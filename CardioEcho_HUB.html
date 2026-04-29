@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#06101E">
+<title>CardioEcho — Aide au diagnostic échocardiographique</title>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+:root {
+    --bg-deep: #06101E;
+    --bg-card: #0B1928;
+    --bg-elevated: #122537;
+    --border: rgba(255,255,255,0.07);
+    --text-primary: #EEF5FF;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --accent: #4F8EF7;
+    --age-color: #F87171;
+    --age-glow: rgba(248,113,113,0.15);
+}
+
+html, body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 0 0 30px;
+    position: relative;
+}
+
+.hero {
+    padding: 20px 20px 8px;
+    text-align: center;
+    background: radial-gradient(circle at 50% 0%, var(--age-glow), transparent 70%);
+    transition: background 0.5s ease;
+}
+.brand-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin-bottom: 6px;
+}
+.brand-logo {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--age-color), #2563EB);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px var(--age-glow);
+    transition: all 0.4s ease;
+}
+.brand-logo svg { width: 20px; height: 20px; }
+.brand-name { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+.brand-tagline { font-size: 10.5px; color: var(--text-secondary); margin-bottom: 2px; }
+.brand-author {
+    font-size: 10px; color: var(--age-color);
+    font-weight: 600; letter-spacing: 0.3px;
+    transition: color 0.4s;
+}
+
+.interactive { padding: 8px 16px 12px; }
+
+.silhouette-stage {
+    height: 200px;
+    background: radial-gradient(ellipse at center bottom, var(--age-glow) 0%, transparent 65%);
+    display: flex; align-items: flex-end; justify-content: center;
+    position: relative;
+    margin-bottom: 6px;
+    transition: background 0.5s ease;
+}
+.silhouette { height: 180px; width: auto; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.silhouette path, .silhouette circle, .silhouette ellipse, .silhouette rect {
+    fill: var(--age-color);
+    transition: fill 0.5s ease;
+}
+
+.heart-pulse {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.heart-pulse svg {
+    width: 24px; height: 24px;
+    fill: white; opacity: 0.85;
+    animation: pulse 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px var(--age-color));
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+
+.slider-zone {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px 16px;
+    margin-top: 4px;
+}
+.slider-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px;
+}
+.slider-label {
+    font-size: 10.5px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.7px; font-weight: 700;
+}
+.slider-value {
+    font-size: 15px; font-weight: 700; color: var(--age-color);
+    transition: color 0.3s; font-variant-numeric: tabular-nums;
+}
+
+.slider-track-wrap { position: relative; padding: 14px 0 8px; }
+.slider-track-wrap input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px;
+    background: linear-gradient(to right,
+        var(--age-color) 0%,
+        var(--age-color) var(--progress, 0%),
+        var(--bg-elevated) var(--progress, 0%),
+        var(--bg-elevated) 100%);
+    border-radius: 3px; outline: none; transition: background 0.3s;
+}
+.slider-track-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 3px solid var(--age-color);
+    cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: all 0.2s;
+}
+.slider-track-wrap input[type="range"]::-webkit-slider-thumb:active { transform: scale(1.15); }
+.slider-track-wrap input[type="range"]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 3px solid var(--age-color);
+    cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.slider-labels {
+    display: flex; justify-content: space-between;
+    margin-top: 10px; font-size: 9px; color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.age-card-zone { padding: 0 16px; margin-top: 12px; }
+.age-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--age-color);
+    border-radius: 14px;
+    padding: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative; overflow: hidden;
+}
+.age-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 0% 0%, var(--age-glow), transparent 50%);
+    opacity: 0.3; pointer-events: none;
+}
+.age-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+}
+.age-card-title { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; }
+.age-card-status {
+    font-size: 9.5px; font-weight: 700; padding: 3px 7px;
+    border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+    background: var(--age-glow); color: var(--age-color);
+    border: 1px solid currentColor;
+}
+.age-card-status.wip {
+    background: rgba(252,211,77,0.10); color: #FCD34D;
+    border-color: rgba(252,211,77,0.30);
+}
+.age-card-range {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 12px; font-variant-numeric: tabular-nums;
+}
+.pathologies-title {
+    font-size: 10px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.6px;
+    font-weight: 700; margin-bottom: 7px;
+}
+.pathologies-list {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px;
+}
+.patho-chip {
+    font-size: 10.5px; padding: 4px 9px;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    color: var(--text-secondary); border-radius: 14px; font-weight: 600;
+}
+
+.btn-enter {
+    width: 100%; padding: 13px;
+    background: var(--age-color); color: white; border: none;
+    border-radius: 11px; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
+    letter-spacing: 0.3px; box-shadow: 0 4px 14px var(--age-glow);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-enter:hover { transform: translateY(-1px); box-shadow: 0 6px 18px var(--age-glow); }
+.btn-enter:active { transform: translateY(0); }
+.btn-enter:disabled {
+    background: var(--bg-elevated); color: var(--text-muted);
+    cursor: not-allowed; box-shadow: none;
+}
+
+.section-divider {
+    padding: 18px 20px 8px;
+    font-size: 10.5px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+}
+.section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.utilities { padding: 0 16px; }
+.util-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 11px; padding: 11px 13px;
+    display: flex; align-items: center; gap: 11px; margin-bottom: 8px;
+    cursor: pointer; transition: all 0.15s; text-decoration: none; color: inherit;
+}
+.util-card:hover { background: var(--bg-elevated); }
+.util-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: rgba(79,142,247,0.08); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 15px;
+}
+.util-text { flex: 1; }
+.util-title { font-size: 12px; font-weight: 600; margin-bottom: 1px; }
+.util-subtitle { font-size: 10px; color: var(--text-muted); }
+
+.app-footer {
+    text-align: center; padding: 20px 20px 8px;
+    font-size: 9.5px; color: var(--text-muted); line-height: 1.6;
+}
+.app-footer strong { color: var(--text-secondary); }
+.app-footer .version {
+    display: inline-block; margin-top: 4px; padding: 2px 8px;
+    background: rgba(79,142,247,0.10); color: var(--accent);
+    border-radius: 4px; font-size: 9px; font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<header class="hero">
+    <div class="brand-row">
+        <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="white">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </div>
+        <div class="brand-name">CardioEcho</div>
+    </div>
+    <div class="brand-tagline">Aide au diagnostic échocardiographique</div>
+    <div class="brand-author">Dr Touati Mohamed · Cardiologue pédiatre</div>
+</header>
+
+
+<div class="interactive">
+    <div class="silhouette-stage">
+        <svg id="silhouette" class="silhouette" viewBox="0 0 100 180" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="heart-pulse">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+    </div>
+
+    <div class="slider-zone">
+        <div class="slider-header">
+            <span class="slider-label">Tranche d'âge</span>
+            <span class="slider-value" id="ageDisplay">Nouveau-né</span>
+        </div>
+        <div class="slider-track-wrap">
+            <input type="range" id="ageSlider" min="0" max="5" value="0" step="1">
+            <div class="slider-labels">
+                <span>0j</span>
+                <span>1m</span>
+                <span>6m</span>
+                <span>2a</span>
+                <span>5a</span>
+                <span>15a+</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="age-card-zone">
+    <div class="age-card" id="ageCard">
+        <div class="age-card-header">
+            <div class="age-card-title" id="ageCardTitle">Nouveau-né</div>
+            <div class="age-card-status" id="ageCardStatus">v4 prête</div>
+        </div>
+        <div class="age-card-range" id="ageCardRange">0 — 1 mois (0–30 jours)</div>
+
+        <div class="pathologies-title">Pathologies principales</div>
+        <div class="pathologies-list" id="pathologiesList"></div>
+
+        <button class="btn-enter" id="btnEnter">
+            <span>Entrer dans le module</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+<div class="section-divider">Outils rapides</div>
+<div class="utilities">
+    <a class="util-card" href="#" onclick="alert('À implémenter : calculateur Z-score Lopez 2010 standalone'); return false;">
+        <div class="util-icon">📏</div>
+        <div class="util-text">
+            <div class="util-title">Calculateur Z-score (Lopez 2010)</div>
+            <div class="util-subtitle">Mesures échographiques par BSA</div>
+        </div>
+    </a>
+    <a class="util-card" href="#" onclick="alert('À implémenter : surface corporelle Mosteller'); return false;">
+        <div class="util-icon">⚖️</div>
+        <div class="util-text">
+            <div class="util-title">Surface corporelle (Mosteller)</div>
+            <div class="util-subtitle">SC à partir du poids et de la taille</div>
+        </div>
+    </a>
+    <a class="util-card" href="#" onclick="alert('À implémenter : index de Nakata'); return false;">
+        <div class="util-icon">📐</div>
+        <div class="util-text">
+            <div class="util-title">Index de Nakata</div>
+            <div class="util-subtitle">Surface AP rapportée à la SC</div>
+        </div>
+    </a>
+</div>
+
+
+<div class="app-footer">
+    <strong>CardioEcho</strong> · Application créée et validée par <strong>Dr Touati Mohamed</strong><br>
+    Cardiologue pédiatre · CMCI Algérie · Données 2012–2025<br>
+    <span class="version">v0.2 · HUB interactif</span>
+</div>
+
+</div>
+
+
+<script>
+const AGE_GROUPS = [
+    {
+        title: 'Nouveau-né', range: '0 — 1 mois (0–30 jours)',
+        color: '#F87171', glow: 'rgba(248,113,113,0.18)',
+        status: 'ready', statusLabel: 'Module v4 prêt', link: 'modules/01_neonatal.html',
+        pathologies: ['TGV', 'APSO', 'APSI', 'HLVS', 'RVPAT', 'CoAo', 'RAO valv.', 'PCA malin', 'T4F sévère'],
+        silhouette: `
+            <ellipse cx="50" cy="135" rx="32" ry="28"/>
+            <circle cx="50" cy="80" r="22"/>
+            <ellipse cx="50" cy="156" rx="36" ry="12"/>
+        `
+    },
+    {
+        title: 'Nourrisson', range: '1 — 6 mois',
+        color: '#FB923C', glow: 'rgba(251,146,60,0.18)',
+        status: 'wip', statusLabel: 'À construire', link: 'modules/02_infant.html',
+        pathologies: ['T4F', 'CIV large', 'CAV', 'PCA', 'CoAo modérée', 'RVPAT non obstrué', 'ALCAPA'],
+        silhouette: `
+            <circle cx="50" cy="60" r="20"/>
+            <ellipse cx="50" cy="118" rx="26" ry="38"/>
+            <ellipse cx="36" cy="158" rx="9" ry="13"/>
+            <ellipse cx="64" cy="158" rx="9" ry="13"/>
+            <ellipse cx="28" cy="115" rx="6" ry="20"/>
+            <ellipse cx="72" cy="115" rx="6" ry="20"/>
+        `
+    },
+    {
+        title: 'Petit enfant', range: '6 mois — 2 ans',
+        color: '#FCD34D', glow: 'rgba(252,211,77,0.18)',
+        status: 'wip', statusLabel: 'À construire', link: 'modules/03_toddler.html',
+        pathologies: ['T4F retardée', 'CIV résiduelle', 'sténoses modérées', 'cardiomyopathies'],
+        silhouette: `
+            <circle cx="50" cy="40" r="17"/>
+            <ellipse cx="50" cy="98" rx="20" ry="38"/>
+            <ellipse cx="42" cy="150" rx="7" ry="22"/>
+            <ellipse cx="58" cy="150" rx="7" ry="22"/>
+            <ellipse cx="28" cy="92" rx="5" ry="22"/>
+            <ellipse cx="72" cy="92" rx="5" ry="22"/>
+        `
+    },
+    {
+        title: 'Préscolaire', range: '2 — 5 ans',
+        color: '#6EE7B7', glow: 'rgba(110,231,183,0.18)',
+        status: 'wip', statusLabel: 'À construire', link: 'modules/04_preschool.html',
+        pathologies: ['CIA', 'post-op (Glenn, switch)', 'sténose mitrale rhumatismale', 'Marfan'],
+        silhouette: `
+            <circle cx="50" cy="32" r="15"/>
+            <ellipse cx="50" cy="84" rx="18" ry="38"/>
+            <ellipse cx="42" cy="146" rx="6" ry="28"/>
+            <ellipse cx="58" cy="146" rx="6" ry="28"/>
+            <ellipse cx="28" cy="80" rx="4.5" ry="26"/>
+            <ellipse cx="72" cy="80" rx="4.5" ry="26"/>
+        `
+    },
+    {
+        title: 'Grand enfant', range: '5 — 15 ans',
+        color: '#4F8EF7', glow: 'rgba(79,142,247,0.18)',
+        status: 'wip', statusLabel: 'À construire', link: 'modules/05_child.html',
+        pathologies: ['CIA tardive', 'Ebstein', 'péricardites', 'post-Fontan', 'RAA', 'CMH'],
+        silhouette: `
+            <circle cx="50" cy="22" r="13"/>
+            <ellipse cx="50" cy="70" rx="16" ry="36"/>
+            <ellipse cx="42" cy="138" rx="6" ry="36"/>
+            <ellipse cx="58" cy="138" rx="6" ry="36"/>
+            <ellipse cx="28" cy="68" rx="4.5" ry="30"/>
+            <ellipse cx="72" cy="68" rx="4.5" ry="30"/>
+        `
+    },
+    {
+        title: 'Adulte', range: '≥ 15 ans',
+        color: '#C4B5FD', glow: 'rgba(196,181,253,0.18)',
+        status: 'wip', statusLabel: 'À construire', link: 'modules/06_adult.html',
+        pathologies: ['GUCH', 'valvulopathies acquises', 'cardiopathies ischémiques', 'HTAP'],
+        silhouette: `
+            <circle cx="50" cy="18" r="13"/>
+            <ellipse cx="50" cy="65" rx="18" ry="38"/>
+            <ellipse cx="42" cy="138" rx="6.5" ry="38"/>
+            <ellipse cx="58" cy="138" rx="6.5" ry="38"/>
+            <ellipse cx="26" cy="65" rx="5" ry="32"/>
+            <ellipse cx="74" cy="65" rx="5" ry="32"/>
+        `
+    },
+];
+
+const slider = document.getElementById('ageSlider');
+const ageDisplay = document.getElementById('ageDisplay');
+const ageCardTitle = document.getElementById('ageCardTitle');
+const ageCardRange = document.getElementById('ageCardRange');
+const ageCardStatus = document.getElementById('ageCardStatus');
+const pathologiesList = document.getElementById('pathologiesList');
+const btnEnter = document.getElementById('btnEnter');
+const silhouette = document.getElementById('silhouette');
+const root = document.documentElement;
+
+function updateUI(idx) {
+    const group = AGE_GROUPS[idx];
+    root.style.setProperty('--age-color', group.color);
+    root.style.setProperty('--age-glow', group.glow);
+    root.style.setProperty('--progress', (idx / (AGE_GROUPS.length - 1)) * 100 + '%');
+
+    ageDisplay.textContent = group.title;
+    ageCardTitle.textContent = group.title;
+    ageCardRange.textContent = group.range;
+    ageCardStatus.textContent = group.statusLabel;
+    ageCardStatus.className = 'age-card-status ' + (group.status === 'ready' ? '' : 'wip');
+
+    pathologiesList.innerHTML = group.pathologies.map(p =>
+        '<span class="patho-chip">' + p + '</span>'
+    ).join('');
+
+    silhouette.innerHTML = group.silhouette;
+
+    if (group.status === 'ready') {
+        btnEnter.querySelector('span').textContent = 'Entrer dans le module';
+        btnEnter.dataset.link = group.link;
+    } else {
+        btnEnter.querySelector('span').textContent = 'Module en construction';
+        btnEnter.dataset.link = '';
+    }
+}
+
+slider.addEventListener('input', (e) => updateUI(parseInt(e.target.value)));
+
+btnEnter.addEventListener('click', () => {
+    const link = btnEnter.dataset.link;
+    if (link) {
+        window.location.href = link;
+    } else {
+        const idx = parseInt(slider.value);
+        const group = AGE_GROUPS[idx];
+        alert('Module "' + group.title + ' (' + group.range + ')" en cours de construction.\n\nIl sera bientôt disponible.');
+    }
+});
+
+updateUI(0);
+</script>
+
+</body>
+</html>
