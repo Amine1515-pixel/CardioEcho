@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#06101E">
+<title>CardioEcho — Module Nourrisson (1–6 mois)</title>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+:root {
+    --bg-deep: #06101E; --bg-card: #0B1928; --bg-elevated: #122537;
+    --border: rgba(255,255,255,0.07); --border-soft: rgba(255,255,255,0.04);
+    --text-primary: #EEF5FF; --text-secondary: #94A3B8; --text-muted: #64748B;
+    --accent: #FB923C;  /* orange — module nourrisson */
+    --accent-glow: rgba(251,146,60,0.18);
+    --success: #6EE7B7; --success-bg: rgba(110,231,183,0.10);
+    --warning: #FCD34D; --warning-bg: rgba(252,211,77,0.10);
+    --danger: #FCA5A5; --danger-bg: rgba(252,165,165,0.10);
+    --critical: #F87171; --critical-bg: rgba(248,113,113,0.12);
+    --purple: #C4B5FD; --path-violet: #7C3AED; --path-bg: rgba(124,58,237,0.12);
+}
+
+html, body {
+    background: var(--bg-deep); color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+    min-height: 100vh; overflow-x: hidden;
+}
+
+.app { max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 80px; }
+
+/* HEADER */
+.header {
+    background: linear-gradient(180deg, #0B1928 0%, #06101E 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px 12px;
+    position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
+}
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.btn-back-hub {
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    color: var(--text-secondary); padding: 6px 10px; border-radius: 8px;
+    font-size: 11px; font-weight: 600; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    transition: all 0.15s; font-family: inherit;
+}
+.btn-back-hub:hover { border-color: var(--accent); color: var(--accent); }
+.brand-mid {
+    flex: 1; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+}
+.brand-name { font-size: 13px; font-weight: 700; }
+.brand-tag { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+.step-badge {
+    background: rgba(251,146,60,0.15); border: 1px solid rgba(251,146,60,0.30);
+    color: var(--accent); font-size: 10px; font-weight: 700;
+    padding: 5px 9px; border-radius: 7px; letter-spacing: 0.4px;
+}
+.progress-track {
+    height: 3px; background: var(--border-soft);
+    margin-top: 10px; border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #6EE7B7);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* SCREENS */
+.screen { display: none; padding: 16px; animation: slideIn 0.3s ease-out; }
+.screen.active { display: block; }
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.screen-title { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 4px; }
+.screen-subtitle { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.55; }
+
+/* AGE BANNER */
+.age-banner {
+    background: linear-gradient(135deg, rgba(251,146,60,0.10), transparent);
+    border: 1px solid rgba(251,146,60,0.20);
+    border-radius: 11px; padding: 11px 13px; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+}
+.age-banner-icon {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: var(--accent); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: white; font-size: 16px;
+}
+.age-banner-text { flex: 1; }
+.age-banner-title { font-size: 12.5px; font-weight: 700; color: var(--accent); }
+.age-banner-subtitle { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
+
+/* CARDS */
+.card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px; margin-bottom: 12px;
+}
+.card-title {
+    font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.7px;
+    font-weight: 600; margin-bottom: 10px;
+}
+
+/* INPUTS */
+.field { margin-bottom: 14px; }
+.field-label {
+    display: block; font-size: 11.5px; font-weight: 600;
+    color: var(--text-secondary); margin-bottom: 6px;
+}
+.field-input {
+    width: 100%; background: var(--bg-elevated); border: 1px solid var(--border);
+    color: var(--text-primary); font-size: 15px; padding: 11px 13px;
+    border-radius: 9px; font-family: inherit; -webkit-appearance: none;
+}
+.field-input:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.field-suffix { position: relative; }
+.field-suffix .suffix-text {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: var(--text-muted); font-size: 11px; pointer-events: none;
+}
+.field-help { font-size: 10.5px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+.computed-display {
+    background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(110,231,183,0.06));
+    border: 1px solid rgba(251,146,60,0.25);
+    border-radius: 10px; padding: 11px 13px; margin-top: 10px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.computed-display.hidden { display: none; }
+.computed-label {
+    font-size: 11px; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600;
+}
+.computed-value { font-size: 17px; font-weight: 700; color: var(--accent); }
+
+.segmented {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: 9px; overflow: hidden; padding: 3px; gap: 3px;
+}
+.segment {
+    background: transparent; color: var(--text-secondary); border: none;
+    padding: 9px 8px; font-size: 13px; font-weight: 600;
+    border-radius: 6px; cursor: pointer; font-family: inherit;
+}
+.segment.active {
+    background: var(--accent); color: white;
+    box-shadow: 0 2px 6px rgba(251,146,60,0.35);
+}
+
+/* CRITÈRE-CARD */
+.criterion {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 14px;
+    transition: border-color 0.2s;
+}
+.criterion.answered-yes { border-color: rgba(110,231,183,0.40); }
+.criterion.answered-no { border-color: rgba(100,116,139,0.30); }
+
+.crit-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 13px; border-bottom: 1px solid var(--border-soft);
+}
+.crit-header-left { display: flex; align-items: center; gap: 8px; }
+.crit-id-badge {
+    font-family: 'SF Mono', monospace; font-size: 10.5px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+    background: var(--bg-elevated); color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+.crit-niv-badge {
+    font-size: 9px; font-weight: 700; padding: 3px 7px;
+    border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.crit-niv-3 { background: var(--path-bg); color: var(--path-violet); border: 1px solid rgba(124,58,237,0.30); }
+.crit-niv-2 { background: var(--success-bg); color: var(--success); border: 1px solid rgba(110,231,183,0.25); }
+.crit-niv-1 { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(251,146,60,0.30); }
+.crit-niv-elim { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(252,165,165,0.25); }
+.crit-niv-crit { background: var(--critical-bg); color: var(--critical); border: 1px solid rgba(248,113,113,0.30); }
+.crit-coupe {
+    font-size: 9.5px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.6px;
+}
+
+.crit-video {
+    width: 100%; aspect-ratio: 1/1; background: #000;
+    position: relative; overflow: hidden;
+}
+.crit-video iframe { width: 100%; height: 100%; border: none; display: block; }
+.crit-video-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #0B1928, #1F2937);
+    color: var(--text-muted); text-align: center; padding: 24px;
+}
+.crit-video-placeholder-icon { font-size: 36px; opacity: 0.3; margin-bottom: 10px; }
+.crit-video-placeholder-text { font-size: 11px; line-height: 1.5; max-width: 240px; }
+.crit-video-placeholder code {
+    display: block; margin-top: 8px; padding: 4px 8px;
+    background: rgba(255,255,255,0.04); border-radius: 4px;
+    font-size: 9.5px; color: var(--text-secondary);
+    font-family: 'SF Mono', monospace;
+}
+
+.crit-body { padding: 13px; }
+.crit-lib {
+    font-size: 14px; font-weight: 700; color: var(--text-primary);
+    line-height: 1.4; margin-bottom: 5px;
+}
+.crit-desc {
+    font-size: 11.5px; color: var(--text-secondary);
+    line-height: 1.5; margin-bottom: 11px;
+}
+
+.crit-zscore {
+    background: rgba(251,146,60,0.06);
+    border: 1px solid rgba(251,146,60,0.18);
+    border-radius: 9px; padding: 10px 11px; margin-bottom: 11px;
+}
+.crit-zscore-label {
+    font-size: 11px; color: var(--accent); font-weight: 600;
+    margin-bottom: 7px;
+}
+.crit-zscore-row {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 8px; align-items: center;
+}
+.crit-zscore-input {
+    background: var(--bg-deep); border: 1px solid var(--border);
+    color: var(--text-primary); font-size: 14px; padding: 8px 10px;
+    border-radius: 7px; width: 100%; -webkit-appearance: none; font-family: inherit;
+}
+.crit-zscore-input:focus { outline: none; border-color: var(--accent); }
+.crit-zscore-result {
+    padding: 7px 11px; border-radius: 6px; font-size: 11px; font-weight: 700;
+    text-align: center; min-width: 130px;
+}
+.crit-zscore-result.empty { background: var(--bg-deep); color: var(--text-muted); border: 1px solid var(--border); }
+.crit-zscore-result.normal { background: var(--success-bg); color: var(--success); border: 1px solid rgba(110,231,183,0.30); }
+.crit-zscore-result.hypo { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(252,165,165,0.30); }
+.crit-zscore-result.hyper { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(252,211,77,0.30); }
+
+.crit-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.crit-btn {
+    background: var(--bg-elevated); color: var(--text-secondary);
+    border: 1px solid var(--border); padding: 10px;
+    border-radius: 8px; font-size: 13.5px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+}
+.crit-btn.selected.yes { background: var(--success-bg); border-color: var(--success); color: var(--success); }
+.crit-btn.selected.no { background: rgba(100,116,139,0.15); border-color: var(--text-muted); color: var(--text-secondary); }
+
+.crit-group {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin: 18px 0 10px; padding-left: 4px;
+}
+.crit-group:first-child { margin-top: 0; }
+
+/* RANKING */
+.ranking {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 13px; margin-bottom: 12px;
+}
+.ranking-title {
+    font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.7px;
+    font-weight: 700; margin-bottom: 11px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.rank-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.rank-row:last-child { margin-bottom: 0; }
+.rank-code {
+    width: 70px; font-size: 11.5px; font-weight: 700;
+    color: var(--text-primary); flex-shrink: 0; letter-spacing: 0.3px;
+}
+.rank-bar-container {
+    flex: 1; height: 6px; background: var(--bg-elevated);
+    border-radius: 4px; overflow: hidden;
+}
+.rank-bar {
+    height: 100%; border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.rank-bar.lead { background: linear-gradient(90deg, var(--accent), #6EE7B7); }
+.rank-bar.mid { background: rgba(251,146,60,0.55); }
+.rank-pct {
+    width: 38px; text-align: right; font-size: 11.5px; font-weight: 700;
+    color: var(--text-secondary); font-variant-numeric: tabular-nums;
+}
+
+/* DIAG BANNER */
+.diag-banner {
+    background: linear-gradient(135deg, rgba(251,146,60,0.18), rgba(110,231,183,0.10));
+    border: 1px solid rgba(251,146,60,0.40);
+    border-radius: 14px; padding: 16px;
+    text-align: center; margin-bottom: 14px;
+}
+.diag-banner-label {
+    font-size: 10px; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 700; margin-bottom: 5px;
+}
+.diag-banner-name {
+    font-size: 18px; font-weight: 700; color: var(--accent);
+    margin-bottom: 8px; letter-spacing: -0.2px;
+}
+.diag-banner-prob {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.prob-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: conic-gradient(var(--success) calc(var(--p) * 1%), rgba(255,255,255,0.05) 0);
+    display: flex; align-items: center; justify-content: center; position: relative;
+}
+.prob-circle::before {
+    content: ''; position: absolute; inset: 4px;
+    background: var(--bg-card); border-radius: 50%;
+}
+.prob-text { position: relative; font-size: 13px; font-weight: 700; }
+
+.confirm-summary {
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: 10px; padding: 9px 12px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+}
+.confirm-summary-count { color: var(--success); font-weight: 700; }
+
+/* BUTTONS */
+.btn {
+    width: 100%; background: var(--accent); color: white; border: none;
+    padding: 14px; border-radius: 11px; font-size: 14.5px; font-weight: 700;
+    cursor: pointer; font-family: inherit; margin-top: 12px;
+    box-shadow: 0 4px 12px rgba(251,146,60,0.30);
+}
+.btn:disabled {
+    background: var(--bg-elevated); color: var(--text-muted);
+    cursor: not-allowed; box-shadow: none;
+}
+.btn-secondary {
+    background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border); box-shadow: none;
+}
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+
+/* REPORT */
+.report {
+    background: white; color: #0B1928; border-radius: 14px; padding: 20px;
+    font-family: 'Georgia', serif; line-height: 1.55; font-size: 12.5px;
+    margin-bottom: 14px;
+}
+.report-header {
+    border-bottom: 2px solid #C2410C;
+    padding-bottom: 11px; margin-bottom: 14px;
+}
+.report-title {
+    font-size: 15px; font-weight: 700; color: #C2410C;
+    text-align: center; margin-bottom: 3px; letter-spacing: 0.3px;
+}
+.report-subtitle {
+    text-align: center; color: #475569;
+    font-size: 11px; font-style: italic;
+}
+.report-section { margin-bottom: 12px; }
+.report-section h3 {
+    font-size: 12.5px; color: #C2410C;
+    text-transform: uppercase; letter-spacing: 1px;
+    border-bottom: 1px solid #CBD5E1; padding-bottom: 3px;
+    margin-bottom: 6px; font-family: -apple-system, sans-serif; font-weight: 700;
+}
+.report-section ul { list-style: none; padding: 0; }
+.report-section ul li {
+    padding: 2px 0; padding-left: 15px; position: relative; font-size: 12px;
+}
+.report-section ul li::before {
+    content: '•'; position: absolute; left: 0; color: #C2410C; font-weight: 700;
+}
+.report-grid {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 4px 12px; font-size: 12px;
+}
+.report-grid .lbl { font-weight: 700; color: #475569; }
+.report-diagnosis {
+    background: #FFEDD5; border-left: 3px solid #C2410C;
+    padding: 10px 12px; margin: 10px 0; border-radius: 4px;
+}
+.report-diagnosis-name { font-weight: 700; color: #C2410C; font-size: 13.5px; margin-bottom: 2px; }
+.report-recos {
+    background: #FFF7E6; border-left: 3px solid #BF8F00;
+    padding: 10px 12px; border-radius: 4px; margin-top: 6px;
+}
+.report-footer {
+    margin-top: 18px; padding-top: 10px;
+    border-top: 1px dashed #94A3B8;
+    text-align: right; font-size: 10.5px; color: #475569;
+}
+.report-signature {
+    margin-top: 5px; font-weight: 700; color: #C2410C;
+    font-size: 11.5px; font-family: 'Georgia', serif;
+}
+
+.divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+.app-footer {
+    text-align: center; padding: 16px;
+    font-size: 10px; color: var(--text-muted); line-height: 1.6;
+    border-top: 1px solid var(--border); margin-top: 20px;
+}
+.app-footer .test-badge {
+    display: inline-block; padding: 2px 8px;
+    background: rgba(252,211,77,0.15); color: var(--warning);
+    border-radius: 4px; font-weight: 700; font-size: 9px;
+}
+
+@supports (-webkit-touch-callout: none) { .field-input, .crit-zscore-input { font-size: 16px; } }
+
+@media print {
+    body { background: white; }
+    .app { max-width: none; padding: 0; background: white; }
+    .header, .screen:not(#screen-5), .btn-row, .btn, .app-footer { display: none !important; }
+    #screen-5 { display: block !important; padding: 0; }
+    .screen-title, .screen-subtitle { display: none; }
+    .report { margin: 0; padding: 20mm; box-shadow: none; border-radius: 0; background: white !important; color: black !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-row">
+        <a href="../index.html" class="btn-back-hub">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>HUB</span>
+        </a>
+        <div class="brand-mid">
+            <span class="brand-name">CardioEcho</span>
+            <span class="brand-tag">Module Nourrisson</span>
+        </div>
+        <div class="step-badge" id="stepBadge">1/5</div>
+    </div>
+    <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width: 20%;"></div>
+    </div>
+</header>
+
+
+<!-- ÉCRAN 1 : PROFIL PATIENT -->
+<section class="screen active" id="screen-1">
+    <h1 class="screen-title">Profil patient</h1>
+    <p class="screen-subtitle">Identification du nourrisson 1–6 mois</p>
+
+    <div class="age-banner">
+        <div class="age-banner-icon">👶</div>
+        <div class="age-banner-text">
+            <div class="age-banner-title">Tranche d'âge : 1–6 mois</div>
+            <div class="age-banner-subtitle">Nourrisson — pathologies non urgentes le plus souvent</div>
+        </div>
+    </div>
+
+    <div class="card" style="border:1px solid rgba(196,181,253,0.25); background:linear-gradient(135deg, rgba(196,181,253,0.04), transparent);">
+        <div class="card-title" style="color:var(--purple);">✍️ Médecin signataire</div>
+        <div class="field-row">
+            <div class="field" style="margin-bottom:0;">
+                <label class="field-label">Prénom</label>
+                <input type="text" class="field-input" id="docFirstName" placeholder="Mohamed" autocomplete="off">
+            </div>
+            <div class="field" style="margin-bottom:0;">
+                <label class="field-label">Nom</label>
+                <input type="text" class="field-input" id="docLastName" placeholder="Touati" autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Identité du patient</div>
+        <div class="field">
+            <label class="field-label">Nom</label>
+            <input type="text" class="field-input" id="lastName" placeholder="Dupont" autocomplete="off">
+        </div>
+        <div class="field">
+            <label class="field-label">Prénom</label>
+            <input type="text" class="field-input" id="firstName" placeholder="Marie" autocomplete="off">
+        </div>
+        <div class="field">
+            <label class="field-label">Sexe</label>
+            <div class="segmented">
+                <button class="segment active" data-sex="M">Masculin</button>
+                <button class="segment" data-sex="F">Féminin</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Anthropométrie</div>
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">Âge (mois)</label>
+                <div class="field-suffix">
+                    <input type="number" class="field-input" id="ageMonths" placeholder="3" min="1" max="6" step="0.1" inputmode="decimal">
+                    <span class="suffix-text">mois</span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="field-label">Poids</label>
+                <div class="field-suffix">
+                    <input type="number" class="field-input" id="weight" placeholder="5.5" step="0.1" inputmode="decimal">
+                    <span class="suffix-text">kg</span>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="field-label">Taille (optionnelle)</label>
+            <div class="field-suffix">
+                <input type="number" class="field-input" id="height" placeholder="60" step="0.1" inputmode="decimal">
+                <span class="suffix-text">cm</span>
+            </div>
+            <div class="field-help">Si non disponible, la SC est calculée par le poids seul</div>
+        </div>
+        <div class="computed-display hidden" id="bsaDisplay">
+            <span class="computed-label">Surface corporelle</span>
+            <span class="computed-value" id="bsaValue">— m²</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">État clinique</div>
+        <div class="field">
+            <label class="field-label">SpO₂ à l'air ambiant</label>
+            <div class="field-suffix">
+                <input type="number" class="field-input" id="spo2" placeholder="95" min="40" max="100" inputmode="numeric">
+                <span class="suffix-text">%</span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="field-label">Insuffisance cardiaque</label>
+            <div class="segmented">
+                <button class="segment active" data-ic="non">Absente</button>
+                <button class="segment" data-ic="oui">Présente</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn" id="btnNext1">Continuer vers l'orientation diagnostique →</button>
+</section>
+
+
+<!-- ÉCRAN 2 : ORIENTATION -->
+<section class="screen" id="screen-2">
+    <h1 class="screen-title">Orientation diagnostique</h1>
+    <p class="screen-subtitle">Critères échographiques d'orientation chez le nourrisson</p>
+
+    <div class="ranking" id="triageRanking" style="display:none;">
+        <div class="ranking-title"><span>Probabilités diagnostiques</span></div>
+        <div id="rankingBody"></div>
+    </div>
+
+    <div id="triageQuestions"></div>
+
+    <div class="btn-row">
+        <button class="btn btn-secondary" id="btnBack2">← Retour</button>
+        <button class="btn" id="btnNext2" disabled>Confirmer le diagnostic →</button>
+    </div>
+</section>
+
+
+<!-- ÉCRAN 3 : CONFIRMATION -->
+<section class="screen" id="screen-3">
+    <h1 class="screen-title">Confirmation diagnostique</h1>
+    <p class="screen-subtitle" id="confSubtitle">Critères Cat.A pathognomoniques</p>
+
+    <div class="diag-banner" id="leadBanner">
+        <div class="diag-banner-label">Diagnostic présomptif</div>
+        <div class="diag-banner-name" id="leadName">—</div>
+        <div class="diag-banner-prob">
+            <div class="prob-circle" id="probCircle" style="--p:0;">
+                <span class="prob-text" id="probText">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="confirm-summary">
+        <span>Critères Cat.A confirmés</span>
+        <span class="confirm-summary-count" id="confirmCount">0 / 0</span>
+    </div>
+
+    <div id="confirmationContent"></div>
+
+    <div class="btn-row">
+        <button class="btn btn-secondary" id="btnBack3">← Retour</button>
+        <button class="btn" id="btnNext3">Évaluer la gravité →</button>
+    </div>
+</section>
+
+
+<!-- ÉCRAN 4 : GRAVITÉ -->
+<section class="screen" id="screen-4">
+    <h1 class="screen-title">Évaluation de gravité</h1>
+    <p class="screen-subtitle" id="gravSubtitle">Critères Cat.B de sévérité</p>
+
+    <div id="gravityContent"></div>
+
+    <div class="btn-row">
+        <button class="btn btn-secondary" id="btnBack4">← Retour</button>
+        <button class="btn" id="btnNext4">Générer le compte rendu →</button>
+    </div>
+</section>
+
+
+<!-- ÉCRAN 5 : COMPTE RENDU -->
+<section class="screen" id="screen-5">
+    <h1 class="screen-title">Compte rendu</h1>
+    <p class="screen-subtitle">Document échographique professionnel</p>
+
+    <div id="reportContainer"></div>
+
+    <div class="btn-row">
+        <button class="btn btn-secondary" id="btnBack5">← Modifier</button>
+        <button class="btn" id="btnPrint">Imprimer / PDF</button>
+    </div>
+</section>
+
+
+<div class="app-footer">
+    <span class="test-badge">VERSION TEST ALLÉGÉE</span><br>
+    <strong>CardioEcho</strong> · Module Nourrisson 1–6 mois<br>
+    Dr Touati Mohamed · CMCI Algérie<br>
+    <em>2 pathologies de test : T4F · CIV large</em>
+</div>
+
+</div>
+
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   DONNÉES — VERSION TEST ALLÉGÉE (2 pathologies)
+   ═══════════════════════════════════════════════════════════ */
+
+const PATHO_INFO = {
+    'T4F': { name: 'Tétralogie de Fallot', urgence: 'HAUTE', cyano: true },
+    'CIV': { name: 'CIV large (Communication Inter-Ventriculaire)', urgence: 'MOYENNE', cyano: false },
+};
+
+const PREVALENCE = { 'T4F': 10.5, 'CIV': 18.0 };
+
+/* CRITÈRES ALLÉGÉS — 3 Cat.A + 2 Cat.B par pathologie */
+const CRITERIA = {
+    'T4F': {
+        A: [
+            {
+                id: 'A01', grp: 'CIV',
+                lib: 'CIV malalignement antérieur',
+                desc: 'Septum conal dévié vers l\'avant — pathognomonique de la T4F',
+                niv: '+3', score: 96, coupe: 'Grand axe / Apical',
+                canva: ''
+            },
+            {
+                id: 'A02', grp: 'Aorte',
+                lib: 'Aorte chevauchante (override 25-75%)',
+                desc: 'Aorte à cheval sur le septum interventriculaire',
+                niv: '+3', score: 94, coupe: 'Grand axe',
+                canva: ''
+            },
+            {
+                id: 'A03', grp: 'Valve pulmonaire',
+                lib: 'Anneau pulmonaire hypoplasique',
+                desc: 'Mesurer le diamètre — Z-score < -2 = hypoplasie',
+                niv: '+2', score: 80, coupe: 'Petit axe',
+                canva: '',
+                z_input: true, z_struct: 'Anneau pulmonaire', z_mean: 7.5, z_sd: 0.9
+            },
+        ],
+        B: [
+            {
+                id: 'B01', grp: 'Forme',
+                lib: 'T4F sévère (cyanose franche, SpO₂ < 75%)',
+                desc: 'Obstruction sévère ou atrésie membranaire — ductodépendant',
+                urg: 'URGENT', critical: true,
+                canva: ''
+            },
+            {
+                id: 'B02', grp: 'AP',
+                lib: 'AP droite hypoplasique',
+                desc: 'Risque sténose APD résiduelle post-réparation',
+                urg: 'Complexe',
+                canva: '',
+                z_input: true, z_struct: 'AP droite', z_mean: 5.5, z_sd: 0.8
+            },
+        ]
+    },
+    'CIV': {
+        A: [
+            {
+                id: 'A01', grp: 'CIV',
+                lib: 'Communication interventriculaire visible (Doppler couleur)',
+                desc: 'Flux à travers le septum visible au Doppler couleur',
+                niv: '+3', score: 95, coupe: '4 cavités / Grand axe',
+                canva: ''
+            },
+            {
+                id: 'A02', grp: 'CIV',
+                lib: 'Diamètre de la CIV',
+                desc: 'Mesure du diamètre en grand axe — large si > 50% du diamètre aortique',
+                niv: '+2', score: 80, coupe: 'Grand axe',
+                canva: '',
+                z_input: true, z_struct: 'Diamètre CIV', z_mean: 4, z_sd: 1.0
+            },
+            {
+                id: 'A03', grp: 'Surcharge',
+                lib: 'Dilatation du VG (surcharge volumique)',
+                desc: 'Surcharge volumique du VG par hyperdébit pulmonaire chronique',
+                niv: '+2', score: 78, coupe: 'Grand axe TM',
+                canva: '',
+                z_input: true, z_struct: 'DTD VG', z_mean: 22, z_sd: 2.5
+            },
+        ],
+        B: [
+            {
+                id: 'B01', grp: 'HTAP',
+                lib: 'HTAP sévère (IT Vmax > 3 m/s)',
+                desc: 'Hypertension pulmonaire — risque de maladie obstructive vasculaire',
+                urg: 'URGENT', critical: true,
+                canva: ''
+            },
+            {
+                id: 'B02', grp: 'Dimension',
+                lib: 'CIV large non restrictive (diamètre > 50% Ao)',
+                desc: 'Pression VD = pression VG — fermeture chirurgicale indiquée',
+                urg: 'Sévère',
+                canva: '',
+                z_input: true, z_struct: 'Diamètre CIV', z_mean: 4, z_sd: 1.0
+            },
+        ]
+    },
+};
+
+/* QUESTIONS D'ORIENTATION ALLÉGÉES — 4 questions */
+const TRIAGE_QUESTIONS = [
+    {
+        id: 'orient_1',
+        q: 'CIV malalignement antérieur + aorte chevauchante',
+        help: 'Coupe grand axe parasternale — septum conal dévié',
+        coupe: 'Grand axe',
+        canva: '',
+        w: { oui: { T4F: 50, CIV: -10 }, non: { T4F: -25, CIV: 5 } }
+    },
+    {
+        id: 'orient_2',
+        q: 'Sténose pulmonaire (gradient > 30 mmHg)',
+        help: 'Doppler continu sur la voie de sortie du VD',
+        coupe: 'Petit axe',
+        canva: '',
+        w: { oui: { T4F: 40, CIV: -5 }, non: { T4F: -15, CIV: 0 } }
+    },
+    {
+        id: 'orient_3',
+        q: 'Communication interventriculaire visible (Doppler couleur)',
+        help: '4 cavités + grand axe avec Doppler couleur',
+        coupe: '4 cavités',
+        canva: '',
+        w: { oui: { T4F: 15, CIV: 40 }, non: { T4F: -20, CIV: -30 } }
+    },
+    {
+        id: 'orient_4',
+        q: 'Septum interventriculaire intact (NORMAL)',
+        help: 'Si septum intact → exclut T4F et CIV',
+        coupe: '4 cavités',
+        canva: '',
+        w: { oui: { T4F: -50, CIV: -50 }, non: { T4F: 5, CIV: 5 } }
+    },
+];
+
+/* RECOMMANDATIONS */
+const RECOMMENDATIONS = {
+    'T4F': [
+        'Réparation chirurgicale entre 3-6 mois (forme classique)',
+        'Si crises hypoxiques : β-bloquant (propranolol 1 mg/kg PO 3-4×/j)',
+        'Si forme sévère ductodépendante : PGE1 + chirurgie en urgence',
+        'BT shunt en pont si anatomie défavorable',
+        'FISH 22q11 si crosse à droite',
+    ],
+    'CIV': [
+        'Surveillance échographique régulière',
+        'Si CIV large + IC : traitement médical (diurétiques, IEC)',
+        'Fermeture chirurgicale ou par cathétérisme si HTAP ou IC réfractaire',
+        'Prophylaxie de l\'endocardite (avant fermeture)',
+        'Évaluation pulmonaire avant fermeture si HTAP suspectée',
+    ],
+};
+
+
+/* ═══════════════════════════════════════════════════════════
+   ÉTAT
+   ═══════════════════════════════════════════════════════════ */
+const state = {
+    currentScreen: 1,
+    patient: { lastName:'', firstName:'', sex:'M', ageMonths:null, weight:null, height:null, bsa:null, spo2:null, ic:'non' },
+    doctor: { firstName:'', lastName:'' },
+    triage: {},
+    triageScores: {},
+    leadDiagnosis: null,
+    catA: {},
+    catB: {},
+    confirmationScore: 0,
+    zscores: {},
+};
+
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════════ */
+function calcBSA(w, h) {
+    if (w && h) return Math.sqrt((w * h) / 3600);
+    if (w) return (4 * w + 7) / (w + 90);
+    return null;
+}
+
+function getZClass(z) {
+    if (z === null || isNaN(z)) return 'empty';
+    if (z < -2) return 'hypo';
+    if (z > 2) return 'hyper';
+    return 'normal';
+}
+
+function getZLabel(z) {
+    if (z === null || isNaN(z)) return 'Saisir mesure';
+    let label;
+    if (z < -2) label = 'HYPOPLASIE';
+    else if (z > 2) label = 'DILATATION';
+    else label = 'NORMAL';
+    return label + ' (Z = ' + (z >= 0 ? '+' : '') + z.toFixed(1) + ')';
+}
+
+function goTo(n) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + n).classList.add('active');
+    state.currentScreen = n;
+    document.getElementById('stepBadge').textContent = n + '/5';
+    document.getElementById('progressFill').style.width = (n * 20) + '%';
+    window.scrollTo(0, 0);
+}
+
+function renderCriterion(crit, callback) {
+    const nivClass = crit.niv === '+3' ? 'crit-niv-3' :
+                     crit.niv === '+2' ? 'crit-niv-2' :
+                     crit.niv === '+1' ? 'crit-niv-1' :
+                     crit.niv === '-2' ? 'crit-niv-elim' :
+                     crit.critical ? 'crit-niv-crit' : 'crit-niv-1';
+    const nivLabel = crit.niv ? crit.niv : (crit.critical ? '⚠ CRIT' : crit.urg || '');
+
+    let videoHtml;
+    if (crit.canva) {
+        videoHtml = '<iframe src="' + crit.canva + '" allow="fullscreen" allowfullscreen scrolling="no" loading="lazy"></iframe>';
+    } else {
+        videoHtml = '<div class="crit-video-placeholder">' +
+            '<div class="crit-video-placeholder-icon">📹</div>' +
+            '<div class="crit-video-placeholder-text">' +
+                'Lien Canva à renseigner' +
+                '<code>CRITERIA.' + crit._patho + '.' + crit._cat + '[' + crit._idx + '].canva</code>' +
+            '</div></div>';
+    }
+
+    let zHtml = '';
+    if (crit.z_input) {
+        const zKey = crit._patho + '_' + crit.id;
+        zHtml =
+            '<div class="crit-zscore">' +
+                '<div class="crit-zscore-label">📏 Mesure ' + (crit.z_struct || crit.lib) + '</div>' +
+                '<div class="crit-zscore-row">' +
+                    '<input type="number" class="crit-zscore-input" id="zin-' + zKey + '" ' +
+                        'data-zkey="' + zKey + '" data-zmean="' + crit.z_mean + '" data-zsd="' + crit.z_sd + '" ' +
+                        'data-zstruct="' + (crit.z_struct || crit.lib) + '" ' +
+                        'placeholder="mm" step="0.1" inputmode="decimal">' +
+                    '<div class="crit-zscore-result empty" id="zout-' + zKey + '">Saisir mesure (mm)</div>' +
+                '</div>' +
+            '</div>';
+    }
+
+    const div = document.createElement('div');
+    div.className = 'criterion';
+    div.id = 'crit-' + crit._patho + '-' + crit.id;
+    div.innerHTML =
+        '<div class="crit-header">' +
+            '<div class="crit-header-left">' +
+                '<span class="crit-id-badge">' + crit.id + '</span>' +
+                '<span class="crit-niv-badge ' + nivClass + '">' + nivLabel + '</span>' +
+            '</div>' +
+            '<span class="crit-coupe">' + (crit.coupe || crit.grp || '') + '</span>' +
+        '</div>' +
+        '<div class="crit-video">' + videoHtml + '</div>' +
+        '<div class="crit-body">' +
+            '<div class="crit-lib">' + crit.lib + '</div>' +
+            '<div class="crit-desc">' + crit.desc + '</div>' +
+            zHtml +
+            '<div class="crit-buttons">' +
+                '<button class="crit-btn" data-ans="non" data-id="' + crit.id + '">Non</button>' +
+                '<button class="crit-btn" data-ans="oui" data-id="' + crit.id + '">Oui</button>' +
+            '</div>' +
+        '</div>';
+
+    div.querySelectorAll('.crit-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const ans = btn.dataset.ans;
+            const cid = btn.dataset.id;
+            div.querySelectorAll('.crit-btn').forEach(b => b.classList.remove('selected', 'yes', 'no'));
+            btn.classList.add('selected', ans === 'oui' ? 'yes' : 'no');
+            div.classList.remove('answered-yes', 'answered-no');
+            div.classList.add(ans === 'oui' ? 'answered-yes' : 'answered-no');
+            callback(cid, ans);
+        });
+    });
+
+    if (crit.z_input) {
+        const zInput = div.querySelector('.crit-zscore-input');
+        const zOut = div.querySelector('.crit-zscore-result');
+        if (zInput && zOut) {
+            zInput.addEventListener('input', () => {
+                const val = parseFloat(zInput.value);
+                const mean = parseFloat(zInput.dataset.zmean);
+                const sd = parseFloat(zInput.dataset.zsd);
+                const zKey = zInput.dataset.zkey;
+                const struct = zInput.dataset.zstruct;
+                if (isNaN(val) || val <= 0) {
+                    zOut.className = 'crit-zscore-result empty';
+                    zOut.textContent = 'Saisir mesure (mm)';
+                    delete state.zscores[zKey];
+                    return;
+                }
+                const bsa = state.patient.bsa || 0.3;
+                const adjMean = mean * Math.sqrt(bsa / 0.3);
+                const zVal = (val - adjMean) / sd;
+                state.zscores[zKey] = { struct: struct, measure: val, z: zVal, critId: crit.id };
+                zOut.className = 'crit-zscore-result ' + getZClass(zVal);
+                zOut.textContent = getZLabel(zVal);
+            });
+        }
+    }
+
+    return div;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN 1
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('[data-sex]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-sex]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.patient.sex = btn.dataset.sex;
+    });
+});
+
+document.querySelectorAll('[data-ic]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-ic]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.patient.ic = btn.dataset.ic;
+    });
+});
+
+['lastName', 'firstName'].forEach(id => {
+    document.getElementById(id).addEventListener('input', e => state.patient[id] = e.target.value);
+});
+
+['docFirstName', 'docLastName'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', e => {
+        const key = id === 'docFirstName' ? 'firstName' : 'lastName';
+        state.doctor[key] = e.target.value;
+    });
+});
+
+['ageMonths', 'weight', 'height', 'spo2'].forEach(id => {
+    document.getElementById(id).addEventListener('input', e => {
+        const v = parseFloat(e.target.value);
+        state.patient[id] = isNaN(v) ? null : v;
+        updateBSA();
+    });
+});
+
+function updateBSA() {
+    const bsa = calcBSA(state.patient.weight, state.patient.height);
+    state.patient.bsa = bsa;
+    const display = document.getElementById('bsaDisplay');
+    if (bsa) {
+        display.classList.remove('hidden');
+        document.getElementById('bsaValue').textContent = bsa.toFixed(2) + ' m²';
+    } else {
+        display.classList.add('hidden');
+    }
+}
+
+document.getElementById('btnNext1').addEventListener('click', () => {
+    const p = state.patient;
+    if (!p.lastName || !p.firstName) { alert('Veuillez saisir nom et prénom du patient'); return; }
+    if (p.ageMonths === null || p.weight === null) { alert('Âge et poids obligatoires'); return; }
+    if (p.spo2 === null) { alert('SpO₂ obligatoire'); return; }
+    buildTriage();
+    goTo(2);
+});
+
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN 2 — TRIAGE
+   ═══════════════════════════════════════════════════════════ */
+function buildTriage() {
+    const container = document.getElementById('triageQuestions');
+    container.innerHTML = '';
+
+    const intro = document.createElement('div');
+    intro.className = 'card';
+    intro.style.cssText = 'background:linear-gradient(135deg, rgba(251,146,60,0.06), transparent); border-color:rgba(251,146,60,0.20);';
+    intro.innerHTML =
+        '<div class="card-title" style="color:var(--accent);">📖 Comment ça marche</div>' +
+        '<p style="font-size:12px; color:var(--text-secondary); line-height:1.55;">' +
+        'Visualisez la boucle vidéo pour chaque critère écho et indiquez si vous l\'observez. ' +
+        'Inclut des critères normaux qui éliminent certains diagnostics.' +
+        '</p>';
+    container.appendChild(intro);
+
+    TRIAGE_QUESTIONS.forEach((q, idx) => {
+        let videoHtml;
+        if (q.canva) {
+            videoHtml = '<iframe src="' + q.canva + '" allow="fullscreen" allowfullscreen scrolling="no" loading="lazy"></iframe>';
+        } else {
+            videoHtml = '<div class="crit-video-placeholder">' +
+                '<div class="crit-video-placeholder-icon">📹</div>' +
+                '<div class="crit-video-placeholder-text">' +
+                    'Lien Canva à renseigner' +
+                    '<code>TRIAGE_QUESTIONS[' + idx + '].canva</code>' +
+                '</div></div>';
+        }
+
+        const isEliminator = Object.values(q.w.oui).some(v => v <= -40);
+        const div = document.createElement('div');
+        div.className = 'criterion';
+        div.id = 'q-' + q.id;
+        div.innerHTML =
+            '<div class="crit-header">' +
+                '<div class="crit-header-left">' +
+                    '<span class="crit-id-badge">Q' + (idx + 1) + '</span>' +
+                    (isEliminator ? '<span class="crit-niv-badge crit-niv-elim">ÉLIMINATOIRE</span>'
+                                  : '<span class="crit-niv-badge crit-niv-2">ORIENTATION</span>') +
+                '</div>' +
+                '<span class="crit-coupe">' + (q.coupe || '') + '</span>' +
+            '</div>' +
+            '<div class="crit-video">' + videoHtml + '</div>' +
+            '<div class="crit-body">' +
+                '<div class="crit-lib">' + q.q + '</div>' +
+                '<div class="crit-desc">' + q.help + '</div>' +
+                '<div class="crit-buttons">' +
+                    '<button class="crit-btn" data-ans="non" data-qid="' + q.id + '">Non</button>' +
+                    '<button class="crit-btn" data-ans="oui" data-qid="' + q.id + '">Oui</button>' +
+                '</div>' +
+            '</div>';
+        container.appendChild(div);
+    });
+
+    container.querySelectorAll('.crit-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const qid = btn.dataset.qid;
+            const ans = btn.dataset.ans;
+            state.triage[qid] = ans;
+            const block = document.getElementById('q-' + qid);
+            block.querySelectorAll('.crit-btn').forEach(b => b.classList.remove('selected','yes','no'));
+            btn.classList.add('selected', ans === 'oui' ? 'yes' : 'no');
+            block.classList.remove('answered-yes','answered-no');
+            block.classList.add(ans === 'oui' ? 'answered-yes' : 'answered-no');
+            computeTriageScores();
+            updateRanking();
+        });
+    });
+}
+
+function computeTriageScores() {
+    const raw = {};
+    Object.keys(PATHO_INFO).forEach(p => raw[p] = 0);
+    TRIAGE_QUESTIONS.forEach(q => {
+        const ans = state.triage[q.id];
+        if (!ans) return;
+        const w = q.w[ans];
+        for (const p in w) raw[p] += w[p];
+    });
+
+    const final = {};
+    let total = 0;
+    for (const p in raw) {
+        const adj = Math.max(0, raw[p]) * (1 + (PREVALENCE[p] || 0) / 50);
+        final[p] = adj;
+        total += adj;
+    }
+    if (total > 0) for (const p in final) final[p] = (final[p] / total) * 100;
+    state.triageScores = final;
+}
+
+function updateRanking() {
+    const ranking = document.getElementById('triageRanking');
+    const body = document.getElementById('rankingBody');
+    const answered = Object.keys(state.triage).length;
+    if (answered < 2) {
+        ranking.style.display = 'none';
+        document.getElementById('btnNext2').disabled = true;
+        return;
+    }
+    ranking.style.display = 'block';
+    body.innerHTML = '';
+    const sorted = Object.entries(state.triageScores).sort((a,b) => b[1] - a[1]);
+    sorted.forEach(([code, pct], i) => {
+        const cls = i === 0 ? 'lead' : 'mid';
+        const row = document.createElement('div');
+        row.className = 'rank-row';
+        row.innerHTML = '<span class="rank-code">' + code + '</span>' +
+            '<div class="rank-bar-container"><div class="rank-bar ' + cls + '" style="width:' + Math.min(100, pct) + '%"></div></div>' +
+            '<span class="rank-pct">' + pct.toFixed(0) + '%</span>';
+        body.appendChild(row);
+    });
+    if (sorted.length > 0 && sorted[0][1] > 0) state.leadDiagnosis = sorted[0][0];
+    else state.leadDiagnosis = null;
+    document.getElementById('btnNext2').disabled = !(answered >= 2 && state.leadDiagnosis);
+}
+
+document.getElementById('btnBack2').addEventListener('click', () => goTo(1));
+document.getElementById('btnNext2').addEventListener('click', () => {
+    buildConfirmation();
+    goTo(3);
+});
+
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN 3 — CONFIRMATION
+   ═══════════════════════════════════════════════════════════ */
+function buildConfirmation() {
+    const lead = state.leadDiagnosis;
+    if (!lead) return;
+    const info = PATHO_INFO[lead];
+    document.getElementById('leadName').textContent = info.name;
+    const prob = state.triageScores[lead] || 50;
+    document.getElementById('probCircle').style.setProperty('--p', prob);
+    document.getElementById('probText').textContent = prob.toFixed(0) + '%';
+    document.getElementById('confSubtitle').textContent = 'Critères pathognomoniques de ' + lead;
+
+    state.catA = {};
+    const container = document.getElementById('confirmationContent');
+    container.innerHTML = '';
+
+    const criteria = (CRITERIA[lead] && CRITERIA[lead].A) || [];
+    document.getElementById('confirmCount').textContent = '0 / ' + criteria.length;
+
+    const groups = {};
+    criteria.forEach((c, idx) => {
+        c._patho = lead; c._cat = 'A'; c._idx = idx;
+        const g = c.grp || 'Critères';
+        if (!groups[g]) groups[g] = [];
+        groups[g].push(c);
+    });
+
+    Object.entries(groups).forEach(([gName, items]) => {
+        const h = document.createElement('div');
+        h.className = 'crit-group';
+        h.textContent = '— ' + gName + ' —';
+        container.appendChild(h);
+        items.forEach(c => {
+            const card = renderCriterion(c, (cid, ans) => {
+                state.catA[cid] = ans;
+                updateConfirmProb();
+            });
+            container.appendChild(card);
+        });
+    });
+}
+
+function updateConfirmProb() {
+    const lead = state.leadDiagnosis;
+    if (!lead) return;
+    const total = (CRITERIA[lead] && CRITERIA[lead].A.length) || 1;
+    const yes = Object.values(state.catA).filter(v => v === 'oui').length;
+    document.getElementById('confirmCount').textContent = yes + ' / ' + total;
+    const triageProb = state.triageScores[lead] || 50;
+    const confirmRatio = total > 0 ? (yes / total) * 100 : 0;
+    const finalProb = Math.min(99, triageProb * 0.4 + confirmRatio * 0.6 + 5);
+    state.confirmationScore = finalProb;
+    document.getElementById('probCircle').style.setProperty('--p', finalProb);
+    document.getElementById('probText').textContent = finalProb.toFixed(0) + '%';
+}
+
+document.getElementById('btnBack3').addEventListener('click', () => goTo(2));
+document.getElementById('btnNext3').addEventListener('click', () => {
+    buildGravity();
+    goTo(4);
+});
+
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN 4 — GRAVITÉ
+   ═══════════════════════════════════════════════════════════ */
+function buildGravity() {
+    const lead = state.leadDiagnosis;
+    if (!lead) return;
+    document.getElementById('gravSubtitle').textContent = 'Critères de sévérité — ' + PATHO_INFO[lead].name;
+
+    state.catB = {};
+    const container = document.getElementById('gravityContent');
+    container.innerHTML = '';
+
+    const criteria = (CRITERIA[lead] && CRITERIA[lead].B) || [];
+    if (criteria.length > 0) {
+        const groups = {};
+        criteria.forEach((c, idx) => {
+            c._patho = lead; c._cat = 'B'; c._idx = idx;
+            const g = c.grp || 'Sous-types';
+            if (!groups[g]) groups[g] = [];
+            groups[g].push(c);
+        });
+
+        Object.entries(groups).forEach(([gName, items]) => {
+            const h = document.createElement('div');
+            h.className = 'crit-group';
+            h.textContent = '— ' + gName + ' —';
+            container.appendChild(h);
+            items.forEach(c => {
+                const card = renderCriterion(c, (cid, ans) => {
+                    state.catB[cid] = ans;
+                });
+                container.appendChild(card);
+            });
+        });
+    }
+}
+
+document.getElementById('btnBack4').addEventListener('click', () => goTo(3));
+document.getElementById('btnNext4').addEventListener('click', () => {
+    buildReport();
+    goTo(5);
+});
+
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN 5 — COMPTE RENDU
+   ═══════════════════════════════════════════════════════════ */
+function buildReport() {
+    const p = state.patient;
+    const lead = state.leadDiagnosis;
+    const info = PATHO_INFO[lead];
+    const today = new Date().toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
+
+    const confirmedA = (CRITERIA[lead]?.A || []).filter(c => state.catA[c.id] === 'oui');
+    const criticalB = [];
+    const otherB = [];
+    (CRITERIA[lead]?.B || []).forEach(c => {
+        if (state.catB[c.id] === 'oui') {
+            if (c.critical) criticalB.push(c); else otherB.push(c);
+        }
+    });
+    const zMeasures = Object.values(state.zscores || {});
+    const recos = RECOMMENDATIONS[lead] || [];
+
+    const docName = (state.doctor.firstName || state.doctor.lastName)
+        ? 'Dr ' + state.doctor.firstName + ' ' + (state.doctor.lastName || '').toUpperCase()
+        : 'Dr Touati Mohamed';
+
+    const html =
+        '<div class="report">' +
+            '<div class="report-header">' +
+                '<div class="report-title">COMPTE RENDU D\'ÉCHOCARDIOGRAPHIE PÉDIATRIQUE</div>' +
+                '<div class="report-subtitle">Module Nourrisson 1–6 mois</div>' +
+            '</div>' +
+
+            '<div class="report-section">' +
+                '<h3>Identification du patient</h3>' +
+                '<div class="report-grid">' +
+                    '<div class="lbl">Nom :</div><div>' + p.lastName.toUpperCase() + ' ' + p.firstName + '</div>' +
+                    '<div class="lbl">Sexe :</div><div>' + (p.sex === 'M' ? 'Masculin' : 'Féminin') + '</div>' +
+                    '<div class="lbl">Âge :</div><div>' + p.ageMonths + ' mois</div>' +
+                    '<div class="lbl">Poids :</div><div>' + p.weight + ' kg</div>' +
+                    (p.height ? '<div class="lbl">Taille :</div><div>' + p.height + ' cm</div>' : '') +
+                    '<div class="lbl">Surface corporelle :</div><div>' + (p.bsa ? p.bsa.toFixed(2) + ' m²' : '—') + '</div>' +
+                    '<div class="lbl">SpO₂ :</div><div>' + p.spo2 + '%</div>' +
+                    '<div class="lbl">Insuffisance cardiaque :</div><div>' + (p.ic === 'oui' ? 'Présente' : 'Absente') + '</div>' +
+                '</div>' +
+            '</div>' +
+
+            '<div class="report-section">' +
+                '<h3>Diagnostic échocardiographique</h3>' +
+                '<div class="report-diagnosis">' +
+                    '<div class="report-diagnosis-name">' + info.name + ' (' + lead + ')</div>' +
+                    '<div style="font-size:11px;">Probabilité : <strong>' + state.confirmationScore.toFixed(0) + '%</strong> · Urgence : <strong>' + info.urgence + '</strong></div>' +
+                '</div>' +
+            '</div>' +
+
+            (confirmedA.length ? (
+                '<div class="report-section">' +
+                    '<h3>Critères diagnostiques retenus</h3>' +
+                    '<ul>' + confirmedA.map(c => '<li><strong>[' + c.id + ']</strong> ' + c.lib + '</li>').join('') + '</ul>' +
+                '</div>'
+            ) : '') +
+
+            ((criticalB.length || otherB.length) ? (
+                '<div class="report-section">' +
+                    '<h3>Évaluation de gravité</h3>' +
+                    (criticalB.length ? '<ul>' + criticalB.map(c => '<li style="color:#C00000;"><strong>⚠ [' + c.id + ']</strong> ' + c.lib + '</li>').join('') + '</ul>' : '') +
+                    (otherB.length ? '<ul>' + otherB.map(c => '<li><strong>[' + c.id + ']</strong> ' + c.lib + '</li>').join('') + '</ul>' : '') +
+                '</div>'
+            ) : '') +
+
+            (zMeasures.length ? (
+                '<div class="report-section">' +
+                    '<h3>Mesures (Z-scores Lopez 2010)</h3>' +
+                    '<ul>' + zMeasures.map(m =>
+                        '<li><strong>' + m.struct + '</strong> : ' + m.measure.toFixed(1) + ' mm ' +
+                        '<span style="color:' + (Math.abs(m.z) > 2 ? '#C00000' : '#375623') + '; font-weight:700;">' +
+                        '(Z = ' + (m.z >= 0 ? '+' : '') + m.z.toFixed(1) + ')</span></li>'
+                    ).join('') + '</ul>' +
+                '</div>'
+            ) : '') +
+
+            '<div class="report-section">' +
+                '<h3>Conduite à tenir</h3>' +
+                '<div class="report-recos"><ul>' +
+                    recos.map(r => '<li>' + r + '</li>').join('') +
+                '</ul></div>' +
+            '</div>' +
+
+            '<div class="report-footer">' +
+                'Examen réalisé le ' + today +
+                '<div class="report-signature">' + docName + '</div>' +
+                '<div style="font-size:10px; font-weight:normal; font-style:italic;">Cardiologue pédiatre · CMCI Algérie</div>' +
+            '</div>' +
+        '</div>';
+
+    document.getElementById('reportContainer').innerHTML = html;
+}
+
+document.getElementById('btnBack5').addEventListener('click', () => goTo(4));
+document.getElementById('btnPrint').addEventListener('click', () => window.print());
+</script>
+
+</body>
+</html>
