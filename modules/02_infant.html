@@ -21,7 +21,7 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-se
   background:var(--bg);color:var(--text);overflow-x:hidden;font-size:15px;line-height:1.5;
   -webkit-font-smoothing:antialiased}
 body{padding-bottom:80px;min-height:100vh}
- 
+
 /* HEADER */
 .app-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
   color:#fff;padding:14px 16px;position:sticky;top:0;z-index:100;
@@ -33,12 +33,12 @@ body{padding-bottom:80px;min-height:100vh}
 .app-header .module-tag{font-size:10px;opacity:.85;font-weight:500;display:block;margin-top:2px}
 .app-header .back-btn{background:rgba(255,255,255,.18);border:none;color:#fff;
   padding:6px 12px;border-radius:18px;font-size:13px;cursor:pointer;font-weight:600}
- 
+
 /* SCREENS */
 .screen{display:none;padding:16px;animation:fadeIn .3s ease}
 .screen.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
- 
+
 /* CARDS */
 .card{background:var(--card);border-radius:var(--radius);padding:16px;
   margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
@@ -47,7 +47,7 @@ body{padding-bottom:80px;min-height:100vh}
 .card-title .icon{width:24px;height:24px;border-radius:6px;background:var(--accent);
   display:flex;align-items:center;justify-content:center;font-size:13px}
 .card-subtitle{font-size:12px;color:var(--text-soft);margin-bottom:12px}
- 
+
 /* INPUTS */
 .field{margin-bottom:12px}
 .field label{display:block;font-size:12px;font-weight:600;color:var(--text-soft);
@@ -63,7 +63,7 @@ body{padding-bottom:80px;min-height:100vh}
 .field-computed{background:linear-gradient(135deg,var(--accent) 0%,#D9EDF7 100%);
   padding:10px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
   color:var(--primary-dark);margin-top:8px;text-align:center}
- 
+
 /* === BILINGUE FR/EN === */
 /* Header app avec switch FR/EN */
 .app-header{position:sticky;top:0;z-index:100;background:#fff;
@@ -82,7 +82,7 @@ body{padding-bottom:80px;min-height:100vh}
   letter-spacing:.4px;transition:all .15s}
 .lang-btn.active{background:var(--primary);color:#fff;
   box-shadow:0 1px 3px rgba(74,144,226,.3)}
- 
+
 /* Écran 0 Welcome (sélecteur langue initial) */
 #screen-0{display:flex;flex-direction:column;align-items:center;
   justify-content:center;min-height:100vh;padding:40px 24px;
@@ -114,13 +114,13 @@ body{padding-bottom:80px;min-height:100vh}
 .lang-card-native{font-size:11px;color:var(--text-soft);letter-spacing:.4px}
 .welcome-footer{margin-top:40px;font-size:11px;color:var(--text-soft);
   text-align:center;line-height:1.6}
- 
+
 /* === STYLE NEONATAL ADAPTÉ === */
 /* Screen titles */
 .screen-title{font-size:22px;font-weight:800;letter-spacing:-0.4px;
   margin:6px 0 4px;color:var(--primary-dark)}
 .screen-subtitle{font-size:13px;color:var(--text-soft);margin-bottom:18px;line-height:1.5}
- 
+
 /* Age banner */
 .age-banner{background:linear-gradient(135deg,#FFF3E0 0%,#FFE0E0 100%);
   border:1.5px solid #FFB74D;border-radius:12px;padding:11px 13px;
@@ -131,23 +131,23 @@ body{padding-bottom:80px;min-height:100vh}
 .age-banner-text{flex:1}
 .age-banner-title{font-size:13px;font-weight:700;color:#E65100}
 .age-banner-subtitle{font-size:11px;color:#BF360C;margin-top:2px}
- 
+
 /* Card médecin distinctive (purple) */
 .card-doctor{border:1.5px solid #C5CAE9;background:linear-gradient(135deg,#F3F4FF 0%,#FFF 100%)}
 .card-title-doctor{color:#3949AB !important}
- 
+
 /* Field-label uppercase petit */
 .field-label{display:block;font-size:11.5px;font-weight:700;
   color:var(--text-soft);margin-bottom:6px;
   text-transform:uppercase;letter-spacing:.4px}
- 
+
 /* Field-input (style néonatal, sans .field wrapper) */
 .field-input{width:100%;padding:11px 13px;border:1.5px solid var(--border);
   border-radius:9px;font-size:15px;font-family:inherit;background:#fff;
   color:var(--text);-webkit-appearance:none}
 .field-input:focus{outline:none;border-color:var(--primary);
   box-shadow:0 0 0 3px rgba(74,144,226,.15)}
- 
+
 /* Field with suffix (kg, cm) */
 .field-suffix{position:relative}
 .field-suffix .suffix-text{position:absolute;right:12px;top:50%;
@@ -155,7 +155,7 @@ body{padding-bottom:80px;min-height:100vh}
   font-weight:600;pointer-events:none;letter-spacing:.3px}
 .field-help{font-size:11px;color:var(--text-soft);margin-top:4px;
   line-height:1.4;font-style:italic}
- 
+
 /* Computed display (SC) */
 .computed-display{background:linear-gradient(135deg,#E3F2FD 0%,#E8F5E9 100%);
   border:1.5px solid #4FC3F7;border-radius:11px;padding:12px 14px;
@@ -167,7 +167,7 @@ body{padding-bottom:80px;min-height:100vh}
 .computed-value{font-size:18px;font-weight:800;color:var(--primary-dark)}
 .computed-formula{font-size:10.5px;color:var(--text-soft);font-style:italic;
   width:100%;text-align:right;margin-top:2px}
- 
+
 /* Segmented (radio buttons) */
 .segmented{display:grid;grid-template-columns:1fr 1fr;
   background:#F0F4F7;border:1.5px solid var(--border);
@@ -178,7 +178,7 @@ body{padding-bottom:80px;min-height:100vh}
 .segment.active{background:var(--primary);color:#fff;
   box-shadow:0 2px 6px rgba(74,144,226,.35)}
 .segment:not(.active):active{background:rgba(74,144,226,.08)}
- 
+
 /* Z-score badges (mesures dilaté/normal/hypoplasique) */
 .zscore-badge{display:inline-flex;align-items:center;gap:5px;
   padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;
@@ -187,7 +187,7 @@ body{padding-bottom:80px;min-height:100vh}
 .zscore-badge.normal{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
 .zscore-badge.hypo{background:#FFF3E0;color:#E65100;border:1px solid #FFB74D}
 .zscore-badge.hyper{background:#FFEBEE;color:#C62828;border:1px solid #EF9A9A}
- 
+
 /* AGE SLIDER */
 .age-slider-wrap{padding:10px 4px}
 .age-slider{width:100%;-webkit-appearance:none;height:8px;border-radius:4px;
@@ -201,7 +201,7 @@ body{padding-bottom:80px;min-height:100vh}
 .age-display{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
 .age-display .value{font-size:24px;font-weight:800;color:var(--primary-dark)}
 .age-display .scale{font-size:11px;color:var(--text-soft)}
- 
+
 /* PATHOLOGY GRID */
 .path-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .path-card{background:#fff;border-radius:var(--radius);padding:14px 10px;
@@ -216,7 +216,7 @@ body{padding-bottom:80px;min-height:100vh}
   color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px}
 .path-card .badge-rare{background:var(--warning)}
 .path-card .badge-veryrare{background:var(--danger)}
- 
+
 /* CANVA */
 .canva-wrapper{position:relative;width:100%;border-radius:var(--radius-sm);
   overflow:hidden;background:#0a0a0a;box-shadow:var(--shadow-md);margin-bottom:12px}
@@ -224,7 +224,7 @@ body{padding-bottom:80px;min-height:100vh}
   font-weight:600;display:flex;align-items:center;justify-content:space-between}
 .canva-label .tag{background:rgba(255,255,255,.15);padding:2px 8px;border-radius:10px;font-size:10px}
 .canva-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#000}
- 
+
 /* SECTION HEADERS */
 .section-h{font-size:13px;font-weight:700;color:var(--primary-dark);
   margin:18px 0 8px;text-transform:uppercase;letter-spacing:.4px;
@@ -233,7 +233,7 @@ body{padding-bottom:80px;min-height:100vh}
 .section-h.diag::before{background:var(--success)}
 .section-h.eval::before{background:var(--warning)}
 .section-h.ai::before{background:var(--ai-accent)}
- 
+
 /* DIAG / ÉVAL ITEMS */
 .criterion{background:#fff;border-radius:var(--radius);padding:12px;margin-bottom:10px;
   border:1.5px solid var(--border);transition:all .2s;cursor:pointer}
@@ -251,7 +251,7 @@ body{padding-bottom:80px;min-height:100vh}
 .criterion-measure input{width:80px;padding:6px 8px;border:1.5px solid var(--border);
   border-radius:6px;font-size:13px}
 .criterion-measure label{font-size:11px;color:var(--text-soft);font-weight:600}
- 
+
 /* AI BOX */
 .ai-box{background:linear-gradient(135deg,var(--ai-bg) 0%,#FFF 100%);
   border:2px solid var(--ai-border);border-radius:var(--radius);padding:14px;
@@ -270,7 +270,7 @@ body{padding-bottom:80px;min-height:100vh}
 .ai-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;
   background:var(--ai-accent);margin-left:6px;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
- 
+
 /* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;
   border-top:1px solid var(--border);padding:10px 16px;display:flex;gap:10px;
@@ -282,20 +282,20 @@ body{padding-bottom:80px;min-height:100vh}
 .btn-primary:active{background:var(--primary-dark);transform:scale(.98)}
 .btn-primary:disabled{background:#B0BEC5;cursor:not-allowed}
 .btn-secondary{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
- 
+
 /* SUMMARY BAR (sticky) */
 .patient-bar{background:var(--accent);padding:8px 16px;font-size:12px;
   color:var(--primary-dark);display:flex;gap:10px;flex-wrap:wrap;
   border-bottom:1px solid var(--primary-light)}
 .patient-bar span{font-weight:600}
 .patient-bar .sep{color:var(--primary-light)}
- 
+
 /* QUESTIONNAIRE - sections, options, fields */
 .qsection{padding:12px 0;border-bottom:1px dashed var(--border)}
 .qsection:last-child{border-bottom:none}
 .qsection-label{font-size:13px;font-weight:700;color:var(--primary-dark);margin-bottom:10px}
 .qsection-options{display:flex;flex-direction:column;gap:8px}
- 
+
 .qopt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;
   border:1.5px solid var(--border);border-radius:var(--radius-sm);
   background:#fff;cursor:pointer;transition:all .15s}
@@ -304,7 +304,7 @@ body{padding-bottom:80px;min-height:100vh}
 .qopt-content{flex:1}
 .qopt-label{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
 .qopt-desc{font-size:11px;color:var(--text-soft);line-height:1.35;margin-top:3px}
- 
+
 /* Radio mark */
 .qopt-radio-mark{width:18px;height:18px;border:2px solid var(--border);
   border-radius:50%;flex-shrink:0;margin-top:1px;background:#fff;position:relative}
@@ -312,14 +312,14 @@ body{padding-bottom:80px;min-height:100vh}
 .qopt-radio.selected .qopt-radio-mark::after{
   content:'';position:absolute;top:3px;left:3px;width:8px;height:8px;
   border-radius:50%;background:var(--primary)}
- 
+
 /* Check mark */
 .qopt-check-mark{width:20px;height:20px;border:2px solid var(--border);
   border-radius:5px;flex-shrink:0;margin-top:1px;background:#fff;
   display:flex;align-items:center;justify-content:center;
   font-size:12px;font-weight:700;color:#fff}
 .qopt-check.selected .qopt-check-mark{background:var(--success);border-color:var(--success)}
- 
+
 /* Number / select fields */
 .qfield-row{display:flex;align-items:center;gap:8px}
 .qfield{padding:9px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
@@ -328,14 +328,14 @@ body{padding-bottom:80px;min-height:100vh}
 input.qfield{max-width:120px}
 .qfield-unit{font-size:12px;color:var(--text-soft);font-weight:600}
 .qfield-hint{font-size:11px;color:var(--text-soft);margin-top:5px;font-style:italic}
- 
+
 /* Compound (sous-questions) */
 .qsection-compound{display:flex;flex-direction:column;gap:14px;
   padding-left:10px;border-left:2px solid var(--accent);margin-top:6px}
 .qcompound-field{}
 .qcompound-label{font-size:12px;font-weight:600;color:var(--text-soft);margin-bottom:6px;
   text-transform:uppercase;letter-spacing:.3px}
- 
+
 /* Mini Canva par question (vidéo exemple) */
 .qvideo-wrap{margin:0 0 12px;border-radius:var(--radius-sm);overflow:hidden;
   background:#0a0a0a;box-shadow:0 2px 6px rgba(0,0,0,.1);border:1px solid var(--border)}
@@ -344,7 +344,7 @@ input.qfield{max-width:120px}
 .qvideo-label .qvideo-tag{background:rgba(255,255,255,.18);padding:2px 7px;
   border-radius:8px;font-size:9px;letter-spacing:.5px}
 .qvideo-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#000}
- 
+
 /* ALGORITHME AIDE DIAGNOSTIC POSITIF — 17 étapes empilées */
 .algo-summary{background:linear-gradient(135deg,#E8F5E9 0%,#FFF 100%);
   border:1.5px solid #81C784;border-radius:12px;padding:11px 14px;
@@ -354,7 +354,7 @@ input.qfield{max-width:120px}
 .algo-summary-icon{font-size:18px;flex-shrink:0}
 .algo-summary-text{font-size:13px;color:var(--primary-dark);font-weight:600;
   flex:1;line-height:1.35}
- 
+
 /* Bloc d'étape (carte étape complète) */
 .algo-step-block{background:#fff;border:1.5px solid var(--border);
   border-radius:12px;padding:12px;margin-bottom:14px;transition:all .2s;
@@ -365,7 +365,7 @@ input.qfield{max-width:120px}
 .algo-step-block.step-absent{opacity:.6;background:#F8FAFB}
 .algo-step-block.step-explorer{border-color:#FFB74D;
   background:linear-gradient(135deg,#FFF8E1 0%,#FFF 60%)}
- 
+
 .algo-step-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .algo-step-num{width:34px;height:34px;border-radius:50%;
   background:var(--primary);color:#fff;
@@ -385,15 +385,15 @@ input.qfield{max-width:120px}
   background:rgba(39,174,96,.12);padding:2px 7px;border-radius:8px;
   font-size:10.5px;letter-spacing:.3px}
 .algo-step-path-no{color:#90A4AE;background:rgba(144,164,174,.12)}
- 
+
 /* Mini-Canva intégré au bloc */
 .algo-step-canva{width:100%;aspect-ratio:16/9;border-radius:8px;
   overflow:hidden;background:#000;margin-bottom:10px;border:1px solid var(--border)}
 .algo-step-canva iframe{width:100%;height:100%;border:none;display:block}
- 
+
 .algo-step-desc{font-size:12px;color:var(--text);line-height:1.5;
   background:#F8FAFB;padding:9px 11px;border-radius:8px;margin-bottom:10px}
- 
+
 /* Choix présent/absent/explorer */
 .algo-step-choices{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 .algo-choice{padding:10px 6px;border:1.5px solid var(--border);
@@ -407,12 +407,12 @@ input.qfield{max-width:120px}
   border-color:#90A4AE;box-shadow:0 2px 6px rgba(144,164,174,.35)}
 .algo-choice-explorer.active{background:#FFB74D;color:#fff;
   border-color:#FFB74D;box-shadow:0 2px 6px rgba(255,183,77,.35)}
- 
+
 /* HUB 3 BOUTONS */
 .hub-header{padding:8px 4px 16px;text-align:center}
 .hub-header h2{font-size:20px;font-weight:800;color:var(--primary-dark);margin-bottom:6px}
 .hub-subtitle{font-size:13px;color:var(--text-soft)}
- 
+
 .hub-buttons{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
 .hub-btn{display:flex;align-items:center;gap:14px;padding:18px 16px;
   background:#fff;border:2px solid var(--border);border-radius:var(--radius);
@@ -432,7 +432,7 @@ input.qfield{max-width:120px}
   margin-bottom:4px;line-height:1.3}
 .hub-btn-desc{font-size:12px;color:var(--text-soft);line-height:1.4}
 .hub-btn-arrow{font-size:20px;color:var(--primary-light);flex-shrink:0;font-weight:700}
- 
+
 /* DECISION CARD (écran diag positif) */
 .decision-card{background:linear-gradient(135deg,#FFF 0%,var(--accent) 100%);
   border:2px solid var(--primary-light)}
@@ -441,21 +441,21 @@ input.qfield{max-width:120px}
 .btn-warning:active{background:#C0660D}
 .btn-success{background:var(--success);color:#fff}
 .btn-success:active{background:#1E8449}
- 
+
 /* CHATBOT */
 .chatbot-info{background:linear-gradient(135deg,var(--ai-bg) 0%,#FFF 100%);
   border:2px solid var(--ai-border)}
- 
+
 .api-key-card{border:1.5px solid var(--warning);background:#FFF8F0}
 .api-key-card.hidden{display:none}
- 
+
 .chat-container{display:flex;flex-direction:column;background:#fff;
   border-radius:var(--radius);box-shadow:var(--shadow);
   overflow:hidden;margin-bottom:14px;height:60vh;min-height:400px}
- 
+
 .chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;
   flex-direction:column;gap:10px;background:#FAFBFC}
- 
+
 .chat-msg{max-width:85%;padding:10px 14px;border-radius:14px;
   font-size:14px;line-height:1.45;word-wrap:break-word}
 .chat-msg-user{align-self:flex-end;background:var(--primary);color:#fff;
@@ -467,7 +467,7 @@ input.qfield{max-width:120px}
 .chat-msg strong{color:var(--ai-accent)}
 .chat-msg-assistant strong{color:var(--ai-accent)}
 .chat-msg-user strong{color:#fff;text-decoration:underline}
- 
+
 .chat-typing{align-self:flex-start;background:#F0F4F7;padding:12px 16px;
   border-radius:14px;border-bottom-left-radius:4px}
 .chat-typing-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
@@ -476,7 +476,7 @@ input.qfield{max-width:120px}
 .chat-typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.5}
   30%{transform:translateY(-6px);opacity:1}}
- 
+
 .chat-input-wrap{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);
   background:#fff;align-items:flex-end}
 .chat-input-wrap textarea{flex:1;padding:10px 12px;border:1.5px solid var(--border);
@@ -488,13 +488,13 @@ input.qfield{max-width:120px}
   flex-shrink:0;font-weight:700;display:flex;align-items:center;justify-content:center}
 .btn-chat-send:active{transform:scale(.92)}
 .btn-chat-send:disabled{background:#B0BEC5;cursor:not-allowed}
- 
+
 .chat-suggestions{display:flex;gap:6px;padding:0 10px 10px;flex-wrap:wrap;background:#fff}
 .chat-suggestion{padding:6px 12px;background:#F0F4F7;border:1px solid var(--border);
   border-radius:14px;font-size:12px;color:var(--primary-dark);cursor:pointer;
   font-weight:500;transition:all .15s}
 .chat-suggestion:active{background:var(--accent);transform:scale(.95)}
- 
+
 @media(max-width:360px){
   body{font-size:14px}
   .path-card .code{font-size:16px}
@@ -505,7 +505,7 @@ input.qfield{max-width:120px}
 </style>
 </head>
 <body>
- 
+
 <!-- ============ ÉCRAN 0 : WELCOME (Sélecteur langue) ============ -->
 <section class="screen active" id="screen-0">
   <div class="welcome-logo">🫀</div>
@@ -530,7 +530,7 @@ input.qfield{max-width:120px}
     <div style="margin-top:4px">v2.0 · Dr Touati Mohamed · 2026</div>
   </div>
 </section>
- 
+
 <!-- Header app avec switch FR/EN (apparaît dès écran 1) -->
 <header class="app-header" id="appHeader" style="display:none">
   <div class="app-header-brand">
@@ -542,15 +542,15 @@ input.qfield{max-width:120px}
     <button class="lang-btn" id="langBtnEN" onclick="changeLanguage('en')">EN</button>
   </div>
 </header>
- 
+
 <!-- Patient bar visible dès écran 2 -->
 <div class="patient-bar" id="patientBar" style="display:none"></div>
- 
+
 <!-- ============ ÉCRAN 1 : PROFIL PATIENT ============ -->
 <section class="screen" id="screen-1">
   <h1 class="screen-title" data-i18n="patientProfile">Profil patient</h1>
   <p class="screen-subtitle" data-i18n="patientProfileSubtitle">Identification du nourrisson 1–6 mois</p>
- 
+
   <div class="age-banner">
     <div class="age-banner-icon">👶</div>
     <div class="age-banner-text">
@@ -558,7 +558,7 @@ input.qfield{max-width:120px}
       <div class="age-banner-subtitle" data-i18n="ageBannerSubtitle">Nourrisson — 11 cardiopathies du module 2B</div>
     </div>
   </div>
- 
+
   <!-- Médecin signataire -->
   <div class="card card-doctor">
     <div class="card-title card-title-doctor" data-i18n="signatoryDoctor">✍️ Médecin signataire</div>
@@ -573,7 +573,7 @@ input.qfield{max-width:120px}
       </div>
     </div>
   </div>
- 
+
   <!-- Identité patient -->
   <div class="card">
     <div class="card-title" data-i18n="patientIdentity">Identité du patient</div>
@@ -593,7 +593,7 @@ input.qfield{max-width:120px}
       </div>
     </div>
   </div>
- 
+
   <!-- Anthropométrie -->
   <div class="card">
     <div class="card-title" data-i18n="anthropometry">Anthropométrie</div>
@@ -634,19 +634,19 @@ input.qfield{max-width:120px}
       <span class="computed-formula" id="bsaFormula"></span>
     </div>
   </div>
- 
+
   <div class="bottom-nav">
     <button class="btn btn-primary btn-block" onclick="validateProfileAndGo()" data-i18n="continueToHub">Continuer vers le hub diagnostique ▸</button>
   </div>
 </section>
- 
+
 <!-- ============ ÉCRAN 2 : HUB 3 BOUTONS (juste après profil) ============ -->
 <section class="screen" id="screen-2">
   <div class="hub-header">
     <h2 id="hubTitle" data-i18n="hubTitle">🩺 Que voulez-vous faire ?</h2>
     <p id="hubSubtitle" class="hub-subtitle" data-i18n="hubSubtitleDefault">Choisissez votre approche diagnostique</p>
   </div>
- 
+
   <div class="hub-buttons">
     <!-- Bouton 1 : J'ai un diagnostic → Grille pathologies -->
     <button class="hub-btn hub-btn-1" onclick="goToScreen(3)">
@@ -657,7 +657,7 @@ input.qfield{max-width:120px}
       </div>
       <div class="hub-btn-arrow">▸</div>
     </button>
- 
+
     <!-- Bouton 2 : Aide diagnostic positif → Algorithme 17 étapes -->
     <button class="hub-btn hub-btn-2" onclick="goToScreen(4)">
       <div class="hub-btn-icon">🔍</div>
@@ -667,7 +667,7 @@ input.qfield{max-width:120px}
       </div>
       <div class="hub-btn-arrow">▸</div>
     </button>
- 
+
     <!-- Bouton 3 : ChatBot Claude -->
     <button class="hub-btn hub-btn-3" onclick="goToScreen(6)">
       <div class="hub-btn-icon">🤖</div>
@@ -678,12 +678,12 @@ input.qfield{max-width:120px}
       <div class="hub-btn-arrow">▸</div>
     </button>
   </div>
- 
+
   <div class="bottom-nav">
     <button class="btn btn-secondary" onclick="goToScreen(1)" data-i18n="backProfile">◂ Profil</button>
   </div>
 </section>
- 
+
 <!-- ============ ÉCRAN 3 : SÉLECTION PATHOLOGIE (après bouton "J'ai un diag") ============ -->
 <section class="screen" id="screen-3">
   <div class="card">
@@ -691,77 +691,77 @@ input.qfield{max-width:120px}
     <p class="card-subtitle" data-i18n="pathologySubtitle">11 pathologies du module Diagnostic. Les % indiquent la prévalence dans la cohorte CMCI nourrisson 1-6 mois.</p>
     <div class="path-grid" id="pathGrid"></div>
   </div>
- 
+
   <div class="bottom-nav">
     <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
     <button class="btn btn-primary" id="btnGoModule" disabled onclick="goToScreen(5)" data-i18n="selectPathology">Sélectionnez ▸</button>
   </div>
 </section>
- 
+
 <!-- ============ ÉCRAN 4 : DIAGNOSTIC POSITIF (Cat A) ============ -->
 <section class="screen" id="screen-4">
   <h1 class="screen-title" data-i18n="algoTitle">🔍 Aide au diagnostic positif</h1>
   <p class="screen-subtitle" data-i18n="algoSubtitle">17 étapes d'évaluation systématique. Pour chaque étape, regardez la vidéo et cochez votre observation.</p>
- 
+
   <!-- Compteur de pathologies marquées présent -->
   <div class="algo-summary" id="algoSummary">
     <span class="algo-summary-icon">📊</span>
     <span class="algo-summary-text" id="algoSummaryText" data-i18n="algoSummaryEmpty">Aucune anomalie marquée pour le moment</span>
   </div>
- 
+
   <!-- Liste des 17 étapes empilées -->
   <div id="algoStepsContainer"></div>
- 
+
   <!-- Bouton Lancer évaluation (apparait si ≥1 présent) -->
   <div class="card decision-card" id="algoLaunchCard" style="display:none">
     <div class="card-title"><span class="icon">🎯</span><span data-i18n="algoLaunchTitle">Pathologies à évaluer</span></div>
     <p class="card-subtitle" id="algoLaunchSubtitle"></p>
     <div id="algoLaunchButtons"></div>
   </div>
- 
+
   <div class="bottom-nav">
     <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
     <button class="btn btn-warning" onclick="algoReset()" data-i18n="algoReset">♻️ Réinitialiser</button>
     <button class="btn btn-primary" onclick="goToScreen(7)" data-i18n="algoCR">📄 CR</button>
   </div>
 </section>
- 
+
 <!-- ============ ÉCRAN 5 : ÉVALUATION (Q1 + Q2) ============ -->
 <section class="screen" id="screen-5">
   <!-- Bloc Canva (boucles écho) -->
   <div id="canvaBlock"></div>
- 
+
   <!-- Section : Diagnostic positif (questionnaire Q1) -->
   <div class="section-h diag" data-i18n="evalAnatomic">✅ Évaluation anatomique</div>
   <div class="card">
     <p class="card-subtitle" id="diagPositifSubtitle" data-i18n="evalAnatomicSubtitle">Type, mesures anatomiques</p>
     <div id="diagPositifContent"></div>
   </div>
- 
+
   <!-- Section : Évaluation (questionnaire Q2) -->
   <div class="section-h eval" data-i18n="evalHemo">🔍 Évaluation hémodynamique</div>
   <div class="card">
     <p class="card-subtitle" data-i18n="evalHemoSubtitle">Flux, restriction, pression VD, surcharge VG, obstacles</p>
     <div id="evalContent"></div>
   </div>
- 
+
   <!-- Section : Box AI -->
   <div class="section-h ai" data-i18n="evalAI">🤖 Box AI — Synthèse intelligente</div>
   <div id="aiBoxContent"></div>
- 
+
   <div class="bottom-nav">
     <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
     <button class="btn btn-primary" onclick="goToScreen(7)" data-i18n="evalReport">Compte rendu ▸</button>
   </div>
 </section>
- 
+
 <!-- ============ ÉCRAN 6 : CHATBOT CLAUDE ============ -->
 <section class="screen" id="screen-6">
   <div class="card chatbot-info">
     <div class="card-title"><span class="icon">🤖</span><span data-i18n="chatTitle">Box AI — Aide diagnostique Claude</span></div>
     <p class="card-subtitle" data-i18n="chatSubtitle">Décrivez les éléments échographiques observés. Claude vous aide à identifier la pathologie la plus probable et orienter l'examen.</p>
   </div>
- 
+
   <!-- API Key (saisie une fois, stockée localStorage) -->
   <div class="card api-key-card" id="apiKeyCard">
     <div class="card-title"><span class="icon">🔐</span><span data-i18n="apiKeyTitle">Clé API Anthropic</span></div>
@@ -772,7 +772,7 @@ input.qfield{max-width:120px}
     <button class="btn btn-primary" onclick="saveApiKey()" data-i18n="apiKeySave">💾 Enregistrer la clé</button>
     <p class="field-hint" style="margin-top:8px" data-i18n="apiKeyHint">🔒 Votre clé reste sur votre appareil. Aucune donnée n'est envoyée à un serveur tiers.</p>
   </div>
- 
+
   <!-- Chat -->
   <div class="chat-container" id="chatContainer">
     <div class="chat-messages" id="chatMessages"></div>
@@ -782,13 +782,13 @@ input.qfield{max-width:120px}
     </div>
     <div class="chat-suggestions" id="chatSuggestions"></div>
   </div>
- 
+
   <div class="bottom-nav">
     <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
     <button class="btn btn-primary" onclick="goToScreen(3)" data-i18n="chatChoosePath">Choisir pathologie ▸</button>
   </div>
 </section>
- 
+
 <!-- ============ ÉCRAN 7 : COMPTE RENDU ============ -->
 <section class="screen" id="screen-7">
   <div class="card">
@@ -800,27 +800,27 @@ input.qfield{max-width:120px}
     <button class="btn btn-primary" onclick="exportReport()" data-i18n="reportExport">📤 Exporter</button>
   </div>
 </section>
- 
+
 <script>
 // ============ MAPPING URLS CANVA ============
 const CANVA_URLS = {
-  CIV:    "https://www.canva.com/design/DAHIXS_vD80/0luISc6HiW6V4DN/view?embed",
-  CIA:    "https://www.canva.com/design/DAHIXYX413w/sJmsasrORgZHA_5/view?embed",
-  PCA:    "https://www.canva.com/design/DAHIXbMWLO4/6XZGLWMk2gIGzEO/view?embed",
-  CAV:    "https://www.canva.com/design/DAHIXRvTRWg/IpVVcMAsyZrlqME/view?embed",
-  T4F:    "https://www.canva.com/design/DAHIXSWBVMc/oCqkOJofcYHcTSD/view?embed",
-  SP:     "https://www.canva.com/design/DAHIXcDWqLc/vFwmy8mbbFej7op/view?embed",
-  CoAo:   "https://www.canva.com/design/DAHIXTj3Teo/QloZEVUmCkNjlIM/view?embed",
-  VU:     "https://www.canva.com/design/DAHIXYGhs5g/fy86Gfe5VHhYep5/view?embed",
-  TGV_CIV:"https://www.canva.com/design/DAHIXb7400c/U7Ra1nGktekuk1r/view?embed",
-  VDDI:   "https://www.canva.com/design/DAHIXU5wVQI/AMk-KhjegVWf3TU/view?embed",
-  TAC:    "https://www.canva.com/design/DAHIXYe1whw/5YdO3fNa5ykE3FK/view?embed",
-  RAO:    "https://www.canva.com/design/DAHIXRHki6M/Dqp29dQk7BHTYEX/view?embed",
-  ALCAPA: "https://www.canva.com/design/DAHIXVcUbos/ZxQHOhVRb1KtAoE/view?embed",
-  FIST:   "https://www.canva.com/design/DAHIXaj6qe8/eQBpmK_8baK2mC1/view?embed",
-  ALGO:   "https://www.canva.com/design/DAHIaf-qo_s/lqM8lRgVtBjY2wQ/view?embed"
+  CIV:    "https://www.canva.com/design/DAHIXS_vD80/view?embed",
+  CIA:    "https://www.canva.com/design/DAHIXYX413w/view?embed",
+  PCA:    "https://www.canva.com/design/DAHIXbMWLO4/view?embed",
+  CAV:    "https://www.canva.com/design/DAHIXRvTRWg/view?embed",
+  T4F:    "https://www.canva.com/design/DAHIXSWBVMc/view?embed",
+  SP:     "https://www.canva.com/design/DAHIXcDWqLc/view?embed",
+  CoAo:   "https://www.canva.com/design/DAHIXTj3Teo/view?embed",
+  VU:     "https://www.canva.com/design/DAHIXYGhs5g/view?embed",
+  TGV_CIV:"https://www.canva.com/design/DAHIXb7400c/view?embed",
+  VDDI:   "https://www.canva.com/design/DAHIXU5wVQI/view?embed",
+  TAC:    "https://www.canva.com/design/DAHIXYe1whw/view?embed",
+  RAO:    "https://www.canva.com/design/DAHIXRHki6M/view?embed",
+  ALCAPA: "https://www.canva.com/design/DAHIXVcUbos/view?embed",
+  FIST:   "https://www.canva.com/design/DAHIXaj6qe8/view?embed",
+  ALGO:   "https://www.canva.com/design/DAHIaf-qo_s/view?embed"
 };
- 
+
 // ============ ALGORITHME AIDE DIAGNOSTIC POSITIF — 17 ÉTAPES ============
 // Chaque étape pointe vers la page Canva A (titre+vidéo) et la page B (détails)
 // pathTarget : clé de PATHOLOGIES vers laquelle naviguer si "Oui, présent"
@@ -850,7 +850,7 @@ const LOPEZ_2010 = {
   // Anneau tricuspide
   tvAnnulus: {label:"Anneau tricuspide", a:3.057, b:0.474, sd:0.076, unit:"mm"}
 };
- 
+
 function calcZScore(measureKey, observedMM, bsa){
   const m = LOPEZ_2010[measureKey];
   if(!m || !observedMM || !bsa || observedMM <= 0 || bsa <= 0) return null;
@@ -858,14 +858,14 @@ function calcZScore(measureKey, observedMM, bsa){
   const z = (Math.log(observedMM) - lnPredicted) / m.sd;
   return z;
 }
- 
+
 function getZClass(z){
   if(z === null || isNaN(z)) return "empty";
   if(z < -2) return "hypo";
   if(z > 2) return "hyper";
   return "normal";
 }
- 
+
 function getZLabel(z){
   if(z === null || isNaN(z)) return t("zEmpty");
   let label;
@@ -874,7 +874,7 @@ function getZLabel(z){
   else label = t("zNormal");
   return label + " (Z=" + (z >= 0 ? "+" : "") + z.toFixed(1) + ")";
 }
- 
+
 // Helper : produit le badge HTML
 function zScoreBadge(measureKey, observedMM){
   const bsa = STATE.patient && STATE.patient.bsa;
@@ -883,7 +883,7 @@ function zScoreBadge(measureKey, observedMM){
   const txt = getZLabel(z);
   return `<span class="zscore-badge ${cls}">${txt}</span>`;
 }
- 
+
 const ALGO_DIAG_POSITIF = [
   {n:1,  name:"Septum interventriculaire",     short:"CIV",
    name_en:"Interventricular septum", short_en:"VSD",
@@ -971,7 +971,7 @@ const ALGO_DIAG_POSITIF = [
    desc:"Vérifier origine et flux des coronaires. ALCAPA (origine anormale coronaire G depuis l'AP, CMD précoce 2-3 mois). Fistule coronaire (dilatation + flux turbulent).",
    desc_en:"Check coronary origin and flow. ALCAPA (anomalous origin of left coronary from PA, early DCM at 2-3 months). Coronary fistula (dilatation + turbulent flow)."}
 ];
- 
+
 // ============ PATHOLOGIES — STRUCTURE DE BASE (à enrichir une par une) ============
 // Chaque pathologie : diagPositif[] + eval[] + aiLogic(state) → texte HTML
 const PATHOLOGIES = {
@@ -987,7 +987,7 @@ const PATHOLOGIES = {
   ALCAPA: {name:"ALCAPA", fullName:"Anomalous LCA from Pulmonary Artery",    prev:0.08, badge:"veryrare", icon:"⭐"},
   FIST:   {name:"FIST",   fullName:"Fistule Coronaire",                      prev:0.02, badge:"veryrare"}
 };
- 
+
 // ============ STUB PAR DÉFAUT (pathologies non encore construites) ============
 function defaultPathologyData(key){
   const p = PATHOLOGIES[key];
@@ -1010,7 +1010,7 @@ function defaultPathologyData(key){
     }
   };
 }
- 
+
 // ============ CIV - QUESTIONNAIRE ARCHITECTURE ============
 // Architecture : 2 questionnaires en accordéons + Box AI dynamique
 // Q1: Évaluation anatomique (type CIM-11 + diamètre)
@@ -1019,7 +1019,7 @@ PATHOLOGIES.CIV.data = {
   questionnaire: true, // mode questionnaire (vs checklist)
   // Pages Canva par type CIM-11 (DAHIXS_vD80 a maintenant 14 pages, dont 11-14 = types 1-4)
   canvaPages: { type1: 11, type2: 12, type3: 13, type4: 14, default: 1 },
- 
+
   // ===== QUESTIONNAIRE 1 : ÉVALUATION ANATOMIQUE =====
   q1_anatomique: {
     title: "Évaluation anatomique",
@@ -1060,7 +1060,7 @@ PATHOLOGIES.CIV.data = {
       }
     ]
   },
- 
+
   // ===== QUESTIONNAIRE 2 : ÉVALUATION HÉMODYNAMIQUE =====
   q2_hemodynamique: {
     title: "Évaluation hémodynamique",
@@ -1155,25 +1155,25 @@ PATHOLOGIES.CIV.data = {
       }
     ]
   },
- 
+
   // ===== LOGIQUE BOX AI =====
   aiLogic: function(state) {
     const a = state.q1 || {};
     const h = state.q2 || {};
- 
+
     // Niveau 1 : rien rempli
     const hasType = a.type;
     const hasDiam = a.diametre || a.diametre_ratio;
     const hasFlux = h.direction_flux;
     const hasRestriction = h.vmax;
- 
+
     if (!hasType && !hasDiam && !hasFlux) {
       return `<em>Sélectionnez le type CIM-11 et complétez les questionnaires pour activer la synthèse intelligente.</em><br><br>
         <strong>Rappel :</strong> CIV = 42.6% des nourrissons CMCI. 4 types CIM-11 + évaluation hémodynamique selon courbure septale, restriction, surcharge.`;
     }
- 
+
     let html = "";
- 
+
     // ===== Synthèse anatomique =====
     if (hasType) {
       const typeLabels = {
@@ -1183,7 +1183,7 @@ PATHOLOGIES.CIV.data = {
         type4: "Type 4 — Musculaires trabéculées"
       };
       html += `<strong>📍 ${typeLabels[a.type]}</strong><br>`;
- 
+
       // Alertes spécifiques par type
       if (a.type === "type1") {
         html += `🚨 <strong>Type 1 outlet :</strong> risque MAJEUR de prolapsus de la cuspide aortique → IAo. Indication chirurgicale précoce systématique, même si petite.<br>`;
@@ -1195,7 +1195,7 @@ PATHOLOGIES.CIV.data = {
         html += `📌 <strong>Type 4 musculaire :</strong> fermeture spontanée 40% à 2 ans. Surveillance pure si asymptomatique. Si multiples → Swiss-cheese.<br>`;
       }
     }
- 
+
     // Diamètre
     if (a.diametre_ratio) {
       const ratioLabels = {
@@ -1212,11 +1212,11 @@ PATHOLOGIES.CIV.data = {
       let cat = d < 3 ? "petite" : d <= 6 ? "moyenne" : "grande";
       html += `<br><strong>📏 Taille CIV :</strong> ${a.diametre} mm — ${cat}<br>`;
     }
- 
+
     // ===== Synthèse hémodynamique =====
     if (hasFlux) {
       html += `<br><strong>🩸 Hémodynamique :</strong><br>`;
- 
+
       // Direction flux
       if (h.direction_flux === "DG") {
         html += `🚨 <strong>Flux D→G :</strong> HTAP fixée probable (Eisenmenger). <strong>CONTRE-INDICATION</strong> à la fermeture. Cathétérisme pour test de réversibilité des résistances pulmonaires.<br>`;
@@ -1225,7 +1225,7 @@ PATHOLOGIES.CIV.data = {
       } else if (h.direction_flux === "GD") {
         html += `✓ Flux G→D classique.<br>`;
       }
- 
+
       // Restriction
       if (h.vmax) {
         const v = parseFloat(h.vmax);
@@ -1236,7 +1236,7 @@ PATHOLOGIES.CIV.data = {
         else restriction = "<strong>non-restrictive</strong> — HTAP probable";
         html += `Vmax = ${v} m/s → gradient ≈ ${grad} mmHg : CIV ${restriction}.<br>`;
       }
- 
+
       // Cause restriction
       if (h.cause_restriction && h.cause_restriction.length > 0) {
         const causeLabels = {
@@ -1248,7 +1248,7 @@ PATHOLOGIES.CIV.data = {
         const causes = h.cause_restriction.map(c => causeLabels[c]).join(", ");
         html += `Mécanisme : ${causes}.<br>`;
       }
- 
+
       // Pression VD
       if (h.courbure_septale) {
         const courbureLabels = {
@@ -1258,7 +1258,7 @@ PATHOLOGIES.CIV.data = {
         };
         html += `Pression VD : ${courbureLabels[h.courbure_septale]}.<br>`;
       }
- 
+
       if (h.vmax_it) {
         const vit = parseFloat(h.vmax_it);
         const paps = (4 * vit * vit).toFixed(0);
@@ -1267,7 +1267,7 @@ PATHOLOGIES.CIV.data = {
         else if (paps > 35) html += ` (HTAP modérée)`;
         html += `.<br>`;
       }
- 
+
       // Surcharge VG
       const zVG = (h.dtd_vg && p && p.bsa) ? calcZScore("lvedd", parseFloat(h.dtd_vg), p.bsa) : null;
       const ogAo = h.og_ao ? parseFloat(h.og_ao) : null;
@@ -1279,7 +1279,7 @@ PATHOLOGIES.CIV.data = {
         if (ogAo > 1.4) html += `OG/Ao = ${ogAo} : <strong>shunt G-D significatif</strong>.<br>`;
         else html += `OG/Ao = ${ogAo} : non significatif.<br>`;
       }
- 
+
       // Obstacles
       if (h.obstacle_vg && h.obstacle_vg.length > 0) {
         const labels = { malalign_post: "malalignement postérieur", membrane_sao: "membrane sous-aortique", coarctation: "coarctation" };
@@ -1290,7 +1290,7 @@ PATHOLOGIES.CIV.data = {
         html += `⚠️ <strong>Obstacle VD :</strong> ${h.obstacle_vd.map(o => labels[o]).join(", ")}.<br>`;
       }
     }
- 
+
     // ===== Recommandation finale =====
     html += `<br><strong>💡 Synthèse :</strong> `;
     if (h.direction_flux === "DG") {
@@ -1306,11 +1306,11 @@ PATHOLOGIES.CIV.data = {
     } else {
       html += `Compléter l'évaluation hémodynamique.`;
     }
- 
+
     return html;
   }
 };
- 
+
 // ============ ÉTAT GLOBAL ============
 const STATE = {
   lang: "fr",  // Langue active : "fr" ou "en"
@@ -1320,7 +1320,7 @@ const STATE = {
   selectedPath: null,
   checks: {} // {diagPositif:{0:true,1:false}, eval:{0:true...}}
 };
- 
+
 // ============ INTERNATIONALISATION (FR/EN) ============
 const i18n = {
   fr: {
@@ -1508,12 +1508,12 @@ const i18n = {
     countLabel: "checked"
   }
 };
- 
+
 function t(key){
   const dict = i18n[STATE.lang] || i18n.fr;
   return dict[key] || key;
 }
- 
+
 // Choisi à l'écran 0 → fade out + show écran 1 + show header
 function selectLanguage(lang){
   STATE.lang = lang;
@@ -1529,7 +1529,7 @@ function selectLanguage(lang){
     goToScreen(1);
   }, 300);
 }
- 
+
 // Toggle FR/EN depuis le header
 function changeLanguage(lang){
   STATE.lang = lang;
@@ -1546,13 +1546,13 @@ function changeLanguage(lang){
   else if(id === "screen-6") renderChatBot();
   else if(id === "screen-7") renderReport();
 }
- 
+
 function updateLangButtons(){
   const btnFR = $("langBtnFR"), btnEN = $("langBtnEN");
   if(btnFR) btnFR.classList.toggle("active", STATE.lang === "fr");
   if(btnEN) btnEN.classList.toggle("active", STATE.lang === "en");
 }
- 
+
 function applyTranslations(){
   const dict = i18n[STATE.lang] || i18n.fr;
   document.documentElement.lang = STATE.lang;
@@ -1583,16 +1583,16 @@ function applyTranslations(){
     if($("patientLastName"))  $("patientLastName").placeholder  = "Doe";
   }
 }
- 
+
 // ============ UTILITIES ============
 function $(id){return document.getElementById(id)}
- 
+
 function updateAge(){
   const v = parseInt($("ageSlider").value);
   STATE.patient.ageMonths = v;
   $("ageValue").textContent = v + " " + t("months");
 }
- 
+
 // ============ CALCUL SC ADAPTATIF ============
 // Si poids + taille → Mosteller
 // Si poids seul → formule simplifiée (4×P + 7) / (P + 90)
@@ -1601,7 +1601,7 @@ function calcBSA(weight, height){
   if(weight) return {bsa: (4 * weight + 7) / (weight + 90), formula: t("bsaWeightOnly")};
   return {bsa: null, formula: ""};
 }
- 
+
 function computeBSA(){
   const w = parseFloat($("patientWeight").value);
   const h = parseFloat($("patientHeight").value);
@@ -1619,14 +1619,14 @@ function computeBSA(){
     display.classList.add("hidden");
   }
 }
- 
+
 function setSex(sex){
   STATE.patient.sex = sex;
   document.querySelectorAll("#sexSegmented .segment").forEach(s=>{
     s.classList.toggle("active", s.dataset.sex === sex);
   });
 }
- 
+
 function updatePatientBar(){
   const p = STATE.patient;
   if(!p.weight){$("patientBar") && ($("patientBar").style.display="none");return}
@@ -1641,7 +1641,7 @@ function updatePatientBar(){
     <span>${p.weight} kg</span>${p.height?`<span class="sep">·</span><span>${p.height} cm</span>`:""}<span class="sep">·</span>
     <span>SC ${p.bsa?p.bsa.toFixed(3):"—"} m²</span>`;
 }
- 
+
 // ============ NAVIGATION ============
 function validateProfileAndGo(){
   // Médecin
@@ -1657,7 +1657,7 @@ function validateProfileAndGo(){
   STATE.patient.weight    = parseFloat($("patientWeight").value) || null;
   STATE.patient.height    = parseFloat($("patientHeight").value) || null;
   STATE.patient.ageMonths = parseInt($("ageSlider").value);
- 
+
   if(!STATE.patient.weight){
     alert("Le poids est obligatoire pour calculer la surface corporelle.");
     $("patientWeight").focus();
@@ -1667,7 +1667,7 @@ function validateProfileAndGo(){
   updatePatientBar();
   goToScreen(2);
 }
- 
+
 function goToScreen(n){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   $(`screen-${n}`).classList.add("active");
@@ -1679,7 +1679,7 @@ function goToScreen(n){
   if(n===6) renderChatBot();                // ChatBot Claude
   if(n===7) renderReport();                 // Compte rendu
 }
- 
+
 // ============ HUB 3 BOUTONS (écran 2 — point de départ après profil) ============
 function renderHub(){
   // Plus besoin de pathologie pré-sélectionnée — le hub est le point d'entrée
@@ -1688,14 +1688,14 @@ function renderHub(){
   $("hubTitle").innerHTML = t("hubTitle");
   $("hubSubtitle").innerHTML = `<strong>${fullName}</strong> — ${p.ageMonths} ${t("months")} · ${p.weight||"?"} kg · ${t("bsa")} ${p.bsa?p.bsa.toFixed(2):"?"} m²`;
 }
- 
+
 // ============ ALGORITHME AIDE DIAGNOSTIC POSITIF (écran 4, 17 étapes empilées) ============
 // STATE.algoAnswers : {1: "present"|"absent"|"explorer"|null, 2: ..., ...}
 function renderAlgoStep(){
   // Init si nécessaire
   if(!STATE.algoAnswers) STATE.algoAnswers = {};
   const isEN = STATE.lang === "en";
- 
+
   // Construire le HTML des 17 étapes empilées
   const container = $("algoStepsContainer");
   container.innerHTML = ALGO_DIAG_POSITIF.map(step => {
@@ -1738,10 +1738,10 @@ function renderAlgoStep(){
         </div>
       </div>`;
   }).join("");
- 
+
   updateAlgoSummary();
 }
- 
+
 function setAlgoAnswer(stepNum, answer){
   if(!STATE.algoAnswers) STATE.algoAnswers = {};
   // Toggle : reclic même réponse → désélectionne
@@ -1770,14 +1770,14 @@ function setAlgoAnswer(stepNum, answer){
   }
   updateAlgoSummary();
 }
- 
+
 function updateAlgoSummary(){
   const answers = STATE.algoAnswers || {};
   const presents = ALGO_DIAG_POSITIF.filter(s => answers[s.n] === "present");
   const explorers = ALGO_DIAG_POSITIF.filter(s => answers[s.n] === "explorer");
   const totalAnswered = Object.keys(answers).length;
   const isEN = STATE.lang === "en";
- 
+
   // Texte résumé
   let summaryText;
   if(presents.length === 0 && explorers.length === 0 && totalAnswered === 0){
@@ -1793,7 +1793,7 @@ function updateAlgoSummary(){
     summaryText = parts.join(" · ");
   }
   $("algoSummaryText").innerHTML = summaryText;
- 
+
   // Bouton lancer évaluation : visible si ≥1 "présent" avec module
   const launchCard = $("algoLaunchCard");
   const presentsWithModule = presents.filter(s => s.pathTarget && PATHOLOGIES[s.pathTarget]);
@@ -1815,26 +1815,26 @@ function updateAlgoSummary(){
     launchCard.style.display = "none";
   }
 }
- 
+
 function algoLaunchPathology(pathKey){
   if(!PATHOLOGIES[pathKey]) return;
   STATE.selectedPath = pathKey;
   STATE.q1 = {}; STATE.q2 = {}; STATE.checks = {diagPositif:{}, eval:{}};
   goToScreen(5);
 }
- 
+
 function algoReset(){
   if(!confirm(t("algoResetConfirm"))) return;
   STATE.algoAnswers = {};
   renderAlgoStep();
 }
- 
+
 function goBack(){
   if(confirm("Retour à l'accueil ? Les données saisies seront perdues.")){
     location.href = "../index.html";
   }
 }
- 
+
 // ============ GRID PATHOLOGIE ============
 function renderPathologyGrid(){
   const grid = $("pathGrid");
@@ -1853,7 +1853,7 @@ function renderPathologyGrid(){
     $("btnGoModule").textContent = `Module ▸ ${PATHOLOGIES[STATE.selectedPath].name}`;
   }
 }
- 
+
 function selectPathology(key){
   STATE.selectedPath = key;
   STATE.checks = {diagPositif:{}, eval:{}};
@@ -1863,18 +1863,18 @@ function selectPathology(key){
   // Note: STATE.algoAnswers conservé pour qu'il apparaisse dans le CR
   renderPathologyGrid();
 }
- 
+
 // ============ MODULE PATHOLOGIE ============
 function renderModule(){
   if(!STATE.selectedPath) return;
   const key = STATE.selectedPath;
   const pathMeta = PATHOLOGIES[key];
   const pathData = pathMeta.data || defaultPathologyData(key);
- 
+
   // Init state pour les questionnaires
   if(!STATE.q1) STATE.q1 = {};
   if(!STATE.q2) STATE.q2 = {};
- 
+
   // Bloc Canva — page dynamique selon type sélectionné
   let canvaPage = 1;
   if(pathData.questionnaire && pathData.canvaPages && STATE.q1.type){
@@ -1887,7 +1887,7 @@ function renderModule(){
     </div>
     <iframe class="canva-frame" src="${CANVA_URLS[key]}#${canvaPage}" allow="fullscreen" loading="lazy" allowfullscreen></iframe>
   </div>`;
- 
+
   // ===== MODE QUESTIONNAIRE (CIV et futures pathologies) =====
   if(pathData.questionnaire){
     // Cacher l'ancien layout
@@ -1905,22 +1905,22 @@ function renderModule(){
     $("diagPositifContent").innerHTML = pathData.diagPositif.map((c,i)=>renderCriterion(c,i,"diagPositif")).join("");
     $("evalContent").innerHTML = pathData.eval.map((c,i)=>renderCriterion(c,i,"eval")).join("");
   }
- 
+
   renderAIBox();
 }
- 
+
 // ============ QUESTIONNAIRE RENDER ============
 function renderQuestionnaire(qKey, q){
   if(!q) return "";
   return q.sections.map(section => renderSection(qKey, section)).join("");
 }
- 
+
 function renderSection(qKey, section){
   const stateObj = STATE[qKey] || {};
   const key = STATE.selectedPath;
   let html = `<div class="qsection">
     <div class="qsection-label">${section.label}</div>`;
- 
+
   // Mini-canva vidéo par question (si videoPage défini)
   if(section.videoPage && CANVA_URLS[key]){
     html += `<div class="qvideo-wrap">
@@ -1932,7 +1932,7 @@ function renderSection(qKey, section){
         allow="fullscreen" loading="lazy" allowfullscreen></iframe>
     </div>`;
   }
- 
+
   if(section.type === "radio"){
     html += `<div class="qsection-options">`;
     section.options.forEach(opt => {
@@ -2023,17 +2023,17 @@ function renderSection(qKey, section){
     });
     html += `</div>`;
   }
- 
+
   html += `</div>`;
   return html;
 }
- 
+
 function setRadio(qKey, fieldId, value){
   if(!STATE[qKey]) STATE[qKey] = {};
   STATE[qKey][fieldId] = value;
   renderModule();
 }
- 
+
 function setField(qKey, fieldId, value){
   if(!STATE[qKey]) STATE[qKey] = {};
   STATE[qKey][fieldId] = value;
@@ -2041,7 +2041,7 @@ function setField(qKey, fieldId, value){
   updateZBadgeForField(qKey, fieldId, value);
   renderAIBox(); // pas de re-render complet pour ne pas perdre le focus input
 }
- 
+
 // Met à jour le badge Z-score d'un champ donné sans casser le focus
 function updateZBadgeForField(qKey, fieldId, value){
   const key = STATE.selectedPath;
@@ -2081,7 +2081,7 @@ function updateZBadgeForField(qKey, fieldId, value){
     row.appendChild(tmp.content.firstChild);
   }
 }
- 
+
 function toggleChecklist(qKey, fieldId, value){
   if(!STATE[qKey]) STATE[qKey] = {};
   if(!STATE[qKey][fieldId]) STATE[qKey][fieldId] = [];
@@ -2091,7 +2091,7 @@ function toggleChecklist(qKey, fieldId, value){
   else arr.push(value);
   renderModule();
 }
- 
+
 function renderCriterion(c, i, group){
   const isChecked = STATE.checks[group] && STATE.checks[group][i];
   return `<div class="criterion ${isChecked?'checked':''}" onclick="toggleCheck('${group}',${i})">
@@ -2103,19 +2103,19 @@ function renderCriterion(c, i, group){
     <div class="criterion-desc">${c.desc}</div>
   </div>`;
 }
- 
+
 function toggleCheck(group, i){
   if(!STATE.checks[group]) STATE.checks[group] = {};
   STATE.checks[group][i] = !STATE.checks[group][i];
   renderModule();
 }
- 
+
 // ============ AI BOX ============
 function renderAIBox(){
   const key = STATE.selectedPath;
   const pathMeta = PATHOLOGIES[key];
   const pathData = pathMeta.data || defaultPathologyData(key);
- 
+
   let aiState;
   if(pathData.questionnaire){
     aiState = {
@@ -2134,7 +2134,7 @@ function renderAIBox(){
       patient: STATE.patient
     };
   }
- 
+
   const aiText = pathData.aiLogic(aiState);
   $("aiBoxContent").innerHTML = `<div class="ai-box">
     <div class="ai-header">
@@ -2144,7 +2144,7 @@ function renderAIBox(){
     <div class="ai-content">${aiText}</div>
   </div>`;
 }
- 
+
 // ============ COMPTE RENDU ============
 function renderReport(){
   const p = STATE.patient;
@@ -2153,7 +2153,7 @@ function renderReport(){
   const today = new Date().toLocaleDateString(isEN ? "en-US" : "fr-FR");
   const fullPatientName = `${p.firstName||""} ${p.lastName||""}`.trim() || "—";
   const fullDocName = `Dr ${doc.firstName||""} ${doc.lastName||""}`.trim();
- 
+
   // Section algorithme (nouveau format STATE.algoAnswers)
   let algoSection = "";
   const answers = STATE.algoAnswers || {};
@@ -2179,7 +2179,7 @@ function renderReport(){
     lines.push(`<br><em style="color:var(--text-soft)">${totalAnswered}/17 ${t("reportStepsParsed")}</em>`);
     algoSection = lines.join("<br>");
   }
- 
+
   // Section pathologie (si une pathologie a été évaluée)
   let pathSection = "";
   if(STATE.selectedPath && PATHOLOGIES[STATE.selectedPath]){
@@ -2187,7 +2187,7 @@ function renderReport(){
     const pathMeta = PATHOLOGIES[key];
     const pathData = pathMeta.data || defaultPathologyData(key);
     let diagSection = "", evalSection = "", aiText = "";
- 
+
     if(pathData.questionnaire){
       const q1 = STATE.q1 || {};
       const q2 = STATE.q2 || {};
@@ -2226,7 +2226,7 @@ function renderReport(){
         patient:p
       });
     }
- 
+
     pathSection = `
       <div style="margin-bottom:14px"><strong>${t("reportPathology")} :</strong> ${pathMeta.fullName} (${key})</div>
       <div style="margin-bottom:14px"><strong>${pathData.questionnaire?(pathData.q1_anatomique.icon+" "+pathData.q1_anatomique.title):t("evalAnatomic")} :</strong><br>${diagSection}</div>
@@ -2235,7 +2235,7 @@ function renderReport(){
         <strong>${t("reportAI")} :</strong><br>${aiText}
       </div>`;
   }
- 
+
   $("reportContent").innerHTML = `
     <div style="margin-bottom:14px"><strong>${t("reportDate")} :</strong> ${today}</div>
     <div style="margin-bottom:14px">
@@ -2249,7 +2249,7 @@ function renderReport(){
     </div>
   `;
 }
- 
+
 function exportReport(){
   const txt = $("reportContent").innerText;
   if(navigator.share){
@@ -2261,14 +2261,14 @@ function exportReport(){
     a.href = url; a.download = `CR_${STATE.selectedPath}_${Date.now()}.txt`; a.click();
   }
 }
- 
+
 // ============ CHATBOT CLAUDE ============
 const CLAUDE_API_KEY_STORAGE = "cardioecho_claude_api_key";
- 
+
 function getApiKey(){
   return localStorage.getItem(CLAUDE_API_KEY_STORAGE) || "";
 }
- 
+
 function saveApiKey(){
   const key = $("apiKeyInput").value.trim();
   if(!key.startsWith("sk-ant-")){
@@ -2279,7 +2279,7 @@ function saveApiKey(){
   $("apiKeyCard").classList.add("hidden");
   initChatBot();
 }
- 
+
 function renderChatBot(){
   if(!STATE.selectedPath){ goToScreen(2); return; }
   const apiKey = getApiKey();
@@ -2290,7 +2290,7 @@ function renderChatBot(){
     $("apiKeyCard").classList.remove("hidden");
   }
 }
- 
+
 function initChatBot(){
   if(!STATE.chatHistory) STATE.chatHistory = [];
   // Message d'accueil si chat vide
@@ -2298,16 +2298,16 @@ function initChatBot(){
     const pathMeta = PATHOLOGIES[STATE.selectedPath];
     const p = STATE.patient;
     const welcomeMsg = `👋 Bonjour Dr Touati. Je vous aide à évaluer si ce patient présente bien une <strong>${pathMeta.fullName}</strong> ou une autre cardiopathie.
- 
+
 <strong>Patient :</strong> ${p.ageMonths} mois, ${p.weight} kg, ${p.height} cm (SC ${p.bsa?p.bsa.toFixed(3):"—"} m²).
- 
+
 Décrivez les éléments observés à l'écho (vues utilisées, anomalies, mesures...). Je vous aiderai à préciser le diagnostic et orienter l'examen.`;
     addChatMessage("assistant", welcomeMsg);
   }
   renderChatMessages();
   renderChatSuggestions();
 }
- 
+
 function renderChatMessages(){
   const container = $("chatMessages");
   container.innerHTML = STATE.chatHistory.map(m=>{
@@ -2317,7 +2317,7 @@ function renderChatMessages(){
   }).join("");
   container.scrollTop = container.scrollHeight;
 }
- 
+
 function renderChatSuggestions(){
   // Suggestions contextuelles (premiers messages utilisateur)
   if(STATE.chatHistory.length > 2){
@@ -2335,35 +2335,35 @@ function renderChatSuggestions(){
     `<span class="chat-suggestion" onclick="useSuggestion('${s.replace(/'/g,"\\'")}')">${s}</span>`
   ).join("");
 }
- 
+
 function useSuggestion(text){
   $("chatInput").value = text;
   $("chatInput").focus();
 }
- 
+
 function addChatMessage(role, content){
   STATE.chatHistory.push({role, content});
   renderChatMessages();
 }
- 
+
 async function sendChatMessage(){
   const input = $("chatInput");
   const text = input.value.trim();
   if(!text) return;
- 
+
   const apiKey = getApiKey();
   if(!apiKey){
     alert("Veuillez d'abord saisir votre clé API Anthropic.");
     $("apiKeyCard").classList.remove("hidden");
     return;
   }
- 
+
   // Add user message
   addChatMessage("user", text);
   input.value = "";
   $("btnSendChat").disabled = true;
   $("chatSuggestions").innerHTML = "";
- 
+
   // Show typing indicator
   const typingDiv = document.createElement("div");
   typingDiv.className = "chat-typing";
@@ -2371,7 +2371,7 @@ async function sendChatMessage(){
   typingDiv.innerHTML = `<span class="chat-typing-dot"></span><span class="chat-typing-dot"></span><span class="chat-typing-dot"></span>`;
   $("chatMessages").appendChild(typingDiv);
   $("chatMessages").scrollTop = $("chatMessages").scrollHeight;
- 
+
   try {
     const reply = await callClaudeAPI(apiKey);
     document.getElementById("chatTyping")?.remove();
@@ -2383,20 +2383,20 @@ async function sendChatMessage(){
     $("btnSendChat").disabled = false;
   }
 }
- 
+
 async function callClaudeAPI(apiKey){
   const pathMeta = PATHOLOGIES[STATE.selectedPath];
   const p = STATE.patient;
- 
+
   // Construire le contexte système
   const systemPrompt = `Tu es un assistant médical spécialisé en cardiopédiatrie pour Dr Touati Mohamed (CMCI Algérie). Tu aides à diagnostiquer les cardiopathies congénitales chez le nourrisson 1-6 mois.
- 
+
 CONTEXTE PATIENT :
 - Âge : ${p.ageMonths} mois
 - Poids : ${p.weight} kg, Taille : ${p.height} cm
 - Surface corporelle (Mosteller) : ${p.bsa ? p.bsa.toFixed(3) : "non calculée"} m²
 - Pathologie initialement suspectée : ${pathMeta.fullName} (${pathMeta.name}, prévalence CMCI ${pathMeta.prev}%)
- 
+
 INSTRUCTIONS :
 1. Analyse les éléments échographiques décrits par le médecin.
 2. Évalue si la pathologie suspectée (${pathMeta.name}) est compatible OU propose des diagnostics différentiels.
@@ -2405,7 +2405,7 @@ INSTRUCTIONS :
 5. Sois CONCIS (max 200 mots), structuré (gras pour les points clés, listes courtes).
 6. Si l'utilisateur décrit des signes incompatibles avec ${pathMeta.name}, oriente vers la bonne pathologie parmi les 11 du module : CIV, CIA, PCA, CAV, T4F, SP, VU, VDDI, TAC, ALCAPA, FIST.
 7. Réponds en français. Termine par une question pour préciser si besoin.`;
- 
+
   // Construire l'historique des messages (excluant les messages système locaux)
   const messages = STATE.chatHistory
     .filter(m => m.role === "user" || m.role === "assistant")
@@ -2414,7 +2414,7 @@ INSTRUCTIONS :
       // Convertir HTML en texte pour Claude
       content: m.content.replace(/<[^>]+>/g, "").trim()
     }));
- 
+
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -2430,12 +2430,12 @@ INSTRUCTIONS :
       messages: messages
     })
   });
- 
+
   if(!response.ok){
     const err = await response.text();
     throw new Error(`HTTP ${response.status} : ${err.substring(0,150)}`);
   }
- 
+
   const data = await response.json();
   if(data.content && data.content[0] && data.content[0].text){
     // Convertir markdown léger en HTML
@@ -2448,7 +2448,7 @@ INSTRUCTIONS :
   }
   throw new Error("Réponse invalide de l'API Claude");
 }
- 
+
 // Send message on Enter (Shift+Enter pour nouvelle ligne)
 document.addEventListener("DOMContentLoaded", ()=>{
   const ci = document.getElementById("chatInput");
@@ -2461,7 +2461,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     });
   }
 });
- 
+
 // ============ INIT ============
 document.addEventListener("DOMContentLoaded", ()=>{
   updateAge();
