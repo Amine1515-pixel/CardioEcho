@@ -3,1351 +3,2472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#06101E">
-<title>CardioEcho — Module Nourrisson (1–6 mois)</title>
-
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0F4C75">
+<title>CardioEcho 2B — Diagnostic Nourrisson 1-6 mois</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-:root {
-    --bg-deep: #06101E; --bg-card: #0B1928; --bg-elevated: #122537;
-    --border: rgba(255,255,255,0.07); --border-soft: rgba(255,255,255,0.04);
-    --text-primary: #EEF5FF; --text-secondary: #94A3B8; --text-muted: #64748B;
-    --accent: #FB923C;  /* orange — module nourrisson */
-    --accent-glow: rgba(251,146,60,0.18);
-    --success: #6EE7B7; --success-bg: rgba(110,231,183,0.10);
-    --warning: #FCD34D; --warning-bg: rgba(252,211,77,0.10);
-    --danger: #FCA5A5; --danger-bg: rgba(252,165,165,0.10);
-    --critical: #F87171; --critical-bg: rgba(248,113,113,0.12);
-    --purple: #C4B5FD; --path-violet: #7C3AED; --path-bg: rgba(124,58,237,0.12);
+:root{
+  --primary:#0F4C75; --primary-dark:#093659; --primary-light:#3282B8;
+  --accent:#BBE1FA; --bg:#F8FAFB; --card:#FFFFFF; --text:#1A1A2E;
+  --text-soft:#6C7B8B; --border:#E1E8ED; --success:#27AE60;
+  --warning:#E67E22; --danger:#C0392B;
+  --ai-bg:#F5F0FF; --ai-border:#9B59B6; --ai-accent:#7D3C98;
+  --radius:12px; --radius-sm:8px; --shadow:0 2px 8px rgba(15,76,117,.08);
+  --shadow-md:0 4px 16px rgba(15,76,117,.12);
 }
-
-html, body {
-    background: var(--bg-deep); color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-    font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
-    min-height: 100vh; overflow-x: hidden;
-}
-
-.app { max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 80px; }
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg);color:var(--text);overflow-x:hidden;font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+body{padding-bottom:80px;min-height:100vh}
+ 
 /* HEADER */
-.header {
-    background: linear-gradient(180deg, #0B1928 0%, #06101E 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 14px 12px;
-    position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
-}
-.header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.btn-back-hub {
-    background: var(--bg-elevated); border: 1px solid var(--border);
-    color: var(--text-secondary); padding: 6px 10px; border-radius: 8px;
-    font-size: 11px; font-weight: 600; cursor: pointer;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
-    transition: all 0.15s; font-family: inherit;
-}
-.btn-back-hub:hover { border-color: var(--accent); color: var(--accent); }
-.brand-mid {
-    flex: 1; text-align: center;
-    display: flex; flex-direction: column; align-items: center;
-}
-.brand-name { font-size: 13px; font-weight: 700; }
-.brand-tag { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
-.step-badge {
-    background: rgba(251,146,60,0.15); border: 1px solid rgba(251,146,60,0.30);
-    color: var(--accent); font-size: 10px; font-weight: 700;
-    padding: 5px 9px; border-radius: 7px; letter-spacing: 0.4px;
-}
-.progress-track {
-    height: 3px; background: var(--border-soft);
-    margin-top: 10px; border-radius: 2px; overflow: hidden;
-}
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), #6EE7B7);
-    border-radius: 2px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+.app-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  color:#fff;padding:14px 16px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);display:flex;align-items:center;gap:12px}
+.app-header .logo{width:36px;height:36px;border-radius:8px;background:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  color:var(--primary);font-size:14px;flex-shrink:0}
+.app-header h1{font-size:15px;font-weight:700;flex:1;line-height:1.2}
+.app-header .module-tag{font-size:10px;opacity:.85;font-weight:500;display:block;margin-top:2px}
+.app-header .back-btn{background:rgba(255,255,255,.18);border:none;color:#fff;
+  padding:6px 12px;border-radius:18px;font-size:13px;cursor:pointer;font-weight:600}
+ 
 /* SCREENS */
-.screen { display: none; padding: 16px; animation: slideIn 0.3s ease-out; }
-.screen.active { display: block; }
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.screen-title { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 4px; }
-.screen-subtitle { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.55; }
-
-/* AGE BANNER */
-.age-banner {
-    background: linear-gradient(135deg, rgba(251,146,60,0.10), transparent);
-    border: 1px solid rgba(251,146,60,0.20);
-    border-radius: 11px; padding: 11px 13px; margin-bottom: 14px;
-    display: flex; align-items: center; gap: 10px;
-}
-.age-banner-icon {
-    width: 32px; height: 32px; border-radius: 9px;
-    background: var(--accent); display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; color: white; font-size: 16px;
-}
-.age-banner-text { flex: 1; }
-.age-banner-title { font-size: 12.5px; font-weight: 700; color: var(--accent); }
-.age-banner-subtitle { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
-
+.screen{display:none;padding:16px;animation:fadeIn .3s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+ 
 /* CARDS */
-.card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px; margin-bottom: 12px;
-}
-.card-title {
-    font-size: 11px; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.7px;
-    font-weight: 600; margin-bottom: 10px;
-}
-
+.card{background:var(--card);border-radius:var(--radius);padding:16px;
+  margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-title{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px}
+.card-title .icon{width:24px;height:24px;border-radius:6px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:13px}
+.card-subtitle{font-size:12px;color:var(--text-soft);margin-bottom:12px}
+ 
 /* INPUTS */
-.field { margin-bottom: 14px; }
-.field-label {
-    display: block; font-size: 11.5px; font-weight: 600;
-    color: var(--text-secondary); margin-bottom: 6px;
-}
-.field-input {
-    width: 100%; background: var(--bg-elevated); border: 1px solid var(--border);
-    color: var(--text-primary); font-size: 15px; padding: 11px 13px;
-    border-radius: 9px; font-family: inherit; -webkit-appearance: none;
-}
-.field-input:focus {
-    outline: none; border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-glow);
-}
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.field-suffix { position: relative; }
-.field-suffix .suffix-text {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    color: var(--text-muted); font-size: 11px; pointer-events: none;
-}
-.field-help { font-size: 10.5px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
-
-.computed-display {
-    background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(110,231,183,0.06));
-    border: 1px solid rgba(251,146,60,0.25);
-    border-radius: 10px; padding: 11px 13px; margin-top: 10px;
-    display: flex; align-items: center; justify-content: space-between;
-}
-.computed-display.hidden { display: none; }
-.computed-label {
-    font-size: 11px; color: var(--text-secondary);
-    text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600;
-}
-.computed-value { font-size: 17px; font-weight: 700; color: var(--accent); }
-
-.segmented {
-    display: grid; grid-template-columns: 1fr 1fr;
-    background: var(--bg-elevated); border: 1px solid var(--border);
-    border-radius: 9px; overflow: hidden; padding: 3px; gap: 3px;
-}
-.segment {
-    background: transparent; color: var(--text-secondary); border: none;
-    padding: 9px 8px; font-size: 13px; font-weight: 600;
-    border-radius: 6px; cursor: pointer; font-family: inherit;
-}
-.segment.active {
-    background: var(--accent); color: white;
-    box-shadow: 0 2px 6px rgba(251,146,60,0.35);
-}
-
-/* CRITÈRE-CARD */
-.criterion {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 14px; overflow: hidden; margin-bottom: 14px;
-    transition: border-color 0.2s;
-}
-.criterion.answered-yes { border-color: rgba(110,231,183,0.40); }
-.criterion.answered-no { border-color: rgba(100,116,139,0.30); }
-
-.crit-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 11px 13px; border-bottom: 1px solid var(--border-soft);
-}
-.crit-header-left { display: flex; align-items: center; gap: 8px; }
-.crit-id-badge {
-    font-family: 'SF Mono', monospace; font-size: 10.5px; font-weight: 700;
-    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
-    background: var(--bg-elevated); color: var(--text-secondary);
-    border: 1px solid var(--border);
-}
-.crit-niv-badge {
-    font-size: 9px; font-weight: 700; padding: 3px 7px;
-    border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase;
-}
-.crit-niv-3 { background: var(--path-bg); color: var(--path-violet); border: 1px solid rgba(124,58,237,0.30); }
-.crit-niv-2 { background: var(--success-bg); color: var(--success); border: 1px solid rgba(110,231,183,0.25); }
-.crit-niv-1 { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(251,146,60,0.30); }
-.crit-niv-elim { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(252,165,165,0.25); }
-.crit-niv-crit { background: var(--critical-bg); color: var(--critical); border: 1px solid rgba(248,113,113,0.30); }
-.crit-coupe {
-    font-size: 9.5px; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.6px;
-}
-
-.crit-video {
-    width: 100%; aspect-ratio: 1/1; background: #000;
-    position: relative; overflow: hidden;
-}
-.crit-video iframe { width: 100%; height: 100%; border: none; display: block; }
-.crit-video-placeholder {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #0B1928, #1F2937);
-    color: var(--text-muted); text-align: center; padding: 24px;
-}
-.crit-video-placeholder-icon { font-size: 36px; opacity: 0.3; margin-bottom: 10px; }
-.crit-video-placeholder-text { font-size: 11px; line-height: 1.5; max-width: 240px; }
-.crit-video-placeholder code {
-    display: block; margin-top: 8px; padding: 4px 8px;
-    background: rgba(255,255,255,0.04); border-radius: 4px;
-    font-size: 9.5px; color: var(--text-secondary);
-    font-family: 'SF Mono', monospace;
-}
-
-.crit-body { padding: 13px; }
-.crit-lib {
-    font-size: 14px; font-weight: 700; color: var(--text-primary);
-    line-height: 1.4; margin-bottom: 5px;
-}
-.crit-desc {
-    font-size: 11.5px; color: var(--text-secondary);
-    line-height: 1.5; margin-bottom: 11px;
-}
-
-.crit-zscore {
-    background: rgba(251,146,60,0.06);
-    border: 1px solid rgba(251,146,60,0.18);
-    border-radius: 9px; padding: 10px 11px; margin-bottom: 11px;
-}
-.crit-zscore-label {
-    font-size: 11px; color: var(--accent); font-weight: 600;
-    margin-bottom: 7px;
-}
-.crit-zscore-row {
-    display: grid; grid-template-columns: 1fr auto;
-    gap: 8px; align-items: center;
-}
-.crit-zscore-input {
-    background: var(--bg-deep); border: 1px solid var(--border);
-    color: var(--text-primary); font-size: 14px; padding: 8px 10px;
-    border-radius: 7px; width: 100%; -webkit-appearance: none; font-family: inherit;
-}
-.crit-zscore-input:focus { outline: none; border-color: var(--accent); }
-.crit-zscore-result {
-    padding: 7px 11px; border-radius: 6px; font-size: 11px; font-weight: 700;
-    text-align: center; min-width: 130px;
-}
-.crit-zscore-result.empty { background: var(--bg-deep); color: var(--text-muted); border: 1px solid var(--border); }
-.crit-zscore-result.normal { background: var(--success-bg); color: var(--success); border: 1px solid rgba(110,231,183,0.30); }
-.crit-zscore-result.hypo { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(252,165,165,0.30); }
-.crit-zscore-result.hyper { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(252,211,77,0.30); }
-
-.crit-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.crit-btn {
-    background: var(--bg-elevated); color: var(--text-secondary);
-    border: 1px solid var(--border); padding: 10px;
-    border-radius: 8px; font-size: 13.5px; font-weight: 700;
-    cursor: pointer; font-family: inherit;
-}
-.crit-btn.selected.yes { background: var(--success-bg); border-color: var(--success); color: var(--success); }
-.crit-btn.selected.no { background: rgba(100,116,139,0.15); border-color: var(--text-muted); color: var(--text-secondary); }
-
-.crit-group {
-    font-size: 11px; font-weight: 700; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 0.8px;
-    margin: 18px 0 10px; padding-left: 4px;
-}
-.crit-group:first-child { margin-top: 0; }
-
-/* RANKING */
-.ranking {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 13px; margin-bottom: 12px;
-}
-.ranking-title {
-    font-size: 11px; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.7px;
-    font-weight: 700; margin-bottom: 11px;
-    display: flex; justify-content: space-between; align-items: center;
-}
-.rank-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
-.rank-row:last-child { margin-bottom: 0; }
-.rank-code {
-    width: 70px; font-size: 11.5px; font-weight: 700;
-    color: var(--text-primary); flex-shrink: 0; letter-spacing: 0.3px;
-}
-.rank-bar-container {
-    flex: 1; height: 6px; background: var(--bg-elevated);
-    border-radius: 4px; overflow: hidden;
-}
-.rank-bar {
-    height: 100%; border-radius: 4px;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.rank-bar.lead { background: linear-gradient(90deg, var(--accent), #6EE7B7); }
-.rank-bar.mid { background: rgba(251,146,60,0.55); }
-.rank-pct {
-    width: 38px; text-align: right; font-size: 11.5px; font-weight: 700;
-    color: var(--text-secondary); font-variant-numeric: tabular-nums;
-}
-
-/* DIAG BANNER */
-.diag-banner {
-    background: linear-gradient(135deg, rgba(251,146,60,0.18), rgba(110,231,183,0.10));
-    border: 1px solid rgba(251,146,60,0.40);
-    border-radius: 14px; padding: 16px;
-    text-align: center; margin-bottom: 14px;
-}
-.diag-banner-label {
-    font-size: 10px; color: var(--text-secondary);
-    text-transform: uppercase; letter-spacing: 1px;
-    font-weight: 700; margin-bottom: 5px;
-}
-.diag-banner-name {
-    font-size: 18px; font-weight: 700; color: var(--accent);
-    margin-bottom: 8px; letter-spacing: -0.2px;
-}
-.diag-banner-prob {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.prob-circle {
-    width: 50px; height: 50px; border-radius: 50%;
-    background: conic-gradient(var(--success) calc(var(--p) * 1%), rgba(255,255,255,0.05) 0);
-    display: flex; align-items: center; justify-content: center; position: relative;
-}
-.prob-circle::before {
-    content: ''; position: absolute; inset: 4px;
-    background: var(--bg-card); border-radius: 50%;
-}
-.prob-text { position: relative; font-size: 13px; font-weight: 700; }
-
-.confirm-summary {
-    background: var(--bg-elevated); border: 1px solid var(--border);
-    border-radius: 10px; padding: 9px 12px; margin-bottom: 12px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 12px;
-}
-.confirm-summary-count { color: var(--success); font-weight: 700; }
-
-/* BUTTONS */
-.btn {
-    width: 100%; background: var(--accent); color: white; border: none;
-    padding: 14px; border-radius: 11px; font-size: 14.5px; font-weight: 700;
-    cursor: pointer; font-family: inherit; margin-top: 12px;
-    box-shadow: 0 4px 12px rgba(251,146,60,0.30);
-}
-.btn:disabled {
-    background: var(--bg-elevated); color: var(--text-muted);
-    cursor: not-allowed; box-shadow: none;
-}
-.btn-secondary {
-    background: transparent; color: var(--text-secondary);
-    border: 1px solid var(--border); box-shadow: none;
-}
-.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-
-/* REPORT */
-.report {
-    background: white; color: #0B1928; border-radius: 14px; padding: 20px;
-    font-family: 'Georgia', serif; line-height: 1.55; font-size: 12.5px;
-    margin-bottom: 14px;
-}
-.report-header {
-    border-bottom: 2px solid #C2410C;
-    padding-bottom: 11px; margin-bottom: 14px;
-}
-.report-title {
-    font-size: 15px; font-weight: 700; color: #C2410C;
-    text-align: center; margin-bottom: 3px; letter-spacing: 0.3px;
-}
-.report-subtitle {
-    text-align: center; color: #475569;
-    font-size: 11px; font-style: italic;
-}
-.report-section { margin-bottom: 12px; }
-.report-section h3 {
-    font-size: 12.5px; color: #C2410C;
-    text-transform: uppercase; letter-spacing: 1px;
-    border-bottom: 1px solid #CBD5E1; padding-bottom: 3px;
-    margin-bottom: 6px; font-family: -apple-system, sans-serif; font-weight: 700;
-}
-.report-section ul { list-style: none; padding: 0; }
-.report-section ul li {
-    padding: 2px 0; padding-left: 15px; position: relative; font-size: 12px;
-}
-.report-section ul li::before {
-    content: '•'; position: absolute; left: 0; color: #C2410C; font-weight: 700;
-}
-.report-grid {
-    display: grid; grid-template-columns: auto 1fr;
-    gap: 4px 12px; font-size: 12px;
-}
-.report-grid .lbl { font-weight: 700; color: #475569; }
-.report-diagnosis {
-    background: #FFEDD5; border-left: 3px solid #C2410C;
-    padding: 10px 12px; margin: 10px 0; border-radius: 4px;
-}
-.report-diagnosis-name { font-weight: 700; color: #C2410C; font-size: 13.5px; margin-bottom: 2px; }
-.report-recos {
-    background: #FFF7E6; border-left: 3px solid #BF8F00;
-    padding: 10px 12px; border-radius: 4px; margin-top: 6px;
-}
-.report-footer {
-    margin-top: 18px; padding-top: 10px;
-    border-top: 1px dashed #94A3B8;
-    text-align: right; font-size: 10.5px; color: #475569;
-}
-.report-signature {
-    margin-top: 5px; font-weight: 700; color: #C2410C;
-    font-size: 11.5px; font-family: 'Georgia', serif;
-}
-
-.divider { height: 1px; background: var(--border); margin: 14px 0; }
-
-.app-footer {
-    text-align: center; padding: 16px;
-    font-size: 10px; color: var(--text-muted); line-height: 1.6;
-    border-top: 1px solid var(--border); margin-top: 20px;
-}
-.app-footer .test-badge {
-    display: inline-block; padding: 2px 8px;
-    background: rgba(252,211,77,0.15); color: var(--warning);
-    border-radius: 4px; font-weight: 700; font-size: 9px;
-}
-
-@supports (-webkit-touch-callout: none) { .field-input, .crit-zscore-input { font-size: 16px; } }
-
-@media print {
-    body { background: white; }
-    .app { max-width: none; padding: 0; background: white; }
-    .header, .screen:not(#screen-5), .btn-row, .btn, .app-footer { display: none !important; }
-    #screen-5 { display: block !important; padding: 0; }
-    .screen-title, .screen-subtitle { display: none; }
-    .report { margin: 0; padding: 20mm; box-shadow: none; border-radius: 0; background: white !important; color: black !important; }
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text-soft);
+  margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;
+  font-family:inherit;background:#fff;color:var(--text)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--primary)}
+.field-row{display:flex;gap:10px}
+.field-row .field{flex:1}
+.field-hint{font-size:11px;color:var(--text-soft);margin-top:4px;font-style:italic}
+.field-computed{background:linear-gradient(135deg,var(--accent) 0%,#D9EDF7 100%);
+  padding:10px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
+  color:var(--primary-dark);margin-top:8px;text-align:center}
+ 
+/* === BILINGUE FR/EN === */
+/* Header app avec switch FR/EN */
+.app-header{position:sticky;top:0;z-index:100;background:#fff;
+  border-bottom:1.5px solid var(--border);padding:8px 12px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.app-header-brand{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.app-header-brand-name{font-size:15px;font-weight:800;color:var(--primary-dark)}
+.app-header-brand-tag{font-size:11px;color:var(--text-soft);
+  text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.lang-switch{display:flex;gap:2px;background:#F0F4F7;
+  border:1.5px solid var(--border);border-radius:8px;padding:2px}
+.lang-btn{background:transparent;color:var(--text-soft);border:none;
+  padding:5px 10px;font-size:11.5px;font-weight:700;
+  border-radius:6px;cursor:pointer;font-family:inherit;
+  letter-spacing:.4px;transition:all .15s}
+.lang-btn.active{background:var(--primary);color:#fff;
+  box-shadow:0 1px 3px rgba(74,144,226,.3)}
+ 
+/* Écran 0 Welcome (sélecteur langue initial) */
+#screen-0{display:flex;flex-direction:column;align-items:center;
+  justify-content:center;min-height:100vh;padding:40px 24px;
+  background:linear-gradient(135deg,#F8FAFB 0%,#E3F2FD 100%)}
+.welcome-logo{width:80px;height:80px;border-radius:20px;
+  background:linear-gradient(135deg,var(--primary) 0%,#2C5F9E 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:42px;margin-bottom:16px;box-shadow:0 6px 20px rgba(74,144,226,.35)}
+.welcome-title{font-size:32px;font-weight:800;letter-spacing:-1px;
+  color:var(--primary-dark);margin-bottom:6px}
+.welcome-subtitle{font-size:14px;color:var(--text-soft);
+  margin-bottom:6px;text-align:center;line-height:1.5;max-width:300px}
+.welcome-author{font-size:12px;color:var(--text-soft);font-style:italic;
+  margin-bottom:30px}
+.lang-selector-title{font-size:11px;color:var(--text-soft);
+  text-transform:uppercase;letter-spacing:.9px;font-weight:700;
+  margin-bottom:14px;text-align:center}
+.lang-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  width:100%;max-width:320px}
+.lang-card{background:#fff;border:1.5px solid var(--border);
+  border-radius:14px;padding:20px 14px;text-align:center;cursor:pointer;
+  transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.lang-card:active{transform:translateY(0) scale(.97)}
+.lang-card:hover{border-color:var(--primary);transform:translateY(-2px);
+  box-shadow:0 4px 14px rgba(74,144,226,.15)}
+.lang-card-flag{font-size:36px;margin-bottom:10px;display:block}
+.lang-card-name{font-size:15px;font-weight:700;color:var(--text);
+  margin-bottom:2px}
+.lang-card-native{font-size:11px;color:var(--text-soft);letter-spacing:.4px}
+.welcome-footer{margin-top:40px;font-size:11px;color:var(--text-soft);
+  text-align:center;line-height:1.6}
+ 
+/* === STYLE NEONATAL ADAPTÉ === */
+/* Screen titles */
+.screen-title{font-size:22px;font-weight:800;letter-spacing:-0.4px;
+  margin:6px 0 4px;color:var(--primary-dark)}
+.screen-subtitle{font-size:13px;color:var(--text-soft);margin-bottom:18px;line-height:1.5}
+ 
+/* Age banner */
+.age-banner{background:linear-gradient(135deg,#FFF3E0 0%,#FFE0E0 100%);
+  border:1.5px solid #FFB74D;border-radius:12px;padding:11px 13px;
+  margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.age-banner-icon{width:36px;height:36px;border-radius:10px;background:#FF9800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:#fff;font-size:18px}
+.age-banner-text{flex:1}
+.age-banner-title{font-size:13px;font-weight:700;color:#E65100}
+.age-banner-subtitle{font-size:11px;color:#BF360C;margin-top:2px}
+ 
+/* Card médecin distinctive (purple) */
+.card-doctor{border:1.5px solid #C5CAE9;background:linear-gradient(135deg,#F3F4FF 0%,#FFF 100%)}
+.card-title-doctor{color:#3949AB !important}
+ 
+/* Field-label uppercase petit */
+.field-label{display:block;font-size:11.5px;font-weight:700;
+  color:var(--text-soft);margin-bottom:6px;
+  text-transform:uppercase;letter-spacing:.4px}
+ 
+/* Field-input (style néonatal, sans .field wrapper) */
+.field-input{width:100%;padding:11px 13px;border:1.5px solid var(--border);
+  border-radius:9px;font-size:15px;font-family:inherit;background:#fff;
+  color:var(--text);-webkit-appearance:none}
+.field-input:focus{outline:none;border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(74,144,226,.15)}
+ 
+/* Field with suffix (kg, cm) */
+.field-suffix{position:relative}
+.field-suffix .suffix-text{position:absolute;right:12px;top:50%;
+  transform:translateY(-50%);color:var(--text-soft);font-size:11px;
+  font-weight:600;pointer-events:none;letter-spacing:.3px}
+.field-help{font-size:11px;color:var(--text-soft);margin-top:4px;
+  line-height:1.4;font-style:italic}
+ 
+/* Computed display (SC) */
+.computed-display{background:linear-gradient(135deg,#E3F2FD 0%,#E8F5E9 100%);
+  border:1.5px solid #4FC3F7;border-radius:11px;padding:12px 14px;
+  margin-top:12px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:6px}
+.computed-display.hidden{display:none}
+.computed-label{font-size:11px;color:var(--text-soft);
+  text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.computed-value{font-size:18px;font-weight:800;color:var(--primary-dark)}
+.computed-formula{font-size:10.5px;color:var(--text-soft);font-style:italic;
+  width:100%;text-align:right;margin-top:2px}
+ 
+/* Segmented (radio buttons) */
+.segmented{display:grid;grid-template-columns:1fr 1fr;
+  background:#F0F4F7;border:1.5px solid var(--border);
+  border-radius:9px;overflow:hidden;padding:3px;gap:3px}
+.segment{background:transparent;color:var(--text-soft);border:none;
+  padding:10px 8px;font-size:13px;font-weight:700;
+  border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s}
+.segment.active{background:var(--primary);color:#fff;
+  box-shadow:0 2px 6px rgba(74,144,226,.35)}
+.segment:not(.active):active{background:rgba(74,144,226,.08)}
+ 
+/* Z-score badges (mesures dilaté/normal/hypoplasique) */
+.zscore-badge{display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;
+  letter-spacing:.3px;margin-left:8px;vertical-align:middle}
+.zscore-badge.empty{background:#ECEFF1;color:#90A4AE}
+.zscore-badge.normal{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
+.zscore-badge.hypo{background:#FFF3E0;color:#E65100;border:1px solid #FFB74D}
+.zscore-badge.hyper{background:#FFEBEE;color:#C62828;border:1px solid #EF9A9A}
+ 
+/* AGE SLIDER */
+.age-slider-wrap{padding:10px 4px}
+.age-slider{width:100%;-webkit-appearance:none;height:8px;border-radius:4px;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--primary-light) 100%);outline:none}
+.age-slider::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;
+  border-radius:50%;background:var(--primary);cursor:pointer;border:3px solid #fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.age-slider::-moz-range-thumb{width:28px;height:28px;border-radius:50%;
+  background:var(--primary);cursor:pointer;border:3px solid #fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.age-display{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.age-display .value{font-size:24px;font-weight:800;color:var(--primary-dark)}
+.age-display .scale{font-size:11px;color:var(--text-soft)}
+ 
+/* PATHOLOGY GRID */
+.path-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.path-card{background:#fff;border-radius:var(--radius);padding:14px 10px;
+  border:2px solid var(--border);text-align:center;cursor:pointer;
+  transition:all .2s;position:relative;overflow:hidden}
+.path-card:active{transform:scale(.97)}
+.path-card.selected{border-color:var(--primary);background:linear-gradient(135deg,#fff 0%,var(--accent) 100%)}
+.path-card .code{font-size:18px;font-weight:800;color:var(--primary-dark);
+  margin-bottom:4px;display:block}
+.path-card .name{font-size:11px;color:var(--text-soft);line-height:1.3;font-weight:500}
+.path-card .prev{position:absolute;top:6px;right:6px;background:var(--primary-light);
+  color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px}
+.path-card .badge-rare{background:var(--warning)}
+.path-card .badge-veryrare{background:var(--danger)}
+ 
+/* CANVA */
+.canva-wrapper{position:relative;width:100%;border-radius:var(--radius-sm);
+  overflow:hidden;background:#0a0a0a;box-shadow:var(--shadow-md);margin-bottom:12px}
+.canva-label{background:var(--primary-dark);color:#fff;padding:6px 12px;font-size:12px;
+  font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.canva-label .tag{background:rgba(255,255,255,.15);padding:2px 8px;border-radius:10px;font-size:10px}
+.canva-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#000}
+ 
+/* SECTION HEADERS */
+.section-h{font-size:13px;font-weight:700;color:var(--primary-dark);
+  margin:18px 0 8px;text-transform:uppercase;letter-spacing:.4px;
+  display:flex;align-items:center;gap:8px}
+.section-h::before{content:'';width:4px;height:14px;background:var(--primary);border-radius:2px}
+.section-h.diag::before{background:var(--success)}
+.section-h.eval::before{background:var(--warning)}
+.section-h.ai::before{background:var(--ai-accent)}
+ 
+/* DIAG / ÉVAL ITEMS */
+.criterion{background:#fff;border-radius:var(--radius);padding:12px;margin-bottom:10px;
+  border:1.5px solid var(--border);transition:all .2s;cursor:pointer}
+.criterion.checked{border-color:var(--success);background:linear-gradient(135deg,#fff 0%,#E8F5E9 100%)}
+.criterion-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.criterion-check{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  background:#fff;font-size:14px;font-weight:700;color:#fff}
+.criterion.checked .criterion-check{background:var(--success);border-color:var(--success)}
+.criterion-title{font-size:13px;font-weight:700;color:var(--primary-dark);flex:1;line-height:1.3}
+.criterion-tag{font-size:10px;color:var(--text-soft);background:#F0F4F7;
+  padding:2px 6px;border-radius:8px;font-weight:600;flex-shrink:0}
+.criterion-desc{font-size:12px;color:var(--text-soft);line-height:1.4;padding-left:32px}
+.criterion-measure{padding-left:32px;margin-top:8px;display:flex;gap:6px;align-items:center}
+.criterion-measure input{width:80px;padding:6px 8px;border:1.5px solid var(--border);
+  border-radius:6px;font-size:13px}
+.criterion-measure label{font-size:11px;color:var(--text-soft);font-weight:600}
+ 
+/* AI BOX */
+.ai-box{background:linear-gradient(135deg,var(--ai-bg) 0%,#FFF 100%);
+  border:2px solid var(--ai-border);border-radius:var(--radius);padding:14px;
+  margin-top:14px;position:relative;overflow:hidden}
+.ai-box::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;
+  background:linear-gradient(180deg,var(--ai-accent) 0%,var(--ai-border) 100%)}
+.ai-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-left:8px}
+.ai-header .ai-icon{width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--ai-accent) 0%,var(--ai-border) 100%);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;
+  font-weight:800;box-shadow:0 2px 6px rgba(155,89,182,.3)}
+.ai-title{font-size:13px;font-weight:800;color:var(--ai-accent);
+  text-transform:uppercase;letter-spacing:.5px}
+.ai-content{padding-left:8px;font-size:13px;line-height:1.55;color:var(--text)}
+.ai-content strong{color:var(--ai-accent)}
+.ai-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--ai-accent);margin-left:6px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+ 
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;
+  border-top:1px solid var(--border);padding:10px 16px;display:flex;gap:10px;
+  z-index:90;box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.btn{padding:14px;border:none;border-radius:var(--radius-sm);
+  font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;
+  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;flex:1}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:active{background:var(--primary-dark);transform:scale(.98)}
+.btn-primary:disabled{background:#B0BEC5;cursor:not-allowed}
+.btn-secondary{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+ 
+/* SUMMARY BAR (sticky) */
+.patient-bar{background:var(--accent);padding:8px 16px;font-size:12px;
+  color:var(--primary-dark);display:flex;gap:10px;flex-wrap:wrap;
+  border-bottom:1px solid var(--primary-light)}
+.patient-bar span{font-weight:600}
+.patient-bar .sep{color:var(--primary-light)}
+ 
+/* QUESTIONNAIRE - sections, options, fields */
+.qsection{padding:12px 0;border-bottom:1px dashed var(--border)}
+.qsection:last-child{border-bottom:none}
+.qsection-label{font-size:13px;font-weight:700;color:var(--primary-dark);margin-bottom:10px}
+.qsection-options{display:flex;flex-direction:column;gap:8px}
+ 
+.qopt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  background:#fff;cursor:pointer;transition:all .15s}
+.qopt:active{transform:scale(.98)}
+.qopt.selected{border-color:var(--primary);background:linear-gradient(135deg,#fff 0%,var(--accent) 100%)}
+.qopt-content{flex:1}
+.qopt-label{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
+.qopt-desc{font-size:11px;color:var(--text-soft);line-height:1.35;margin-top:3px}
+ 
+/* Radio mark */
+.qopt-radio-mark{width:18px;height:18px;border:2px solid var(--border);
+  border-radius:50%;flex-shrink:0;margin-top:1px;background:#fff;position:relative}
+.qopt-radio.selected .qopt-radio-mark{border-color:var(--primary)}
+.qopt-radio.selected .qopt-radio-mark::after{
+  content:'';position:absolute;top:3px;left:3px;width:8px;height:8px;
+  border-radius:50%;background:var(--primary)}
+ 
+/* Check mark */
+.qopt-check-mark{width:20px;height:20px;border:2px solid var(--border);
+  border-radius:5px;flex-shrink:0;margin-top:1px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#fff}
+.qopt-check.selected .qopt-check-mark{background:var(--success);border-color:var(--success)}
+ 
+/* Number / select fields */
+.qfield-row{display:flex;align-items:center;gap:8px}
+.qfield{padding:9px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  font-size:14px;font-family:inherit;background:#fff;color:var(--text);width:100%}
+.qfield:focus{outline:none;border-color:var(--primary)}
+input.qfield{max-width:120px}
+.qfield-unit{font-size:12px;color:var(--text-soft);font-weight:600}
+.qfield-hint{font-size:11px;color:var(--text-soft);margin-top:5px;font-style:italic}
+ 
+/* Compound (sous-questions) */
+.qsection-compound{display:flex;flex-direction:column;gap:14px;
+  padding-left:10px;border-left:2px solid var(--accent);margin-top:6px}
+.qcompound-field{}
+.qcompound-label{font-size:12px;font-weight:600;color:var(--text-soft);margin-bottom:6px;
+  text-transform:uppercase;letter-spacing:.3px}
+ 
+/* Mini Canva par question (vidéo exemple) */
+.qvideo-wrap{margin:0 0 12px;border-radius:var(--radius-sm);overflow:hidden;
+  background:#0a0a0a;box-shadow:0 2px 6px rgba(0,0,0,.1);border:1px solid var(--border)}
+.qvideo-label{background:var(--primary-dark);color:#fff;padding:5px 10px;font-size:11px;
+  font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.qvideo-label .qvideo-tag{background:rgba(255,255,255,.18);padding:2px 7px;
+  border-radius:8px;font-size:9px;letter-spacing:.5px}
+.qvideo-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#000}
+ 
+/* ALGORITHME AIDE DIAGNOSTIC POSITIF — 17 étapes empilées */
+.algo-summary{background:linear-gradient(135deg,#E8F5E9 0%,#FFF 100%);
+  border:1.5px solid #81C784;border-radius:12px;padding:11px 14px;
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  position:sticky;top:8px;z-index:50;backdrop-filter:blur(8px);
+  box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.algo-summary-icon{font-size:18px;flex-shrink:0}
+.algo-summary-text{font-size:13px;color:var(--primary-dark);font-weight:600;
+  flex:1;line-height:1.35}
+ 
+/* Bloc d'étape (carte étape complète) */
+.algo-step-block{background:#fff;border:1.5px solid var(--border);
+  border-radius:12px;padding:12px;margin-bottom:14px;transition:all .2s;
+  box-shadow:var(--shadow)}
+.algo-step-block.step-present{border-color:var(--success);
+  background:linear-gradient(135deg,#E8F5E9 0%,#FFF 60%);
+  box-shadow:0 0 0 3px rgba(39,174,96,.15)}
+.algo-step-block.step-absent{opacity:.6;background:#F8FAFB}
+.algo-step-block.step-explorer{border-color:#FFB74D;
+  background:linear-gradient(135deg,#FFF8E1 0%,#FFF 60%)}
+ 
+.algo-step-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.algo-step-num{width:34px;height:34px;border-radius:50%;
+  background:var(--primary);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;flex-shrink:0;
+  box-shadow:0 2px 6px rgba(74,144,226,.35)}
+.algo-step-block.step-present .algo-step-num{background:var(--success);
+  box-shadow:0 2px 6px rgba(39,174,96,.4)}
+.algo-step-block.step-explorer .algo-step-num{background:#FFB74D;
+  box-shadow:0 2px 6px rgba(255,183,77,.4)}
+.algo-step-info{flex:1;min-width:0}
+.algo-step-title{font-size:14.5px;font-weight:800;color:var(--primary-dark);
+  line-height:1.25;margin-bottom:2px}
+.algo-step-sub{font-size:11.5px;color:var(--text-soft);
+  display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.algo-step-path{color:var(--success);font-weight:700;
+  background:rgba(39,174,96,.12);padding:2px 7px;border-radius:8px;
+  font-size:10.5px;letter-spacing:.3px}
+.algo-step-path-no{color:#90A4AE;background:rgba(144,164,174,.12)}
+ 
+/* Mini-Canva intégré au bloc */
+.algo-step-canva{width:100%;aspect-ratio:16/9;border-radius:8px;
+  overflow:hidden;background:#000;margin-bottom:10px;border:1px solid var(--border)}
+.algo-step-canva iframe{width:100%;height:100%;border:none;display:block}
+ 
+.algo-step-desc{font-size:12px;color:var(--text);line-height:1.5;
+  background:#F8FAFB;padding:9px 11px;border-radius:8px;margin-bottom:10px}
+ 
+/* Choix présent/absent/explorer */
+.algo-step-choices{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.algo-choice{padding:10px 6px;border:1.5px solid var(--border);
+  background:#fff;border-radius:8px;font-size:12px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:all .15s;
+  color:var(--text-soft);text-align:center;line-height:1.2}
+.algo-choice:active{transform:scale(.96)}
+.algo-choice-present.active{background:var(--success);color:#fff;
+  border-color:var(--success);box-shadow:0 2px 6px rgba(39,174,96,.35)}
+.algo-choice-absent.active{background:#90A4AE;color:#fff;
+  border-color:#90A4AE;box-shadow:0 2px 6px rgba(144,164,174,.35)}
+.algo-choice-explorer.active{background:#FFB74D;color:#fff;
+  border-color:#FFB74D;box-shadow:0 2px 6px rgba(255,183,77,.35)}
+ 
+/* HUB 3 BOUTONS */
+.hub-header{padding:8px 4px 16px;text-align:center}
+.hub-header h2{font-size:20px;font-weight:800;color:var(--primary-dark);margin-bottom:6px}
+.hub-subtitle{font-size:13px;color:var(--text-soft)}
+ 
+.hub-buttons{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.hub-btn{display:flex;align-items:center;gap:14px;padding:18px 16px;
+  background:#fff;border:2px solid var(--border);border-radius:var(--radius);
+  cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;
+  width:100%;box-shadow:var(--shadow)}
+.hub-btn:active{transform:scale(.98)}
+.hub-btn:hover{border-color:var(--primary);box-shadow:var(--shadow-md)}
+.hub-btn-1{border-left:5px solid var(--success)}
+.hub-btn-2{border-left:5px solid var(--primary)}
+.hub-btn-3{border-left:5px solid var(--ai-accent)}
+.hub-btn-icon{font-size:28px;flex-shrink:0;width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--accent) 0%,#fff 100%);
+  border-radius:12px}
+.hub-btn-content{flex:1;min-width:0}
+.hub-btn-title{font-size:15px;font-weight:700;color:var(--primary-dark);
+  margin-bottom:4px;line-height:1.3}
+.hub-btn-desc{font-size:12px;color:var(--text-soft);line-height:1.4}
+.hub-btn-arrow{font-size:20px;color:var(--primary-light);flex-shrink:0;font-weight:700}
+ 
+/* DECISION CARD (écran diag positif) */
+.decision-card{background:linear-gradient(135deg,#FFF 0%,var(--accent) 100%);
+  border:2px solid var(--primary-light)}
+.btn-block{width:100%}
+.btn-warning{background:var(--warning);color:#fff}
+.btn-warning:active{background:#C0660D}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:active{background:#1E8449}
+ 
+/* CHATBOT */
+.chatbot-info{background:linear-gradient(135deg,var(--ai-bg) 0%,#FFF 100%);
+  border:2px solid var(--ai-border)}
+ 
+.api-key-card{border:1.5px solid var(--warning);background:#FFF8F0}
+.api-key-card.hidden{display:none}
+ 
+.chat-container{display:flex;flex-direction:column;background:#fff;
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:14px;height:60vh;min-height:400px}
+ 
+.chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;
+  flex-direction:column;gap:10px;background:#FAFBFC}
+ 
+.chat-msg{max-width:85%;padding:10px 14px;border-radius:14px;
+  font-size:14px;line-height:1.45;word-wrap:break-word}
+.chat-msg-user{align-self:flex-end;background:var(--primary);color:#fff;
+  border-bottom-right-radius:4px}
+.chat-msg-assistant{align-self:flex-start;background:#F0F4F7;
+  color:var(--text);border-bottom-left-radius:4px}
+.chat-msg-system{align-self:center;background:transparent;color:var(--text-soft);
+  font-size:12px;font-style:italic;text-align:center;max-width:100%}
+.chat-msg strong{color:var(--ai-accent)}
+.chat-msg-assistant strong{color:var(--ai-accent)}
+.chat-msg-user strong{color:#fff;text-decoration:underline}
+ 
+.chat-typing{align-self:flex-start;background:#F0F4F7;padding:12px 16px;
+  border-radius:14px;border-bottom-left-radius:4px}
+.chat-typing-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--ai-accent);margin:0 1px;animation:typingBounce 1.4s infinite}
+.chat-typing-dot:nth-child(2){animation-delay:.2s}
+.chat-typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.5}
+  30%{transform:translateY(-6px);opacity:1}}
+ 
+.chat-input-wrap{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);
+  background:#fff;align-items:flex-end}
+.chat-input-wrap textarea{flex:1;padding:10px 12px;border:1.5px solid var(--border);
+  border-radius:18px;font-size:14px;font-family:inherit;resize:none;
+  background:#fff;color:var(--text);max-height:80px}
+.chat-input-wrap textarea:focus{outline:none;border-color:var(--primary)}
+.btn-chat-send{width:42px;height:42px;border-radius:50%;border:none;
+  background:var(--primary);color:#fff;font-size:18px;cursor:pointer;
+  flex-shrink:0;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-chat-send:active{transform:scale(.92)}
+.btn-chat-send:disabled{background:#B0BEC5;cursor:not-allowed}
+ 
+.chat-suggestions{display:flex;gap:6px;padding:0 10px 10px;flex-wrap:wrap;background:#fff}
+.chat-suggestion{padding:6px 12px;background:#F0F4F7;border:1px solid var(--border);
+  border-radius:14px;font-size:12px;color:var(--primary-dark);cursor:pointer;
+  font-weight:500;transition:all .15s}
+.chat-suggestion:active{background:var(--accent);transform:scale(.95)}
+ 
+@media(max-width:360px){
+  body{font-size:14px}
+  .path-card .code{font-size:16px}
+  .hub-btn-icon{font-size:24px;width:40px;height:40px}
+  .hub-btn-title{font-size:14px}
+  .hub-btn-desc{font-size:11px}
 }
 </style>
 </head>
 <body>
-
-<div class="app">
-
-<!-- HEADER -->
-<header class="header">
-    <div class="header-row">
-        <a href="../index.html" class="btn-back-hub">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-            <span>HUB</span>
-        </a>
-        <div class="brand-mid">
-            <span class="brand-name">CardioEcho</span>
-            <span class="brand-tag">Module Nourrisson</span>
-        </div>
-        <div class="step-badge" id="stepBadge">1/5</div>
+ 
+<!-- ============ ÉCRAN 0 : WELCOME (Sélecteur langue) ============ -->
+<section class="screen active" id="screen-0">
+  <div class="welcome-logo">🫀</div>
+  <h1 class="welcome-title">CardioEcho</h1>
+  <p class="welcome-subtitle">Module 2B · Diagnostic Nourrisson 1–6 mois<br>Aide au diagnostic échocardiographique</p>
+  <div class="welcome-author">Dr Touati Mohamed · CMCI Algérie</div>
+  <div class="lang-selector-title">Choisissez votre langue · Select your language</div>
+  <div class="lang-cards">
+    <div class="lang-card" onclick="selectLanguage('fr')">
+      <span class="lang-card-flag">🇫🇷</span>
+      <div class="lang-card-name">Français</div>
+      <div class="lang-card-native">FR</div>
     </div>
-    <div class="progress-track">
-        <div class="progress-fill" id="progressFill" style="width: 20%;"></div>
+    <div class="lang-card" onclick="selectLanguage('en')">
+      <span class="lang-card-flag">🇬🇧</span>
+      <div class="lang-card-name">English</div>
+      <div class="lang-card-native">EN</div>
     </div>
+  </div>
+  <div class="welcome-footer">
+    <div data-i18n="welcomeFooter">Aide au diagnostic — ne remplace pas le jugement clinique</div>
+    <div style="margin-top:4px">v2.0 · Dr Touati Mohamed · 2026</div>
+  </div>
+</section>
+ 
+<!-- Header app avec switch FR/EN (apparaît dès écran 1) -->
+<header class="app-header" id="appHeader" style="display:none">
+  <div class="app-header-brand">
+    <span class="app-header-brand-name">CardioEcho</span>
+    <span class="app-header-brand-tag" data-i18n="moduleTag">Module 2B</span>
+  </div>
+  <div class="lang-switch">
+    <button class="lang-btn active" id="langBtnFR" onclick="changeLanguage('fr')">FR</button>
+    <button class="lang-btn" id="langBtnEN" onclick="changeLanguage('en')">EN</button>
+  </div>
 </header>
-
-
-<!-- ÉCRAN 1 : PROFIL PATIENT -->
-<section class="screen active" id="screen-1">
-    <h1 class="screen-title">Profil patient</h1>
-    <p class="screen-subtitle">Identification du nourrisson 1–6 mois</p>
-
-    <div class="age-banner">
-        <div class="age-banner-icon">👶</div>
-        <div class="age-banner-text">
-            <div class="age-banner-title">Tranche d'âge : 1–6 mois</div>
-            <div class="age-banner-subtitle">Nourrisson — pathologies non urgentes le plus souvent</div>
-        </div>
+ 
+<!-- Patient bar visible dès écran 2 -->
+<div class="patient-bar" id="patientBar" style="display:none"></div>
+ 
+<!-- ============ ÉCRAN 1 : PROFIL PATIENT ============ -->
+<section class="screen" id="screen-1">
+  <h1 class="screen-title" data-i18n="patientProfile">Profil patient</h1>
+  <p class="screen-subtitle" data-i18n="patientProfileSubtitle">Identification du nourrisson 1–6 mois</p>
+ 
+  <div class="age-banner">
+    <div class="age-banner-icon">👶</div>
+    <div class="age-banner-text">
+      <div class="age-banner-title" data-i18n="ageBannerTitle">Tranche d'âge : 1–6 mois</div>
+      <div class="age-banner-subtitle" data-i18n="ageBannerSubtitle">Nourrisson — 11 cardiopathies du module 2B</div>
     </div>
-
-    <div class="card" style="border:1px solid rgba(196,181,253,0.25); background:linear-gradient(135deg, rgba(196,181,253,0.04), transparent);">
-        <div class="card-title" style="color:var(--purple);">✍️ Médecin signataire</div>
-        <div class="field-row">
-            <div class="field" style="margin-bottom:0;">
-                <label class="field-label">Prénom</label>
-                <input type="text" class="field-input" id="docFirstName" placeholder="Mohamed" autocomplete="off">
-            </div>
-            <div class="field" style="margin-bottom:0;">
-                <label class="field-label">Nom</label>
-                <input type="text" class="field-input" id="docLastName" placeholder="Touati" autocomplete="off">
-            </div>
-        </div>
+  </div>
+ 
+  <!-- Médecin signataire -->
+  <div class="card card-doctor">
+    <div class="card-title card-title-doctor" data-i18n="signatoryDoctor">✍️ Médecin signataire</div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:0">
+        <label class="field-label" data-i18n="firstName">Prénom</label>
+        <input type="text" class="field-input" id="docFirstName" placeholder="Mohamed" autocomplete="off" value="Mohamed">
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label class="field-label" data-i18n="lastName">Nom</label>
+        <input type="text" class="field-input" id="docLastName" placeholder="Touati" autocomplete="off" value="Touati">
+      </div>
     </div>
-
-    <div class="card">
-        <div class="card-title">Identité du patient</div>
-        <div class="field">
-            <label class="field-label">Nom</label>
-            <input type="text" class="field-input" id="lastName" placeholder="Dupont" autocomplete="off">
-        </div>
-        <div class="field">
-            <label class="field-label">Prénom</label>
-            <input type="text" class="field-input" id="firstName" placeholder="Marie" autocomplete="off">
-        </div>
-        <div class="field">
-            <label class="field-label">Sexe</label>
-            <div class="segmented">
-                <button class="segment active" data-sex="M">Masculin</button>
-                <button class="segment" data-sex="F">Féminin</button>
-            </div>
-        </div>
+  </div>
+ 
+  <!-- Identité patient -->
+  <div class="card">
+    <div class="card-title" data-i18n="patientIdentity">Identité du patient</div>
+    <div class="field">
+      <label class="field-label" data-i18n="lastName">Nom</label>
+      <input type="text" class="field-input" id="patientLastName" placeholder="Sami" autocomplete="off" value="Sami">
     </div>
-
-    <div class="card">
-        <div class="card-title">Anthropométrie</div>
-        <div class="field-row">
-            <div class="field">
-                <label class="field-label">Âge (mois)</label>
-                <div class="field-suffix">
-                    <input type="number" class="field-input" id="ageMonths" placeholder="3" min="1" max="6" step="0.1" inputmode="decimal">
-                    <span class="suffix-text">mois</span>
-                </div>
-            </div>
-            <div class="field">
-                <label class="field-label">Poids</label>
-                <div class="field-suffix">
-                    <input type="number" class="field-input" id="weight" placeholder="5.5" step="0.1" inputmode="decimal">
-                    <span class="suffix-text">kg</span>
-                </div>
-            </div>
-        </div>
-        <div class="field">
-            <label class="field-label">Taille (optionnelle)</label>
-            <div class="field-suffix">
-                <input type="number" class="field-input" id="height" placeholder="60" step="0.1" inputmode="decimal">
-                <span class="suffix-text">cm</span>
-            </div>
-            <div class="field-help">Si non disponible, la SC est calculée par le poids seul</div>
-        </div>
-        <div class="computed-display hidden" id="bsaDisplay">
-            <span class="computed-label">Surface corporelle</span>
-            <span class="computed-value" id="bsaValue">— m²</span>
-        </div>
+    <div class="field">
+      <label class="field-label" data-i18n="firstName">Prénom</label>
+      <input type="text" class="field-input" id="patientFirstName" placeholder="Rayan" autocomplete="off" value="Rayan">
     </div>
-
-    <div class="card">
-        <div class="card-title">État clinique</div>
-        <div class="field">
-            <label class="field-label">SpO₂ à l'air ambiant</label>
-            <div class="field-suffix">
-                <input type="number" class="field-input" id="spo2" placeholder="95" min="40" max="100" inputmode="numeric">
-                <span class="suffix-text">%</span>
-            </div>
-        </div>
-        <div class="field">
-            <label class="field-label">Insuffisance cardiaque</label>
-            <div class="segmented">
-                <button class="segment active" data-ic="non">Absente</button>
-                <button class="segment" data-ic="oui">Présente</button>
-            </div>
-        </div>
+    <div class="field">
+      <label class="field-label" data-i18n="sex">Sexe</label>
+      <div class="segmented" id="sexSegmented">
+        <button class="segment active" data-sex="M" onclick="setSex('M')" data-i18n="male">Masculin</button>
+        <button class="segment" data-sex="F" onclick="setSex('F')" data-i18n="female">Féminin</button>
+      </div>
     </div>
-
-    <button class="btn" id="btnNext1">Continuer vers l'orientation diagnostique →</button>
+  </div>
+ 
+  <!-- Anthropométrie -->
+  <div class="card">
+    <div class="card-title" data-i18n="anthropometry">Anthropométrie</div>
+    <div class="field">
+      <label class="field-label" data-i18n="ageMonths">Âge (mois)</label>
+      <div class="age-slider-wrap">
+        <input type="range" min="1" max="6" step="1" value="3" class="age-slider"
+          id="ageSlider" oninput="updateAge()">
+        <div class="age-display">
+          <span class="scale">1</span>
+          <span class="value" id="ageValue">3 mois</span>
+          <span class="scale">6</span>
+        </div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label" data-i18n="weight">Poids</label>
+        <div class="field-suffix">
+          <input type="number" class="field-input" id="patientWeight" placeholder="5.4"
+            step="0.1" min="2" max="15" inputmode="decimal" oninput="computeBSA()">
+          <span class="suffix-text">kg</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label" data-i18n="height">Taille</label>
+        <div class="field-suffix">
+          <input type="number" class="field-input" id="patientHeight" placeholder="62"
+            step="0.5" min="45" max="80" inputmode="decimal" oninput="computeBSA()">
+          <span class="suffix-text">cm</span>
+        </div>
+        <div class="field-help" data-i18n="heightHelp">Optionnelle. Si non disponible, la SC est calculée par le poids seul.</div>
+      </div>
+    </div>
+    <div class="computed-display hidden" id="bsaDisplay">
+      <span class="computed-label" data-i18n="bsa">Surface corporelle</span>
+      <span class="computed-value" id="bsaValue">— m²</span>
+      <span class="computed-formula" id="bsaFormula"></span>
+    </div>
+  </div>
+ 
+  <div class="bottom-nav">
+    <button class="btn btn-primary btn-block" onclick="validateProfileAndGo()" data-i18n="continueToHub">Continuer vers le hub diagnostique ▸</button>
+  </div>
 </section>
-
-
-<!-- ÉCRAN 2 : ORIENTATION -->
+ 
+<!-- ============ ÉCRAN 2 : HUB 3 BOUTONS (juste après profil) ============ -->
 <section class="screen" id="screen-2">
-    <h1 class="screen-title">Orientation diagnostique</h1>
-    <p class="screen-subtitle">Critères échographiques d'orientation chez le nourrisson</p>
-
-    <div class="ranking" id="triageRanking" style="display:none;">
-        <div class="ranking-title"><span>Probabilités diagnostiques</span></div>
-        <div id="rankingBody"></div>
-    </div>
-
-    <div id="triageQuestions"></div>
-
-    <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBack2">← Retour</button>
-        <button class="btn" id="btnNext2" disabled>Confirmer le diagnostic →</button>
-    </div>
+  <div class="hub-header">
+    <h2 id="hubTitle" data-i18n="hubTitle">🩺 Que voulez-vous faire ?</h2>
+    <p id="hubSubtitle" class="hub-subtitle" data-i18n="hubSubtitleDefault">Choisissez votre approche diagnostique</p>
+  </div>
+ 
+  <div class="hub-buttons">
+    <!-- Bouton 1 : J'ai un diagnostic → Grille pathologies -->
+    <button class="hub-btn hub-btn-1" onclick="goToScreen(3)">
+      <div class="hub-btn-icon">✅</div>
+      <div class="hub-btn-content">
+        <div class="hub-btn-title" data-i18n="hubBtn1Title">1. J'ai un diagnostic</div>
+        <div class="hub-btn-desc" data-i18n="hubBtn1Desc">Diagnostic <strong>déjà identifié</strong>. Sélectionner la pathologie puis passer directement à l'évaluation (anatomique + hémodynamique).</div>
+      </div>
+      <div class="hub-btn-arrow">▸</div>
+    </button>
+ 
+    <!-- Bouton 2 : Aide diagnostic positif → Algorithme 17 étapes -->
+    <button class="hub-btn hub-btn-2" onclick="goToScreen(4)">
+      <div class="hub-btn-icon">🔍</div>
+      <div class="hub-btn-content">
+        <div class="hub-btn-title" data-i18n="hubBtn2Title">2. Aide au diagnostic positif</div>
+        <div class="hub-btn-desc" data-i18n="hubBtn2Desc">Je cherche à <strong>identifier</strong> la pathologie. Algorithme systématique 17 étapes avec vidéos écho.</div>
+      </div>
+      <div class="hub-btn-arrow">▸</div>
+    </button>
+ 
+    <!-- Bouton 3 : ChatBot Claude -->
+    <button class="hub-btn hub-btn-3" onclick="goToScreen(6)">
+      <div class="hub-btn-icon">🤖</div>
+      <div class="hub-btn-content">
+        <div class="hub-btn-title" data-i18n="hubBtn3Title">3. Je ne suis pas sûr</div>
+        <div class="hub-btn-desc" data-i18n="hubBtn3Desc"><strong>ChatBot AI</strong> avec Claude pour m'aider à différencier et m'orienter avec les éléments cliniques observés.</div>
+      </div>
+      <div class="hub-btn-arrow">▸</div>
+    </button>
+  </div>
+ 
+  <div class="bottom-nav">
+    <button class="btn btn-secondary" onclick="goToScreen(1)" data-i18n="backProfile">◂ Profil</button>
+  </div>
 </section>
-
-
-<!-- ÉCRAN 3 : CONFIRMATION -->
+ 
+<!-- ============ ÉCRAN 3 : SÉLECTION PATHOLOGIE (après bouton "J'ai un diag") ============ -->
 <section class="screen" id="screen-3">
-    <h1 class="screen-title">Confirmation diagnostique</h1>
-    <p class="screen-subtitle" id="confSubtitle">Critères Cat.A pathognomoniques</p>
-
-    <div class="diag-banner" id="leadBanner">
-        <div class="diag-banner-label">Diagnostic présomptif</div>
-        <div class="diag-banner-name" id="leadName">—</div>
-        <div class="diag-banner-prob">
-            <div class="prob-circle" id="probCircle" style="--p:0;">
-                <span class="prob-text" id="probText">0%</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="confirm-summary">
-        <span>Critères Cat.A confirmés</span>
-        <span class="confirm-summary-count" id="confirmCount">0 / 0</span>
-    </div>
-
-    <div id="confirmationContent"></div>
-
-    <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBack3">← Retour</button>
-        <button class="btn" id="btnNext3">Évaluer la gravité →</button>
-    </div>
+  <div class="card">
+    <div class="card-title"><span class="icon">🎯</span><span data-i18n="pathologyTitle">Quelle pathologie évaluer ?</span></div>
+    <p class="card-subtitle" data-i18n="pathologySubtitle">11 pathologies du module Diagnostic. Les % indiquent la prévalence dans la cohorte CMCI nourrisson 1-6 mois.</p>
+    <div class="path-grid" id="pathGrid"></div>
+  </div>
+ 
+  <div class="bottom-nav">
+    <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
+    <button class="btn btn-primary" id="btnGoModule" disabled onclick="goToScreen(5)" data-i18n="selectPathology">Sélectionnez ▸</button>
+  </div>
 </section>
-
-
-<!-- ÉCRAN 4 : GRAVITÉ -->
+ 
+<!-- ============ ÉCRAN 4 : DIAGNOSTIC POSITIF (Cat A) ============ -->
 <section class="screen" id="screen-4">
-    <h1 class="screen-title">Évaluation de gravité</h1>
-    <p class="screen-subtitle" id="gravSubtitle">Critères Cat.B de sévérité</p>
-
-    <div id="gravityContent"></div>
-
-    <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBack4">← Retour</button>
-        <button class="btn" id="btnNext4">Générer le compte rendu →</button>
-    </div>
+  <h1 class="screen-title" data-i18n="algoTitle">🔍 Aide au diagnostic positif</h1>
+  <p class="screen-subtitle" data-i18n="algoSubtitle">17 étapes d'évaluation systématique. Pour chaque étape, regardez la vidéo et cochez votre observation.</p>
+ 
+  <!-- Compteur de pathologies marquées présent -->
+  <div class="algo-summary" id="algoSummary">
+    <span class="algo-summary-icon">📊</span>
+    <span class="algo-summary-text" id="algoSummaryText" data-i18n="algoSummaryEmpty">Aucune anomalie marquée pour le moment</span>
+  </div>
+ 
+  <!-- Liste des 17 étapes empilées -->
+  <div id="algoStepsContainer"></div>
+ 
+  <!-- Bouton Lancer évaluation (apparait si ≥1 présent) -->
+  <div class="card decision-card" id="algoLaunchCard" style="display:none">
+    <div class="card-title"><span class="icon">🎯</span><span data-i18n="algoLaunchTitle">Pathologies à évaluer</span></div>
+    <p class="card-subtitle" id="algoLaunchSubtitle"></p>
+    <div id="algoLaunchButtons"></div>
+  </div>
+ 
+  <div class="bottom-nav">
+    <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
+    <button class="btn btn-warning" onclick="algoReset()" data-i18n="algoReset">♻️ Réinitialiser</button>
+    <button class="btn btn-primary" onclick="goToScreen(7)" data-i18n="algoCR">📄 CR</button>
+  </div>
 </section>
-
-
-<!-- ÉCRAN 5 : COMPTE RENDU -->
+ 
+<!-- ============ ÉCRAN 5 : ÉVALUATION (Q1 + Q2) ============ -->
 <section class="screen" id="screen-5">
-    <h1 class="screen-title">Compte rendu</h1>
-    <p class="screen-subtitle">Document échographique professionnel</p>
-
-    <div id="reportContainer"></div>
-
-    <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBack5">← Modifier</button>
-        <button class="btn" id="btnPrint">Imprimer / PDF</button>
-    </div>
+  <!-- Bloc Canva (boucles écho) -->
+  <div id="canvaBlock"></div>
+ 
+  <!-- Section : Diagnostic positif (questionnaire Q1) -->
+  <div class="section-h diag" data-i18n="evalAnatomic">✅ Évaluation anatomique</div>
+  <div class="card">
+    <p class="card-subtitle" id="diagPositifSubtitle" data-i18n="evalAnatomicSubtitle">Type, mesures anatomiques</p>
+    <div id="diagPositifContent"></div>
+  </div>
+ 
+  <!-- Section : Évaluation (questionnaire Q2) -->
+  <div class="section-h eval" data-i18n="evalHemo">🔍 Évaluation hémodynamique</div>
+  <div class="card">
+    <p class="card-subtitle" data-i18n="evalHemoSubtitle">Flux, restriction, pression VD, surcharge VG, obstacles</p>
+    <div id="evalContent"></div>
+  </div>
+ 
+  <!-- Section : Box AI -->
+  <div class="section-h ai" data-i18n="evalAI">🤖 Box AI — Synthèse intelligente</div>
+  <div id="aiBoxContent"></div>
+ 
+  <div class="bottom-nav">
+    <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
+    <button class="btn btn-primary" onclick="goToScreen(7)" data-i18n="evalReport">Compte rendu ▸</button>
+  </div>
 </section>
-
-
-<div class="app-footer">
-    <span class="test-badge">VERSION TEST ALLÉGÉE</span><br>
-    <strong>CardioEcho</strong> · Module Nourrisson 1–6 mois<br>
-    Dr Touati Mohamed · CMCI Algérie<br>
-    <em>2 pathologies de test : T4F · CIV large</em>
-</div>
-
-</div>
-
-
+ 
+<!-- ============ ÉCRAN 6 : CHATBOT CLAUDE ============ -->
+<section class="screen" id="screen-6">
+  <div class="card chatbot-info">
+    <div class="card-title"><span class="icon">🤖</span><span data-i18n="chatTitle">Box AI — Aide diagnostique Claude</span></div>
+    <p class="card-subtitle" data-i18n="chatSubtitle">Décrivez les éléments échographiques observés. Claude vous aide à identifier la pathologie la plus probable et orienter l'examen.</p>
+  </div>
+ 
+  <!-- API Key (saisie une fois, stockée localStorage) -->
+  <div class="card api-key-card" id="apiKeyCard">
+    <div class="card-title"><span class="icon">🔐</span><span data-i18n="apiKeyTitle">Clé API Anthropic</span></div>
+    <p class="card-subtitle" data-i18n="apiKeySubtitle">Saisissez votre clé API Claude. Elle est stockée localement dans votre navigateur uniquement.</p>
+    <div class="field">
+      <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." style="font-family:monospace;font-size:13px">
+    </div>
+    <button class="btn btn-primary" onclick="saveApiKey()" data-i18n="apiKeySave">💾 Enregistrer la clé</button>
+    <p class="field-hint" style="margin-top:8px" data-i18n="apiKeyHint">🔒 Votre clé reste sur votre appareil. Aucune donnée n'est envoyée à un serveur tiers.</p>
+  </div>
+ 
+  <!-- Chat -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-wrap">
+      <textarea id="chatInput" data-i18n-ph="chatPlaceholder" placeholder="Décrivez les éléments observés à l'écho..." rows="2"></textarea>
+      <button class="btn-chat-send" onclick="sendChatMessage()" id="btnSendChat">➤</button>
+    </div>
+    <div class="chat-suggestions" id="chatSuggestions"></div>
+  </div>
+ 
+  <div class="bottom-nav">
+    <button class="btn btn-secondary" onclick="goToScreen(2)" data-i18n="backHub">◂ Hub</button>
+    <button class="btn btn-primary" onclick="goToScreen(3)" data-i18n="chatChoosePath">Choisir pathologie ▸</button>
+  </div>
+</section>
+ 
+<!-- ============ ÉCRAN 7 : COMPTE RENDU ============ -->
+<section class="screen" id="screen-7">
+  <div class="card">
+    <div class="card-title"><span class="icon">📄</span><span data-i18n="reportTitle">Compte rendu échocardiographique</span></div>
+    <div id="reportContent"></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="btn btn-secondary" onclick="goToScreen(5)" data-i18n="backHub">◂ Hub</button>
+    <button class="btn btn-primary" onclick="exportReport()" data-i18n="reportExport">📤 Exporter</button>
+  </div>
+</section>
+ 
 <script>
-/* ═══════════════════════════════════════════════════════════
-   DONNÉES — VERSION TEST ALLÉGÉE (2 pathologies)
-   ═══════════════════════════════════════════════════════════ */
-
-const PATHO_INFO = {
-    'T4F': { name: 'Tétralogie de Fallot', urgence: 'HAUTE', cyano: true },
-    'CIV': { name: 'CIV large (Communication Inter-Ventriculaire)', urgence: 'MOYENNE', cyano: false },
+// ============ MAPPING URLS CANVA ============
+const CANVA_URLS = {
+  CIV:    "https://www.canva.com/design/DAHIXS_vD80/0luISc6HiW6V4DN/view?embed",
+  CIA:    "https://www.canva.com/design/DAHIXYX413w/sJmsasrORgZHA_5/view?embed",
+  PCA:    "https://www.canva.com/design/DAHIXbMWLO4/6XZGLWMk2gIGzEO/view?embed",
+  CAV:    "https://www.canva.com/design/DAHIXRvTRWg/IpVVcMAsyZrlqME/view?embed",
+  T4F:    "https://www.canva.com/design/DAHIXSWBVMc/oCqkOJofcYHcTSD/view?embed",
+  SP:     "https://www.canva.com/design/DAHIXcDWqLc/vFwmy8mbbFej7op/view?embed",
+  CoAo:   "https://www.canva.com/design/DAHIXTj3Teo/QloZEVUmCkNjlIM/view?embed",
+  VU:     "https://www.canva.com/design/DAHIXYGhs5g/fy86Gfe5VHhYep5/view?embed",
+  TGV_CIV:"https://www.canva.com/design/DAHIXb7400c/U7Ra1nGktekuk1r/view?embed",
+  VDDI:   "https://www.canva.com/design/DAHIXU5wVQI/AMk-KhjegVWf3TU/view?embed",
+  TAC:    "https://www.canva.com/design/DAHIXYe1whw/5YdO3fNa5ykE3FK/view?embed",
+  RAO:    "https://www.canva.com/design/DAHIXRHki6M/Dqp29dQk7BHTYEX/view?embed",
+  ALCAPA: "https://www.canva.com/design/DAHIXVcUbos/ZxQHOhVRb1KtAoE/view?embed",
+  FIST:   "https://www.canva.com/design/DAHIXaj6qe8/eQBpmK_8baK2mC1/view?embed",
+  ALGO:   "https://www.canva.com/design/DAHIaf-qo_s/lqM8lRgVtBjY2wQ/view?embed"
 };
-
-const PREVALENCE = { 'T4F': 10.5, 'CIV': 18.0 };
-
-/* CRITÈRES ALLÉGÉS — 3 Cat.A + 2 Cat.B par pathologie */
-const CRITERIA = {
-    'T4F': {
-        A: [
-            {
-                id: 'A01', grp: 'CIV',
-                lib: 'CIV malalignement antérieur',
-                desc: 'Septum conal dévié vers l\'avant — pathognomonique de la T4F',
-                niv: '+3', score: 96, coupe: 'Grand axe / Apical',
-                canva: ''
-            },
-            {
-                id: 'A02', grp: 'Aorte',
-                lib: 'Aorte chevauchante (override 25-75%)',
-                desc: 'Aorte à cheval sur le septum interventriculaire',
-                niv: '+3', score: 94, coupe: 'Grand axe',
-                canva: ''
-            },
-            {
-                id: 'A03', grp: 'Valve pulmonaire',
-                lib: 'Anneau pulmonaire hypoplasique',
-                desc: 'Mesurer le diamètre — Z-score < -2 = hypoplasie',
-                niv: '+2', score: 80, coupe: 'Petit axe',
-                canva: '',
-                z_input: true, z_struct: 'Anneau pulmonaire', z_mean: 7.5, z_sd: 0.9
-            },
-        ],
-        B: [
-            {
-                id: 'B01', grp: 'Forme',
-                lib: 'T4F sévère (cyanose franche, SpO₂ < 75%)',
-                desc: 'Obstruction sévère ou atrésie membranaire — ductodépendant',
-                urg: 'URGENT', critical: true,
-                canva: ''
-            },
-            {
-                id: 'B02', grp: 'AP',
-                lib: 'AP droite hypoplasique',
-                desc: 'Risque sténose APD résiduelle post-réparation',
-                urg: 'Complexe',
-                canva: '',
-                z_input: true, z_struct: 'AP droite', z_mean: 5.5, z_sd: 0.8
-            },
-        ]
-    },
-    'CIV': {
-        A: [
-            {
-                id: 'A01', grp: 'CIV',
-                lib: 'Communication interventriculaire visible (Doppler couleur)',
-                desc: 'Flux à travers le septum visible au Doppler couleur',
-                niv: '+3', score: 95, coupe: '4 cavités / Grand axe',
-                canva: ''
-            },
-            {
-                id: 'A02', grp: 'CIV',
-                lib: 'Diamètre de la CIV',
-                desc: 'Mesure du diamètre en grand axe — large si > 50% du diamètre aortique',
-                niv: '+2', score: 80, coupe: 'Grand axe',
-                canva: '',
-                z_input: true, z_struct: 'Diamètre CIV', z_mean: 4, z_sd: 1.0
-            },
-            {
-                id: 'A03', grp: 'Surcharge',
-                lib: 'Dilatation du VG (surcharge volumique)',
-                desc: 'Surcharge volumique du VG par hyperdébit pulmonaire chronique',
-                niv: '+2', score: 78, coupe: 'Grand axe TM',
-                canva: '',
-                z_input: true, z_struct: 'DTD VG', z_mean: 22, z_sd: 2.5
-            },
-        ],
-        B: [
-            {
-                id: 'B01', grp: 'HTAP',
-                lib: 'HTAP sévère (IT Vmax > 3 m/s)',
-                desc: 'Hypertension pulmonaire — risque de maladie obstructive vasculaire',
-                urg: 'URGENT', critical: true,
-                canva: ''
-            },
-            {
-                id: 'B02', grp: 'Dimension',
-                lib: 'CIV large non restrictive (diamètre > 50% Ao)',
-                desc: 'Pression VD = pression VG — fermeture chirurgicale indiquée',
-                urg: 'Sévère',
-                canva: '',
-                z_input: true, z_struct: 'Diamètre CIV', z_mean: 4, z_sd: 1.0
-            },
-        ]
-    },
+ 
+// ============ ALGORITHME AIDE DIAGNOSTIC POSITIF — 17 ÉTAPES ============
+// Chaque étape pointe vers la page Canva A (titre+vidéo) et la page B (détails)
+// pathTarget : clé de PATHOLOGIES vers laquelle naviguer si "Oui, présent"
+// (null = pas de module dédié, juste afficher diagnostic dans CR)
+// ============ Z-SCORES LOPEZ 2010 ============
+// Référence : Lopez L et al. J Am Soc Echocardiogr 2010
+// Modèle allométrique : ln(Y) = a + b·ln(BSA), avec SD du résidu
+// Y en mm, BSA en m². Z = (ln(observé) - ln(prédit)) / SD
+// Coefficients adaptés des publications pédiatriques principales
+const LOPEZ_2010 = {
+  // Anneau aortique (vue parasternale long axe, télésystole)
+  aoAnnulus: {label:"Anneau aortique", a:2.811, b:0.502, sd:0.071, unit:"mm"},
+  // Aorte ascendante
+  aoAsc:     {label:"Aorte ascendante", a:2.901, b:0.507, sd:0.080, unit:"mm"},
+  // Anneau pulmonaire (parasternale petit axe, télésystole)
+  pvAnnulus: {label:"Anneau pulmonaire", a:2.872, b:0.486, sd:0.082, unit:"mm"},
+  // Tronc AP
+  mpa:       {label:"Tronc artère pulmonaire", a:2.927, b:0.475, sd:0.094, unit:"mm"},
+  // DTD VG (TM ou 2D, parasternale long axe)
+  lvedd:     {label:"DTD VG", a:3.249, b:0.452, sd:0.077, unit:"mm"},
+  // DTS VG
+  lvesd:     {label:"DTS VG", a:2.864, b:0.452, sd:0.092, unit:"mm"},
+  // OG (parasternale long axe, télésystole)
+  la:        {label:"Oreillette gauche", a:3.013, b:0.458, sd:0.099, unit:"mm"},
+  // Anneau mitral
+  mvAnnulus: {label:"Anneau mitral", a:3.060, b:0.485, sd:0.071, unit:"mm"},
+  // Anneau tricuspide
+  tvAnnulus: {label:"Anneau tricuspide", a:3.057, b:0.474, sd:0.076, unit:"mm"}
 };
-
-/* QUESTIONS D'ORIENTATION ALLÉGÉES — 4 questions */
-const TRIAGE_QUESTIONS = [
-    {
-        id: 'orient_1',
-        q: 'CIV malalignement antérieur + aorte chevauchante',
-        help: 'Coupe grand axe parasternale — septum conal dévié',
-        coupe: 'Grand axe',
-        canva: '',
-        w: { oui: { T4F: 50, CIV: -10 }, non: { T4F: -25, CIV: 5 } }
-    },
-    {
-        id: 'orient_2',
-        q: 'Sténose pulmonaire (gradient > 30 mmHg)',
-        help: 'Doppler continu sur la voie de sortie du VD',
-        coupe: 'Petit axe',
-        canva: '',
-        w: { oui: { T4F: 40, CIV: -5 }, non: { T4F: -15, CIV: 0 } }
-    },
-    {
-        id: 'orient_3',
-        q: 'Communication interventriculaire visible (Doppler couleur)',
-        help: '4 cavités + grand axe avec Doppler couleur',
-        coupe: '4 cavités',
-        canva: '',
-        w: { oui: { T4F: 15, CIV: 40 }, non: { T4F: -20, CIV: -30 } }
-    },
-    {
-        id: 'orient_4',
-        q: 'Septum interventriculaire intact (NORMAL)',
-        help: 'Si septum intact → exclut T4F et CIV',
-        coupe: '4 cavités',
-        canva: '',
-        w: { oui: { T4F: -50, CIV: -50 }, non: { T4F: 5, CIV: 5 } }
-    },
+ 
+function calcZScore(measureKey, observedMM, bsa){
+  const m = LOPEZ_2010[measureKey];
+  if(!m || !observedMM || !bsa || observedMM <= 0 || bsa <= 0) return null;
+  const lnPredicted = m.a + m.b * Math.log(bsa);
+  const z = (Math.log(observedMM) - lnPredicted) / m.sd;
+  return z;
+}
+ 
+function getZClass(z){
+  if(z === null || isNaN(z)) return "empty";
+  if(z < -2) return "hypo";
+  if(z > 2) return "hyper";
+  return "normal";
+}
+ 
+function getZLabel(z){
+  if(z === null || isNaN(z)) return t("zEmpty");
+  let label;
+  if(z < -2) label = t("zHypo");
+  else if(z > 2) label = t("zHyper");
+  else label = t("zNormal");
+  return label + " (Z=" + (z >= 0 ? "+" : "") + z.toFixed(1) + ")";
+}
+ 
+// Helper : produit le badge HTML
+function zScoreBadge(measureKey, observedMM){
+  const bsa = STATE.patient && STATE.patient.bsa;
+  const z = calcZScore(measureKey, observedMM, bsa);
+  const cls = getZClass(z);
+  const txt = getZLabel(z);
+  return `<span class="zscore-badge ${cls}">${txt}</span>`;
+}
+ 
+const ALGO_DIAG_POSITIF = [
+  {n:1,  name:"Septum interventriculaire",     short:"CIV",
+   name_en:"Interventricular septum", short_en:"VSD",
+   pageA:2,  pageB:3,  pathTarget:"CIV",
+   desc:"Évaluation du septum interventriculaire — Recherche d'une CIV. Coupes : Apicale 4 cavités + Parasternale long axe + petit axe. Doppler couleur sur tout le septum.",
+   desc_en:"Interventricular septum evaluation — Search for VSD. Views: Apical 4-chamber + Parasternal long axis + short axis. Color Doppler over entire septum."},
+  {n:2,  name:"Septum interatrial",            short:"CIA",
+   name_en:"Interatrial septum", short_en:"ASD",
+   pageA:4,  pageB:5,  pathTarget:"CIA",
+   desc:"Évaluation du septum interatrial — Recherche d'une CIA. Coupe sous-costale (++) + Parasternale petit axe + Apicale 4 cavités. Doppler couleur sur le SIA.",
+   desc_en:"Interatrial septum evaluation — Search for ASD. Subcostal view (++) + Parasternal short axis + Apical 4-chamber. Color Doppler on IAS."},
+  {n:3,  name:"Canal Atrioventriculaire",      short:"CAV",
+   name_en:"Atrioventricular canal", short_en:"AVSD",
+   pageA:6,  pageB:7,  pathTarget:"CAV",
+   desc:"Recherche d'un CAV. Coupe Apicale 4 cavités. Recherche d'une seule valve AV commune (5 feuillets). Croix du cœur absente. Souvent associé à T21.",
+   desc_en:"Search for AVSD. Apical 4-chamber view. Look for a single common AV valve (5 leaflets). Absent crux. Often associated with Trisomy 21."},
+  {n:4,  name:"Retour veineux pulm. anormal total", short:"RVPAT",
+   name_en:"Total anomalous pulmonary venous return", short_en:"TAPVR",
+   pageA:8,  pageB:9,  pathTarget:null,
+   desc:"Aucune veine pulmonaire ne se draine dans l'OG. Coupes Apicale 4 cavités + Sus-sternale + Sous-costale. 4 types Darling (supra/infra/cardiaque/mixte). URGENCE si obstruction.",
+   desc_en:"No pulmonary vein drains into LA. Apical 4-chamber + Suprasternal + Subcostal views. 4 Darling types (supra/infra/cardiac/mixed). EMERGENCY if obstructed."},
+  {n:5,  name:"Retour veineux pulm. anormal partiel", short:"RVPAP",
+   name_en:"Partial anomalous pulmonary venous return", short_en:"PAPVR",
+   pageA:10, pageB:11, pathTarget:null,
+   desc:"1 ou 2 veines pulmonaires aberrantes. Coupes Sous-costale + Sus-sternale. Souvent associé à CIA sinus venosus haute. Surcharge OD/VD inexpliquée.",
+   desc_en:"1 or 2 anomalous pulmonary veins. Subcostal + Suprasternal views. Often associated with high sinus venosus ASD. Unexplained RA/RV overload."},
+  {n:6,  name:"Persistance Canal Artériel",    short:"PCA",
+   name_en:"Patent Ductus Arteriosus", short_en:"PDA",
+   pageA:12, pageB:13, pathTarget:"PCA",
+   desc:"Communication entre AP gauche et descendante de l'aorte. Coupes Parasternale petit axe haute + Sus-sternale (vue ductale). Doppler systolo-diastolique continu.",
+   desc_en:"Communication between left PA and descending aorta. High parasternal short axis + Suprasternal (ductal view). Continuous systolo-diastolic Doppler."},
+  {n:7,  name:"Septum aorto-pulmonaire",       short:"TAC / Fenêtre AP",
+   name_en:"Aortopulmonary septum", short_en:"Truncus / AP window",
+   pageA:14, pageB:15, pathTarget:"TAC",
+   desc:"TAC = un seul gros vaisseau à cheval sur CIV. Fenêtre AP = communication post-valvulaire entre Ao et tronc AP. Coupe Parasternale petit axe gros vaisseaux.",
+   desc_en:"Truncus = single great vessel overriding VSD. AP window = post-valvular communication between Ao and PA trunk. Parasternal short axis at great vessels."},
+  {n:8,  name:"Aorte à cheval (dextroposition)", short:"T4F / APSO / TAC / CIV-Eisen.",
+   name_en:"Overriding aorta (dextroposition)", short_en:"TOF / PA-VSD / Truncus / Eisenmenger",
+   pageA:16, pageB:17, pathTarget:"T4F",
+   desc:"L'aorte chevauche le SIV au-dessus d'une CIV. 4 étiologies à différencier selon la voie pulmonaire et les résistances. Coupe Parasternale long axe + 5 cavités.",
+   desc_en:"Aorta overrides the IVS above a VSD. 4 etiologies to differentiate based on pulmonary outflow and resistance. Parasternal long axis + 5-chamber view."},
+  {n:9,  name:"2 gros vaisseaux du VD",        short:"VDDI",
+   name_en:"Both great vessels from RV", short_en:"DORV",
+   pageA:18, pageB:19, pathTarget:"VDDI",
+   desc:"Aorte ET AP naissent toutes deux du VD (>50%). Discontinuité mitro-aortique. CIV obligatoire. 4 types selon position CIV (sous-aortique, sous-pulmonaire, doublement engagée, non engagée).",
+   desc_en:"Both Aorta AND PA arise from RV (>50%). Mitral-aortic discontinuity. Mandatory VSD. 4 types based on VSD position (subaortic, subpulmonary, doubly committed, non-committed)."},
+  {n:10, name:"Ventricule unique",             short:"VU",
+   name_en:"Single ventricle", short_en:"SV",
+   pageA:20, pageB:21, pathTarget:"VU",
+   desc:"Une seule cavité ventriculaire fonctionnelle. Coupe Apicale 4 cavités + Sous-costale. Atrésie tricuspide / HLHS / double inlet. Voie Fontan ultime.",
+   desc_en:"Single functional ventricular chamber. Apical 4-chamber + Subcostal views. Tricuspid atresia / HLHS / double inlet. Fontan pathway ultimately."},
+  {n:11, name:"Hétérotaxie (situs ambigu)",    short:"Hétérotaxie",
+   name_en:"Heterotaxy (situs ambiguous)", short_en:"Heterotaxy",
+   pageA:22, pageB:23, pathTarget:null,
+   desc:"Anomalie de latéralisation. Coupe sous-costale (foie/estomac). Asplénie (isomérisme droit) ou polysplénie (isomérisme gauche). Souvent + cardiopathies complexes.",
+   desc_en:"Lateralization defect. Subcostal view (liver/stomach). Asplenia (right isomerism) or polysplenia (left isomerism). Often associated with complex CHD."},
+  {n:12, name:"TGV révélée tardivement",       short:"TGV",
+   name_en:"Late-presenting TGA", short_en:"TGA",
+   pageA:24, pageB:25, pathTarget:"TGV_CIV",
+   desc:"Discordance ventriculo-artérielle révélée tardivement. Vaisseaux parallèles (et non croisés). Souvent + CIV ou SP qui ont permis une survie sans cyanose immédiate.",
+   desc_en:"Late-presenting ventriculo-arterial discordance. Parallel (not crossed) vessels. Often with VSD or PS allowing survival without immediate cyanosis."},
+  {n:13, name:"Cardiopathie complexe",         short:"Non identifiée",
+   name_en:"Complex CHD", short_en:"Unidentified",
+   pageA:26, pageB:27, pathTarget:null,
+   desc:"Anatomie atypique après examen systématique des 12 étapes. Documenter au maximum (boucles 2D + Doppler). Demander avis spécialisé (centre tertiaire + IRM cardiaque + cathlab).",
+   desc_en:"Atypical anatomy after systematic review of the 12 steps. Document maximally (2D loops + Doppler). Request specialist opinion (tertiary center + cardiac MRI + cath lab)."},
+  {n:14, name:"Aspect VG / VD",                short:"HLVS / CMD / CMH",
+   name_en:"LV / RV appearance", short_en:"HLHS / DCM / HCM",
+   pageA:28, pageB:29, pathTarget:"ALCAPA",
+   desc:"Évaluer taille et fonction VG. Hypoplasie VG (HLHS), VG dilaté hypokinétique (CMD ALCAPA), hypertrophie (CMH). Coupes Parasternale long axe + petit axe + Apicale 4 cavités.",
+   desc_en:"Assess LV size and function. Hypoplastic LV (HLHS), dilated hypokinetic LV (DCM ALCAPA), hypertrophy (HCM). Parasternal long axis + short axis + Apical 4-chamber."},
+  {n:15, name:"Crosse aortique",               short:"CoAo / IAA / Crosse droite",
+   name_en:"Aortic arch", short_en:"CoA / IAA / Right arch",
+   pageA:30, pageB:31, pathTarget:"CoAo",
+   desc:"Évaluer trajet, latéralisation, gradient et flux. CoAo (gradient >20-30 mmHg, perte flux diastolique abdo). IAA (urgence ductodépendante). Crosse droite (DiGeorge, T4F).",
+   desc_en:"Assess course, laterality, gradient and flow. CoA (gradient >20-30 mmHg, loss of diastolic abdominal flow). IAA (duct-dependent emergency). Right arch (DiGeorge, TOF)."},
+  {n:16, name:"Voie pulmonaire",               short:"SP isolée / APSI",
+   name_en:"Pulmonary outflow", short_en:"Isolated PS / PA-IVS",
+   pageA:32, pageB:33, pathTarget:"SP",
+   desc:"Évaluer anneau, valve, tronc AP, branches. SP isolée (Vmax >3 m/s). APSI = atrésie pulmonaire à septum intact, VD hypoplasique avec sinusoïdes, ductodépendante.",
+   desc_en:"Assess annulus, valve, PA trunk, branches. Isolated PS (Vmax >3 m/s). PA-IVS = pulmonary atresia with intact septum, hypoplastic RV with sinusoids, duct-dependent."},
+  {n:17, name:"Coronaires",                    short:"ALCAPA / Fistule",
+   name_en:"Coronary arteries", short_en:"ALCAPA / Fistula",
+   pageA:34, pageB:35, pathTarget:"ALCAPA",
+   desc:"Vérifier origine et flux des coronaires. ALCAPA (origine anormale coronaire G depuis l'AP, CMD précoce 2-3 mois). Fistule coronaire (dilatation + flux turbulent).",
+   desc_en:"Check coronary origin and flow. ALCAPA (anomalous origin of left coronary from PA, early DCM at 2-3 months). Coronary fistula (dilatation + turbulent flow)."}
 ];
-
-/* RECOMMANDATIONS */
-const RECOMMENDATIONS = {
-    'T4F': [
-        'Réparation chirurgicale entre 3-6 mois (forme classique)',
-        'Si crises hypoxiques : β-bloquant (propranolol 1 mg/kg PO 3-4×/j)',
-        'Si forme sévère ductodépendante : PGE1 + chirurgie en urgence',
-        'BT shunt en pont si anatomie défavorable',
-        'FISH 22q11 si crosse à droite',
-    ],
-    'CIV': [
-        'Surveillance échographique régulière',
-        'Si CIV large + IC : traitement médical (diurétiques, IEC)',
-        'Fermeture chirurgicale ou par cathétérisme si HTAP ou IC réfractaire',
-        'Prophylaxie de l\'endocardite (avant fermeture)',
-        'Évaluation pulmonaire avant fermeture si HTAP suspectée',
-    ],
+ 
+// ============ PATHOLOGIES — STRUCTURE DE BASE (à enrichir une par une) ============
+// Chaque pathologie : diagPositif[] + eval[] + aiLogic(state) → texte HTML
+const PATHOLOGIES = {
+  CIV:    {name:"CIV",    fullName:"Communication Interventriculaire",       prev:42.6, badge:"frequent"},
+  CIA:    {name:"CIA",    fullName:"Communication Interauriculaire",         prev:27.2, badge:"frequent"},
+  PCA:    {name:"PCA",    fullName:"Persistance Canal Artériel",             prev:12.0, badge:"frequent"},
+  CAV:    {name:"CAV",    fullName:"Canal Atrioventriculaire",               prev:9.4,  badge:"moderate"},
+  T4F:    {name:"T4F",    fullName:"Tétralogie de Fallot",                   prev:6.0,  badge:"moderate"},
+  SP:     {name:"SP",     fullName:"Sténose Pulmonaire",                     prev:4.7,  badge:"moderate"},
+  VU:     {name:"VU",     fullName:"Ventricule Unique",                      prev:2.9,  badge:"rare"},
+  VDDI:   {name:"VDDI",   fullName:"Ventricule Droit à Double Issue",        prev:1.5,  badge:"rare"},
+  TAC:    {name:"TAC",    fullName:"Tronc Artériel Commun",                  prev:0.6,  badge:"rare"},
+  ALCAPA: {name:"ALCAPA", fullName:"Anomalous LCA from Pulmonary Artery",    prev:0.08, badge:"veryrare", icon:"⭐"},
+  FIST:   {name:"FIST",   fullName:"Fistule Coronaire",                      prev:0.02, badge:"veryrare"}
 };
-
-
-/* ═══════════════════════════════════════════════════════════
-   ÉTAT
-   ═══════════════════════════════════════════════════════════ */
-const state = {
-    currentScreen: 1,
-    patient: { lastName:'', firstName:'', sex:'M', ageMonths:null, weight:null, height:null, bsa:null, spo2:null, ic:'non' },
-    doctor: { firstName:'', lastName:'' },
-    triage: {},
-    triageScores: {},
-    leadDiagnosis: null,
-    catA: {},
-    catB: {},
-    confirmationScore: 0,
-    zscores: {},
+ 
+// ============ STUB PAR DÉFAUT (pathologies non encore construites) ============
+function defaultPathologyData(key){
+  const p = PATHOLOGIES[key];
+  return {
+    questionnaire: false, // mode legacy
+    diagPositif: [
+      {title:"Critère diagnostic positif (à compléter)", tag:`${key}-Q1`,
+        desc:"Module pathologie en cours de construction. Contenu détaillé à venir."}
+    ],
+    eval: [
+      {title:"Évaluation (à compléter)", tag:`${key}-B1`,
+        desc:"Sous-types, sévérité, retentissement à intégrer."}
+    ],
+    aiLogic: function(state){
+      const checked = Object.values(state.checks||{}).filter(v=>v).length;
+      const total = state.totalCriteria;
+      if(checked === 0) return `<em>Cochez les critères observés à l'écho pour activer la synthèse AI.</em>`;
+      if(checked < total/2) return `<strong>Évaluation incomplète.</strong> ${checked}/${total} critères cochés. Continuer l'examen pour affiner le diagnostic.`;
+      return `<strong>Profil compatible ${p.fullName}.</strong> ${checked}/${total} critères positifs. Poursuivre par la rédaction du compte rendu.`;
+    }
+  };
+}
+ 
+// ============ CIV - QUESTIONNAIRE ARCHITECTURE ============
+// Architecture : 2 questionnaires en accordéons + Box AI dynamique
+// Q1: Évaluation anatomique (type CIM-11 + diamètre)
+// Q2: Évaluation hémodynamique (5 sections selon tableau)
+PATHOLOGIES.CIV.data = {
+  questionnaire: true, // mode questionnaire (vs checklist)
+  // Pages Canva par type CIM-11 (DAHIXS_vD80 a maintenant 14 pages, dont 11-14 = types 1-4)
+  canvaPages: { type1: 11, type2: 12, type3: 13, type4: 14, default: 1 },
+ 
+  // ===== QUESTIONNAIRE 1 : ÉVALUATION ANATOMIQUE =====
+  q1_anatomique: {
+    title: "Évaluation anatomique",
+    icon: "🫀",
+    sections: [
+      {
+        id: "type",
+        label: "Type CIM-11 (sélectionner 1)",
+        type: "radio",
+        options: [
+          { value: "type1", label: "Type 1", desc: "CIV supracristale = Juxtartérielle doublement committed / CIV musculaire de l'outlet", canvaPage: 11 },
+          { value: "type2", label: "Type 2", desc: "Périmembraneuse Centrale = Infracristale = Cono-ventriculaire", canvaPage: 12 },
+          { value: "type3", label: "Type 3", desc: "Périmembraneuse de l'inlet (CAV-type) / CIV musculaire d'admission (Postérieure)", canvaPage: 13 },
+          { value: "type4", label: "Type 4", desc: "CIV musculaires trabéculées", canvaPage: 14 }
+        ]
+      },
+      {
+        id: "diametre",
+        label: "Diamètre CIV (mm)",
+        type: "number",
+        unit: "mm",
+        min: 0, max: 30, step: 0.1,
+        videoPage: 15,
+        hint: "Mesure perpendiculaire au septum, en télésystole. Petite <3mm, moyenne 3-6mm, grande >6mm."
+      },
+      {
+        id: "diametre_ratio",
+        label: "Diamètre CIV / anneau aortique",
+        type: "select",
+        videoPage: 15,
+        options: [
+          { value: "", label: "—" },
+          { value: "petite", label: "< 0.3 (petite)" },
+          { value: "moderee", label: "0.3 – 0.5 (modérée)" },
+          { value: "grande", label: "> 0.5 (grande)" },
+          { value: "tres_grande", label: "> 1 (très grande / non-restrictive)" }
+        ]
+      }
+    ]
+  },
+ 
+  // ===== QUESTIONNAIRE 2 : ÉVALUATION HÉMODYNAMIQUE =====
+  q2_hemodynamique: {
+    title: "Évaluation hémodynamique",
+    icon: "💉",
+    sections: [
+      {
+        id: "direction_flux",
+        label: "1. Direction du flux CIV",
+        type: "radio",
+        videoPage: 16,
+        options: [
+          { value: "GD", label: "Gauche → Droit (G→D)", desc: "Shunt classique, CIV restrictive ou modérée" },
+          { value: "DG", label: "Droit → Gauche (D→G)", desc: "⚠️ HTAP fixée (Eisenmenger) — CONTRE-INDICATION fermeture" },
+          { value: "bidir", label: "Bidirectionnel", desc: "HTAP modérée, situation transitionnelle" }
+        ]
+      },
+      {
+        id: "restriction",
+        label: "2. Degré de restriction CIV",
+        type: "compound",
+        videoPage: 17,
+        fields: [
+          { id: "vmax", label: "Vmax CIV (m/s)", type: "number", unit: "m/s", min: 0, max: 6, step: 0.1 },
+          {
+            id: "cause_restriction", label: "Cause de la restriction (cocher)", type: "checklist",
+            options: [
+              { value: "civ_petite", label: "CIV petite (anatomiquement)" },
+              { value: "anevrysme", label: "Couverture par anévrysme septal" },
+              { value: "feuillet_tr", label: "Feuillet septal tricuspide" },
+              { value: "prolapsus_ao", label: "Prolapsus cuspe aortique" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "pression_vd",
+        label: "3. Pression VD",
+        type: "compound",
+        videoPage: 18,
+        fields: [
+          {
+            id: "courbure_septale", label: "Courbure septale", type: "radio",
+            options: [
+              { value: "arrondie", label: "Arrondie (PVD normale)" },
+              { value: "aplatie", label: "Aplatie (PVD ≈ PVG)" },
+              { value: "inversee", label: "Inversée / D-shape (PVD > PVG)" }
+            ]
+          },
+          {
+            id: "cause_pvd", label: "Cause", type: "checklist",
+            options: [
+              { value: "htap", label: "HTAP" },
+              { value: "stenose_vd", label: "Sténose VD" }
+            ]
+          },
+          { id: "vmax_it", label: "Vmax IT (m/s)", type: "number", unit: "m/s", min: 0, max: 6, step: 0.1, hint: "PAPs ≈ 4×V² + POD" }
+        ]
+      },
+      {
+        id: "surcharge_vg",
+        label: "4. Degré de surcharge VG",
+        type: "compound",
+        videoPage: 19,
+        fields: [
+          { id: "dtd_vg", label: "DTD VG (mm)", type: "number", unit: "mm", min: 0, max: 80, step: 0.1, lopez: "lvedd" },
+          { id: "og_diam", label: "Diamètre OG (mm)", type: "number", unit: "mm", min: 0, max: 50, step: 0.1, lopez: "la" },
+          { id: "og_ao", label: "Ratio OG/Ao", type: "number", unit: "", min: 0, max: 3, step: 0.01, hint: ">1.4 = shunt significatif" }
+        ]
+      },
+      {
+        id: "obstacles",
+        label: "5. Obstacles VG / VD",
+        type: "compound",
+        videoPage: 20,
+        fields: [
+          {
+            id: "obstacle_vg", label: "Obstacle VG", type: "checklist",
+            options: [
+              { value: "malalign_post", label: "Malalignement postérieur" },
+              { value: "membrane_sao", label: "Membrane sous-aortique" },
+              { value: "coarctation", label: "Coarctation" }
+            ]
+          },
+          {
+            id: "obstacle_vd", label: "Obstacle VD", type: "checklist",
+            options: [
+              { value: "stenose_mediovd", label: "Sténose médio-VD" },
+              { value: "malalign_ant", label: "Malalignement antérieur" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+ 
+  // ===== LOGIQUE BOX AI =====
+  aiLogic: function(state) {
+    const a = state.q1 || {};
+    const h = state.q2 || {};
+ 
+    // Niveau 1 : rien rempli
+    const hasType = a.type;
+    const hasDiam = a.diametre || a.diametre_ratio;
+    const hasFlux = h.direction_flux;
+    const hasRestriction = h.vmax;
+ 
+    if (!hasType && !hasDiam && !hasFlux) {
+      return `<em>Sélectionnez le type CIM-11 et complétez les questionnaires pour activer la synthèse intelligente.</em><br><br>
+        <strong>Rappel :</strong> CIV = 42.6% des nourrissons CMCI. 4 types CIM-11 + évaluation hémodynamique selon courbure septale, restriction, surcharge.`;
+    }
+ 
+    let html = "";
+ 
+    // ===== Synthèse anatomique =====
+    if (hasType) {
+      const typeLabels = {
+        type1: "Type 1 — Supracristale / Juxtartérielle / Outlet musculaire",
+        type2: "Type 2 — Périmembraneuse Centrale (Infracristale / Cono-ventriculaire)",
+        type3: "Type 3 — Inlet périmembraneuse / Admission musculaire",
+        type4: "Type 4 — Musculaires trabéculées"
+      };
+      html += `<strong>📍 ${typeLabels[a.type]}</strong><br>`;
+ 
+      // Alertes spécifiques par type
+      if (a.type === "type1") {
+        html += `🚨 <strong>Type 1 outlet :</strong> risque MAJEUR de prolapsus de la cuspide aortique → IAo. Indication chirurgicale précoce systématique, même si petite.<br>`;
+      } else if (a.type === "type2") {
+        html += `📌 <strong>Type 2 périmembraneuse :</strong> la plus fréquente. Surveiller IAo (prolapsus). Possibilité fermeture spontanée si <4mm.<br>`;
+      } else if (a.type === "type3") {
+        html += `📌 <strong>Type 3 inlet/admission :</strong> rechercher CAV partiel et trisomie 21 (caryotype).<br>`;
+      } else if (a.type === "type4") {
+        html += `📌 <strong>Type 4 musculaire :</strong> fermeture spontanée 40% à 2 ans. Surveillance pure si asymptomatique. Si multiples → Swiss-cheese.<br>`;
+      }
+    }
+ 
+    // Diamètre
+    if (a.diametre_ratio) {
+      const ratioLabels = {
+        petite: "petite (<0.3 anneau Ao)",
+        moderee: "modérée (0.3-0.5)",
+        grande: "grande (>0.5)",
+        tres_grande: "très grande / non-restrictive (>1)"
+      };
+      html += `<br><strong>📏 Taille CIV :</strong> ${ratioLabels[a.diametre_ratio]}`;
+      if (a.diametre) html += ` (${a.diametre} mm)`;
+      html += `<br>`;
+    } else if (a.diametre) {
+      const d = parseFloat(a.diametre);
+      let cat = d < 3 ? "petite" : d <= 6 ? "moyenne" : "grande";
+      html += `<br><strong>📏 Taille CIV :</strong> ${a.diametre} mm — ${cat}<br>`;
+    }
+ 
+    // ===== Synthèse hémodynamique =====
+    if (hasFlux) {
+      html += `<br><strong>🩸 Hémodynamique :</strong><br>`;
+ 
+      // Direction flux
+      if (h.direction_flux === "DG") {
+        html += `🚨 <strong>Flux D→G :</strong> HTAP fixée probable (Eisenmenger). <strong>CONTRE-INDICATION</strong> à la fermeture. Cathétérisme pour test de réversibilité des résistances pulmonaires.<br>`;
+      } else if (h.direction_flux === "bidir") {
+        html += `⚠️ <strong>Flux bidirectionnel :</strong> HTAP modérée. Bilan hémodynamique complet nécessaire.<br>`;
+      } else if (h.direction_flux === "GD") {
+        html += `✓ Flux G→D classique.<br>`;
+      }
+ 
+      // Restriction
+      if (h.vmax) {
+        const v = parseFloat(h.vmax);
+        const grad = (4 * v * v).toFixed(0);
+        let restriction = "";
+        if (v >= 3.5) restriction = "<strong>restrictive</strong> (PAPs basse présumée)";
+        else if (v >= 2.5) restriction = "modérément restrictive";
+        else restriction = "<strong>non-restrictive</strong> — HTAP probable";
+        html += `Vmax = ${v} m/s → gradient ≈ ${grad} mmHg : CIV ${restriction}.<br>`;
+      }
+ 
+      // Cause restriction
+      if (h.cause_restriction && h.cause_restriction.length > 0) {
+        const causeLabels = {
+          civ_petite: "CIV anatomiquement petite",
+          anevrysme: "anévrysme septal",
+          feuillet_tr: "feuillet septal tricuspide",
+          prolapsus_ao: "prolapsus cuspe Ao"
+        };
+        const causes = h.cause_restriction.map(c => causeLabels[c]).join(", ");
+        html += `Mécanisme : ${causes}.<br>`;
+      }
+ 
+      // Pression VD
+      if (h.courbure_septale) {
+        const courbureLabels = {
+          arrondie: "septum arrondi (PVD normale)",
+          aplatie: "septum aplati (PVD ≈ PVG)",
+          inversee: "<strong>septum inversé / D-shape</strong> (PVD > PVG)"
+        };
+        html += `Pression VD : ${courbureLabels[h.courbure_septale]}.<br>`;
+      }
+ 
+      if (h.vmax_it) {
+        const vit = parseFloat(h.vmax_it);
+        const paps = (4 * vit * vit).toFixed(0);
+        html += `IT Vmax = ${vit} m/s → PAPs ≈ ${paps} + POD mmHg`;
+        if (paps > 50) html += ` (<strong>HTAP sévère</strong> ⚠️)`;
+        else if (paps > 35) html += ` (HTAP modérée)`;
+        html += `.<br>`;
+      }
+ 
+      // Surcharge VG
+      const zVG = (h.dtd_vg && p && p.bsa) ? calcZScore("lvedd", parseFloat(h.dtd_vg), p.bsa) : null;
+      const ogAo = h.og_ao ? parseFloat(h.og_ao) : null;
+      if (zVG !== null && !isNaN(zVG)) {
+        if (zVG > 2) html += `Surcharge VG : Z-score DTD VG = ${zVG} (<strong>dilatation significative</strong>).<br>`;
+        else html += `DTD VG : Z-score = ${zVG} (normal).<br>`;
+      }
+      if (ogAo !== null && !isNaN(ogAo)) {
+        if (ogAo > 1.4) html += `OG/Ao = ${ogAo} : <strong>shunt G-D significatif</strong>.<br>`;
+        else html += `OG/Ao = ${ogAo} : non significatif.<br>`;
+      }
+ 
+      // Obstacles
+      if (h.obstacle_vg && h.obstacle_vg.length > 0) {
+        const labels = { malalign_post: "malalignement postérieur", membrane_sao: "membrane sous-aortique", coarctation: "coarctation" };
+        html += `⚠️ <strong>Obstacle VG :</strong> ${h.obstacle_vg.map(o => labels[o]).join(", ")}.<br>`;
+      }
+      if (h.obstacle_vd && h.obstacle_vd.length > 0) {
+        const labels = { stenose_mediovd: "sténose médio-VD", malalign_ant: "malalignement antérieur" };
+        html += `⚠️ <strong>Obstacle VD :</strong> ${h.obstacle_vd.map(o => labels[o]).join(", ")}.<br>`;
+      }
+    }
+ 
+    // ===== Recommandation finale =====
+    html += `<br><strong>💡 Synthèse :</strong> `;
+    if (h.direction_flux === "DG") {
+      html += `Eisenmenger probable — pas de chirurgie de fermeture.`;
+    } else if (a.diametre_ratio === "tres_grande" || (a.diametre && parseFloat(a.diametre) > 6)) {
+      html += `CIV large → indication chirurgicale précoce (avant HTAP fixée).`;
+    } else if (a.type === "type1") {
+      html += `Type 1 outlet → indication chirurgicale précoce (prévention IAo).`;
+    } else if (a.diametre_ratio === "petite" && h.direction_flux === "GD") {
+      html += `CIV petite restrictive → surveillance écho évolutive. Possibilité de fermeture spontanée.`;
+    } else if (hasFlux) {
+      html += `Compléter le bilan hémodynamique pour préciser l'indication thérapeutique.`;
+    } else {
+      html += `Compléter l'évaluation hémodynamique.`;
+    }
+ 
+    return html;
+  }
 };
-
-
-/* ═══════════════════════════════════════════════════════════
-   HELPERS
-   ═══════════════════════════════════════════════════════════ */
-function calcBSA(w, h) {
-    if (w && h) return Math.sqrt((w * h) / 3600);
-    if (w) return (4 * w + 7) / (w + 90);
-    return null;
+ 
+// ============ ÉTAT GLOBAL ============
+const STATE = {
+  lang: "fr",  // Langue active : "fr" ou "en"
+  doctor: {firstName:"Mohamed", lastName:"Touati"},
+  patient: {firstName:"Rayan", lastName:"Sami", name:"Rayan Sami",
+            sex:"M", ageMonths:3, weight:null, height:null, bsa:null},
+  selectedPath: null,
+  checks: {} // {diagPositif:{0:true,1:false}, eval:{0:true...}}
+};
+ 
+// ============ INTERNATIONALISATION (FR/EN) ============
+const i18n = {
+  fr: {
+    // Welcome
+    welcomeFooter: "Aide au diagnostic — ne remplace pas le jugement clinique",
+    moduleTag: "Module 2B · Nourrisson 1–6 mois",
+    // Écran 1 — Profil
+    patientProfile: "Profil patient",
+    patientProfileSubtitle: "Identification du nourrisson 1–6 mois",
+    ageBannerTitle: "Tranche d'âge : 1–6 mois",
+    ageBannerSubtitle: "Nourrisson — 11 cardiopathies du module 2B",
+    signatoryDoctor: "✍️ Médecin signataire",
+    firstName: "Prénom",
+    lastName: "Nom",
+    patientIdentity: "Identité du patient",
+    sex: "Sexe",
+    male: "Masculin",
+    female: "Féminin",
+    anthropometry: "Anthropométrie",
+    ageMonths: "Âge (mois)",
+    weight: "Poids",
+    height: "Taille",
+    heightHelp: "Optionnelle. Si non disponible, la SC est calculée par le poids seul.",
+    bsa: "Surface corporelle",
+    bsaMosteller: "Mosteller (poids + taille)",
+    bsaWeightOnly: "Formule poids seul",
+    continueToHub: "Continuer vers le hub diagnostique ▸",
+    // Écran 2 — Hub
+    hubTitle: "🩺 Que voulez-vous faire ?",
+    hubSubtitleDefault: "Choisissez votre approche diagnostique",
+    hubBtn1Title: "1. J'ai un diagnostic",
+    hubBtn1Desc: "Diagnostic <strong>déjà identifié</strong>. Sélectionner la pathologie puis passer directement à l'évaluation (anatomique + hémodynamique).",
+    hubBtn2Title: "2. Aide au diagnostic positif",
+    hubBtn2Desc: "Je cherche à <strong>identifier</strong> la pathologie. Algorithme systématique 17 étapes avec vidéos écho.",
+    hubBtn3Title: "3. Je ne suis pas sûr",
+    hubBtn3Desc: "<strong>ChatBot AI</strong> avec Claude pour m'aider à différencier et m'orienter avec les éléments cliniques observés.",
+    backProfile: "◂ Profil",
+    // Écran 3 — Pathologies
+    pathologyTitle: "Quelle pathologie évaluer ?",
+    pathologySubtitle: "11 pathologies du module Diagnostic. Les % indiquent la prévalence dans la cohorte CMCI nourrisson 1-6 mois.",
+    backHub: "◂ Hub",
+    selectPathology: "Sélectionnez ▸",
+    // Écran 4 — Algorithme
+    algoTitle: "🔍 Aide au diagnostic positif",
+    algoSubtitle: "17 étapes d'évaluation systématique. Pour chaque étape, regardez la vidéo et cochez votre observation.",
+    algoSummaryEmpty: "Aucune anomalie marquée pour le moment",
+    algoChoicePresent: "✓ Présent",
+    algoChoiceAbsent: "○ Absent",
+    algoChoiceExplorer: "? À explorer",
+    algoLaunchTitle: "Pathologies à évaluer",
+    algoEvaluate: "🩺 Évaluer",
+    algoReset: "♻️ Réinitialiser",
+    algoCR: "📄 CR",
+    algoResetConfirm: "Réinitialiser toutes les réponses de l'algorithme ?",
+    // Écran 5 — Évaluation
+    evalAnatomic: "✅ Évaluation anatomique",
+    evalAnatomicSubtitle: "Type, mesures anatomiques",
+    evalHemo: "🔍 Évaluation hémodynamique",
+    evalHemoSubtitle: "Flux, restriction, pression VD, surcharge VG, obstacles",
+    evalAI: "🤖 Box AI — Synthèse intelligente",
+    evalReport: "Compte rendu ▸",
+    // Écran 6 — ChatBot
+    chatTitle: "Box AI — Aide diagnostique Claude",
+    chatSubtitle: "Décrivez les éléments échographiques observés. Claude vous aide à identifier la pathologie la plus probable et orienter l'examen.",
+    apiKeyTitle: "🔐 Clé API Anthropic",
+    apiKeySubtitle: "Saisissez votre clé API Claude. Elle est stockée localement dans votre navigateur uniquement.",
+    apiKeySave: "💾 Enregistrer la clé",
+    apiKeyHint: "🔒 Votre clé reste sur votre appareil. Aucune donnée n'est envoyée à un serveur tiers.",
+    chatPlaceholder: "Décrivez les éléments observés à l'écho...",
+    chatChoosePath: "Choisir pathologie ▸",
+    // Écran 7 — CR
+    reportTitle: "📄 Compte rendu",
+    reportDate: "Date",
+    reportPatient: "Patient",
+    reportPathology: "Pathologie évaluée",
+    reportAlgo: "🔍 Algorithme aide diagnostic",
+    reportAI: "🤖 Synthèse AI",
+    reportPresent: "Pathologies identifiées (présent)",
+    reportExplorer: "À explorer",
+    reportStepsParsed: "étapes parcourues",
+    reportExport: "📤 Exporter",
+    reportNoneRenseigne: "Non renseigné",
+    reportStep: "Étape",
+    months: "mois",
+    // Z-scores
+    zNormal: "NORMAL",
+    zHypo: "HYPOPLASIE",
+    zHyper: "DILATATION",
+    zEmpty: "—",
+    // Algo summary parts
+    presentS: "présent", presents: "présents",
+    toExplore: "à explorer",
+    countLabel: "cochés"
+  },
+  en: {
+    // Welcome
+    welcomeFooter: "Diagnostic aid — does not replace clinical judgment",
+    moduleTag: "Module 2B · Infant 1–6 months",
+    // Screen 1 — Profile
+    patientProfile: "Patient profile",
+    patientProfileSubtitle: "Infant identification 1–6 months",
+    ageBannerTitle: "Age range: 1–6 months",
+    ageBannerSubtitle: "Infant — 11 conditions of module 2B",
+    signatoryDoctor: "✍️ Signatory physician",
+    firstName: "First name",
+    lastName: "Last name",
+    patientIdentity: "Patient identity",
+    sex: "Sex",
+    male: "Male",
+    female: "Female",
+    anthropometry: "Anthropometry",
+    ageMonths: "Age (months)",
+    weight: "Weight",
+    height: "Height",
+    heightHelp: "Optional. If unavailable, BSA is calculated from weight alone.",
+    bsa: "Body surface area",
+    bsaMosteller: "Mosteller (weight + height)",
+    bsaWeightOnly: "Weight-only formula",
+    continueToHub: "Continue to diagnostic hub ▸",
+    // Screen 2 — Hub
+    hubTitle: "🩺 What would you like to do?",
+    hubSubtitleDefault: "Choose your diagnostic approach",
+    hubBtn1Title: "1. I have a diagnosis",
+    hubBtn1Desc: "Diagnosis <strong>already identified</strong>. Select the pathology then proceed directly to evaluation (anatomical + hemodynamic).",
+    hubBtn2Title: "2. Help with positive diagnosis",
+    hubBtn2Desc: "I'm looking to <strong>identify</strong> the pathology. Systematic 17-step algorithm with echo videos.",
+    hubBtn3Title: "3. I'm not sure",
+    hubBtn3Desc: "<strong>AI ChatBot</strong> with Claude to help me differentiate and orient with the observed clinical elements.",
+    backProfile: "◂ Profile",
+    // Screen 3 — Pathologies
+    pathologyTitle: "Which pathology to evaluate?",
+    pathologySubtitle: "11 pathologies of the Diagnostic module. The % indicate prevalence in the CMCI infant 1-6 months cohort.",
+    backHub: "◂ Hub",
+    selectPathology: "Select ▸",
+    // Screen 4 — Algorithm
+    algoTitle: "🔍 Positive diagnosis aid",
+    algoSubtitle: "17 steps of systematic evaluation. For each step, watch the video and check your observation.",
+    algoSummaryEmpty: "No abnormality marked yet",
+    algoChoicePresent: "✓ Present",
+    algoChoiceAbsent: "○ Absent",
+    algoChoiceExplorer: "? To explore",
+    algoLaunchTitle: "Pathologies to evaluate",
+    algoEvaluate: "🩺 Evaluate",
+    algoReset: "♻️ Reset",
+    algoCR: "📄 Report",
+    algoResetConfirm: "Reset all algorithm answers?",
+    // Screen 5 — Evaluation
+    evalAnatomic: "✅ Anatomical evaluation",
+    evalAnatomicSubtitle: "Type, anatomical measurements",
+    evalHemo: "🔍 Hemodynamic evaluation",
+    evalHemoSubtitle: "Flow, restriction, RV pressure, LV overload, obstacles",
+    evalAI: "🤖 AI Box — Smart synthesis",
+    evalReport: "Report ▸",
+    // Screen 6 — ChatBot
+    chatTitle: "AI Box — Claude diagnostic aid",
+    chatSubtitle: "Describe the observed echographic elements. Claude helps you identify the most likely pathology and direct the examination.",
+    apiKeyTitle: "🔐 Anthropic API key",
+    apiKeySubtitle: "Enter your Claude API key. It is stored locally in your browser only.",
+    apiKeySave: "💾 Save key",
+    apiKeyHint: "🔒 Your key stays on your device. No data is sent to a third-party server.",
+    chatPlaceholder: "Describe what you observe on the echo...",
+    chatChoosePath: "Choose pathology ▸",
+    // Screen 7 — Report
+    reportTitle: "📄 Report",
+    reportDate: "Date",
+    reportPatient: "Patient",
+    reportPathology: "Pathology evaluated",
+    reportAlgo: "🔍 Diagnostic aid algorithm",
+    reportAI: "🤖 AI synthesis",
+    reportPresent: "Identified pathologies (present)",
+    reportExplorer: "To explore",
+    reportStepsParsed: "steps reviewed",
+    reportExport: "📤 Export",
+    reportNoneRenseigne: "Not specified",
+    reportStep: "Step",
+    months: "months",
+    // Z-scores
+    zNormal: "NORMAL",
+    zHypo: "HYPOPLASIA",
+    zHyper: "DILATATION",
+    zEmpty: "—",
+    // Algo summary parts
+    presentS: "present", presents: "present",
+    toExplore: "to explore",
+    countLabel: "checked"
+  }
+};
+ 
+function t(key){
+  const dict = i18n[STATE.lang] || i18n.fr;
+  return dict[key] || key;
 }
-
-function getZClass(z) {
-    if (z === null || isNaN(z)) return 'empty';
-    if (z < -2) return 'hypo';
-    if (z > 2) return 'hyper';
-    return 'normal';
+ 
+// Choisi à l'écran 0 → fade out + show écran 1 + show header
+function selectLanguage(lang){
+  STATE.lang = lang;
+  applyTranslations();
+  updateLangButtons();
+  const screen0 = $("screen-0");
+  screen0.style.transition = "opacity 0.3s";
+  screen0.style.opacity = "0";
+  setTimeout(()=>{
+    screen0.classList.remove("active");
+    screen0.style.opacity = "";
+    $("appHeader").style.display = "flex";
+    goToScreen(1);
+  }, 300);
 }
-
-function getZLabel(z) {
-    if (z === null || isNaN(z)) return 'Saisir mesure';
-    let label;
-    if (z < -2) label = 'HYPOPLASIE';
-    else if (z > 2) label = 'DILATATION';
-    else label = 'NORMAL';
-    return label + ' (Z = ' + (z >= 0 ? '+' : '') + z.toFixed(1) + ')';
+ 
+// Toggle FR/EN depuis le header
+function changeLanguage(lang){
+  STATE.lang = lang;
+  applyTranslations();
+  updateLangButtons();
+  // Re-render des écrans dynamiques
+  const activeScreen = document.querySelector(".screen.active");
+  if(!activeScreen) return;
+  const id = activeScreen.id;
+  if(id === "screen-2") renderHub();
+  else if(id === "screen-3") renderPathologyGrid();
+  else if(id === "screen-4") renderAlgoStep();
+  else if(id === "screen-5") renderModule();
+  else if(id === "screen-6") renderChatBot();
+  else if(id === "screen-7") renderReport();
 }
-
-function goTo(n) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById('screen-' + n).classList.add('active');
-    state.currentScreen = n;
-    document.getElementById('stepBadge').textContent = n + '/5';
-    document.getElementById('progressFill').style.width = (n * 20) + '%';
-    window.scrollTo(0, 0);
+ 
+function updateLangButtons(){
+  const btnFR = $("langBtnFR"), btnEN = $("langBtnEN");
+  if(btnFR) btnFR.classList.toggle("active", STATE.lang === "fr");
+  if(btnEN) btnEN.classList.toggle("active", STATE.lang === "en");
 }
-
-function renderCriterion(crit, callback) {
-    const nivClass = crit.niv === '+3' ? 'crit-niv-3' :
-                     crit.niv === '+2' ? 'crit-niv-2' :
-                     crit.niv === '+1' ? 'crit-niv-1' :
-                     crit.niv === '-2' ? 'crit-niv-elim' :
-                     crit.critical ? 'crit-niv-crit' : 'crit-niv-1';
-    const nivLabel = crit.niv ? crit.niv : (crit.critical ? '⚠ CRIT' : crit.urg || '');
-
-    let videoHtml;
-    if (crit.canva) {
-        videoHtml = '<iframe src="' + crit.canva + '" allow="fullscreen" allowfullscreen scrolling="no" loading="lazy"></iframe>';
+ 
+function applyTranslations(){
+  const dict = i18n[STATE.lang] || i18n.fr;
+  document.documentElement.lang = STATE.lang;
+  // textContent
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if(dict[key] !== undefined){
+      // Si la clé contient du HTML (strong, br...), on utilise innerHTML
+      if(dict[key].includes("<")) el.innerHTML = dict[key];
+      else el.textContent = dict[key];
+    }
+  });
+  // placeholders dynamiques
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+    const key = el.dataset.i18nPh;
+    if(dict[key]) el.placeholder = dict[key];
+  });
+  // Adapter les placeholders prénom/nom selon la langue
+  if(STATE.lang === "fr"){
+    if($("docFirstName")) $("docFirstName").placeholder = "Mohamed";
+    if($("docLastName"))  $("docLastName").placeholder  = "Touati";
+    if($("patientFirstName")) $("patientFirstName").placeholder = "Rayan";
+    if($("patientLastName"))  $("patientLastName").placeholder  = "Sami";
+  } else {
+    if($("docFirstName")) $("docFirstName").placeholder = "John";
+    if($("docLastName"))  $("docLastName").placeholder  = "Smith";
+    if($("patientFirstName")) $("patientFirstName").placeholder = "Mary";
+    if($("patientLastName"))  $("patientLastName").placeholder  = "Doe";
+  }
+}
+ 
+// ============ UTILITIES ============
+function $(id){return document.getElementById(id)}
+ 
+function updateAge(){
+  const v = parseInt($("ageSlider").value);
+  STATE.patient.ageMonths = v;
+  $("ageValue").textContent = v + " " + t("months");
+}
+ 
+// ============ CALCUL SC ADAPTATIF ============
+// Si poids + taille → Mosteller
+// Si poids seul → formule simplifiée (4×P + 7) / (P + 90)
+function calcBSA(weight, height){
+  if(weight && height) return {bsa: Math.sqrt((weight * height) / 3600), formula: t("bsaMosteller")};
+  if(weight) return {bsa: (4 * weight + 7) / (weight + 90), formula: t("bsaWeightOnly")};
+  return {bsa: null, formula: ""};
+}
+ 
+function computeBSA(){
+  const w = parseFloat($("patientWeight").value);
+  const h = parseFloat($("patientHeight").value);
+  const display = $("bsaDisplay");
+  const result = calcBSA(w, h);
+  if(result.bsa){
+    STATE.patient.bsa = result.bsa;
+    STATE.patient.weight = w;
+    STATE.patient.height = h || null;
+    display.classList.remove("hidden");
+    $("bsaValue").textContent = result.bsa.toFixed(3) + " m²";
+    $("bsaFormula").textContent = result.formula;
+  } else {
+    STATE.patient.bsa = null;
+    display.classList.add("hidden");
+  }
+}
+ 
+function setSex(sex){
+  STATE.patient.sex = sex;
+  document.querySelectorAll("#sexSegmented .segment").forEach(s=>{
+    s.classList.toggle("active", s.dataset.sex === sex);
+  });
+}
+ 
+function updatePatientBar(){
+  const p = STATE.patient;
+  if(!p.weight){$("patientBar") && ($("patientBar").style.display="none");return}
+  const bar = $("patientBar");
+  if(!bar) return;
+  bar.style.display="flex";
+  const fullName = (p.firstName || "") + " " + (p.lastName || "") || "Patient";
+  bar.innerHTML = `
+    <span>${fullName.trim()}</span><span class="sep">·</span>
+    <span>${p.sex||"—"}</span><span class="sep">·</span>
+    <span>${p.ageMonths} mois</span><span class="sep">·</span>
+    <span>${p.weight} kg</span>${p.height?`<span class="sep">·</span><span>${p.height} cm</span>`:""}<span class="sep">·</span>
+    <span>SC ${p.bsa?p.bsa.toFixed(3):"—"} m²</span>`;
+}
+ 
+// ============ NAVIGATION ============
+function validateProfileAndGo(){
+  // Médecin
+  STATE.doctor = {
+    firstName: ($("docFirstName").value || "Mohamed").trim(),
+    lastName:  ($("docLastName").value  || "Touati").trim()
+  };
+  // Patient
+  STATE.patient.firstName = ($("patientFirstName").value || "Rayan").trim();
+  STATE.patient.lastName  = ($("patientLastName").value  || "Sami").trim();
+  STATE.patient.name      = STATE.patient.firstName + " " + STATE.patient.lastName;
+  // Sexe géré par setSex() — on garde la valeur de STATE.patient.sex (default "M")
+  STATE.patient.weight    = parseFloat($("patientWeight").value) || null;
+  STATE.patient.height    = parseFloat($("patientHeight").value) || null;
+  STATE.patient.ageMonths = parseInt($("ageSlider").value);
+ 
+  if(!STATE.patient.weight){
+    alert("Le poids est obligatoire pour calculer la surface corporelle.");
+    $("patientWeight").focus();
+    return;
+  }
+  computeBSA();
+  updatePatientBar();
+  goToScreen(2);
+}
+ 
+function goToScreen(n){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(`screen-${n}`).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(n===2) renderHub();                    // HUB 3 boutons (juste après profil)
+  if(n===3) renderPathologyGrid();          // Grille pathologies (après bouton "J'ai diag")
+  if(n===4) renderAlgoStep();               // Algorithme 17 étapes (après bouton "Aide diag")
+  if(n===5) renderModule();                 // Évaluation Q1+Q2
+  if(n===6) renderChatBot();                // ChatBot Claude
+  if(n===7) renderReport();                 // Compte rendu
+}
+ 
+// ============ HUB 3 BOUTONS (écran 2 — point de départ après profil) ============
+function renderHub(){
+  // Plus besoin de pathologie pré-sélectionnée — le hub est le point d'entrée
+  const p = STATE.patient;
+  const fullName = `${p.firstName||""} ${p.lastName||""}`.trim() || "Patient";
+  $("hubTitle").innerHTML = t("hubTitle");
+  $("hubSubtitle").innerHTML = `<strong>${fullName}</strong> — ${p.ageMonths} ${t("months")} · ${p.weight||"?"} kg · ${t("bsa")} ${p.bsa?p.bsa.toFixed(2):"?"} m²`;
+}
+ 
+// ============ ALGORITHME AIDE DIAGNOSTIC POSITIF (écran 4, 17 étapes empilées) ============
+// STATE.algoAnswers : {1: "present"|"absent"|"explorer"|null, 2: ..., ...}
+function renderAlgoStep(){
+  // Init si nécessaire
+  if(!STATE.algoAnswers) STATE.algoAnswers = {};
+  const isEN = STATE.lang === "en";
+ 
+  // Construire le HTML des 17 étapes empilées
+  const container = $("algoStepsContainer");
+  container.innerHTML = ALGO_DIAG_POSITIF.map(step => {
+    const ans = STATE.algoAnswers[step.n] || null;
+    const cls = ans === "present" ? "step-present" : ans === "absent" ? "step-absent" : ans === "explorer" ? "step-explorer" : "";
+    const stepName = isEN ? (step.name_en || step.name) : step.name;
+    const stepShort = isEN ? (step.short_en || step.short) : step.short;
+    const stepDesc = isEN ? (step.desc_en || step.desc) : step.desc;
+    const noModuleText = isEN ? "→ noted in report" : "→ signalé dans CR";
+    const pathInfo = step.pathTarget
+      ? `<span class="algo-step-path">→ ${step.pathTarget}</span>`
+      : `<span class="algo-step-path algo-step-path-no">${noModuleText}</span>`;
+    return `
+      <div class="algo-step-block ${cls}" id="algoBlock-${step.n}">
+        <div class="algo-step-header">
+          <div class="algo-step-num">${step.n}</div>
+          <div class="algo-step-info">
+            <div class="algo-step-title">${stepName}</div>
+            <div class="algo-step-sub">${stepShort} ${pathInfo}</div>
+          </div>
+        </div>
+        <div class="algo-step-canva">
+          <iframe src="${CANVA_URLS.ALGO}#${step.pageA}" loading="lazy"
+            allow="fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="algo-step-desc">${stepDesc}</div>
+        <div class="algo-step-choices">
+          <button class="algo-choice algo-choice-present ${ans==='present'?'active':''}"
+            onclick="setAlgoAnswer(${step.n},'present')">
+            ${t("algoChoicePresent")}
+          </button>
+          <button class="algo-choice algo-choice-absent ${ans==='absent'?'active':''}"
+            onclick="setAlgoAnswer(${step.n},'absent')">
+            ${t("algoChoiceAbsent")}
+          </button>
+          <button class="algo-choice algo-choice-explorer ${ans==='explorer'?'active':''}"
+            onclick="setAlgoAnswer(${step.n},'explorer')">
+            ${t("algoChoiceExplorer")}
+          </button>
+        </div>
+      </div>`;
+  }).join("");
+ 
+  updateAlgoSummary();
+}
+ 
+function setAlgoAnswer(stepNum, answer){
+  if(!STATE.algoAnswers) STATE.algoAnswers = {};
+  // Toggle : reclic même réponse → désélectionne
+  if(STATE.algoAnswers[stepNum] === answer){
+    delete STATE.algoAnswers[stepNum];
+  } else {
+    STATE.algoAnswers[stepNum] = answer;
+  }
+  // Re-render uniquement le bloc concerné pour préserver scroll
+  const step = ALGO_DIAG_POSITIF.find(s => s.n === stepNum);
+  if(step){
+    const block = $(`algoBlock-${stepNum}`);
+    if(block){
+      const ans = STATE.algoAnswers[stepNum] || null;
+      block.classList.remove("step-present","step-absent","step-explorer");
+      if(ans) block.classList.add(`step-${ans}`);
+      // Update active des boutons dans ce bloc
+      block.querySelectorAll(".algo-choice").forEach(btn=>{
+        btn.classList.remove("active");
+      });
+      if(ans){
+        const activeBtn = block.querySelector(`.algo-choice-${ans}`);
+        if(activeBtn) activeBtn.classList.add("active");
+      }
+    }
+  }
+  updateAlgoSummary();
+}
+ 
+function updateAlgoSummary(){
+  const answers = STATE.algoAnswers || {};
+  const presents = ALGO_DIAG_POSITIF.filter(s => answers[s.n] === "present");
+  const explorers = ALGO_DIAG_POSITIF.filter(s => answers[s.n] === "explorer");
+  const totalAnswered = Object.keys(answers).length;
+  const isEN = STATE.lang === "en";
+ 
+  // Texte résumé
+  let summaryText;
+  if(presents.length === 0 && explorers.length === 0 && totalAnswered === 0){
+    summaryText = t("algoSummaryEmpty");
+  } else {
+    const parts = [];
+    if(presents.length > 0){
+      const word = presents.length > 1 ? t("presents") : t("presentS");
+      parts.push(`<strong>${presents.length}</strong> ${word}`);
+    }
+    if(explorers.length > 0) parts.push(`<strong>${explorers.length}</strong> ${t("toExplore")}`);
+    parts.push(`<span style="color:var(--text-soft)">${totalAnswered}/17 ${t("countLabel")}</span>`);
+    summaryText = parts.join(" · ");
+  }
+  $("algoSummaryText").innerHTML = summaryText;
+ 
+  // Bouton lancer évaluation : visible si ≥1 "présent" avec module
+  const launchCard = $("algoLaunchCard");
+  const presentsWithModule = presents.filter(s => s.pathTarget && PATHOLOGIES[s.pathTarget]);
+  if(presentsWithModule.length > 0){
+    launchCard.style.display = "block";
+    const subtitleText = presentsWithModule.length === 1
+      ? (isEN ? "Click below to launch detailed evaluation:" : "Cliquez ci-dessous pour lancer l'évaluation détaillée :")
+      : (isEN
+          ? `<strong>${presentsWithModule.length} pathologies</strong> identified. Choose which to evaluate first:`
+          : `<strong>${presentsWithModule.length} pathologies</strong> identifiées. Choisissez celle à évaluer en priorité :`);
+    $("algoLaunchSubtitle").innerHTML = subtitleText;
+    $("algoLaunchButtons").innerHTML = presentsWithModule.map(step => {
+      const path = PATHOLOGIES[step.pathTarget];
+      return `<button class="btn btn-success btn-block" onclick="algoLaunchPathology('${step.pathTarget}')" style="margin-bottom:8px">
+        ${t("algoEvaluate")} ${path.fullName} (${step.pathTarget})
+      </button>`;
+    }).join("");
+  } else {
+    launchCard.style.display = "none";
+  }
+}
+ 
+function algoLaunchPathology(pathKey){
+  if(!PATHOLOGIES[pathKey]) return;
+  STATE.selectedPath = pathKey;
+  STATE.q1 = {}; STATE.q2 = {}; STATE.checks = {diagPositif:{}, eval:{}};
+  goToScreen(5);
+}
+ 
+function algoReset(){
+  if(!confirm(t("algoResetConfirm"))) return;
+  STATE.algoAnswers = {};
+  renderAlgoStep();
+}
+ 
+function goBack(){
+  if(confirm("Retour à l'accueil ? Les données saisies seront perdues.")){
+    location.href = "../index.html";
+  }
+}
+ 
+// ============ GRID PATHOLOGIE ============
+function renderPathologyGrid(){
+  const grid = $("pathGrid");
+  grid.innerHTML = Object.entries(PATHOLOGIES).map(([key,p])=>{
+    const badgeClass = p.badge==="rare"?"badge-rare":p.badge==="veryrare"?"badge-veryrare":"";
+    const icon = p.icon || "";
+    const sel = STATE.selectedPath===key ? "selected" : "";
+    return `<div class="path-card ${sel}" data-key="${key}" onclick="selectPathology('${key}')">
+      <span class="prev ${badgeClass}">${p.prev}%</span>
+      <span class="code">${p.name} ${icon}</span>
+      <span class="name">${p.fullName}</span>
+    </div>`;
+  }).join("");
+  if(STATE.selectedPath){
+    $("btnGoModule").disabled = false;
+    $("btnGoModule").textContent = `Module ▸ ${PATHOLOGIES[STATE.selectedPath].name}`;
+  }
+}
+ 
+function selectPathology(key){
+  STATE.selectedPath = key;
+  STATE.checks = {diagPositif:{}, eval:{}};
+  STATE.q1 = {};
+  STATE.q2 = {};
+  STATE.chatHistory = [];    // reset chat à chaque pathologie
+  // Note: STATE.algoAnswers conservé pour qu'il apparaisse dans le CR
+  renderPathologyGrid();
+}
+ 
+// ============ MODULE PATHOLOGIE ============
+function renderModule(){
+  if(!STATE.selectedPath) return;
+  const key = STATE.selectedPath;
+  const pathMeta = PATHOLOGIES[key];
+  const pathData = pathMeta.data || defaultPathologyData(key);
+ 
+  // Init state pour les questionnaires
+  if(!STATE.q1) STATE.q1 = {};
+  if(!STATE.q2) STATE.q2 = {};
+ 
+  // Bloc Canva — page dynamique selon type sélectionné
+  let canvaPage = 1;
+  if(pathData.questionnaire && pathData.canvaPages && STATE.q1.type){
+    canvaPage = pathData.canvaPages[STATE.q1.type] || pathData.canvaPages.default || 1;
+  }
+  $("canvaBlock").innerHTML = `<div class="canva-wrapper">
+    <div class="canva-label">
+      <span>📺 ${pathMeta.fullName}${STATE.q1.type ? ' — '+STATE.q1.type.toUpperCase() : ''}</span>
+      <span class="tag">${key}</span>
+    </div>
+    <iframe class="canva-frame" src="${CANVA_URLS[key]}#${canvaPage}" allow="fullscreen" loading="lazy" allowfullscreen></iframe>
+  </div>`;
+ 
+  // ===== MODE QUESTIONNAIRE (CIV et futures pathologies) =====
+  if(pathData.questionnaire){
+    // Cacher l'ancien layout
+    $("diagPositifSubtitle").style.display = "none";
+    $("diagPositifContent").innerHTML = renderQuestionnaire("q1", pathData.q1_anatomique);
+    $("evalContent").innerHTML = renderQuestionnaire("q2", pathData.q2_hemodynamique);
+    // Mettre à jour les section headers
+    document.querySelectorAll(".section-h.diag").forEach(el=>el.innerHTML = `${pathData.q1_anatomique.icon} ${pathData.q1_anatomique.title}`);
+    document.querySelectorAll(".section-h.eval").forEach(el=>el.innerHTML = `${pathData.q2_hemodynamique.icon} ${pathData.q2_hemodynamique.title}`);
+  }
+  // ===== MODE LEGACY (checklist) =====
+  else {
+    $("diagPositifSubtitle").style.display = "block";
+    $("diagPositifSubtitle").textContent = `${pathMeta.fullName} — Critères positifs essentiels`;
+    $("diagPositifContent").innerHTML = pathData.diagPositif.map((c,i)=>renderCriterion(c,i,"diagPositif")).join("");
+    $("evalContent").innerHTML = pathData.eval.map((c,i)=>renderCriterion(c,i,"eval")).join("");
+  }
+ 
+  renderAIBox();
+}
+ 
+// ============ QUESTIONNAIRE RENDER ============
+function renderQuestionnaire(qKey, q){
+  if(!q) return "";
+  return q.sections.map(section => renderSection(qKey, section)).join("");
+}
+ 
+function renderSection(qKey, section){
+  const stateObj = STATE[qKey] || {};
+  const key = STATE.selectedPath;
+  let html = `<div class="qsection">
+    <div class="qsection-label">${section.label}</div>`;
+ 
+  // Mini-canva vidéo par question (si videoPage défini)
+  if(section.videoPage && CANVA_URLS[key]){
+    html += `<div class="qvideo-wrap">
+      <div class="qvideo-label">
+        <span>📺 Exemple vidéo écho</span>
+        <span class="qvideo-tag">P.${section.videoPage}</span>
+      </div>
+      <iframe class="qvideo-frame" src="${CANVA_URLS[key]}#${section.videoPage}"
+        allow="fullscreen" loading="lazy" allowfullscreen></iframe>
+    </div>`;
+  }
+ 
+  if(section.type === "radio"){
+    html += `<div class="qsection-options">`;
+    section.options.forEach(opt => {
+      const sel = stateObj[section.id] === opt.value ? "selected" : "";
+      html += `<div class="qopt qopt-radio ${sel}" onclick="setRadio('${qKey}','${section.id}','${opt.value}')">
+        <div class="qopt-radio-mark"></div>
+        <div class="qopt-content">
+          <div class="qopt-label">${opt.label}</div>
+          ${opt.desc ? `<div class="qopt-desc">${opt.desc}</div>` : ""}
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  else if(section.type === "select"){
+    html += `<select class="qfield" onchange="setField('${qKey}','${section.id}',this.value)">`;
+    section.options.forEach(opt => {
+      const sel = stateObj[section.id] === opt.value ? "selected" : "";
+      html += `<option value="${opt.value}" ${sel}>${opt.label}</option>`;
+    });
+    html += `</select>`;
+  }
+  else if(section.type === "number"){
+    const val = stateObj[section.id] || "";
+    html += `<div class="qfield-row">
+      <input type="number" class="qfield" value="${val}"
+        min="${section.min}" max="${section.max}" step="${section.step}"
+        oninput="setField('${qKey}','${section.id}',this.value)" placeholder="—">
+      ${section.unit ? `<span class="qfield-unit">${section.unit}</span>` : ""}
+      ${section.lopez && val ? zScoreBadge(section.lopez, parseFloat(val)) : ""}
+    </div>`;
+    if(section.hint) html += `<div class="qfield-hint">${section.hint}</div>`;
+  }
+  else if(section.type === "checklist"){
+    if(!stateObj[section.id]) STATE[qKey][section.id] = [];
+    html += `<div class="qsection-options">`;
+    section.options.forEach(opt => {
+      const checked = (stateObj[section.id] || []).includes(opt.value);
+      html += `<div class="qopt qopt-check ${checked?'selected':''}" onclick="toggleChecklist('${qKey}','${section.id}','${opt.value}')">
+        <div class="qopt-check-mark">${checked?'✓':''}</div>
+        <div class="qopt-content"><div class="qopt-label">${opt.label}</div></div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  else if(section.type === "compound"){
+    html += `<div class="qsection-compound">`;
+    section.fields.forEach(field => {
+      // Compound = sub-fields, on les rend récursivement avec leur propre id
+      html += `<div class="qcompound-field">
+        <div class="qcompound-label">${field.label}</div>`;
+      if(field.type === "radio"){
+        html += `<div class="qsection-options">`;
+        field.options.forEach(opt => {
+          const sel = stateObj[field.id] === opt.value ? "selected" : "";
+          html += `<div class="qopt qopt-radio ${sel}" onclick="setRadio('${qKey}','${field.id}','${opt.value}')">
+            <div class="qopt-radio-mark"></div>
+            <div class="qopt-content">
+              <div class="qopt-label">${opt.label}</div>
+              ${opt.desc ? `<div class="qopt-desc">${opt.desc}</div>` : ""}
+            </div>
+          </div>`;
+        });
+        html += `</div>`;
+      } else if(field.type === "checklist"){
+        if(!stateObj[field.id]) STATE[qKey][field.id] = [];
+        html += `<div class="qsection-options">`;
+        field.options.forEach(opt => {
+          const checked = (stateObj[field.id] || []).includes(opt.value);
+          html += `<div class="qopt qopt-check ${checked?'selected':''}" onclick="toggleChecklist('${qKey}','${field.id}','${opt.value}')">
+            <div class="qopt-check-mark">${checked?'✓':''}</div>
+            <div class="qopt-content"><div class="qopt-label">${opt.label}</div></div>
+          </div>`;
+        });
+        html += `</div>`;
+      } else if(field.type === "number"){
+        const val = stateObj[field.id] || "";
+        html += `<div class="qfield-row">
+          <input type="number" class="qfield" value="${val}"
+            min="${field.min}" max="${field.max}" step="${field.step}"
+            oninput="setField('${qKey}','${field.id}',this.value)" placeholder="—">
+          ${field.unit ? `<span class="qfield-unit">${field.unit}</span>` : ""}
+          ${field.lopez && val ? zScoreBadge(field.lopez, parseFloat(val)) : ""}
+        </div>`;
+        if(field.hint) html += `<div class="qfield-hint">${field.hint}</div>`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+ 
+  html += `</div>`;
+  return html;
+}
+ 
+function setRadio(qKey, fieldId, value){
+  if(!STATE[qKey]) STATE[qKey] = {};
+  STATE[qKey][fieldId] = value;
+  renderModule();
+}
+ 
+function setField(qKey, fieldId, value){
+  if(!STATE[qKey]) STATE[qKey] = {};
+  STATE[qKey][fieldId] = value;
+  // Mise à jour ciblée du badge Z-score si ce champ a une clé Lopez
+  updateZBadgeForField(qKey, fieldId, value);
+  renderAIBox(); // pas de re-render complet pour ne pas perdre le focus input
+}
+ 
+// Met à jour le badge Z-score d'un champ donné sans casser le focus
+function updateZBadgeForField(qKey, fieldId, value){
+  const key = STATE.selectedPath;
+  if(!key) return;
+  const pathMeta = PATHOLOGIES[key];
+  if(!pathMeta || !pathMeta.data) return;
+  const pathData = pathMeta.data;
+  // Trouver le field correspondant pour récupérer sa clé lopez
+  let lopezKey = null;
+  const allSections = [
+    ...(pathData.q1_anatomique?.sections || []),
+    ...(pathData.q2_hemodynamique?.sections || [])
+  ];
+  for(const s of allSections){
+    if(s.id === fieldId && s.lopez){ lopezKey = s.lopez; break; }
+    if(s.fields){
+      for(const f of s.fields){
+        if(f.id === fieldId && f.lopez){ lopezKey = f.lopez; break; }
+      }
+    }
+    if(lopezKey) break;
+  }
+  if(!lopezKey) return;
+  // Trouver l'input et le row pour mettre à jour le badge frère
+  const input = document.querySelector(`input[oninput*="'${fieldId}'"]`);
+  if(!input) return;
+  const row = input.closest(".qfield-row");
+  if(!row) return;
+  // Supprimer ancien badge
+  const oldBadge = row.querySelector(".zscore-badge");
+  if(oldBadge) oldBadge.remove();
+  // Ajouter nouveau badge si valeur valide
+  const numVal = parseFloat(value);
+  if(!isNaN(numVal) && numVal > 0){
+    const tmp = document.createElement("template");
+    tmp.innerHTML = zScoreBadge(lopezKey, numVal);
+    row.appendChild(tmp.content.firstChild);
+  }
+}
+ 
+function toggleChecklist(qKey, fieldId, value){
+  if(!STATE[qKey]) STATE[qKey] = {};
+  if(!STATE[qKey][fieldId]) STATE[qKey][fieldId] = [];
+  const arr = STATE[qKey][fieldId];
+  const idx = arr.indexOf(value);
+  if(idx >= 0) arr.splice(idx, 1);
+  else arr.push(value);
+  renderModule();
+}
+ 
+function renderCriterion(c, i, group){
+  const isChecked = STATE.checks[group] && STATE.checks[group][i];
+  return `<div class="criterion ${isChecked?'checked':''}" onclick="toggleCheck('${group}',${i})">
+    <div class="criterion-header">
+      <div class="criterion-check">${isChecked?'✓':''}</div>
+      <div class="criterion-title">${c.title}</div>
+      <span class="criterion-tag">${c.tag}</span>
+    </div>
+    <div class="criterion-desc">${c.desc}</div>
+  </div>`;
+}
+ 
+function toggleCheck(group, i){
+  if(!STATE.checks[group]) STATE.checks[group] = {};
+  STATE.checks[group][i] = !STATE.checks[group][i];
+  renderModule();
+}
+ 
+// ============ AI BOX ============
+function renderAIBox(){
+  const key = STATE.selectedPath;
+  const pathMeta = PATHOLOGIES[key];
+  const pathData = pathMeta.data || defaultPathologyData(key);
+ 
+  let aiState;
+  if(pathData.questionnaire){
+    aiState = {
+      q1: STATE.q1 || {},
+      q2: STATE.q2 || {},
+      patient: STATE.patient
+    };
+  } else {
+    const allChecks = {...(STATE.checks.diagPositif||{}), ...(STATE.checks.eval||{})};
+    const totalCriteria = (pathData.diagPositif||[]).length + (pathData.eval||[]).length;
+    aiState = {
+      checks: allChecks,
+      totalCriteria,
+      diagPositifChecks: STATE.checks.diagPositif||{},
+      evalChecks: STATE.checks.eval||{},
+      patient: STATE.patient
+    };
+  }
+ 
+  const aiText = pathData.aiLogic(aiState);
+  $("aiBoxContent").innerHTML = `<div class="ai-box">
+    <div class="ai-header">
+      <div class="ai-icon">AI</div>
+      <div class="ai-title">${pathMeta.name} · Synthèse <span class="ai-pulse"></span></div>
+    </div>
+    <div class="ai-content">${aiText}</div>
+  </div>`;
+}
+ 
+// ============ COMPTE RENDU ============
+function renderReport(){
+  const p = STATE.patient;
+  const doc = STATE.doctor || {firstName:"Mohamed", lastName:"Touati"};
+  const isEN = STATE.lang === "en";
+  const today = new Date().toLocaleDateString(isEN ? "en-US" : "fr-FR");
+  const fullPatientName = `${p.firstName||""} ${p.lastName||""}`.trim() || "—";
+  const fullDocName = `Dr ${doc.firstName||""} ${doc.lastName||""}`.trim();
+ 
+  // Section algorithme (nouveau format STATE.algoAnswers)
+  let algoSection = "";
+  const answers = STATE.algoAnswers || {};
+  const presents = ALGO_DIAG_POSITIF.filter(s => answers[s.n] === "present");
+  const explorers = ALGO_DIAG_POSITIF.filter(s => answers[s.n] === "explorer");
+  const totalAnswered = Object.keys(answers).length;
+  if(totalAnswered > 0){
+    const lines = [];
+    if(presents.length > 0){
+      lines.push(`<strong>${t("reportPresent")} :</strong>`);
+      presents.forEach(s => {
+        const stepName = isEN ? (s.name_en || s.name) : s.name;
+        lines.push(`&nbsp;&nbsp;• ${t("reportStep")} ${s.n} — ${stepName}${s.pathTarget?` (${s.pathTarget})`:""}`);
+      });
+    }
+    if(explorers.length > 0){
+      lines.push(`<br><strong>${t("reportExplorer")} :</strong>`);
+      explorers.forEach(s => {
+        const stepName = isEN ? (s.name_en || s.name) : s.name;
+        lines.push(`&nbsp;&nbsp;• ${t("reportStep")} ${s.n} — ${stepName}`);
+      });
+    }
+    lines.push(`<br><em style="color:var(--text-soft)">${totalAnswered}/17 ${t("reportStepsParsed")}</em>`);
+    algoSection = lines.join("<br>");
+  }
+ 
+  // Section pathologie (si une pathologie a été évaluée)
+  let pathSection = "";
+  if(STATE.selectedPath && PATHOLOGIES[STATE.selectedPath]){
+    const key = STATE.selectedPath;
+    const pathMeta = PATHOLOGIES[key];
+    const pathData = pathMeta.data || defaultPathologyData(key);
+    let diagSection = "", evalSection = "", aiText = "";
+ 
+    if(pathData.questionnaire){
+      const q1 = STATE.q1 || {};
+      const q2 = STATE.q2 || {};
+      const fmtQ = (q, qData) => {
+        let lines = [];
+        qData.sections.forEach(s => {
+          const val = q[s.id];
+          if(s.type === "compound" && s.fields){
+            s.fields.forEach(f => {
+              const v = q[f.id];
+              if(v !== undefined && v !== "" && (Array.isArray(v) ? v.length>0 : true)){
+                const display = Array.isArray(v) ? v.join(", ") : v;
+                lines.push(`• ${f.label} : <strong>${display}</strong>${f.unit?" "+f.unit:""}`);
+              }
+            });
+          } else if(val !== undefined && val !== "" && (Array.isArray(val) ? val.length>0 : true)){
+            const display = Array.isArray(val) ? val.join(", ") : val;
+            lines.push(`• ${s.label} : <strong>${display}</strong>${s.unit?" "+s.unit:""}`);
+          }
+        });
+        return lines.length>0 ? lines.join("<br>") : `<em>${t("reportNoneRenseigne")}</em>`;
+      };
+      diagSection = fmtQ(q1, pathData.q1_anatomique);
+      evalSection = fmtQ(q2, pathData.q2_hemodynamique);
+      aiText = pathData.aiLogic({q1, q2, patient:p});
     } else {
-        videoHtml = '<div class="crit-video-placeholder">' +
-            '<div class="crit-video-placeholder-icon">📹</div>' +
-            '<div class="crit-video-placeholder-text">' +
-                'Lien Canva à renseigner' +
-                '<code>CRITERIA.' + crit._patho + '.' + crit._cat + '[' + crit._idx + '].canva</code>' +
-            '</div></div>';
+      diagSection = (pathData.diagPositif||[]).filter((c,i)=>STATE.checks.diagPositif&&STATE.checks.diagPositif[i])
+        .map(c=>`• ${c.title}`).join("<br>") || `<em>${t("reportNoneRenseigne")}</em>`;
+      evalSection = (pathData.eval||[]).filter((c,i)=>STATE.checks.eval&&STATE.checks.eval[i])
+        .map(c=>`• ${c.title}`).join("<br>") || `<em>${t("reportNoneRenseigne")}</em>`;
+      aiText = pathData.aiLogic({
+        checks:{...(STATE.checks.diagPositif||{}),...(STATE.checks.eval||{})},
+        totalCriteria:(pathData.diagPositif||[]).length+(pathData.eval||[]).length,
+        diagPositifChecks:STATE.checks.diagPositif||{},
+        evalChecks:STATE.checks.eval||{},
+        patient:p
+      });
     }
-
-    let zHtml = '';
-    if (crit.z_input) {
-        const zKey = crit._patho + '_' + crit.id;
-        zHtml =
-            '<div class="crit-zscore">' +
-                '<div class="crit-zscore-label">📏 Mesure ' + (crit.z_struct || crit.lib) + '</div>' +
-                '<div class="crit-zscore-row">' +
-                    '<input type="number" class="crit-zscore-input" id="zin-' + zKey + '" ' +
-                        'data-zkey="' + zKey + '" data-zmean="' + crit.z_mean + '" data-zsd="' + crit.z_sd + '" ' +
-                        'data-zstruct="' + (crit.z_struct || crit.lib) + '" ' +
-                        'placeholder="mm" step="0.1" inputmode="decimal">' +
-                    '<div class="crit-zscore-result empty" id="zout-' + zKey + '">Saisir mesure (mm)</div>' +
-                '</div>' +
-            '</div>';
-    }
-
-    const div = document.createElement('div');
-    div.className = 'criterion';
-    div.id = 'crit-' + crit._patho + '-' + crit.id;
-    div.innerHTML =
-        '<div class="crit-header">' +
-            '<div class="crit-header-left">' +
-                '<span class="crit-id-badge">' + crit.id + '</span>' +
-                '<span class="crit-niv-badge ' + nivClass + '">' + nivLabel + '</span>' +
-            '</div>' +
-            '<span class="crit-coupe">' + (crit.coupe || crit.grp || '') + '</span>' +
-        '</div>' +
-        '<div class="crit-video">' + videoHtml + '</div>' +
-        '<div class="crit-body">' +
-            '<div class="crit-lib">' + crit.lib + '</div>' +
-            '<div class="crit-desc">' + crit.desc + '</div>' +
-            zHtml +
-            '<div class="crit-buttons">' +
-                '<button class="crit-btn" data-ans="non" data-id="' + crit.id + '">Non</button>' +
-                '<button class="crit-btn" data-ans="oui" data-id="' + crit.id + '">Oui</button>' +
-            '</div>' +
-        '</div>';
-
-    div.querySelectorAll('.crit-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const ans = btn.dataset.ans;
-            const cid = btn.dataset.id;
-            div.querySelectorAll('.crit-btn').forEach(b => b.classList.remove('selected', 'yes', 'no'));
-            btn.classList.add('selected', ans === 'oui' ? 'yes' : 'no');
-            div.classList.remove('answered-yes', 'answered-no');
-            div.classList.add(ans === 'oui' ? 'answered-yes' : 'answered-no');
-            callback(cid, ans);
-        });
-    });
-
-    if (crit.z_input) {
-        const zInput = div.querySelector('.crit-zscore-input');
-        const zOut = div.querySelector('.crit-zscore-result');
-        if (zInput && zOut) {
-            zInput.addEventListener('input', () => {
-                const val = parseFloat(zInput.value);
-                const mean = parseFloat(zInput.dataset.zmean);
-                const sd = parseFloat(zInput.dataset.zsd);
-                const zKey = zInput.dataset.zkey;
-                const struct = zInput.dataset.zstruct;
-                if (isNaN(val) || val <= 0) {
-                    zOut.className = 'crit-zscore-result empty';
-                    zOut.textContent = 'Saisir mesure (mm)';
-                    delete state.zscores[zKey];
-                    return;
-                }
-                const bsa = state.patient.bsa || 0.3;
-                const adjMean = mean * Math.sqrt(bsa / 0.3);
-                const zVal = (val - adjMean) / sd;
-                state.zscores[zKey] = { struct: struct, measure: val, z: zVal, critId: crit.id };
-                zOut.className = 'crit-zscore-result ' + getZClass(zVal);
-                zOut.textContent = getZLabel(zVal);
-            });
-        }
-    }
-
-    return div;
+ 
+    pathSection = `
+      <div style="margin-bottom:14px"><strong>${t("reportPathology")} :</strong> ${pathMeta.fullName} (${key})</div>
+      <div style="margin-bottom:14px"><strong>${pathData.questionnaire?(pathData.q1_anatomique.icon+" "+pathData.q1_anatomique.title):t("evalAnatomic")} :</strong><br>${diagSection}</div>
+      <div style="margin-bottom:14px"><strong>${pathData.questionnaire?(pathData.q2_hemodynamique.icon+" "+pathData.q2_hemodynamique.title):t("evalHemo")} :</strong><br>${evalSection}</div>
+      <div style="margin-bottom:14px;padding:10px;background:var(--ai-bg);border-radius:8px">
+        <strong>${t("reportAI")} :</strong><br>${aiText}
+      </div>`;
+  }
+ 
+  $("reportContent").innerHTML = `
+    <div style="margin-bottom:14px"><strong>${t("reportDate")} :</strong> ${today}</div>
+    <div style="margin-bottom:14px">
+      <strong>${t("reportPatient")} :</strong> ${fullPatientName} · ${p.sex||"—"} · ${p.ageMonths||"—"} ${t("months")}<br>
+      <strong>${t("weight")} :</strong> ${p.weight||"—"} kg${p.height?` · <strong>${t("height")} :</strong> ${p.height} cm`:""} · <strong>${t("bsa")} :</strong> ${p.bsa?p.bsa.toFixed(3)+" m²":"—"}
+    </div>
+    ${algoSection ? `<div style="margin-bottom:14px;padding:10px;background:var(--accent);border-radius:8px"><strong>${t("reportAlgo")} :</strong><br>${algoSection}</div>` : ""}
+    ${pathSection}
+    <div style="margin-top:20px;font-size:12px;color:var(--text-soft);border-top:1px solid var(--border);padding-top:10px">
+      ${fullDocName} — CMCI Algérie · CardioEcho 2B
+    </div>
+  `;
 }
-
-
-/* ═══════════════════════════════════════════════════════════
-   ÉCRAN 1
-   ═══════════════════════════════════════════════════════════ */
-document.querySelectorAll('[data-sex]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-sex]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.patient.sex = btn.dataset.sex;
-    });
-});
-
-document.querySelectorAll('[data-ic]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-ic]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.patient.ic = btn.dataset.ic;
-    });
-});
-
-['lastName', 'firstName'].forEach(id => {
-    document.getElementById(id).addEventListener('input', e => state.patient[id] = e.target.value);
-});
-
-['docFirstName', 'docLastName'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', e => {
-        const key = id === 'docFirstName' ? 'firstName' : 'lastName';
-        state.doctor[key] = e.target.value;
-    });
-});
-
-['ageMonths', 'weight', 'height', 'spo2'].forEach(id => {
-    document.getElementById(id).addEventListener('input', e => {
-        const v = parseFloat(e.target.value);
-        state.patient[id] = isNaN(v) ? null : v;
-        updateBSA();
-    });
-});
-
-function updateBSA() {
-    const bsa = calcBSA(state.patient.weight, state.patient.height);
-    state.patient.bsa = bsa;
-    const display = document.getElementById('bsaDisplay');
-    if (bsa) {
-        display.classList.remove('hidden');
-        document.getElementById('bsaValue').textContent = bsa.toFixed(2) + ' m²';
-    } else {
-        display.classList.add('hidden');
-    }
+ 
+function exportReport(){
+  const txt = $("reportContent").innerText;
+  if(navigator.share){
+    navigator.share({title:"CR CardioEcho", text:txt}).catch(()=>{});
+  } else {
+    const blob = new Blob([txt], {type:"text/plain"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `CR_${STATE.selectedPath}_${Date.now()}.txt`; a.click();
+  }
 }
-
-document.getElementById('btnNext1').addEventListener('click', () => {
-    const p = state.patient;
-    if (!p.lastName || !p.firstName) { alert('Veuillez saisir nom et prénom du patient'); return; }
-    if (p.ageMonths === null || p.weight === null) { alert('Âge et poids obligatoires'); return; }
-    if (p.spo2 === null) { alert('SpO₂ obligatoire'); return; }
-    buildTriage();
-    goTo(2);
+ 
+// ============ CHATBOT CLAUDE ============
+const CLAUDE_API_KEY_STORAGE = "cardioecho_claude_api_key";
+ 
+function getApiKey(){
+  return localStorage.getItem(CLAUDE_API_KEY_STORAGE) || "";
+}
+ 
+function saveApiKey(){
+  const key = $("apiKeyInput").value.trim();
+  if(!key.startsWith("sk-ant-")){
+    alert("La clé doit commencer par 'sk-ant-'. Vérifiez votre clé API Anthropic.");
+    return;
+  }
+  localStorage.setItem(CLAUDE_API_KEY_STORAGE, key);
+  $("apiKeyCard").classList.add("hidden");
+  initChatBot();
+}
+ 
+function renderChatBot(){
+  if(!STATE.selectedPath){ goToScreen(2); return; }
+  const apiKey = getApiKey();
+  if(apiKey){
+    $("apiKeyCard").classList.add("hidden");
+    initChatBot();
+  } else {
+    $("apiKeyCard").classList.remove("hidden");
+  }
+}
+ 
+function initChatBot(){
+  if(!STATE.chatHistory) STATE.chatHistory = [];
+  // Message d'accueil si chat vide
+  if(STATE.chatHistory.length === 0){
+    const pathMeta = PATHOLOGIES[STATE.selectedPath];
+    const p = STATE.patient;
+    const welcomeMsg = `👋 Bonjour Dr Touati. Je vous aide à évaluer si ce patient présente bien une <strong>${pathMeta.fullName}</strong> ou une autre cardiopathie.
+ 
+<strong>Patient :</strong> ${p.ageMonths} mois, ${p.weight} kg, ${p.height} cm (SC ${p.bsa?p.bsa.toFixed(3):"—"} m²).
+ 
+Décrivez les éléments observés à l'écho (vues utilisées, anomalies, mesures...). Je vous aiderai à préciser le diagnostic et orienter l'examen.`;
+    addChatMessage("assistant", welcomeMsg);
+  }
+  renderChatMessages();
+  renderChatSuggestions();
+}
+ 
+function renderChatMessages(){
+  const container = $("chatMessages");
+  container.innerHTML = STATE.chatHistory.map(m=>{
+    if(m.role === "system") return `<div class="chat-msg chat-msg-system">${m.content}</div>`;
+    const cls = m.role === "user" ? "chat-msg-user" : "chat-msg-assistant";
+    return `<div class="chat-msg ${cls}">${m.content}</div>`;
+  }).join("");
+  container.scrollTop = container.scrollHeight;
+}
+ 
+function renderChatSuggestions(){
+  // Suggestions contextuelles (premiers messages utilisateur)
+  if(STATE.chatHistory.length > 2){
+    $("chatSuggestions").innerHTML = "";
+    return;
+  }
+  const pathMeta = PATHOLOGIES[STATE.selectedPath];
+  const suggestions = [
+    "Souffle systolique entendu",
+    "Cyanose présente",
+    "Cardiomégalie radio",
+    `Doute entre ${pathMeta.name} et autre pathologie`
+  ];
+  $("chatSuggestions").innerHTML = suggestions.map(s =>
+    `<span class="chat-suggestion" onclick="useSuggestion('${s.replace(/'/g,"\\'")}')">${s}</span>`
+  ).join("");
+}
+ 
+function useSuggestion(text){
+  $("chatInput").value = text;
+  $("chatInput").focus();
+}
+ 
+function addChatMessage(role, content){
+  STATE.chatHistory.push({role, content});
+  renderChatMessages();
+}
+ 
+async function sendChatMessage(){
+  const input = $("chatInput");
+  const text = input.value.trim();
+  if(!text) return;
+ 
+  const apiKey = getApiKey();
+  if(!apiKey){
+    alert("Veuillez d'abord saisir votre clé API Anthropic.");
+    $("apiKeyCard").classList.remove("hidden");
+    return;
+  }
+ 
+  // Add user message
+  addChatMessage("user", text);
+  input.value = "";
+  $("btnSendChat").disabled = true;
+  $("chatSuggestions").innerHTML = "";
+ 
+  // Show typing indicator
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "chat-typing";
+  typingDiv.id = "chatTyping";
+  typingDiv.innerHTML = `<span class="chat-typing-dot"></span><span class="chat-typing-dot"></span><span class="chat-typing-dot"></span>`;
+  $("chatMessages").appendChild(typingDiv);
+  $("chatMessages").scrollTop = $("chatMessages").scrollHeight;
+ 
+  try {
+    const reply = await callClaudeAPI(apiKey);
+    document.getElementById("chatTyping")?.remove();
+    addChatMessage("assistant", reply);
+  } catch(err) {
+    document.getElementById("chatTyping")?.remove();
+    addChatMessage("system", `❌ Erreur API : ${err.message}. Vérifiez votre clé API ou réessayez.`);
+  } finally {
+    $("btnSendChat").disabled = false;
+  }
+}
+ 
+async function callClaudeAPI(apiKey){
+  const pathMeta = PATHOLOGIES[STATE.selectedPath];
+  const p = STATE.patient;
+ 
+  // Construire le contexte système
+  const systemPrompt = `Tu es un assistant médical spécialisé en cardiopédiatrie pour Dr Touati Mohamed (CMCI Algérie). Tu aides à diagnostiquer les cardiopathies congénitales chez le nourrisson 1-6 mois.
+ 
+CONTEXTE PATIENT :
+- Âge : ${p.ageMonths} mois
+- Poids : ${p.weight} kg, Taille : ${p.height} cm
+- Surface corporelle (Mosteller) : ${p.bsa ? p.bsa.toFixed(3) : "non calculée"} m²
+- Pathologie initialement suspectée : ${pathMeta.fullName} (${pathMeta.name}, prévalence CMCI ${pathMeta.prev}%)
+ 
+INSTRUCTIONS :
+1. Analyse les éléments échographiques décrits par le médecin.
+2. Évalue si la pathologie suspectée (${pathMeta.name}) est compatible OU propose des diagnostics différentiels.
+3. Suggère des coupes / mesures complémentaires pour trancher.
+4. Cite les seuils de référence quand pertinent (Z-score Lopez 2010, Vmax, gradient).
+5. Sois CONCIS (max 200 mots), structuré (gras pour les points clés, listes courtes).
+6. Si l'utilisateur décrit des signes incompatibles avec ${pathMeta.name}, oriente vers la bonne pathologie parmi les 11 du module : CIV, CIA, PCA, CAV, T4F, SP, VU, VDDI, TAC, ALCAPA, FIST.
+7. Réponds en français. Termine par une question pour préciser si besoin.`;
+ 
+  // Construire l'historique des messages (excluant les messages système locaux)
+  const messages = STATE.chatHistory
+    .filter(m => m.role === "user" || m.role === "assistant")
+    .map(m => ({
+      role: m.role,
+      // Convertir HTML en texte pour Claude
+      content: m.content.replace(/<[^>]+>/g, "").trim()
+    }));
+ 
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true"
+    },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 600,
+      system: systemPrompt,
+      messages: messages
+    })
+  });
+ 
+  if(!response.ok){
+    const err = await response.text();
+    throw new Error(`HTTP ${response.status} : ${err.substring(0,150)}`);
+  }
+ 
+  const data = await response.json();
+  if(data.content && data.content[0] && data.content[0].text){
+    // Convertir markdown léger en HTML
+    let html = data.content[0].text;
+    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+    html = html.replace(/\n\n/g, "<br><br>");
+    html = html.replace(/\n/g, "<br>");
+    return html;
+  }
+  throw new Error("Réponse invalide de l'API Claude");
+}
+ 
+// Send message on Enter (Shift+Enter pour nouvelle ligne)
+document.addEventListener("DOMContentLoaded", ()=>{
+  const ci = document.getElementById("chatInput");
+  if(ci){
+    ci.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter" && !e.shiftKey){
+        e.preventDefault();
+        sendChatMessage();
+      }
+    });
+  }
 });
-
-
-/* ═══════════════════════════════════════════════════════════
-   ÉCRAN 2 — TRIAGE
-   ═══════════════════════════════════════════════════════════ */
-function buildTriage() {
-    const container = document.getElementById('triageQuestions');
-    container.innerHTML = '';
-
-    const intro = document.createElement('div');
-    intro.className = 'card';
-    intro.style.cssText = 'background:linear-gradient(135deg, rgba(251,146,60,0.06), transparent); border-color:rgba(251,146,60,0.20);';
-    intro.innerHTML =
-        '<div class="card-title" style="color:var(--accent);">📖 Comment ça marche</div>' +
-        '<p style="font-size:12px; color:var(--text-secondary); line-height:1.55;">' +
-        'Visualisez la boucle vidéo pour chaque critère écho et indiquez si vous l\'observez. ' +
-        'Inclut des critères normaux qui éliminent certains diagnostics.' +
-        '</p>';
-    container.appendChild(intro);
-
-    TRIAGE_QUESTIONS.forEach((q, idx) => {
-        let videoHtml;
-        if (q.canva) {
-            videoHtml = '<iframe src="' + q.canva + '" allow="fullscreen" allowfullscreen scrolling="no" loading="lazy"></iframe>';
-        } else {
-            videoHtml = '<div class="crit-video-placeholder">' +
-                '<div class="crit-video-placeholder-icon">📹</div>' +
-                '<div class="crit-video-placeholder-text">' +
-                    'Lien Canva à renseigner' +
-                    '<code>TRIAGE_QUESTIONS[' + idx + '].canva</code>' +
-                '</div></div>';
-        }
-
-        const isEliminator = Object.values(q.w.oui).some(v => v <= -40);
-        const div = document.createElement('div');
-        div.className = 'criterion';
-        div.id = 'q-' + q.id;
-        div.innerHTML =
-            '<div class="crit-header">' +
-                '<div class="crit-header-left">' +
-                    '<span class="crit-id-badge">Q' + (idx + 1) + '</span>' +
-                    (isEliminator ? '<span class="crit-niv-badge crit-niv-elim">ÉLIMINATOIRE</span>'
-                                  : '<span class="crit-niv-badge crit-niv-2">ORIENTATION</span>') +
-                '</div>' +
-                '<span class="crit-coupe">' + (q.coupe || '') + '</span>' +
-            '</div>' +
-            '<div class="crit-video">' + videoHtml + '</div>' +
-            '<div class="crit-body">' +
-                '<div class="crit-lib">' + q.q + '</div>' +
-                '<div class="crit-desc">' + q.help + '</div>' +
-                '<div class="crit-buttons">' +
-                    '<button class="crit-btn" data-ans="non" data-qid="' + q.id + '">Non</button>' +
-                    '<button class="crit-btn" data-ans="oui" data-qid="' + q.id + '">Oui</button>' +
-                '</div>' +
-            '</div>';
-        container.appendChild(div);
-    });
-
-    container.querySelectorAll('.crit-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const qid = btn.dataset.qid;
-            const ans = btn.dataset.ans;
-            state.triage[qid] = ans;
-            const block = document.getElementById('q-' + qid);
-            block.querySelectorAll('.crit-btn').forEach(b => b.classList.remove('selected','yes','no'));
-            btn.classList.add('selected', ans === 'oui' ? 'yes' : 'no');
-            block.classList.remove('answered-yes','answered-no');
-            block.classList.add(ans === 'oui' ? 'answered-yes' : 'answered-no');
-            computeTriageScores();
-            updateRanking();
-        });
-    });
-}
-
-function computeTriageScores() {
-    const raw = {};
-    Object.keys(PATHO_INFO).forEach(p => raw[p] = 0);
-    TRIAGE_QUESTIONS.forEach(q => {
-        const ans = state.triage[q.id];
-        if (!ans) return;
-        const w = q.w[ans];
-        for (const p in w) raw[p] += w[p];
-    });
-
-    const final = {};
-    let total = 0;
-    for (const p in raw) {
-        const adj = Math.max(0, raw[p]) * (1 + (PREVALENCE[p] || 0) / 50);
-        final[p] = adj;
-        total += adj;
-    }
-    if (total > 0) for (const p in final) final[p] = (final[p] / total) * 100;
-    state.triageScores = final;
-}
-
-function updateRanking() {
-    const ranking = document.getElementById('triageRanking');
-    const body = document.getElementById('rankingBody');
-    const answered = Object.keys(state.triage).length;
-    if (answered < 2) {
-        ranking.style.display = 'none';
-        document.getElementById('btnNext2').disabled = true;
-        return;
-    }
-    ranking.style.display = 'block';
-    body.innerHTML = '';
-    const sorted = Object.entries(state.triageScores).sort((a,b) => b[1] - a[1]);
-    sorted.forEach(([code, pct], i) => {
-        const cls = i === 0 ? 'lead' : 'mid';
-        const row = document.createElement('div');
-        row.className = 'rank-row';
-        row.innerHTML = '<span class="rank-code">' + code + '</span>' +
-            '<div class="rank-bar-container"><div class="rank-bar ' + cls + '" style="width:' + Math.min(100, pct) + '%"></div></div>' +
-            '<span class="rank-pct">' + pct.toFixed(0) + '%</span>';
-        body.appendChild(row);
-    });
-    if (sorted.length > 0 && sorted[0][1] > 0) state.leadDiagnosis = sorted[0][0];
-    else state.leadDiagnosis = null;
-    document.getElementById('btnNext2').disabled = !(answered >= 2 && state.leadDiagnosis);
-}
-
-document.getElementById('btnBack2').addEventListener('click', () => goTo(1));
-document.getElementById('btnNext2').addEventListener('click', () => {
-    buildConfirmation();
-    goTo(3);
+ 
+// ============ INIT ============
+document.addEventListener("DOMContentLoaded", ()=>{
+  updateAge();
+  // Le sexe par défaut "M" est déjà en STATE — la classe .active est appliquée en HTML.
+  // Si poids préfilled, on calcule la SC
+  if($("patientWeight") && $("patientWeight").value){ computeBSA(); }
 });
-
-
-/* ═══════════════════════════════════════════════════════════
-   ÉCRAN 3 — CONFIRMATION
-   ═══════════════════════════════════════════════════════════ */
-function buildConfirmation() {
-    const lead = state.leadDiagnosis;
-    if (!lead) return;
-    const info = PATHO_INFO[lead];
-    document.getElementById('leadName').textContent = info.name;
-    const prob = state.triageScores[lead] || 50;
-    document.getElementById('probCircle').style.setProperty('--p', prob);
-    document.getElementById('probText').textContent = prob.toFixed(0) + '%';
-    document.getElementById('confSubtitle').textContent = 'Critères pathognomoniques de ' + lead;
-
-    state.catA = {};
-    const container = document.getElementById('confirmationContent');
-    container.innerHTML = '';
-
-    const criteria = (CRITERIA[lead] && CRITERIA[lead].A) || [];
-    document.getElementById('confirmCount').textContent = '0 / ' + criteria.length;
-
-    const groups = {};
-    criteria.forEach((c, idx) => {
-        c._patho = lead; c._cat = 'A'; c._idx = idx;
-        const g = c.grp || 'Critères';
-        if (!groups[g]) groups[g] = [];
-        groups[g].push(c);
-    });
-
-    Object.entries(groups).forEach(([gName, items]) => {
-        const h = document.createElement('div');
-        h.className = 'crit-group';
-        h.textContent = '— ' + gName + ' —';
-        container.appendChild(h);
-        items.forEach(c => {
-            const card = renderCriterion(c, (cid, ans) => {
-                state.catA[cid] = ans;
-                updateConfirmProb();
-            });
-            container.appendChild(card);
-        });
-    });
-}
-
-function updateConfirmProb() {
-    const lead = state.leadDiagnosis;
-    if (!lead) return;
-    const total = (CRITERIA[lead] && CRITERIA[lead].A.length) || 1;
-    const yes = Object.values(state.catA).filter(v => v === 'oui').length;
-    document.getElementById('confirmCount').textContent = yes + ' / ' + total;
-    const triageProb = state.triageScores[lead] || 50;
-    const confirmRatio = total > 0 ? (yes / total) * 100 : 0;
-    const finalProb = Math.min(99, triageProb * 0.4 + confirmRatio * 0.6 + 5);
-    state.confirmationScore = finalProb;
-    document.getElementById('probCircle').style.setProperty('--p', finalProb);
-    document.getElementById('probText').textContent = finalProb.toFixed(0) + '%';
-}
-
-document.getElementById('btnBack3').addEventListener('click', () => goTo(2));
-document.getElementById('btnNext3').addEventListener('click', () => {
-    buildGravity();
-    goTo(4);
-});
-
-
-/* ═══════════════════════════════════════════════════════════
-   ÉCRAN 4 — GRAVITÉ
-   ═══════════════════════════════════════════════════════════ */
-function buildGravity() {
-    const lead = state.leadDiagnosis;
-    if (!lead) return;
-    document.getElementById('gravSubtitle').textContent = 'Critères de sévérité — ' + PATHO_INFO[lead].name;
-
-    state.catB = {};
-    const container = document.getElementById('gravityContent');
-    container.innerHTML = '';
-
-    const criteria = (CRITERIA[lead] && CRITERIA[lead].B) || [];
-    if (criteria.length > 0) {
-        const groups = {};
-        criteria.forEach((c, idx) => {
-            c._patho = lead; c._cat = 'B'; c._idx = idx;
-            const g = c.grp || 'Sous-types';
-            if (!groups[g]) groups[g] = [];
-            groups[g].push(c);
-        });
-
-        Object.entries(groups).forEach(([gName, items]) => {
-            const h = document.createElement('div');
-            h.className = 'crit-group';
-            h.textContent = '— ' + gName + ' —';
-            container.appendChild(h);
-            items.forEach(c => {
-                const card = renderCriterion(c, (cid, ans) => {
-                    state.catB[cid] = ans;
-                });
-                container.appendChild(card);
-            });
-        });
-    }
-}
-
-document.getElementById('btnBack4').addEventListener('click', () => goTo(3));
-document.getElementById('btnNext4').addEventListener('click', () => {
-    buildReport();
-    goTo(5);
-});
-
-
-/* ═══════════════════════════════════════════════════════════
-   ÉCRAN 5 — COMPTE RENDU
-   ═══════════════════════════════════════════════════════════ */
-function buildReport() {
-    const p = state.patient;
-    const lead = state.leadDiagnosis;
-    const info = PATHO_INFO[lead];
-    const today = new Date().toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
-
-    const confirmedA = (CRITERIA[lead]?.A || []).filter(c => state.catA[c.id] === 'oui');
-    const criticalB = [];
-    const otherB = [];
-    (CRITERIA[lead]?.B || []).forEach(c => {
-        if (state.catB[c.id] === 'oui') {
-            if (c.critical) criticalB.push(c); else otherB.push(c);
-        }
-    });
-    const zMeasures = Object.values(state.zscores || {});
-    const recos = RECOMMENDATIONS[lead] || [];
-
-    const docName = (state.doctor.firstName || state.doctor.lastName)
-        ? 'Dr ' + state.doctor.firstName + ' ' + (state.doctor.lastName || '').toUpperCase()
-        : 'Dr Touati Mohamed';
-
-    const html =
-        '<div class="report">' +
-            '<div class="report-header">' +
-                '<div class="report-title">COMPTE RENDU D\'ÉCHOCARDIOGRAPHIE PÉDIATRIQUE</div>' +
-                '<div class="report-subtitle">Module Nourrisson 1–6 mois</div>' +
-            '</div>' +
-
-            '<div class="report-section">' +
-                '<h3>Identification du patient</h3>' +
-                '<div class="report-grid">' +
-                    '<div class="lbl">Nom :</div><div>' + p.lastName.toUpperCase() + ' ' + p.firstName + '</div>' +
-                    '<div class="lbl">Sexe :</div><div>' + (p.sex === 'M' ? 'Masculin' : 'Féminin') + '</div>' +
-                    '<div class="lbl">Âge :</div><div>' + p.ageMonths + ' mois</div>' +
-                    '<div class="lbl">Poids :</div><div>' + p.weight + ' kg</div>' +
-                    (p.height ? '<div class="lbl">Taille :</div><div>' + p.height + ' cm</div>' : '') +
-                    '<div class="lbl">Surface corporelle :</div><div>' + (p.bsa ? p.bsa.toFixed(2) + ' m²' : '—') + '</div>' +
-                    '<div class="lbl">SpO₂ :</div><div>' + p.spo2 + '%</div>' +
-                    '<div class="lbl">Insuffisance cardiaque :</div><div>' + (p.ic === 'oui' ? 'Présente' : 'Absente') + '</div>' +
-                '</div>' +
-            '</div>' +
-
-            '<div class="report-section">' +
-                '<h3>Diagnostic échocardiographique</h3>' +
-                '<div class="report-diagnosis">' +
-                    '<div class="report-diagnosis-name">' + info.name + ' (' + lead + ')</div>' +
-                    '<div style="font-size:11px;">Probabilité : <strong>' + state.confirmationScore.toFixed(0) + '%</strong> · Urgence : <strong>' + info.urgence + '</strong></div>' +
-                '</div>' +
-            '</div>' +
-
-            (confirmedA.length ? (
-                '<div class="report-section">' +
-                    '<h3>Critères diagnostiques retenus</h3>' +
-                    '<ul>' + confirmedA.map(c => '<li><strong>[' + c.id + ']</strong> ' + c.lib + '</li>').join('') + '</ul>' +
-                '</div>'
-            ) : '') +
-
-            ((criticalB.length || otherB.length) ? (
-                '<div class="report-section">' +
-                    '<h3>Évaluation de gravité</h3>' +
-                    (criticalB.length ? '<ul>' + criticalB.map(c => '<li style="color:#C00000;"><strong>⚠ [' + c.id + ']</strong> ' + c.lib + '</li>').join('') + '</ul>' : '') +
-                    (otherB.length ? '<ul>' + otherB.map(c => '<li><strong>[' + c.id + ']</strong> ' + c.lib + '</li>').join('') + '</ul>' : '') +
-                '</div>'
-            ) : '') +
-
-            (zMeasures.length ? (
-                '<div class="report-section">' +
-                    '<h3>Mesures (Z-scores Lopez 2010)</h3>' +
-                    '<ul>' + zMeasures.map(m =>
-                        '<li><strong>' + m.struct + '</strong> : ' + m.measure.toFixed(1) + ' mm ' +
-                        '<span style="color:' + (Math.abs(m.z) > 2 ? '#C00000' : '#375623') + '; font-weight:700;">' +
-                        '(Z = ' + (m.z >= 0 ? '+' : '') + m.z.toFixed(1) + ')</span></li>'
-                    ).join('') + '</ul>' +
-                '</div>'
-            ) : '') +
-
-            '<div class="report-section">' +
-                '<h3>Conduite à tenir</h3>' +
-                '<div class="report-recos"><ul>' +
-                    recos.map(r => '<li>' + r + '</li>').join('') +
-                '</ul></div>' +
-            '</div>' +
-
-            '<div class="report-footer">' +
-                'Examen réalisé le ' + today +
-                '<div class="report-signature">' + docName + '</div>' +
-                '<div style="font-size:10px; font-weight:normal; font-style:italic;">Cardiologue pédiatre · CMCI Algérie</div>' +
-            '</div>' +
-        '</div>';
-
-    document.getElementById('reportContainer').innerHTML = html;
-}
-
-document.getElementById('btnBack5').addEventListener('click', () => goTo(4));
-document.getElementById('btnPrint').addEventListener('click', () => window.print());
 </script>
-
 </body>
 </html>
