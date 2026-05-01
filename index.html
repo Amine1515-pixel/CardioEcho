@@ -3,492 +3,533 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#06101E">
-<title>CardioEcho — Aide au diagnostic échocardiographique</title>
-
+<meta name="theme-color" content="#0e4a6e">
+<title>CardioEcho — Aide au diagnostic échocardiographique pédiatrique</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
 :root {
-    --bg-deep: #06101E;
-    --bg-card: #0B1928;
-    --bg-elevated: #122537;
-    --border: rgba(255,255,255,0.07);
-    --text-primary: #EEF5FF;
-    --text-secondary: #94A3B8;
-    --text-muted: #64748B;
-    --accent: #4F8EF7;
-    --age-color: #F87171;
-    --age-glow: rgba(248,113,113,0.15);
+  --primary: #1e6091;
+  --primary-dark: #0e4a6e;
+  --primary-light: #e8f1f8;
+  --accent: #f0f7fc;
+  --success: #27ae60;
+  --warning: #f39c12;
+  --danger: #c0392b;
+  --text: #2c3e50;
+  --text-soft: #5d6d7e;
+  --text-muted: #95a5a6;
+  --bg: #f8fafb;
+  --card-bg: #ffffff;
+  --border: #e1e8ed;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 2px 8px rgba(14, 74, 110, 0.06);
+  --shadow-hover: 0 8px 24px rgba(14, 74, 110, 0.12);
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-    background: var(--bg-deep);
-    color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-.app {
-    max-width: 480px;
-    margin: 0 auto;
-    min-height: 100vh;
-    padding: 0 0 30px;
-    position: relative;
+body {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f0f7fc 0%, #ffffff 100%);
 }
 
-.hero {
-    padding: 20px 20px 8px;
-    text-align: center;
-    background: radial-gradient(circle at 50% 0%, var(--age-glow), transparent 70%);
-    transition: background 0.5s ease;
-}
-.brand-row {
-    display: flex; align-items: center; justify-content: center;
-    gap: 10px; margin-bottom: 6px;
-}
-.brand-logo {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--age-color), #2563EB);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 6px 18px var(--age-glow);
-    transition: all 0.4s ease;
-}
-.brand-logo svg { width: 20px; height: 20px; }
-.brand-name { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
-.brand-tagline { font-size: 10.5px; color: var(--text-secondary); margin-bottom: 2px; }
-.brand-author {
-    font-size: 10px; color: var(--age-color);
-    font-weight: 600; letter-spacing: 0.3px;
-    transition: color 0.4s;
+/* ========== HEADER ========== */
+.app-header {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  color: #fff;
+  padding: 20px 16px 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.interactive { padding: 8px 16px 12px; }
-
-.silhouette-stage {
-    height: 200px;
-    background: radial-gradient(ellipse at center bottom, var(--age-glow) 0%, transparent 65%);
-    display: flex; align-items: flex-end; justify-content: center;
-    position: relative;
-    margin-bottom: 6px;
-    transition: background 0.5s ease;
-}
-.silhouette { height: 180px; width: auto; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-.silhouette path, .silhouette circle, .silhouette ellipse, .silhouette rect {
-    fill: var(--age-color);
-    transition: fill 0.5s ease;
+.app-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  backdrop-filter: blur(10px);
 }
 
-.heart-pulse {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-.heart-pulse svg {
-    width: 24px; height: 24px;
-    fill: white; opacity: 0.85;
-    animation: pulse 1.4s ease-in-out infinite;
-    filter: drop-shadow(0 0 8px var(--age-color));
-}
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.85; }
-    50% { transform: scale(1.15); opacity: 1; }
+.app-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  margin-bottom: 4px;
 }
 
-.slider-zone {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 16px 16px;
-    margin-top: 4px;
-}
-.slider-header {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 12px;
-}
-.slider-label {
-    font-size: 10.5px; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.7px; font-weight: 700;
-}
-.slider-value {
-    font-size: 15px; font-weight: 700; color: var(--age-color);
-    transition: color 0.3s; font-variant-numeric: tabular-nums;
+.app-tagline {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.85;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
-.slider-track-wrap { position: relative; padding: 14px 0 8px; }
-.slider-track-wrap input[type="range"] {
-    -webkit-appearance: none; appearance: none;
-    width: 100%; height: 6px;
-    background: linear-gradient(to right,
-        var(--age-color) 0%,
-        var(--age-color) var(--progress, 0%),
-        var(--bg-elevated) var(--progress, 0%),
-        var(--bg-elevated) 100%);
-    border-radius: 3px; outline: none; transition: background 0.3s;
-}
-.slider-track-wrap input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 24px; height: 24px; border-radius: 50%;
-    background: white; border: 3px solid var(--age-color);
-    cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: all 0.2s;
-}
-.slider-track-wrap input[type="range"]::-webkit-slider-thumb:active { transform: scale(1.15); }
-.slider-track-wrap input[type="range"]::-moz-range-thumb {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: white; border: 3px solid var(--age-color);
-    cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-.slider-labels {
-    display: flex; justify-content: space-between;
-    margin-top: 10px; font-size: 9px; color: var(--text-muted);
-    font-variant-numeric: tabular-nums;
+/* ========== LANG SWITCHER ========== */
+.lang-switch {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 3px;
 }
 
-.age-card-zone { padding: 0 16px; margin-top: 12px; }
-.age-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--age-color);
-    border-radius: 14px;
-    padding: 16px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative; overflow: hidden;
-}
-.age-card::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(circle at 0% 0%, var(--age-glow), transparent 50%);
-    opacity: 0.3; pointer-events: none;
-}
-.age-card-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 4px;
-}
-.age-card-title { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; }
-.age-card-status {
-    font-size: 9.5px; font-weight: 700; padding: 3px 7px;
-    border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
-    background: var(--age-glow); color: var(--age-color);
-    border: 1px solid currentColor;
-}
-.age-card-status.wip {
-    background: rgba(252,211,77,0.10); color: #FCD34D;
-    border-color: rgba(252,211,77,0.30);
-}
-.age-card-range {
-    font-size: 12px; color: var(--text-secondary);
-    margin-bottom: 12px; font-variant-numeric: tabular-nums;
-}
-.pathologies-title {
-    font-size: 10px; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.6px;
-    font-weight: 700; margin-bottom: 7px;
-}
-.pathologies-list {
-    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px;
-}
-.patho-chip {
-    font-size: 10.5px; padding: 4px 9px;
-    background: var(--bg-elevated); border: 1px solid var(--border);
-    color: var(--text-secondary); border-radius: 14px; font-weight: 600;
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
 }
 
-.btn-enter {
-    width: 100%; padding: 13px;
-    background: var(--age-color); color: white; border: none;
-    border-radius: 11px; font-size: 14px; font-weight: 700;
-    cursor: pointer; transition: all 0.2s; font-family: inherit;
-    letter-spacing: 0.3px; box-shadow: 0 4px 14px var(--age-glow);
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-enter:hover { transform: translateY(-1px); box-shadow: 0 6px 18px var(--age-glow); }
-.btn-enter:active { transform: translateY(0); }
-.btn-enter:disabled {
-    background: var(--bg-elevated); color: var(--text-muted);
-    cursor: not-allowed; box-shadow: none;
+.lang-btn:hover { color: #fff; }
+
+.lang-btn.active {
+  background: #fff;
+  color: var(--primary-dark);
 }
 
-.section-divider {
-    padding: 18px 20px 8px;
-    font-size: 10.5px; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700;
-    display: flex; align-items: center; gap: 8px;
+/* ========== MAIN ========== */
+.main {
+  flex: 1;
+  padding: 24px 16px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
 }
-.section-divider::before, .section-divider::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-}
-.utilities { padding: 0 16px; }
-.util-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 11px; padding: 11px 13px;
-    display: flex; align-items: center; gap: 11px; margin-bottom: 8px;
-    cursor: pointer; transition: all 0.15s; text-decoration: none; color: inherit;
-}
-.util-card:hover { background: var(--bg-elevated); }
-.util-icon {
-    width: 30px; height: 30px; border-radius: 8px;
-    background: rgba(79,142,247,0.08); color: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 15px;
-}
-.util-text { flex: 1; }
-.util-title { font-size: 12px; font-weight: 600; margin-bottom: 1px; }
-.util-subtitle { font-size: 10px; color: var(--text-muted); }
 
+.intro {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.intro-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.intro-subtitle {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 8px 4px 12px;
+}
+
+/* ========== MODULE CARDS ========== */
+.modules-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.module-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--card-color, var(--primary));
+}
+
+.module-card:hover:not(.disabled) {
+  transform: translateY(-2px);
+  border-color: var(--card-color, var(--primary));
+  box-shadow: var(--shadow-hover);
+}
+
+.module-card:active:not(.disabled) {
+  transform: translateY(0);
+}
+
+.module-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--card-bg-color, var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.module-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.module-age {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--card-color, var(--primary));
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 3px;
+}
+
+.module-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+
+.module-desc {
+  font-size: 12.5px;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+.module-arrow {
+  color: var(--card-color, var(--primary));
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+/* État désactivé */
+.module-card.disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #fafbfc;
+}
+
+.module-card.disabled .module-arrow { display: none; }
+
+.coming-soon-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--warning);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Couleurs par tranche d'âge */
+.card-neonate {
+  --card-color: #d35400;
+  --card-bg-color: #fef5ec;
+}
+.card-infant {
+  --card-color: #1e6091;
+  --card-bg-color: #e8f1f8;
+}
+.card-child {
+  --card-color: #27ae60;
+  --card-bg-color: #e8f8ee;
+}
+.card-teen {
+  --card-color: #8e44ad;
+  --card-bg-color: #f3eaf7;
+}
+
+/* ========== INFO BOX ========== */
+.info-box {
+  background: var(--accent);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.info-box strong {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+/* ========== FOOTER ========== */
 .app-footer {
-    text-align: center; padding: 20px 20px 8px;
-    font-size: 9.5px; color: var(--text-muted); line-height: 1.6;
+  background: var(--primary-dark);
+  color: rgba(255,255,255,0.85);
+  padding: 20px 16px;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
 }
-.app-footer strong { color: var(--text-secondary); }
-.app-footer .version {
-    display: inline-block; margin-top: 4px; padding: 2px 8px;
-    background: rgba(79,142,247,0.10); color: var(--accent);
-    border-radius: 4px; font-size: 9px; font-weight: 700;
+
+.footer-author {
+  font-weight: 700;
+  color: #fff;
+  font-size: 12.5px;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
 }
+
+.footer-meta {
+  opacity: 0.7;
+  font-size: 10.5px;
+  margin-top: 6px;
+  letter-spacing: 0.4px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (min-width: 600px) {
+  .modules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .info-box { grid-column: 1 / -1; }
+}
+
+@media (max-width: 380px) {
+  .app-title { font-size: 24px; }
+  .module-title { font-size: 15px; }
+  .module-desc { font-size: 11.5px; }
+  .module-icon { width: 48px; height: 48px; font-size: 26px; }
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.module-card {
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.module-card:nth-child(1) { animation-delay: 0.05s; }
+.module-card:nth-child(2) { animation-delay: 0.10s; }
+.module-card:nth-child(3) { animation-delay: 0.15s; }
+.module-card:nth-child(4) { animation-delay: 0.20s; }
 </style>
 </head>
 <body>
 
-<div class="app">
-
-<header class="hero">
-    <div class="brand-row">
-        <div class="brand-logo">
-            <svg viewBox="0 0 24 24" fill="white">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-        </div>
-        <div class="brand-name">CardioEcho</div>
-    </div>
-    <div class="brand-tagline">Aide au diagnostic échocardiographique</div>
-    <div class="brand-author">Dr Touati Mohamed · Cardiologue pédiatre</div>
+<!-- ============ HEADER ============ -->
+<header class="app-header">
+  <div class="lang-switch">
+    <button class="lang-btn active" id="langBtnFR" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" id="langBtnEN" onclick="setLang('en')">EN</button>
+  </div>
+  <div class="app-logo">🩺</div>
+  <h1 class="app-title">CardioEcho</h1>
+  <div class="app-tagline" data-i18n="tagline">Aide au diagnostic échocardiographique</div>
 </header>
 
+<!-- ============ MAIN ============ -->
+<main class="main">
 
-<div class="interactive">
-    <div class="silhouette-stage">
-        <svg id="silhouette" class="silhouette" viewBox="0 0 100 180" xmlns="http://www.w3.org/2000/svg"></svg>
-        <div class="heart-pulse">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        </div>
+  <div class="intro">
+    <h2 class="intro-title" data-i18n="introTitle">Choisissez la tranche d'âge</h2>
+    <p class="intro-subtitle" data-i18n="introSubtitle">Sélectionnez le module adapté à l'âge du patient pour accéder à l'algorithme diagnostique correspondant.</p>
+  </div>
+
+  <div class="section-label" data-i18n="modulesLabel">Modules disponibles</div>
+
+  <div class="modules-grid">
+
+    <!-- Module 1 : Néonatal (actif) -->
+    <a href="./modules/01_neonatal.html" class="module-card card-neonate">
+      <div class="module-icon">👶</div>
+      <div class="module-content">
+        <div class="module-age" data-i18n="m1Age">0 — 1 mois</div>
+        <div class="module-title" data-i18n="m1Title">Nouveau-né</div>
+        <div class="module-desc" data-i18n="m1Desc">Cardiopathies néonatales · Cyanose · SpO₂ pré/post-ductale · Test d'hyperoxie</div>
+      </div>
+      <div class="module-arrow">›</div>
+    </a>
+
+    <!-- Module 2 : Nourrisson (actif) -->
+    <a href="./modules/02_infant.html" class="module-card card-infant">
+      <div class="module-icon">🍼</div>
+      <div class="module-content">
+        <div class="module-age" data-i18n="m2Age">1 — 6 mois</div>
+        <div class="module-title" data-i18n="m2Title">Nourrisson</div>
+        <div class="module-desc" data-i18n="m2Desc">Algorithme 17 étapes · CIV, CIA, CAV, T4F · Z-scores Lopez 2010 · ChatBot IA</div>
+      </div>
+      <div class="module-arrow">›</div>
+    </a>
+
+    <!-- Module 3 : Enfant (à venir) -->
+    <div class="module-card card-child disabled">
+      <div class="coming-soon-badge" data-i18n="comingSoon">Bientôt</div>
+      <div class="module-icon">🧒</div>
+      <div class="module-content">
+        <div class="module-age" data-i18n="m3Age">6 mois — 12 ans</div>
+        <div class="module-title" data-i18n="m3Title">Enfant</div>
+        <div class="module-desc" data-i18n="m3Desc">Cardiopathies de l'enfant · Cardiomyopathies · Suivi post-opératoire</div>
+      </div>
     </div>
 
-    <div class="slider-zone">
-        <div class="slider-header">
-            <span class="slider-label">Tranche d'âge</span>
-            <span class="slider-value" id="ageDisplay">Nouveau-né</span>
-        </div>
-        <div class="slider-track-wrap">
-            <input type="range" id="ageSlider" min="0" max="5" value="0" step="1">
-            <div class="slider-labels">
-                <span>0j</span>
-                <span>1m</span>
-                <span>6m</span>
-                <span>2a</span>
-                <span>5a</span>
-                <span>15a+</span>
-            </div>
-        </div>
+    <!-- Module 4 : Adolescent / Adulte (à venir) -->
+    <div class="module-card card-teen disabled">
+      <div class="coming-soon-badge" data-i18n="comingSoon">Bientôt</div>
+      <div class="module-icon">🧑</div>
+      <div class="module-content">
+        <div class="module-age" data-i18n="m4Age">12 ans et +</div>
+        <div class="module-title" data-i18n="m4Title">Adolescent / Adulte</div>
+        <div class="module-desc" data-i18n="m4Desc">Cardiopathies congénitales adultes · GUCH · Cardiopathies acquises</div>
+      </div>
     </div>
-</div>
 
+  </div>
 
-<div class="age-card-zone">
-    <div class="age-card" id="ageCard">
-        <div class="age-card-header">
-            <div class="age-card-title" id="ageCardTitle">Nouveau-né</div>
-            <div class="age-card-status" id="ageCardStatus">v4 prête</div>
-        </div>
-        <div class="age-card-range" id="ageCardRange">0 — 1 mois (0–30 jours)</div>
+  <div class="info-box">
+    <strong data-i18n="infoTitle">À propos :</strong>
+    <span data-i18n="infoText">CardioEcho est un outil d'aide au diagnostic destiné aux cardiologues pédiatres. Les recommandations doivent toujours être validées par un médecin spécialiste.</span>
+  </div>
 
-        <div class="pathologies-title">Pathologies principales</div>
-        <div class="pathologies-list" id="pathologiesList"></div>
+</main>
 
-        <button class="btn-enter" id="btnEnter">
-            <span>Entrer dans le module</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
-    </div>
-</div>
-
-
-<div class="section-divider">Outils rapides</div>
-<div class="utilities">
-    <a class="util-card" href="#" onclick="alert('À implémenter : calculateur Z-score Lopez 2010 standalone'); return false;">
-        <div class="util-icon">📏</div>
-        <div class="util-text">
-            <div class="util-title">Calculateur Z-score (Lopez 2010)</div>
-            <div class="util-subtitle">Mesures échographiques par BSA</div>
-        </div>
-    </a>
-    <a class="util-card" href="#" onclick="alert('À implémenter : surface corporelle Mosteller'); return false;">
-        <div class="util-icon">⚖️</div>
-        <div class="util-text">
-            <div class="util-title">Surface corporelle (Mosteller)</div>
-            <div class="util-subtitle">SC à partir du poids et de la taille</div>
-        </div>
-    </a>
-    <a class="util-card" href="#" onclick="alert('À implémenter : index de Nakata'); return false;">
-        <div class="util-icon">📐</div>
-        <div class="util-text">
-            <div class="util-title">Index de Nakata</div>
-            <div class="util-subtitle">Surface AP rapportée à la SC</div>
-        </div>
-    </a>
-</div>
-
-
-<div class="app-footer">
-    <strong>CardioEcho</strong> · Application créée et validée par <strong>Dr Touati Mohamed</strong><br>
-    Cardiologue pédiatre · CMCI Algérie · Données 2012–2025<br>
-    <span class="version">v0.2 · HUB interactif</span>
-</div>
-
-</div>
-
+<!-- ============ FOOTER ============ -->
+<footer class="app-footer">
+  <div class="footer-author">Dr Touati Mohamed</div>
+  <div data-i18n="footerOrg">Cardiologue pédiatre · CMCI Algérie</div>
+  <div class="footer-meta">CardioEcho v1.0 · 2026</div>
+</footer>
 
 <script>
-const AGE_GROUPS = [
-    {
-        title: 'Nouveau-né', range: '0 — 1 mois (0–30 jours)',
-        color: '#F87171', glow: 'rgba(248,113,113,0.18)',
-        status: 'ready', statusLabel: 'Module v4 prêt', link: 'modules/01_neonatal.html',
-        pathologies: ['TGV', 'APSO', 'APSI', 'HLVS', 'RVPAT', 'CoAo', 'RAO valv.', 'PCA malin', 'T4F sévère'],
-        silhouette: `
-            <ellipse cx="50" cy="135" rx="32" ry="28"/>
-            <circle cx="50" cy="80" r="22"/>
-            <ellipse cx="50" cy="156" rx="36" ry="12"/>
-        `
-    },
-    {
-        title: 'Nourrisson', range: '1 — 6 mois',
-        color: '#FB923C', glow: 'rgba(251,146,60,0.18)',
-        status: 'wip', statusLabel: 'À construire', link: 'modules/02_infant.html',
-        pathologies: ['T4F', 'CIV large', 'CAV', 'PCA', 'CoAo modérée', 'RVPAT non obstrué', 'ALCAPA'],
-        silhouette: `
-            <circle cx="50" cy="60" r="20"/>
-            <ellipse cx="50" cy="118" rx="26" ry="38"/>
-            <ellipse cx="36" cy="158" rx="9" ry="13"/>
-            <ellipse cx="64" cy="158" rx="9" ry="13"/>
-            <ellipse cx="28" cy="115" rx="6" ry="20"/>
-            <ellipse cx="72" cy="115" rx="6" ry="20"/>
-        `
-    },
-    {
-        title: 'Petit enfant', range: '6 mois — 2 ans',
-        color: '#FCD34D', glow: 'rgba(252,211,77,0.18)',
-        status: 'wip', statusLabel: 'À construire', link: 'modules/03_toddler.html',
-        pathologies: ['T4F retardée', 'CIV résiduelle', 'sténoses modérées', 'cardiomyopathies'],
-        silhouette: `
-            <circle cx="50" cy="40" r="17"/>
-            <ellipse cx="50" cy="98" rx="20" ry="38"/>
-            <ellipse cx="42" cy="150" rx="7" ry="22"/>
-            <ellipse cx="58" cy="150" rx="7" ry="22"/>
-            <ellipse cx="28" cy="92" rx="5" ry="22"/>
-            <ellipse cx="72" cy="92" rx="5" ry="22"/>
-        `
-    },
-    {
-        title: 'Préscolaire', range: '2 — 5 ans',
-        color: '#6EE7B7', glow: 'rgba(110,231,183,0.18)',
-        status: 'wip', statusLabel: 'À construire', link: 'modules/04_preschool.html',
-        pathologies: ['CIA', 'post-op (Glenn, switch)', 'sténose mitrale rhumatismale', 'Marfan'],
-        silhouette: `
-            <circle cx="50" cy="32" r="15"/>
-            <ellipse cx="50" cy="84" rx="18" ry="38"/>
-            <ellipse cx="42" cy="146" rx="6" ry="28"/>
-            <ellipse cx="58" cy="146" rx="6" ry="28"/>
-            <ellipse cx="28" cy="80" rx="4.5" ry="26"/>
-            <ellipse cx="72" cy="80" rx="4.5" ry="26"/>
-        `
-    },
-    {
-        title: 'Grand enfant', range: '5 — 15 ans',
-        color: '#4F8EF7', glow: 'rgba(79,142,247,0.18)',
-        status: 'wip', statusLabel: 'À construire', link: 'modules/05_child.html',
-        pathologies: ['CIA tardive', 'Ebstein', 'péricardites', 'post-Fontan', 'RAA', 'CMH'],
-        silhouette: `
-            <circle cx="50" cy="22" r="13"/>
-            <ellipse cx="50" cy="70" rx="16" ry="36"/>
-            <ellipse cx="42" cy="138" rx="6" ry="36"/>
-            <ellipse cx="58" cy="138" rx="6" ry="36"/>
-            <ellipse cx="28" cy="68" rx="4.5" ry="30"/>
-            <ellipse cx="72" cy="68" rx="4.5" ry="30"/>
-        `
-    },
-    {
-        title: 'Adulte', range: '≥ 15 ans',
-        color: '#C4B5FD', glow: 'rgba(196,181,253,0.18)',
-        status: 'wip', statusLabel: 'À construire', link: 'modules/06_adult.html',
-        pathologies: ['GUCH', 'valvulopathies acquises', 'cardiopathies ischémiques', 'HTAP'],
-        silhouette: `
-            <circle cx="50" cy="18" r="13"/>
-            <ellipse cx="50" cy="65" rx="18" ry="38"/>
-            <ellipse cx="42" cy="138" rx="6.5" ry="38"/>
-            <ellipse cx="58" cy="138" rx="6.5" ry="38"/>
-            <ellipse cx="26" cy="65" rx="5" ry="32"/>
-            <ellipse cx="74" cy="65" rx="5" ry="32"/>
-        `
-    },
-];
+/* ════════════════════════════════════════════════
+   GESTION BILINGUE FR / EN
+═════════════════════════════════════════════════ */
+const i18n = {
+  fr: {
+    tagline: "Aide au diagnostic échocardiographique",
+    introTitle: "Choisissez la tranche d'âge",
+    introSubtitle: "Sélectionnez le module adapté à l'âge du patient pour accéder à l'algorithme diagnostique correspondant.",
+    modulesLabel: "Modules disponibles",
+    m1Age: "0 — 1 mois",
+    m1Title: "Nouveau-né",
+    m1Desc: "Cardiopathies néonatales · Cyanose · SpO₂ pré/post-ductale · Test d'hyperoxie",
+    m2Age: "1 — 6 mois",
+    m2Title: "Nourrisson",
+    m2Desc: "Algorithme 17 étapes · CIV, CIA, CAV, T4F · Z-scores Lopez 2010 · ChatBot IA",
+    m3Age: "6 mois — 12 ans",
+    m3Title: "Enfant",
+    m3Desc: "Cardiopathies de l'enfant · Cardiomyopathies · Suivi post-opératoire",
+    m4Age: "12 ans et +",
+    m4Title: "Adolescent / Adulte",
+    m4Desc: "Cardiopathies congénitales adultes · GUCH · Cardiopathies acquises",
+    comingSoon: "Bientôt",
+    infoTitle: "À propos :",
+    infoText: "CardioEcho est un outil d'aide au diagnostic destiné aux cardiologues pédiatres. Les recommandations doivent toujours être validées par un médecin spécialiste.",
+    footerOrg: "Cardiologue pédiatre · CMCI Algérie"
+  },
+  en: {
+    tagline: "Echocardiographic diagnostic assistance",
+    introTitle: "Select the age group",
+    introSubtitle: "Choose the module matching the patient's age to access the corresponding diagnostic algorithm.",
+    modulesLabel: "Available modules",
+    m1Age: "0 — 1 month",
+    m1Title: "Newborn",
+    m1Desc: "Neonatal heart diseases · Cyanosis · Pre/post-ductal SpO₂ · Hyperoxia test",
+    m2Age: "1 — 6 months",
+    m2Title: "Infant",
+    m2Desc: "17-step algorithm · VSD, ASD, AVSD, TOF · Lopez 2010 Z-scores · AI ChatBot",
+    m3Age: "6 months — 12 years",
+    m3Title: "Child",
+    m3Desc: "Pediatric heart diseases · Cardiomyopathies · Post-op follow-up",
+    m4Age: "12+ years",
+    m4Title: "Teen / Adult",
+    m4Desc: "Adult congenital heart disease · GUCH · Acquired cardiopathies",
+    comingSoon: "Soon",
+    infoTitle: "About:",
+    infoText: "CardioEcho is a diagnostic decision-support tool intended for pediatric cardiologists. Recommendations must always be validated by a specialist physician.",
+    footerOrg: "Pediatric cardiologist · CMCI Algeria"
+  }
+};
 
-const slider = document.getElementById('ageSlider');
-const ageDisplay = document.getElementById('ageDisplay');
-const ageCardTitle = document.getElementById('ageCardTitle');
-const ageCardRange = document.getElementById('ageCardRange');
-const ageCardStatus = document.getElementById('ageCardStatus');
-const pathologiesList = document.getElementById('pathologiesList');
-const btnEnter = document.getElementById('btnEnter');
-const silhouette = document.getElementById('silhouette');
-const root = document.documentElement;
+let currentLang = localStorage.getItem('cardioecho_lang') || 'fr';
 
-function updateUI(idx) {
-    const group = AGE_GROUPS[idx];
-    root.style.setProperty('--age-color', group.color);
-    root.style.setProperty('--age-glow', group.glow);
-    root.style.setProperty('--progress', (idx / (AGE_GROUPS.length - 1)) * 100 + '%');
-
-    ageDisplay.textContent = group.title;
-    ageCardTitle.textContent = group.title;
-    ageCardRange.textContent = group.range;
-    ageCardStatus.textContent = group.statusLabel;
-    ageCardStatus.className = 'age-card-status ' + (group.status === 'ready' ? '' : 'wip');
-
-    pathologiesList.innerHTML = group.pathologies.map(p =>
-        '<span class="patho-chip">' + p + '</span>'
-    ).join('');
-
-    silhouette.innerHTML = group.silhouette;
-
-    if (group.status === 'ready') {
-        btnEnter.querySelector('span').textContent = 'Entrer dans le module';
-        btnEnter.dataset.link = group.link;
-    } else {
-        btnEnter.querySelector('span').textContent = 'Module en construction';
-        btnEnter.dataset.link = '';
-    }
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('cardioecho_lang', lang);
+  document.documentElement.lang = lang;
+  const dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key]) el.textContent = dict[key];
+  });
+  // Maj boutons langue
+  document.getElementById('langBtnFR').classList.toggle('active', lang === 'fr');
+  document.getElementById('langBtnEN').classList.toggle('active', lang === 'en');
+  // Titre HTML
+  document.title = lang === 'fr'
+    ? "CardioEcho — Aide au diagnostic échocardiographique pédiatrique"
+    : "CardioEcho — Pediatric echocardiographic decision support";
 }
 
-slider.addEventListener('input', (e) => updateUI(parseInt(e.target.value)));
-
-btnEnter.addEventListener('click', () => {
-    const link = btnEnter.dataset.link;
-    if (link) {
-        window.location.href = link;
-    } else {
-        const idx = parseInt(slider.value);
-        const group = AGE_GROUPS[idx];
-        alert('Module "' + group.title + ' (' + group.range + ')" en cours de construction.\n\nIl sera bientôt disponible.');
-    }
+// Init au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  setLang(currentLang);
 });
 
-updateUI(0);
+// Ne rien faire si on clique sur un module désactivé
+document.querySelectorAll('.module-card.disabled').forEach(card => {
+  card.addEventListener('click', e => {
+    e.preventDefault();
+    const msg = currentLang === 'fr'
+      ? "Ce module sera bientôt disponible."
+      : "This module will be available soon.";
+    alert(msg);
+  });
+});
 </script>
 
 </body>
