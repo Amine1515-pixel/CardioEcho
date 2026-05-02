@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +8,9 @@
 <title>CardioEcho — Module Néonatal (0–1 mois)</title>
 
 <!-- Bibliothèques pour génération PDF (Step 4) -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
@@ -1438,6 +1441,7 @@ html, body {
     display: flex; flex-direction: column; gap: 8px;
 }
 </style>
+
 </head>
 <body>
 
@@ -1446,6 +1450,7 @@ html, body {
 <!-- ════════════════════════════════════════════════
      ÉCRAN 0 : LANGUE
 ═════════════════════════════════════════════════ -->
+
 <section class="screen active" id="screen-0">
     <div class="welcome-logo" id="welcomeLogo">
         <!-- Logo CardioEcho cœur tricolore -->
@@ -1473,6 +1478,7 @@ html, body {
 </section>
 
 <!-- HEADER (apparaît dès écran 1) -->
+
 <header class="header" id="appHeader" style="display:none;">
     <div class="header-row">
         <button class="btn-back-hub" id="btnBack">
@@ -1498,277 +1504,296 @@ html, body {
 <!-- ════════════════════════════════════════════════
      ÉCRAN 1 : PROFIL PATIENT
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-1">
     <h1 class="screen-title" data-i18n="patientProfile">Profil patient</h1>
     <p class="screen-subtitle" data-i18n="patientProfileSubtitle">Identification du nouveau-né 0–1 mois</p>
 
-    <div class="age-banner">
-        <div class="age-banner-icon">👶</div>
-        <div class="age-banner-text">
-            <div class="age-banner-title" data-i18n="ageBannerTitle">Tranche d'âge : 0–1 mois</div>
-            <div class="age-banner-subtitle" data-i18n="ageBannerSubtitle">Nouveau-né — cardiopathies critiques ductodépendantes ⚠</div>
-        </div>
+```
+<div class="age-banner">
+    <div class="age-banner-icon">👶</div>
+    <div class="age-banner-text">
+        <div class="age-banner-title" data-i18n="ageBannerTitle">Tranche d'âge : 0–1 mois</div>
+        <div class="age-banner-subtitle" data-i18n="ageBannerSubtitle">Nouveau-né — cardiopathies critiques ductodépendantes ⚠</div>
     </div>
+</div>
 
-    <div class="card" style="border:1px solid rgba(196,181,253,0.25); background:linear-gradient(135deg, rgba(196,181,253,0.04), transparent);">
-        <div class="card-title" style="color:var(--purple);" data-i18n="signatoryDoctor">✍️ Médecin signataire</div>
-        <div class="field-row">
-            <div class="field" style="margin-bottom:0;">
-                <label class="field-label" data-i18n="firstName">Prénom</label>
-                <input type="text" class="field-input" id="docFirstName" placeholder="Mohamed" value="Mohamed" autocomplete="off">
-            </div>
-            <div class="field" style="margin-bottom:0;">
-                <label class="field-label" data-i18n="lastName">Nom</label>
-                <input type="text" class="field-input" id="docLastName" placeholder="Touati" value="Touati" autocomplete="off">
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-title" data-i18n="patientIdentity">Identité du patient</div>
-        <div class="field">
-            <label class="field-label" data-i18n="lastName">Nom</label>
-            <input type="text" class="field-input" id="patLastName" placeholder="Dupont" value="Sami" autocomplete="off">
-        </div>
-        <div class="field">
+<div class="card" style="border:1px solid rgba(196,181,253,0.25); background:linear-gradient(135deg, rgba(196,181,253,0.04), transparent);">
+    <div class="card-title" style="color:var(--purple);" data-i18n="signatoryDoctor">✍️ Médecin signataire</div>
+    <div class="field-row">
+        <div class="field" style="margin-bottom:0;">
             <label class="field-label" data-i18n="firstName">Prénom</label>
-            <input type="text" class="field-input" id="patFirstName" placeholder="Marie" value="Rayane" autocomplete="off">
+            <input type="text" class="field-input" id="docFirstName" placeholder="Mohamed" autocomplete="off">
         </div>
-        <div class="field">
-            <label class="field-label" data-i18n="sex">Sexe</label>
-            <div class="segmented cols-2">
-                <button class="segment active" data-sex="M" data-i18n="sexMale">Masculin</button>
-                <button class="segment" data-sex="F" data-i18n="sexFemale">Féminin</button>
-            </div>
+        <div class="field" style="margin-bottom:0;">
+            <label class="field-label" data-i18n="lastName">Nom</label>
+            <input type="text" class="field-input" id="docLastName" placeholder="Touati" autocomplete="off">
         </div>
     </div>
+</div>
 
-    <div class="card">
-        <div class="card-title" data-i18n="anthropometry">Anthropométrie</div>
-        <div class="field-row">
-            <div class="field">
-                <label class="field-label" data-i18n="ageDays">Âge (jours)</label>
-                <div class="field-suffix">
-                    <input type="number" class="field-input" id="ageDays" placeholder="7" min="0" max="30" step="1" inputmode="decimal">
-                    <span class="suffix-text" data-i18n="days">jours</span>
-                </div>
-            </div>
-            <div class="field">
-                <label class="field-label" data-i18n="weight">Poids</label>
-                <div class="field-suffix">
-                    <input type="text" class="field-input" id="weight" placeholder="3.2 ou 3,2" inputmode="decimal" autocomplete="off">
-                    <span class="suffix-text">kg</span>
-                </div>
-            </div>
+<div class="card">
+    <div class="card-title" data-i18n="patientIdentity">Identité du patient</div>
+    <div class="field">
+        <label class="field-label" data-i18n="lastName">Nom</label>
+        <input type="text" class="field-input" id="patLastName" placeholder="Dupont" autocomplete="off">
+    </div>
+    <div class="field">
+        <label class="field-label" data-i18n="firstName">Prénom</label>
+        <input type="text" class="field-input" id="patFirstName" placeholder="Marie" autocomplete="off">
+    </div>
+    <div class="field">
+        <label class="field-label" data-i18n="sex">Sexe</label>
+        <div class="segmented cols-2">
+            <button class="segment active" data-sex="M" data-i18n="sexMale">Masculin</button>
+            <button class="segment" data-sex="F" data-i18n="sexFemale">Féminin</button>
         </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title" data-i18n="anthropometry">Anthropométrie</div>
+    <div class="field-row">
         <div class="field">
-            <label class="field-label" data-i18n="heightOptional">Taille (optionnelle)</label>
+            <label class="field-label" data-i18n="ageDays">Âge (jours)</label>
             <div class="field-suffix">
-                <input type="text" class="field-input" id="height" placeholder="50" inputmode="decimal" autocomplete="off">
-                <span class="suffix-text">cm</span>
-            </div>
-            <div class="field-help" data-i18n="heightHelp">Si non disponible, la SC est calculée par le poids seul</div>
-        </div>
-        <div class="computed-display hidden" id="bsaDisplay">
-            <span class="computed-label" data-i18n="bsa">Surface corporelle</span>
-            <span class="computed-value" id="bsaValue">— m²</span>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-title" data-i18n="clinicalStatus">État clinique</div>
-        <div class="field-row">
-            <div class="field">
-                <label class="field-label" data-i18n="spo2Pre">SpO₂ pré-ductale</label>
-                <div class="field-suffix">
-                    <input type="number" class="field-input" id="spo2Pre" placeholder="95" min="40" max="100" inputmode="numeric">
-                    <span class="suffix-text">%</span>
-                </div>
-                <div class="field-help" data-i18n="spo2PreHelp">Bras droit</div>
-            </div>
-            <div class="field">
-                <label class="field-label" data-i18n="spo2Post">SpO₂ post-ductale</label>
-                <div class="field-suffix">
-                    <input type="number" class="field-input" id="spo2Post" placeholder="95" min="40" max="100" inputmode="numeric">
-                    <span class="suffix-text">%</span>
-                </div>
-                <div class="field-help" data-i18n="spo2PostHelp">Pied</div>
+                <input type="number" class="field-input" id="ageDays" placeholder="7" min="0" max="30" step="1" inputmode="decimal">
+                <span class="suffix-text" data-i18n="days">jours</span>
             </div>
         </div>
-        <div class="computed-display hidden" id="spo2DiffDisplay">
-            <span class="computed-label" data-i18n="spo2Differential">Différentiel pré/post-ductal</span>
-            <span class="computed-value" id="spo2DiffValue">— %</span>
-        </div>
-        <div class="field" style="margin-top:14px;">
-            <label class="field-label" data-i18n="heartFailure">Insuffisance cardiaque</label>
-            <div class="segmented cols-2">
-                <button class="segment active" data-ic="non" data-i18n="absent">Absente</button>
-                <button class="segment" data-ic="oui" data-i18n="present">Présente</button>
+        <div class="field">
+            <label class="field-label" data-i18n="weight">Poids</label>
+            <div class="field-suffix">
+                <input type="text" class="field-input" id="weight" placeholder="3.2 ou 3,2" inputmode="decimal" autocomplete="off">
+                <span class="suffix-text">kg</span>
             </div>
         </div>
     </div>
+    <div class="field">
+        <label class="field-label" data-i18n="heightOptional">Taille (optionnelle)</label>
+        <div class="field-suffix">
+            <input type="text" class="field-input" id="height" placeholder="50" inputmode="decimal" autocomplete="off">
+            <span class="suffix-text">cm</span>
+        </div>
+        <div class="field-help" data-i18n="heightHelp">Si non disponible, la SC est calculée par le poids seul</div>
+    </div>
+    <div class="computed-display hidden" id="bsaDisplay">
+        <span class="computed-label" data-i18n="bsa">Surface corporelle</span>
+        <span class="computed-value" id="bsaValue">— m²</span>
+    </div>
+</div>
 
-    <button class="btn" id="btnNext1" data-i18n="btnNextDiagnosis">Continuer vers le questionnaire échographique →</button>
-    <div class="error-banner" id="errorBanner1"></div>
+<div class="card">
+    <div class="card-title" data-i18n="clinicalStatus">État clinique</div>
+    <div class="field-row">
+        <div class="field">
+            <label class="field-label" data-i18n="spo2Pre">SpO₂ pré-ductale</label>
+            <div class="field-suffix">
+                <input type="number" class="field-input" id="spo2Pre" placeholder="95" min="40" max="100" inputmode="numeric">
+                <span class="suffix-text">%</span>
+            </div>
+            <div class="field-help" data-i18n="spo2PreHelp">Bras droit</div>
+        </div>
+        <div class="field">
+            <label class="field-label" data-i18n="spo2Post">SpO₂ post-ductale</label>
+            <div class="field-suffix">
+                <input type="number" class="field-input" id="spo2Post" placeholder="95" min="40" max="100" inputmode="numeric">
+                <span class="suffix-text">%</span>
+            </div>
+            <div class="field-help" data-i18n="spo2PostHelp">Pied</div>
+        </div>
+    </div>
+    <div class="computed-display hidden" id="spo2DiffDisplay">
+        <span class="computed-label" data-i18n="spo2Differential">Différentiel pré/post-ductal</span>
+        <span class="computed-value" id="spo2DiffValue">— %</span>
+    </div>
+    <div class="field" style="margin-top:14px;">
+        <label class="field-label" data-i18n="heartFailure">Insuffisance cardiaque</label>
+        <div class="segmented cols-2">
+            <button class="segment active" data-ic="non" data-i18n="absent">Absente</button>
+            <button class="segment" data-ic="oui" data-i18n="present">Présente</button>
+        </div>
+    </div>
+</div>
+
+<button class="btn" id="btnNext1" data-i18n="btnNextDiagnosis">Continuer vers le questionnaire échographique →</button>
+<div class="error-banner" id="errorBanner1"></div>
+```
+
 </section>
-
 
 <!-- ════════════════════════════════════════════════
      ÉCRANS 2-13 : QUESTIONS Q1-Q12 (générés par JS)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-question">
     <div id="qContent"></div>
     <div class="q-spacer"></div>
 
-    <div class="btn-row">
-        <button class="btn btn-secondary" id="btnQPrev" data-i18n="prev">← Précédente</button>
-        <button class="btn" id="btnQNext" data-i18n="next">Suivante →</button>
-    </div>
-    <div class="error-banner" id="errorBannerQ"></div>
-</section>
+```
+<div class="btn-row">
+    <button class="btn btn-secondary" id="btnQPrev" data-i18n="prev">← Précédente</button>
+    <button class="btn" id="btnQNext" data-i18n="next">Suivante →</button>
+</div>
+<div class="error-banner" id="errorBannerQ"></div>
+```
 
+</section>
 
 <!-- ════════════════════════════════════════════════
      ÉCRAN 1.5 : CHOIX D'ENTRÉE (Step 3b-1)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-entry-choice">
     <h1 class="screen-title" data-i18n="entryChoiceTitle">Comment souhaitez-vous procéder ?</h1>
     <p class="screen-subtitle" data-i18n="entryChoiceSubtitle">Choisissez votre mode d'utilisation</p>
 
-    <div class="entry-cards">
-        <button class="entry-card" id="entryDiagnosticAid">
-            <div class="entry-card-icon">🔍</div>
-            <div class="entry-card-title" data-i18n="entryDiagnosticAidTitle">Aide au diagnostic complet</div>
-            <div class="entry-card-desc" data-i18n="entryDiagnosticAidDesc">Je n'ai pas de diagnostic. Je veux suivre le questionnaire échographique guidé (12 questions) avec algorithme intelligent.</div>
-            <span class="entry-card-tag tag-blue" data-i18n="entryDiagnosticAidTag">12 questions · 5–10 min</span>
-        </button>
-        <button class="entry-card" id="entryDirectDiagnosis">
-            <div class="entry-card-icon">✅</div>
-            <div class="entry-card-title" data-i18n="entryDirectDiagnosisTitle">Diagnostic déjà établi</div>
-            <div class="entry-card-desc" data-i18n="entryDirectDiagnosisDesc">Je connais le diagnostic. Je veux passer directement à l'évaluation détaillée et à la gravité.</div>
-            <span class="entry-card-tag tag-green" data-i18n="entryDirectDiagnosisTag">Sélection directe · 2–5 min</span>
-        </button>
-        <button class="entry-card entry-ai" id="entryAIAssistant">
-            <span class="entry-card-badge-new">✨ NEW</span>
-            <div class="entry-card-icon">💬</div>
-            <div class="entry-card-title" data-i18n="entryAITitle">Assistant IA conversationnel</div>
-            <div class="entry-card-desc" data-i18n="entryAIDesc">Décrivez ce que vous voyez à l'écho en langage libre. L'IA analyse, propose un diagnostic et vous suggère les coupes complémentaires à acquérir.</div>
-            <span class="entry-card-tag tag-purple" data-i18n="entryAITag">Conversationnel · adaptatif</span>
-        </button>
-    </div>
-</section>
+```
+<div class="entry-cards">
+    <button class="entry-card" id="entryDiagnosticAid">
+        <div class="entry-card-icon">🔍</div>
+        <div class="entry-card-title" data-i18n="entryDiagnosticAidTitle">Aide au diagnostic complet</div>
+        <div class="entry-card-desc" data-i18n="entryDiagnosticAidDesc">Je n'ai pas de diagnostic. Je veux suivre le questionnaire échographique guidé (12 questions) avec algorithme intelligent.</div>
+        <span class="entry-card-tag tag-blue" data-i18n="entryDiagnosticAidTag">12 questions · 5–10 min</span>
+    </button>
+    <button class="entry-card" id="entryDirectDiagnosis">
+        <div class="entry-card-icon">✅</div>
+        <div class="entry-card-title" data-i18n="entryDirectDiagnosisTitle">Diagnostic déjà établi</div>
+        <div class="entry-card-desc" data-i18n="entryDirectDiagnosisDesc">Je connais le diagnostic. Je veux passer directement à l'évaluation détaillée et à la gravité.</div>
+        <span class="entry-card-tag tag-green" data-i18n="entryDirectDiagnosisTag">Sélection directe · 2–5 min</span>
+    </button>
+    <button class="entry-card entry-ai" id="entryAIAssistant">
+        <span class="entry-card-badge-new">✨ NEW</span>
+        <div class="entry-card-icon">💬</div>
+        <div class="entry-card-title" data-i18n="entryAITitle">Assistant IA conversationnel</div>
+        <div class="entry-card-desc" data-i18n="entryAIDesc">Décrivez ce que vous voyez à l'écho en langage libre. L'IA analyse, propose un diagnostic et vous suggère les coupes complémentaires à acquérir.</div>
+        <span class="entry-card-tag tag-purple" data-i18n="entryAITag">Conversationnel · adaptatif</span>
+    </button>
+</div>
+```
 
+</section>
 
 <!-- ════════════════════════════════════════════════
      ÉCRAN 1.7 : SÉLECTION DIRECTE DU DIAGNOSTIC (Entrée 2)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-direct-dx">
     <h1 class="screen-title" data-i18n="directDxTitle">Sélectionner le diagnostic</h1>
     <p class="screen-subtitle" data-i18n="directDxSubtitle">Choisissez la pathologie diagnostiquée — vous serez orienté vers l'évaluation détaillée correspondante.</p>
 
-    <input type="text" class="dx-search" id="dxSearch" data-i18n-ph="dxSearchPh" placeholder="🔎 Rechercher (ex : TGV, hypoplasie...)">
+```
+<input type="text" class="dx-search" id="dxSearch" data-i18n-ph="dxSearchPh" placeholder="🔎 Rechercher (ex : TGV, hypoplasie...)">
 
-    <div class="dx-list" id="dxList">
-        <!-- Rempli dynamiquement -->
-    </div>
+<div class="dx-list" id="dxList">
+    <!-- Rempli dynamiquement -->
+</div>
+```
+
 </section>
-
 
 <!-- ════════════════════════════════════════════════
      ÉCRAN : ASSISTANT IA CONVERSATIONNEL (Step 3b-3)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-ai-chat">
     <div class="chat-container">
         <h1 class="screen-title" data-i18n="aiChatTitle">💬 Assistant IA</h1>
         <p class="screen-subtitle" data-i18n="aiChatSubtitle">Décrivez vos observations échocardiographiques</p>
 
-        <div class="chat-intro-card" id="chatIntroCard">
-            <div class="chat-intro-title">✨ <span data-i18n="aiChatIntroTitle">Comment ça marche</span></div>
-            <div class="chat-intro-msg" data-i18n="aiChatIntroMsg">Décrivez ce que vous observez (anatomie, mesures, Doppler...). L'IA analyse en temps réel, propose un diagnostic, et vous demande les coupes complémentaires à acquérir.</div>
-            <div class="chat-intro-tip" data-i18n="aiChatIntroTip">💡 Exemple : « Je vois un VG hypoplasique, aorte ascendante 3 mm, FO restrictif »</div>
-        </div>
+```
+    <div class="chat-intro-card" id="chatIntroCard">
+        <div class="chat-intro-title">✨ <span data-i18n="aiChatIntroTitle">Comment ça marche</span></div>
+        <div class="chat-intro-msg" data-i18n="aiChatIntroMsg">Décrivez ce que vous observez (anatomie, mesures, Doppler...). L'IA analyse en temps réel, propose un diagnostic, et vous demande les coupes complémentaires à acquérir.</div>
+        <div class="chat-intro-tip" data-i18n="aiChatIntroTip">💡 Exemple : « Je vois un VG hypoplasique, aorte ascendante 3 mm, FO restrictif »</div>
+    </div>
 
-        <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-messages" id="chatMessages"></div>
 
-        <div class="chat-input-bar">
-            <div class="chat-quick-suggestions" id="chatQuickSuggestions"></div>
-            <div class="chat-input-wrap">
-                <textarea class="chat-input" id="chatInput" rows="1" data-i18n-ph="aiChatInputPh" placeholder="Décrivez ce que vous voyez à l'écho..."></textarea>
-                <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                </button>
-            </div>
+    <div class="chat-input-bar">
+        <div class="chat-quick-suggestions" id="chatQuickSuggestions"></div>
+        <div class="chat-input-wrap">
+            <textarea class="chat-input" id="chatInput" rows="1" data-i18n-ph="aiChatInputPh" placeholder="Décrivez ce que vous voyez à l'écho..."></textarea>
+            <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
         </div>
     </div>
-</section>
+</div>
+```
 
+</section>
 
 <!-- ════════════════════════════════════════════════
      ÉCRAN : DIAGNOSTIC POSITIF (Cat.A — après questionnaire)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-dx-positive">
     <div id="dxPositiveContent">
         <!-- Rempli par renderDxPositive() -->
     </div>
 </section>
 
-
 <!-- ════════════════════════════════════════════════
      ÉCRAN : ÉVALUATION DE GRAVITÉ (Cat.B — placeholder Step 3b-1)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-severity">
     <div id="severityContent">
         <!-- Rempli par renderSeverity() -->
     </div>
 </section>
 
-
 <!-- ════════════════════════════════════════════════
      ÉCRAN : COMPTE RENDU FINAL (Step 4)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-report">
     <h1 class="screen-title" data-i18n="reportTitle">📄 Compte rendu</h1>
     <p class="screen-subtitle" data-i18n="reportSubtitle">Document final prêt à imprimer / partager</p>
 
-    <!-- Toolbar actions -->
-    <div class="report-toolbar">
-        <button class="report-toolbar-btn" id="btnPrint" onclick="printReport()">
-            <span class="icon">🖨️</span>
-            <span data-i18n="reportActionPrint">Imprimer</span>
-        </button>
-        <button class="report-toolbar-btn" id="btnCopy" onclick="copyReportText()">
-            <span class="icon">📋</span>
-            <span data-i18n="reportActionCopy">Copier</span>
-        </button>
-        <button class="report-toolbar-btn" id="btnPDF" onclick="downloadReportPDF()">
-            <span class="icon">📥</span>
-            <span data-i18n="reportActionPDF">PDF</span>
-        </button>
-        <button class="report-toolbar-btn" id="btnEmail" onclick="emailReport()">
-            <span class="icon">📧</span>
-            <span data-i18n="reportActionEmail">E-mail</span>
-        </button>
-    </div>
+```
+<!-- Toolbar actions -->
+<div class="report-toolbar">
+    <button class="report-toolbar-btn" id="btnPrint" onclick="printReport()">
+        <span class="icon">🖨️</span>
+        <span data-i18n="reportActionPrint">Imprimer</span>
+    </button>
+    <button class="report-toolbar-btn" id="btnCopy" onclick="copyReportText()">
+        <span class="icon">📋</span>
+        <span data-i18n="reportActionCopy">Copier</span>
+    </button>
+    <button class="report-toolbar-btn" id="btnPDF" onclick="downloadReportPDF()">
+        <span class="icon">📥</span>
+        <span data-i18n="reportActionPDF">PDF</span>
+    </button>
+    <button class="report-toolbar-btn" id="btnEmail" onclick="emailReport()">
+        <span class="icon">📧</span>
+        <span data-i18n="reportActionEmail">E-mail</span>
+    </button>
+</div>
 
-    <!-- Page A4 -->
-    <div class="report-a4" id="reportA4">
-        <!-- Rempli par renderReport() -->
-    </div>
+<!-- Page A4 -->
+<div class="report-a4" id="reportA4">
+    <!-- Rempli par renderReport() -->
+</div>
 
-    <!-- Boutons de navigation -->
-    <div class="report-back-row">
-        <button class="btn btn-secondary" onclick="goTo('severity'); renderSeverity();" data-i18n="reportBackSeverity">← Retour à l'évaluation de gravité</button>
-        <button class="btn btn-secondary" onclick="if(confirm(state.lang==='fr'?'Recommencer avec un nouveau patient ?':'Restart with a new patient?')){location.reload();}" data-i18n="reportNewPatient">🆕 Nouveau patient</button>
-    </div>
+<!-- Boutons de navigation -->
+<div class="report-back-row">
+    <button class="btn btn-secondary" onclick="goTo('severity'); renderSeverity();" data-i18n="reportBackSeverity">← Retour à l'évaluation de gravité</button>
+    <button class="btn btn-secondary" onclick="if(confirm(state.lang==='fr'?'Recommencer avec un nouveau patient ?':'Restart with a new patient?')){location.reload();}" data-i18n="reportNewPatient">🆕 Nouveau patient</button>
+</div>
+```
+
 </section>
-
 
 <!-- ════════════════════════════════════════════════
      MODAL : MODIFIER LES RÉPONSES
 ═════════════════════════════════════════════════ -->
+
 <div class="modify-modal-bg" id="modifyModalBg" onclick="closeModifyModal(event)">
     <div class="modify-modal" id="modifyModal" onclick="event.stopPropagation();">
         <h2 class="modify-modal-title" data-i18n="modifyModalTitle">🔧 Modifier les réponses</h2>
@@ -1778,20 +1803,20 @@ html, body {
     </div>
 </div>
 
-
 <!-- ════════════════════════════════════════════════
      ÉCRAN CONCLUSION (Étape 3) — généré dynamiquement
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-conclusion">
     <div class="conclusion-screen" id="conclusionContent">
         <!-- Rempli par renderConclusion() -->
     </div>
 </section>
 
-
 <!-- ════════════════════════════════════════════════
      ÉCRAN PHASE 2 — questions ciblées (Étape 3)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-phase2">
     <div id="phase2Content">
         <!-- Rempli par renderPhase2() -->
@@ -1803,10 +1828,10 @@ html, body {
     </div>
 </section>
 
-
 <!-- ════════════════════════════════════════════════
      ÉCRAN 14 : RÉSUMÉ FIN PHASE 1 (gardé en backup)
 ═════════════════════════════════════════════════ -->
+
 <section class="screen" id="screen-recap">
     <div class="placeholder-screen">
         <div class="placeholder-icon">📊</div>
@@ -1820,10 +1845,10 @@ html, body {
     </div>
 </section>
 
-
 <!-- ════════════════════════════════════════════════
      SCORING PANEL (sticky bottom — visible pendant les Q)
 ═════════════════════════════════════════════════ -->
+
 <div class="scoring-panel collapsed" id="scoringPanel" style="display:none;">
     <div class="scoring-toggle" onclick="toggleScoringPanel()">
         <span class="scoring-title" data-i18n="scoringTitle">📊 Probabilités diagnostiques</span>
@@ -1841,7 +1866,6 @@ html, body {
 
 </div>
 
-
 <script>
 /* ═══════════════════════════════════════════════════════════
    LOGO CARDIOECHO (base64 — fonctionne hors-ligne)
@@ -1854,66 +1878,66 @@ const LOGO_256 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADT
    60 URLs générées automatiquement le 30/04/2026
 ═══════════════════════════════════════════════════════════ */
 const CANVA_URLS = {
-    'APSI-B01': 'https://www.canva.com/design/GeKGRmGu_2w7xI8/view?embed#6',
-    'APSI-B02': 'https://www.canva.com/design/GeKGRmGu_2w7xI8/view?embed#7',
-    'APSI-B03': 'https://www.canva.com/design/GeKGRmGu_2w7xI8/view?embed#8',
-    'APSI-B04': 'https://www.canva.com/design/GeKGRmGu_2w7xI8/view?embed#9',
-    'APSO-B01': 'https://www.canva.com/design/GrrfDX_8Vho2ygc/view?embed#6',
-    'APSO-B02': 'https://www.canva.com/design/GrrfDX_8Vho2ygc/view?embed#7',
-    'APSO-B03': 'https://www.canva.com/design/GrrfDX_8Vho2ygc/view?embed#8',
-    'APSO-B04': 'https://www.canva.com/design/GrrfDX_8Vho2ygc/view?embed#9',
-    'COAO-B01': 'https://www.canva.com/design/z0_4mnAS9qKoVUd/view?embed#7',
-    'COAO-B02': 'https://www.canva.com/design/z0_4mnAS9qKoVUd/view?embed#8',
-    'COAO-B03': 'https://www.canva.com/design/z0_4mnAS9qKoVUd/view?embed#9',
-    'COAO-B04': 'https://www.canva.com/design/z0_4mnAS9qKoVUd/view?embed#10',
-    'HET-B01': 'https://www.canva.com/design/2yMOGtLlPKHubeC/view?embed#6',
-    'HET-B02': 'https://www.canva.com/design/2yMOGtLlPKHubeC/view?embed#7',
-    'HET-B03': 'https://www.canva.com/design/2yMOGtLlPKHubeC/view?embed#8',
-    'HET-B04': 'https://www.canva.com/design/2yMOGtLlPKHubeC/view?embed#9',
-    'HLVS-B01': 'https://www.canva.com/design/FARss6wX5UfxHRA/view?embed#6',
-    'HLVS-B02': 'https://www.canva.com/design/FARss6wX5UfxHRA/view?embed#7',
-    'HLVS-B03': 'https://www.canva.com/design/FARss6wX5UfxHRA/view?embed#8',
-    'HLVS-B04': 'https://www.canva.com/design/FARss6wX5UfxHRA/view?embed#9',
-    'HTAP-B01': 'https://www.canva.com/design/zLjGaaFl8pTkT49/view?embed#6',
-    'HTAP-B02': 'https://www.canva.com/design/zLjGaaFl8pTkT49/view?embed#7',
-    'HTAP-B03': 'https://www.canva.com/design/zLjGaaFl8pTkT49/view?embed#8',
-    'HTAP-B04': 'https://www.canva.com/design/zLjGaaFl8pTkT49/view?embed#9',
-    'NORMAL-Q1.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#2',
-    'NORMAL-Q1.2': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#3',
-    'NORMAL-Q1.3': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#4',
-    'NORMAL-Q1.4': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#5',
-    'NORMAL-Q10.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#17',
-    'NORMAL-Q11.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#18',
-    'NORMAL-Q2.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#6',
-    'NORMAL-Q2.2': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#7',
-    'NORMAL-Q2.3': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#8',
-    'NORMAL-Q3.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#9',
-    'NORMAL-Q4.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#10',
-    'NORMAL-Q5.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#11',
-    'NORMAL-Q5.3': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#12',
-    'NORMAL-Q6.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#13',
-    'NORMAL-Q7.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#14',
-    'NORMAL-Q8.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#15',
-    'NORMAL-Q9.1': 'https://www.canva.com/design/-M1ahxTCEvnRGHV/view?embed#16',
-    'PCA-B01': 'https://www.canva.com/design/Vu69jyFq5mOiSqA/view?embed#6',
-    'PCA-B02': 'https://www.canva.com/design/Vu69jyFq5mOiSqA/view?embed#7',
-    'PCA-B03': 'https://www.canva.com/design/Vu69jyFq5mOiSqA/view?embed#8',
-    'RAO-B01': 'https://www.canva.com/design/wTpmpb-HaHFZlUt/view?embed#6',
-    'RAO-B02': 'https://www.canva.com/design/wTpmpb-HaHFZlUt/view?embed#7',
-    'RAO-B03': 'https://www.canva.com/design/wTpmpb-HaHFZlUt/view?embed#8',
-    'RVPAT-B01': 'https://www.canva.com/design/FIciwscl3-zMfC2/view?embed#6',
-    'RVPAT-B02': 'https://www.canva.com/design/FIciwscl3-zMfC2/view?embed#7',
-    'RVPAT-B03': 'https://www.canva.com/design/FIciwscl3-zMfC2/view?embed#8',
-    'RVPAT-B04': 'https://www.canva.com/design/FIciwscl3-zMfC2/view?embed#9',
-    'T4F-B01': 'https://www.canva.com/design/4cNip8vaFnyp45I/view?embed#6',
-    'T4F-B02': 'https://www.canva.com/design/4cNip8vaFnyp45I/view?embed#7',
-    'T4F-B03': 'https://www.canva.com/design/4cNip8vaFnyp45I/view?embed#8',
-    'T4F-B04': 'https://www.canva.com/design/4cNip8vaFnyp45I/view?embed#9',
-    'TGV-B01': 'https://www.canva.com/design/x7Y8cmpH6W0u-QC/view?embed#6',
-    'TGV-B02': 'https://www.canva.com/design/x7Y8cmpH6W0u-QC/view?embed#7',
-    'TGV-B03': 'https://www.canva.com/design/x7Y8cmpH6W0u-QC/view?embed#8',
-    'TGV-B04': 'https://www.canva.com/design/x7Y8cmpH6W0u-QC/view?embed#9',
-    'TGV-B05': 'https://www.canva.com/design/x7Y8cmpH6W0u-QC/view?embed#10',
+    'APSI-B01': 'https://www.canva.com/design/DAHIVy_ipzk/-KKS1hwRPkH342OVBy2XXg/view?embed#6',
+    'APSI-B02': 'https://www.canva.com/design/DAHIVy_ipzk/-KKS1hwRPkH342OVBy2XXg/view?embed#7',
+    'APSI-B03': 'https://www.canva.com/design/DAHIVy_ipzk/-KKS1hwRPkH342OVBy2XXg/view?embed#8',
+    'APSI-B04': 'https://www.canva.com/design/DAHIVy_ipzk/-KKS1hwRPkH342OVBy2XXg/view?embed#9',
+    'APSO-B01': 'https://www.canva.com/design/DAHIV_zj-SI/RRQLoXypkQCuvP3l5eN5SA/view?embed#6',
+    'APSO-B02': 'https://www.canva.com/design/DAHIV_zj-SI/RRQLoXypkQCuvP3l5eN5SA/view?embed#7',
+    'APSO-B03': 'https://www.canva.com/design/DAHIV_zj-SI/RRQLoXypkQCuvP3l5eN5SA/view?embed#8',
+    'APSO-B04': 'https://www.canva.com/design/DAHIV_zj-SI/RRQLoXypkQCuvP3l5eN5SA/view?embed#9',
+    'COAO-B01': 'https://www.canva.com/design/DAHIV1TIS8c/4-Pj1OLdqFglXgYPDK85zw/view?embed#7',
+    'COAO-B02': 'https://www.canva.com/design/DAHIV1TIS8c/4-Pj1OLdqFglXgYPDK85zw/view?embed#8',
+    'COAO-B03': 'https://www.canva.com/design/DAHIV1TIS8c/4-Pj1OLdqFglXgYPDK85zw/view?embed#9',
+    'COAO-B04': 'https://www.canva.com/design/DAHIV1TIS8c/4-Pj1OLdqFglXgYPDK85zw/view?embed#10',
+    'HET-B01': 'https://www.canva.com/design/DAHIV2ZhsXo/wBYEmX3yRsUxAJs8JVn-qQ/view?embed#6',
+    'HET-B02': 'https://www.canva.com/design/DAHIV2ZhsXo/wBYEmX3yRsUxAJs8JVn-qQ/view?embed#7',
+    'HET-B03': 'https://www.canva.com/design/DAHIV2ZhsXo/wBYEmX3yRsUxAJs8JVn-qQ/view?embed#8',
+    'HET-B04': 'https://www.canva.com/design/DAHIV2ZhsXo/wBYEmX3yRsUxAJs8JVn-qQ/view?embed#9',
+    'HLVS-B01': 'https://www.canva.com/design/DAHIV_tDYrk/JkWU9DM94wtxmX8CJE7pKQ/view?embed#6',
+    'HLVS-B02': 'https://www.canva.com/design/DAHIV_tDYrk/JkWU9DM94wtxmX8CJE7pKQ/view?embed#7',
+    'HLVS-B03': 'https://www.canva.com/design/DAHIV_tDYrk/JkWU9DM94wtxmX8CJE7pKQ/view?embed#8',
+    'HLVS-B04': 'https://www.canva.com/design/DAHIV_tDYrk/JkWU9DM94wtxmX8CJE7pKQ/view?embed#9',
+    'HTAP-B01': 'https://www.canva.com/design/DAHIV8PPY2c/0abknFY7GWizBywLh4zAHA/view?embed#6',
+    'HTAP-B02': 'https://www.canva.com/design/DAHIV8PPY2c/0abknFY7GWizBywLh4zAHA/view?embed#7',
+    'HTAP-B03': 'https://www.canva.com/design/DAHIV8PPY2c/0abknFY7GWizBywLh4zAHA/view?embed#8',
+    'HTAP-B04': 'https://www.canva.com/design/DAHIV8PPY2c/0abknFY7GWizBywLh4zAHA/view?embed#9',
+    'NORMAL-Q1.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#2',
+    'NORMAL-Q1.2': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#3',
+    'NORMAL-Q1.3': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#4',
+    'NORMAL-Q1.4': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#5',
+    'NORMAL-Q10.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#17',
+    'NORMAL-Q11.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#18',
+    'NORMAL-Q2.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#6',
+    'NORMAL-Q2.2': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#7',
+    'NORMAL-Q2.3': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#8',
+    'NORMAL-Q3.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#9',
+    'NORMAL-Q4.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#10',
+    'NORMAL-Q5.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#11',
+    'NORMAL-Q5.3': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#12',
+    'NORMAL-Q6.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#13',
+    'NORMAL-Q7.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#14',
+    'NORMAL-Q8.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#15',
+    'NORMAL-Q9.1': 'https://www.canva.com/design/DAHIV7-ZyzU/7Tz57tYH9Co4Q_itnpDWPA/view?embed#16',
+    'PCA-B01': 'https://www.canva.com/design/DAHIV95cq24/2A0UaC0vT1O631o56jIZXQ/view?embed#6',
+    'PCA-B02': 'https://www.canva.com/design/DAHIV95cq24/2A0UaC0vT1O631o56jIZXQ/view?embed#7',
+    'PCA-B03': 'https://www.canva.com/design/DAHIV95cq24/2A0UaC0vT1O631o56jIZXQ/view?embed#8',
+    'RAO-B01': 'https://www.canva.com/design/DAHIV0epZRs/FoiXv1sqlB4O4r9T8sfYkg/view?embed#6',
+    'RAO-B02': 'https://www.canva.com/design/DAHIV0epZRs/FoiXv1sqlB4O4r9T8sfYkg/view?embed#7',
+    'RAO-B03': 'https://www.canva.com/design/DAHIV0epZRs/FoiXv1sqlB4O4r9T8sfYkg/view?embed#8',
+    'RVPAT-B01': 'https://www.canva.com/design/DAHIV3Nw5IE/zkyvTkn_AbgwGnkfScAuVg/view?embed#6',
+    'RVPAT-B02': 'https://www.canva.com/design/DAHIV3Nw5IE/zkyvTkn_AbgwGnkfScAuVg/view?embed#7',
+    'RVPAT-B03': 'https://www.canva.com/design/DAHIV3Nw5IE/zkyvTkn_AbgwGnkfScAuVg/view?embed#8',
+    'RVPAT-B04': 'https://www.canva.com/design/DAHIV3Nw5IE/zkyvTkn_AbgwGnkfScAuVg/view?embed#9',
+    'T4F-B01': 'https://www.canva.com/design/DAHIVw7U9ys/pKu5af9keoZScuhlPrzcMQ/view?embed#6',
+    'T4F-B02': 'https://www.canva.com/design/DAHIVw7U9ys/pKu5af9keoZScuhlPrzcMQ/view?embed#7',
+    'T4F-B03': 'https://www.canva.com/design/DAHIVw7U9ys/pKu5af9keoZScuhlPrzcMQ/view?embed#8',
+    'T4F-B04': 'https://www.canva.com/design/DAHIVw7U9ys/pKu5af9keoZScuhlPrzcMQ/view?embed#9',
+    'TGV-B01': 'https://www.canva.com/design/DAHIVzI3Vk4/cRLwyRSixvBvJnFIZ3ouVA/view?embed#6',
+    'TGV-B02': 'https://www.canva.com/design/DAHIVzI3Vk4/cRLwyRSixvBvJnFIZ3ouVA/view?embed#7',
+    'TGV-B03': 'https://www.canva.com/design/DAHIVzI3Vk4/cRLwyRSixvBvJnFIZ3ouVA/view?embed#8',
+    'TGV-B04': 'https://www.canva.com/design/DAHIVzI3Vk4/cRLwyRSixvBvJnFIZ3ouVA/view?embed#9',
+    'TGV-B05': 'https://www.canva.com/design/DAHIVzI3Vk4/cRLwyRSixvBvJnFIZ3ouVA/view?embed#10',
 };
 
 /* Helper pour récupérer l'URL Canva d'un tag (avec fallback null) */
@@ -1941,23 +1965,22 @@ const i18n = {
         sex: 'Sexe', sexMale: 'Masculin', sexFemale: 'Féminin',
         anthropometry: 'Anthropométrie',
         ageDays: 'Âge (jours)', days: 'jours',
-        weight: 'Poids (optionnel)', heightOptional: 'Taille (optionnelle)',
+        weight: 'Poids', heightOptional: 'Taille (optionnelle)',
         heightHelp: 'Si non disponible, la SC est calculée par le poids seul',
         bsa: 'Surface corporelle',
         clinicalStatus: 'État clinique',
-        spo2Pre: 'SpO₂ pré-ductale (opt.)', spo2PreHelp: 'Bras droit',
-        spo2Post: 'SpO₂ post-ductale (opt.)', spo2PostHelp: 'Pied',
+        spo2Pre: 'SpO₂ pré-ductale', spo2PreHelp: 'Bras droit',
+        spo2Post: 'SpO₂ post-ductale', spo2PostHelp: 'Pied',
         spo2Differential: 'Différentiel pré/post-ductal',
         heartFailure: 'Insuffisance cardiaque',
         absent: 'Absente', present: 'Présente',
         btnNextDiagnosis: 'Continuer vers le questionnaire échographique →',
-        versionTest: 'VERSION TEST · ÉTAPE 4 · v4.4 (Canva intégré)',
+        versionTest: 'VERSION TEST · ÉTAPE 4 · v4.6 (Canva share tokens)',
         moduleNeonatalFooter: 'Module Néonatal 0–1 mois',
         referenceLai: 'Réf. : Lai 2022 · Données CMCI 10 613 NN (2014–2025)',
         errSignatory: 'Veuillez saisir prénom et nom du médecin',
         errPatient: 'Veuillez saisir nom et prénom du patient',
         errAgeWeight: 'Âge (jours) et poids obligatoires',
-        errAge: 'Âge (jours) obligatoire',
         errSpo2: 'SpO₂ pré et post-ductale obligatoires',
         // Questionnaire
         prev: '← Précédente', next: 'Suivante →',
@@ -2304,23 +2327,22 @@ const i18n = {
         sex: 'Sex', sexMale: 'Male', sexFemale: 'Female',
         anthropometry: 'Anthropometry',
         ageDays: 'Age (days)', days: 'days',
-        weight: 'Weight (optional)', heightOptional: 'Height (optional)',
+        weight: 'Weight', heightOptional: 'Height (optional)',
         heightHelp: 'If unavailable, BSA computed from weight only',
         bsa: 'Body surface area',
         clinicalStatus: 'Clinical status',
-        spo2Pre: 'Pre-ductal SpO₂ (opt.)', spo2PreHelp: 'Right arm',
-        spo2Post: 'Post-ductal SpO₂ (opt.)', spo2PostHelp: 'Foot',
+        spo2Pre: 'Pre-ductal SpO₂', spo2PreHelp: 'Right arm',
+        spo2Post: 'Post-ductal SpO₂', spo2PostHelp: 'Foot',
         spo2Differential: 'Pre/post-ductal differential',
         heartFailure: 'Heart failure',
         absent: 'Absent', present: 'Present',
         btnNextDiagnosis: 'Continue to echocardiographic questionnaire →',
-        versionTest: 'TEST VERSION · STEP 4 · v4.4 (Canva)',
+        versionTest: 'TEST VERSION · STEP 4 · v4.6',
         moduleNeonatalFooter: 'Neonatal Module 0–1 month',
         referenceLai: 'Ref.: Lai 2022 · CMCI data 10,613 newborns (2014–2025)',
         errSignatory: 'Please enter physician\'s first and last name',
         errPatient: 'Please enter patient first and last name',
         errAgeWeight: 'Age (days) and weight are required',
-        errAge: 'Age (days) is required',
         errSpo2: 'Pre and post-ductal SpO₂ are required',
         prev: '← Previous', next: 'Next →',
         questionOf: 'Question {n} / {total}',
@@ -3368,9 +3390,9 @@ const state = {
     lang: 'fr',
     currentScreen: 0,
     currentQ: 0,
-    doctor: { firstName: 'Mohamed', lastName: 'Touati' },
+    doctor: { firstName: '', lastName: '' },
     patient: {
-        lastName: 'Sami', firstName: 'Rayane', sex: 'M',
+        lastName: '', firstName: '', sex: 'M',
         ageDays: null, weight: null, height: null, bsa: null,
         spo2Pre: null, spo2Post: null, spo2Diff: null, ic: 'non'
     },
@@ -3559,7 +3581,7 @@ function renderQuestion() {
             const shouldShow = !isConditional || isConditionalShown(sq);
             html += '<div class="subq' + (isConditional ? ' conditional' : '') + (shouldShow ? ' shown' : '') + '" data-subq-id="' + sq.id + '">';
             // Vidéo Canva propre à cette sous-question (mappée sur la présentation "Examen normal")
-            const sqCanvaUrl = getCanvaUrl('NORMAL-' + sq.id);
+            const sqCanvaUrl = getCanvaUrl('NORMAL-Q' + sq.id);
             if (sqCanvaUrl) {
                 html += '<div class="canva-video-frame">';
                 html += '<iframe src="' + sqCanvaUrl + '" allowfullscreen="allowfullscreen" allow="fullscreen" loading="lazy" title="' + sq.id + '"></iframe>';
@@ -3813,8 +3835,8 @@ document.getElementById('btnNext1').addEventListener('click', () => {
     clearError('errorBanner1');
     if (!d.firstName || !d.lastName) { showError(dict.errSignatory, ['docFirstName', 'docLastName'], 'errorBanner1'); return; }
     if (!p.lastName || !p.firstName) { showError(dict.errPatient, ['patLastName', 'patFirstName'], 'errorBanner1'); return; }
-    if (p.ageDays === null) { showError(dict.errAge || 'Âge (jours) obligatoire', ['ageDays'], 'errorBanner1'); return; }
-    // Poids et SpO2 sont désormais optionnels (Dr Touati)
+    if (p.ageDays === null || p.weight === null) { showError(dict.errAgeWeight, ['ageDays', 'weight'], 'errorBanner1'); return; }
+    if (p.spo2Pre === null || p.spo2Post === null) { showError(dict.errSpo2, ['spo2Pre', 'spo2Post'], 'errorBanner1'); return; }
     // ✦ Step 3b-1 : redirection vers le choix d'entrée
     goTo('entry-choice');
 });
@@ -4328,7 +4350,7 @@ function renderPhase2() {
             html += '<span class="coupe-icon">🎯</span>';
             html += '<span class="coupe-name">' + dict[c.section.coupe] + ' · ' + c.qId + '</span>';
             html += '</div>';
-            const phase2CanvaUrl = getCanvaUrl('NORMAL-' + sq.id);
+            const phase2CanvaUrl = getCanvaUrl('NORMAL-Q' + sq.id);
             if (phase2CanvaUrl) {
                 html += '<div class="canva-video-frame">';
                 html += '<iframe src="' + phase2CanvaUrl + '" allowfullscreen="allowfullscreen" allow="fullscreen" loading="lazy" title="' + sq.id + '"></iframe>';
@@ -6873,8 +6895,56 @@ applyTranslations();
 updateLangButtons();
 </script>
 
-</body>
-</html>
+<!-- DIAGNOSTIC OVERLAY - À retirer une fois le bug résolu -->
+
+<div id="canvaDiag" style="
+    position: fixed; top: 8px; right: 8px;
+    background: rgba(0,0,0,0.92); color: #6EE7B7;
+    font-family: monospace; font-size: 10px;
+    padding: 8px 10px; border-radius: 6px;
+    border: 1px solid #6EE7B7;
+    max-width: 220px; z-index: 99999;
+    line-height: 1.5; pointer-events: auto;
+    cursor: pointer;
+"
+onclick="this.style.display='none'"
+title="Cliquez pour fermer"
+>...</div>
+<script>
+(function() {
+    var d = document.getElementById('canvaDiag');
+    if (!d) return;
+    var lines = [];
+    lines.push('🩺 DIAG v4.5');
+    try {
+        if (typeof CANVA_URLS !== 'undefined') {
+            lines.push('✓ CANVA_URLS: ' + Object.keys(CANVA_URLS).length + ' URLs');
+            var testUrl = (typeof getCanvaUrl === 'function') ? getCanvaUrl('NORMAL-Q1.1') : null;
+            lines.push(testUrl ? '✓ getCanvaUrl OK' : '✗ getCanvaUrl NULL');
+            lines.push('Sample: ' + (testUrl ? testUrl.substring(0, 35) + '...' : 'NULL'));
+        } else {
+            lines.push('✗ CANVA_URLS non défini');
+        }
+    } catch(e) {
+        lines.push('✗ ERR: ' + e.message);
+    }
+    lines.push('---');
+    lines.push('iframes: ' + document.querySelectorAll('iframe').length);
+    d.innerHTML = lines.join('<br>');
+
+```
+// Mise à jour toutes les 2 secondes (pour suivre les changements d'écran)
+setInterval(function() {
+    var iframeCount = document.querySelectorAll('iframe').length;
+    var canvaFrameCount = document.querySelectorAll('.canva-video-frame').length;
+    var canvaPlaceholderCount = document.querySelectorAll('.canva-video').length;
+    d.innerHTML = lines.slice(0, -1).join('<br>') + '<br>iframes: ' + iframeCount + 
+        '<br>frame: ' + canvaFrameCount + ' / placeholder: ' + canvaPlaceholderCount;
+}, 1500);
+```
+
+})();
+</script>
 
 </body>
 </html>
