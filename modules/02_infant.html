@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -23,16 +24,16 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-se
 body{padding-bottom:80px;min-height:100vh}
 
 /* HEADER */
-.app-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
-  color:#fff;padding:14px 16px;position:sticky;top:0;z-index:100;
-  box-shadow:0 2px 12px rgba(0,0,0,.15);display:flex;align-items:center;gap:12px}
+.app-header{background:linear-gradient(135deg,var(–primary) 0%,var(–primary-dark) 100%);
+color:#fff;padding:14px 16px;position:sticky;top:0;z-index:100;
+box-shadow:0 2px 12px rgba(0,0,0,.15);display:flex;align-items:center;gap:12px}
 .app-header .logo{width:36px;height:36px;border-radius:8px;background:#fff;
-  display:flex;align-items:center;justify-content:center;font-weight:800;
-  color:var(--primary);font-size:14px;flex-shrink:0}
+display:flex;align-items:center;justify-content:center;font-weight:800;
+color:var(–primary);font-size:14px;flex-shrink:0}
 .app-header h1{font-size:15px;font-weight:700;flex:1;line-height:1.2}
 .app-header .module-tag{font-size:10px;opacity:.85;font-weight:500;display:block;margin-top:2px}
 .app-header .back-btn{background:rgba(255,255,255,.18);border:none;color:#fff;
-  padding:6px 12px;border-radius:18px;font-size:13px;cursor:pointer;font-weight:600}
+padding:6px 12px;border-radius:18px;font-size:13px;cursor:pointer;font-weight:600}
 
 /* SCREENS */
 .screen{display:none;padding:16px;animation:fadeIn .3s ease}
@@ -40,94 +41,94 @@ body{padding-bottom:80px;min-height:100vh}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* CARDS */
-.card{background:var(--card);border-radius:var(--radius);padding:16px;
-  margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
-.card-title{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:10px;
-  display:flex;align-items:center;gap:8px}
-.card-title .icon{width:24px;height:24px;border-radius:6px;background:var(--accent);
-  display:flex;align-items:center;justify-content:center;font-size:13px}
-.card-subtitle{font-size:12px;color:var(--text-soft);margin-bottom:12px}
+.card{background:var(–card);border-radius:var(–radius);padding:16px;
+margin-bottom:14px;box-shadow:var(–shadow);border:1px solid var(–border)}
+.card-title{font-size:14px;font-weight:700;color:var(–primary-dark);margin-bottom:10px;
+display:flex;align-items:center;gap:8px}
+.card-title .icon{width:24px;height:24px;border-radius:6px;background:var(–accent);
+display:flex;align-items:center;justify-content:center;font-size:13px}
+.card-subtitle{font-size:12px;color:var(–text-soft);margin-bottom:12px}
 
 /* INPUTS */
 .field{margin-bottom:12px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--text-soft);
-  margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(–text-soft);
+margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
 .field input,.field select,.field textarea{width:100%;padding:10px 12px;
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;
-  font-family:inherit;background:#fff;color:var(--text)}
+border:1.5px solid var(–border);border-radius:var(–radius-sm);font-size:15px;
+font-family:inherit;background:#fff;color:var(–text)}
 .field input:focus,.field select:focus,.field textarea:focus{
-  outline:none;border-color:var(--primary)}
+outline:none;border-color:var(–primary)}
 .field-row{display:flex;gap:10px}
 .field-row .field{flex:1}
-.field-hint{font-size:11px;color:var(--text-soft);margin-top:4px;font-style:italic}
-.field-computed{background:linear-gradient(135deg,var(--accent) 0%,#D9EDF7 100%);
-  padding:10px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
-  color:var(--primary-dark);margin-top:8px;text-align:center}
+.field-hint{font-size:11px;color:var(–text-soft);margin-top:4px;font-style:italic}
+.field-computed{background:linear-gradient(135deg,var(–accent) 0%,#D9EDF7 100%);
+padding:10px 14px;border-radius:var(–radius-sm);font-size:14px;font-weight:600;
+color:var(–primary-dark);margin-top:8px;text-align:center}
 
 /* === BILINGUE FR/EN === */
 /* Header app avec switch FR/EN */
 .app-header{position:sticky;top:0;z-index:100;background:#fff;
-  border-bottom:1.5px solid var(--border);padding:8px 12px;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.04)}
+border-bottom:1.5px solid var(–border);padding:8px 12px;
+display:flex;align-items:center;justify-content:space-between;gap:10px;
+box-shadow:0 2px 6px rgba(0,0,0,.04)}
 .app-header-brand{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
-.app-header-brand-name{font-size:15px;font-weight:800;color:var(--primary-dark)}
-.app-header-brand-tag{font-size:11px;color:var(--text-soft);
-  text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.app-header-brand-name{font-size:15px;font-weight:800;color:var(–primary-dark)}
+.app-header-brand-tag{font-size:11px;color:var(–text-soft);
+text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .lang-switch{display:flex;gap:2px;background:#F0F4F7;
-  border:1.5px solid var(--border);border-radius:8px;padding:2px}
-.lang-btn{background:transparent;color:var(--text-soft);border:none;
-  padding:5px 10px;font-size:11.5px;font-weight:700;
-  border-radius:6px;cursor:pointer;font-family:inherit;
-  letter-spacing:.4px;transition:all .15s}
-.lang-btn.active{background:var(--primary);color:#fff;
-  box-shadow:0 1px 3px rgba(74,144,226,.3)}
+border:1.5px solid var(–border);border-radius:8px;padding:2px}
+.lang-btn{background:transparent;color:var(–text-soft);border:none;
+padding:5px 10px;font-size:11.5px;font-weight:700;
+border-radius:6px;cursor:pointer;font-family:inherit;
+letter-spacing:.4px;transition:all .15s}
+.lang-btn.active{background:var(–primary);color:#fff;
+box-shadow:0 1px 3px rgba(74,144,226,.3)}
 
 /* Écran 0 Welcome (sélecteur langue initial) */
 #screen-0{display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:100vh;padding:40px 24px;
-  background:linear-gradient(135deg,#F8FAFB 0%,#E3F2FD 100%)}
+justify-content:center;min-height:100vh;padding:40px 24px;
+background:linear-gradient(135deg,#F8FAFB 0%,#E3F2FD 100%)}
 .welcome-logo{width:80px;height:80px;border-radius:20px;
-  background:linear-gradient(135deg,var(--primary) 0%,#2C5F9E 100%);
-  display:flex;align-items:center;justify-content:center;
-  font-size:42px;margin-bottom:16px;box-shadow:0 6px 20px rgba(74,144,226,.35)}
+background:linear-gradient(135deg,var(–primary) 0%,#2C5F9E 100%);
+display:flex;align-items:center;justify-content:center;
+font-size:42px;margin-bottom:16px;box-shadow:0 6px 20px rgba(74,144,226,.35)}
 .welcome-title{font-size:32px;font-weight:800;letter-spacing:-1px;
-  color:var(--primary-dark);margin-bottom:6px}
-.welcome-subtitle{font-size:14px;color:var(--text-soft);
-  margin-bottom:6px;text-align:center;line-height:1.5;max-width:300px}
-.welcome-author{font-size:12px;color:var(--text-soft);font-style:italic;
-  margin-bottom:30px}
-.lang-selector-title{font-size:11px;color:var(--text-soft);
-  text-transform:uppercase;letter-spacing:.9px;font-weight:700;
-  margin-bottom:14px;text-align:center}
+color:var(–primary-dark);margin-bottom:6px}
+.welcome-subtitle{font-size:14px;color:var(–text-soft);
+margin-bottom:6px;text-align:center;line-height:1.5;max-width:300px}
+.welcome-author{font-size:12px;color:var(–text-soft);font-style:italic;
+margin-bottom:30px}
+.lang-selector-title{font-size:11px;color:var(–text-soft);
+text-transform:uppercase;letter-spacing:.9px;font-weight:700;
+margin-bottom:14px;text-align:center}
 .lang-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;
-  width:100%;max-width:320px}
-.lang-card{background:#fff;border:1.5px solid var(--border);
-  border-radius:14px;padding:20px 14px;text-align:center;cursor:pointer;
-  transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+width:100%;max-width:320px}
+.lang-card{background:#fff;border:1.5px solid var(–border);
+border-radius:14px;padding:20px 14px;text-align:center;cursor:pointer;
+transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .lang-card:active{transform:translateY(0) scale(.97)}
-.lang-card:hover{border-color:var(--primary);transform:translateY(-2px);
-  box-shadow:0 4px 14px rgba(74,144,226,.15)}
+.lang-card:hover{border-color:var(–primary);transform:translateY(-2px);
+box-shadow:0 4px 14px rgba(74,144,226,.15)}
 .lang-card-flag{font-size:36px;margin-bottom:10px;display:block}
-.lang-card-name{font-size:15px;font-weight:700;color:var(--text);
-  margin-bottom:2px}
-.lang-card-native{font-size:11px;color:var(--text-soft);letter-spacing:.4px}
-.welcome-footer{margin-top:40px;font-size:11px;color:var(--text-soft);
-  text-align:center;line-height:1.6}
+.lang-card-name{font-size:15px;font-weight:700;color:var(–text);
+margin-bottom:2px}
+.lang-card-native{font-size:11px;color:var(–text-soft);letter-spacing:.4px}
+.welcome-footer{margin-top:40px;font-size:11px;color:var(–text-soft);
+text-align:center;line-height:1.6}
 
 /* === STYLE NEONATAL ADAPTÉ === */
 /* Screen titles */
 .screen-title{font-size:22px;font-weight:800;letter-spacing:-0.4px;
-  margin:6px 0 4px;color:var(--primary-dark)}
-.screen-subtitle{font-size:13px;color:var(--text-soft);margin-bottom:18px;line-height:1.5}
+margin:6px 0 4px;color:var(–primary-dark)}
+.screen-subtitle{font-size:13px;color:var(–text-soft);margin-bottom:18px;line-height:1.5}
 
 /* Age banner */
 .age-banner{background:linear-gradient(135deg,#FFF3E0 0%,#FFE0E0 100%);
-  border:1.5px solid #FFB74D;border-radius:12px;padding:11px 13px;
-  margin-bottom:14px;display:flex;align-items:center;gap:10px}
+border:1.5px solid #FFB74D;border-radius:12px;padding:11px 13px;
+margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .age-banner-icon{width:36px;height:36px;border-radius:10px;background:#FF9800;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;color:#fff;font-size:18px}
+display:flex;align-items:center;justify-content:center;
+flex-shrink:0;color:#fff;font-size:18px}
 .age-banner-text{flex:1}
 .age-banner-title{font-size:13px;font-weight:700;color:#E65100}
 .age-banner-subtitle{font-size:11px;color:#BF360C;margin-top:2px}
@@ -138,51 +139,51 @@ body{padding-bottom:80px;min-height:100vh}
 
 /* Field-label uppercase petit */
 .field-label{display:block;font-size:11.5px;font-weight:700;
-  color:var(--text-soft);margin-bottom:6px;
-  text-transform:uppercase;letter-spacing:.4px}
+color:var(–text-soft);margin-bottom:6px;
+text-transform:uppercase;letter-spacing:.4px}
 
 /* Field-input (style néonatal, sans .field wrapper) */
-.field-input{width:100%;padding:11px 13px;border:1.5px solid var(--border);
-  border-radius:9px;font-size:15px;font-family:inherit;background:#fff;
-  color:var(--text);-webkit-appearance:none}
-.field-input:focus{outline:none;border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(74,144,226,.15)}
+.field-input{width:100%;padding:11px 13px;border:1.5px solid var(–border);
+border-radius:9px;font-size:15px;font-family:inherit;background:#fff;
+color:var(–text);-webkit-appearance:none}
+.field-input:focus{outline:none;border-color:var(–primary);
+box-shadow:0 0 0 3px rgba(74,144,226,.15)}
 
 /* Field with suffix (kg, cm) */
 .field-suffix{position:relative}
 .field-suffix .suffix-text{position:absolute;right:12px;top:50%;
-  transform:translateY(-50%);color:var(--text-soft);font-size:11px;
-  font-weight:600;pointer-events:none;letter-spacing:.3px}
-.field-help{font-size:11px;color:var(--text-soft);margin-top:4px;
-  line-height:1.4;font-style:italic}
+transform:translateY(-50%);color:var(–text-soft);font-size:11px;
+font-weight:600;pointer-events:none;letter-spacing:.3px}
+.field-help{font-size:11px;color:var(–text-soft);margin-top:4px;
+line-height:1.4;font-style:italic}
 
 /* Computed display (SC) */
 .computed-display{background:linear-gradient(135deg,#E3F2FD 0%,#E8F5E9 100%);
-  border:1.5px solid #4FC3F7;border-radius:11px;padding:12px 14px;
-  margin-top:12px;display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:6px}
+border:1.5px solid #4FC3F7;border-radius:11px;padding:12px 14px;
+margin-top:12px;display:flex;align-items:center;justify-content:space-between;
+flex-wrap:wrap;gap:6px}
 .computed-display.hidden{display:none}
-.computed-label{font-size:11px;color:var(--text-soft);
-  text-transform:uppercase;letter-spacing:.6px;font-weight:700}
-.computed-value{font-size:18px;font-weight:800;color:var(--primary-dark)}
-.computed-formula{font-size:10.5px;color:var(--text-soft);font-style:italic;
-  width:100%;text-align:right;margin-top:2px}
+.computed-label{font-size:11px;color:var(–text-soft);
+text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.computed-value{font-size:18px;font-weight:800;color:var(–primary-dark)}
+.computed-formula{font-size:10.5px;color:var(–text-soft);font-style:italic;
+width:100%;text-align:right;margin-top:2px}
 
 /* Segmented (radio buttons) */
 .segmented{display:grid;grid-template-columns:1fr 1fr;
-  background:#F0F4F7;border:1.5px solid var(--border);
-  border-radius:9px;overflow:hidden;padding:3px;gap:3px}
-.segment{background:transparent;color:var(--text-soft);border:none;
-  padding:10px 8px;font-size:13px;font-weight:700;
-  border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s}
-.segment.active{background:var(--primary);color:#fff;
-  box-shadow:0 2px 6px rgba(74,144,226,.35)}
+background:#F0F4F7;border:1.5px solid var(–border);
+border-radius:9px;overflow:hidden;padding:3px;gap:3px}
+.segment{background:transparent;color:var(–text-soft);border:none;
+padding:10px 8px;font-size:13px;font-weight:700;
+border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s}
+.segment.active{background:var(–primary);color:#fff;
+box-shadow:0 2px 6px rgba(74,144,226,.35)}
 .segment:not(.active):active{background:rgba(74,144,226,.08)}
 
 /* Z-score badges (mesures dilaté/normal/hypoplasique) */
 .zscore-badge{display:inline-flex;align-items:center;gap:5px;
-  padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;
-  letter-spacing:.3px;margin-left:8px;vertical-align:middle}
+padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;
+letter-spacing:.3px;margin-left:8px;vertical-align:middle}
 .zscore-badge.empty{background:#ECEFF1;color:#90A4AE}
 .zscore-badge.normal{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
 .zscore-badge.hypo{background:#FFF3E0;color:#E65100;border:1px solid #FFB74D}
@@ -191,338 +192,334 @@ body{padding-bottom:80px;min-height:100vh}
 /* AGE SLIDER */
 .age-slider-wrap{padding:10px 4px}
 .age-slider{width:100%;-webkit-appearance:none;height:8px;border-radius:4px;
-  background:linear-gradient(90deg,var(--accent) 0%,var(--primary-light) 100%);outline:none}
+background:linear-gradient(90deg,var(–accent) 0%,var(–primary-light) 100%);outline:none}
 .age-slider::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;
-  border-radius:50%;background:var(--primary);cursor:pointer;border:3px solid #fff;
-  box-shadow:0 2px 6px rgba(0,0,0,.2)}
+border-radius:50%;background:var(–primary);cursor:pointer;border:3px solid #fff;
+box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .age-slider::-moz-range-thumb{width:28px;height:28px;border-radius:50%;
-  background:var(--primary);cursor:pointer;border:3px solid #fff;
-  box-shadow:0 2px 6px rgba(0,0,0,.2)}
+background:var(–primary);cursor:pointer;border:3px solid #fff;
+box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .age-display{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-.age-display .value{font-size:24px;font-weight:800;color:var(--primary-dark)}
-.age-display .scale{font-size:11px;color:var(--text-soft)}
+.age-display .value{font-size:24px;font-weight:800;color:var(–primary-dark)}
+.age-display .scale{font-size:11px;color:var(–text-soft)}
 
 /* PATHOLOGY GRID */
 .path-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.path-card{background:#fff;border-radius:var(--radius);padding:14px 10px;
-  border:2px solid var(--border);text-align:center;cursor:pointer;
-  transition:all .2s;position:relative;overflow:hidden}
+.path-card{background:#fff;border-radius:var(–radius);padding:14px 10px;
+border:2px solid var(–border);text-align:center;cursor:pointer;
+transition:all .2s;position:relative;overflow:hidden}
 .path-card:active{transform:scale(.97)}
-.path-card.selected{border-color:var(--primary);background:linear-gradient(135deg,#fff 0%,var(--accent) 100%)}
-.path-card .code{font-size:18px;font-weight:800;color:var(--primary-dark);
-  margin-bottom:4px;display:block}
-.path-card .name{font-size:11px;color:var(--text-soft);line-height:1.3;font-weight:500}
-.path-card .prev{position:absolute;top:6px;right:6px;background:var(--primary-light);
-  color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px}
-.path-card .badge-rare{background:var(--warning)}
-.path-card .badge-veryrare{background:var(--danger)}
+.path-card.selected{border-color:var(–primary);background:linear-gradient(135deg,#fff 0%,var(–accent) 100%)}
+.path-card .code{font-size:18px;font-weight:800;color:var(–primary-dark);
+margin-bottom:4px;display:block}
+.path-card .name{font-size:11px;color:var(–text-soft);line-height:1.3;font-weight:500}
+.path-card .prev{position:absolute;top:6px;right:6px;background:var(–primary-light);
+color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px}
+.path-card .badge-rare{background:var(–warning)}
+.path-card .badge-veryrare{background:var(–danger)}
 
 /* CANVA */
-.canva-wrapper{position:relative;width:100%;border-radius:var(--radius-sm);
-  overflow:hidden;background:#0a0a0a;box-shadow:var(--shadow-md);margin-bottom:12px}
-.canva-label{background:var(--primary-dark);color:#fff;padding:6px 12px;font-size:12px;
-  font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.canva-wrapper{position:relative;width:100%;border-radius:var(–radius-sm);
+overflow:hidden;background:#0a0a0a;box-shadow:var(–shadow-md);margin-bottom:12px}
+.canva-label{background:var(–primary-dark);color:#fff;padding:6px 12px;font-size:12px;
+font-weight:600;display:flex;align-items:center;justify-content:space-between}
 .canva-label .tag{background:rgba(255,255,255,.15);padding:2px 8px;border-radius:10px;font-size:10px}
 .canva-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#000}
 
 /* SECTION HEADERS */
-.section-h{font-size:13px;font-weight:700;color:var(--primary-dark);
-  margin:18px 0 8px;text-transform:uppercase;letter-spacing:.4px;
-  display:flex;align-items:center;gap:8px}
-.section-h::before{content:'';width:4px;height:14px;background:var(--primary);border-radius:2px}
-.section-h.diag::before{background:var(--success)}
-.section-h.eval::before{background:var(--warning)}
-.section-h.ai::before{background:var(--ai-accent)}
+.section-h{font-size:13px;font-weight:700;color:var(–primary-dark);
+margin:18px 0 8px;text-transform:uppercase;letter-spacing:.4px;
+display:flex;align-items:center;gap:8px}
+.section-h::before{content:’’;width:4px;height:14px;background:var(–primary);border-radius:2px}
+.section-h.diag::before{background:var(–success)}
+.section-h.eval::before{background:var(–warning)}
+.section-h.ai::before{background:var(–ai-accent)}
 
 /* DIAG / ÉVAL ITEMS */
-.criterion{background:#fff;border-radius:var(--radius);padding:12px;margin-bottom:10px;
-  border:1.5px solid var(--border);transition:all .2s;cursor:pointer}
-.criterion.checked{border-color:var(--success);background:linear-gradient(135deg,#fff 0%,#E8F5E9 100%)}
+.criterion{background:#fff;border-radius:var(–radius);padding:12px;margin-bottom:10px;
+border:1.5px solid var(–border);transition:all .2s;cursor:pointer}
+.criterion.checked{border-color:var(–success);background:linear-gradient(135deg,#fff 0%,#E8F5E9 100%)}
 .criterion-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.criterion-check{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  background:#fff;font-size:14px;font-weight:700;color:#fff}
-.criterion.checked .criterion-check{background:var(--success);border-color:var(--success)}
-.criterion-title{font-size:13px;font-weight:700;color:var(--primary-dark);flex:1;line-height:1.3}
-.criterion-tag{font-size:10px;color:var(--text-soft);background:#F0F4F7;
-  padding:2px 6px;border-radius:8px;font-weight:600;flex-shrink:0}
-.criterion-desc{font-size:12px;color:var(--text-soft);line-height:1.4;padding-left:32px}
+.criterion-check{width:22px;height:22px;border:2px solid var(–border);border-radius:6px;
+display:flex;align-items:center;justify-content:center;flex-shrink:0;
+background:#fff;font-size:14px;font-weight:700;color:#fff}
+.criterion.checked .criterion-check{background:var(–success);border-color:var(–success)}
+.criterion-title{font-size:13px;font-weight:700;color:var(–primary-dark);flex:1;line-height:1.3}
+.criterion-tag{font-size:10px;color:var(–text-soft);background:#F0F4F7;
+padding:2px 6px;border-radius:8px;font-weight:600;flex-shrink:0}
+.criterion-desc{font-size:12px;color:var(–text-soft);line-height:1.4;padding-left:32px}
 .criterion-measure{padding-left:32px;margin-top:8px;display:flex;gap:6px;align-items:center}
-.criterion-measure input{width:80px;padding:6px 8px;border:1.5px solid var(--border);
-  border-radius:6px;font-size:13px}
-.criterion-measure label{font-size:11px;color:var(--text-soft);font-weight:600}
+.criterion-measure input{width:80px;padding:6px 8px;border:1.5px solid var(–border);
+border-radius:6px;font-size:13px}
+.criterion-measure label{font-size:11px;color:var(–text-soft);font-weight:600}
 
 /* AI BOX */
-.ai-box{background:linear-gradient(135deg,var(--ai-bg) 0%,#FFF 100%);
-  border:2px solid var(--ai-border);border-radius:var(--radius);padding:14px;
-  margin-top:14px;position:relative;overflow:hidden}
-.ai-box::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;
-  background:linear-gradient(180deg,var(--ai-accent) 0%,var(--ai-border) 100%)}
+.ai-box{background:linear-gradient(135deg,var(–ai-bg) 0%,#FFF 100%);
+border:2px solid var(–ai-border);border-radius:var(–radius);padding:14px;
+margin-top:14px;position:relative;overflow:hidden}
+.ai-box::before{content:’’;position:absolute;top:0;left:0;width:6px;height:100%;
+background:linear-gradient(180deg,var(–ai-accent) 0%,var(–ai-border) 100%)}
 .ai-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-left:8px}
 .ai-header .ai-icon{width:32px;height:32px;border-radius:8px;
-  background:linear-gradient(135deg,var(--ai-accent) 0%,var(--ai-border) 100%);
-  color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;
-  font-weight:800;box-shadow:0 2px 6px rgba(155,89,182,.3)}
-.ai-title{font-size:13px;font-weight:800;color:var(--ai-accent);
-  text-transform:uppercase;letter-spacing:.5px}
-.ai-content{padding-left:8px;font-size:13px;line-height:1.55;color:var(--text)}
-.ai-content strong{color:var(--ai-accent)}
+background:linear-gradient(135deg,var(–ai-accent) 0%,var(–ai-border) 100%);
+color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;
+font-weight:800;box-shadow:0 2px 6px rgba(155,89,182,.3)}
+.ai-title{font-size:13px;font-weight:800;color:var(–ai-accent);
+text-transform:uppercase;letter-spacing:.5px}
+.ai-content{padding-left:8px;font-size:13px;line-height:1.55;color:var(–text)}
+.ai-content strong{color:var(–ai-accent)}
 .ai-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:var(--ai-accent);margin-left:6px;animation:pulse 1.5s infinite}
+background:var(–ai-accent);margin-left:6px;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;
-  border-top:1px solid var(--border);padding:10px 16px;display:flex;gap:10px;
-  z-index:90;box-shadow:0 -2px 12px rgba(0,0,0,.05)}
-.btn{padding:14px;border:none;border-radius:var(--radius-sm);
-  font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;
-  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;flex:1}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:active{background:var(--primary-dark);transform:scale(.98)}
+border-top:1px solid var(–border);padding:10px 16px;display:flex;gap:10px;
+z-index:90;box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.btn{padding:14px;border:none;border-radius:var(–radius-sm);
+font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;
+font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;flex:1}
+.btn-primary{background:var(–primary);color:#fff}
+.btn-primary:active{background:var(–primary-dark);transform:scale(.98)}
 .btn-primary:disabled{background:#B0BEC5;cursor:not-allowed}
-.btn-secondary{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+.btn-secondary{background:#fff;color:var(–primary);border:1.5px solid var(–primary)}
 
 /* SUMMARY BAR (sticky) */
-.patient-bar{background:var(--accent);padding:8px 16px;font-size:12px;
-  color:var(--primary-dark);display:flex;gap:10px;flex-wrap:wrap;
-  border-bottom:1px solid var(--primary-light)}
+.patient-bar{background:var(–accent);padding:8px 16px;font-size:12px;
+color:var(–primary-dark);display:flex;gap:10px;flex-wrap:wrap;
+border-bottom:1px solid var(–primary-light)}
 .patient-bar span{font-weight:600}
-.patient-bar .sep{color:var(--primary-light)}
+.patient-bar .sep{color:var(–primary-light)}
 
 /* QUESTIONNAIRE - sections, options, fields */
-.qsection{padding:12px 0;border-bottom:1px dashed var(--border)}
+.qsection{padding:12px 0;border-bottom:1px dashed var(–border)}
 .qsection:last-child{border-bottom:none}
-.qsection-label{font-size:13px;font-weight:700;color:var(--primary-dark);margin-bottom:10px}
+.qsection-label{font-size:13px;font-weight:700;color:var(–primary-dark);margin-bottom:10px}
 .qsection-options{display:flex;flex-direction:column;gap:8px}
 
 .qopt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  background:#fff;cursor:pointer;transition:all .15s}
+border:1.5px solid var(–border);border-radius:var(–radius-sm);
+background:#fff;cursor:pointer;transition:all .15s}
 .qopt:active{transform:scale(.98)}
-.qopt.selected{border-color:var(--primary);background:linear-gradient(135deg,#fff 0%,var(--accent) 100%)}
+.qopt.selected{border-color:var(–primary);background:linear-gradient(135deg,#fff 0%,var(–accent) 100%)}
 .qopt-content{flex:1}
-.qopt-label{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
-.qopt-desc{font-size:11px;color:var(--text-soft);line-height:1.35;margin-top:3px}
+.qopt-label{font-size:13px;font-weight:600;color:var(–text);line-height:1.3}
+.qopt-desc{font-size:11px;color:var(–text-soft);line-height:1.35;margin-top:3px}
 
 /* Radio mark */
-.qopt-radio-mark{width:18px;height:18px;border:2px solid var(--border);
-  border-radius:50%;flex-shrink:0;margin-top:1px;background:#fff;position:relative}
-.qopt-radio.selected .qopt-radio-mark{border-color:var(--primary)}
+.qopt-radio-mark{width:18px;height:18px;border:2px solid var(–border);
+border-radius:50%;flex-shrink:0;margin-top:1px;background:#fff;position:relative}
+.qopt-radio.selected .qopt-radio-mark{border-color:var(–primary)}
 .qopt-radio.selected .qopt-radio-mark::after{
-  content:'';position:absolute;top:3px;left:3px;width:8px;height:8px;
-  border-radius:50%;background:var(--primary)}
+content:’’;position:absolute;top:3px;left:3px;width:8px;height:8px;
+border-radius:50%;background:var(–primary)}
 
 /* Check mark */
-.qopt-check-mark{width:20px;height:20px;border:2px solid var(--border);
-  border-radius:5px;flex-shrink:0;margin-top:1px;background:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:#fff}
-.qopt-check.selected .qopt-check-mark{background:var(--success);border-color:var(--success)}
+.qopt-check-mark{width:20px;height:20px;border:2px solid var(–border);
+border-radius:5px;flex-shrink:0;margin-top:1px;background:#fff;
+display:flex;align-items:center;justify-content:center;
+font-size:12px;font-weight:700;color:#fff}
+.qopt-check.selected .qopt-check-mark{background:var(–success);border-color:var(–success)}
 
 /* Number / select fields */
 .qfield-row{display:flex;align-items:center;gap:8px}
-.qfield{padding:9px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  font-size:14px;font-family:inherit;background:#fff;color:var(--text);width:100%}
-.qfield:focus{outline:none;border-color:var(--primary)}
+.qfield{padding:9px 11px;border:1.5px solid var(–border);border-radius:var(–radius-sm);
+font-size:14px;font-family:inherit;background:#fff;color:var(–text);width:100%}
+.qfield:focus{outline:none;border-color:var(–primary)}
 input.qfield{max-width:120px}
-.qfield-unit{font-size:12px;color:var(--text-soft);font-weight:600}
-.qfield-hint{font-size:11px;color:var(--text-soft);margin-top:5px;font-style:italic}
+.qfield-unit{font-size:12px;color:var(–text-soft);font-weight:600}
+.qfield-hint{font-size:11px;color:var(–text-soft);margin-top:5px;font-style:italic}
 
 /* Compound (sous-questions) */
 .qsection-compound{display:flex;flex-direction:column;gap:14px;
-  padding-left:10px;border-left:2px solid var(--accent);margin-top:6px}
+padding-left:10px;border-left:2px solid var(–accent);margin-top:6px}
 .qcompound-field{}
-.qcompound-label{font-size:12px;font-weight:600;color:var(--text-soft);margin-bottom:6px;
-  text-transform:uppercase;letter-spacing:.3px}
+.qcompound-label{font-size:12px;font-weight:600;color:var(–text-soft);margin-bottom:6px;
+text-transform:uppercase;letter-spacing:.3px}
 
 /* Mini Canva par question (vidéo exemple) */
-.qvideo-wrap{margin:0 0 12px;border-radius:var(--radius-sm);overflow:hidden;
-  background:#0a0a0a;box-shadow:0 2px 6px rgba(0,0,0,.1);border:1px solid var(--border)}
-.qvideo-label{background:var(--primary-dark);color:#fff;padding:5px 10px;font-size:11px;
-  font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.qvideo-wrap{margin:0 0 12px;border-radius:var(–radius-sm);overflow:hidden;
+background:#0a0a0a;box-shadow:0 2px 6px rgba(0,0,0,.1);border:1px solid var(–border)}
+.qvideo-label{background:var(–primary-dark);color:#fff;padding:5px 10px;font-size:11px;
+font-weight:600;display:flex;align-items:center;justify-content:space-between}
 .qvideo-label .qvideo-tag{background:rgba(255,255,255,.18);padding:2px 7px;
-  border-radius:8px;font-size:9px;letter-spacing:.5px}
+border-radius:8px;font-size:9px;letter-spacing:.5px}
 .qvideo-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#000}
 
 /* ALGORITHME AIDE DIAGNOSTIC POSITIF — 17 étapes empilées */
 .algo-summary{background:linear-gradient(135deg,#E8F5E9 0%,#FFF 100%);
-  border:1.5px solid #81C784;border-radius:12px;padding:11px 14px;
-  margin-bottom:14px;display:flex;align-items:center;gap:10px;
-  position:sticky;top:8px;z-index:50;backdrop-filter:blur(8px);
-  box-shadow:0 2px 8px rgba(0,0,0,.08)}
+border:1.5px solid #81C784;border-radius:12px;padding:11px 14px;
+margin-bottom:14px;display:flex;align-items:center;gap:10px;
+position:sticky;top:8px;z-index:50;backdrop-filter:blur(8px);
+box-shadow:0 2px 8px rgba(0,0,0,.08)}
 .algo-summary-icon{font-size:18px;flex-shrink:0}
-.algo-summary-text{font-size:13px;color:var(--primary-dark);font-weight:600;
-  flex:1;line-height:1.35}
+.algo-summary-text{font-size:13px;color:var(–primary-dark);font-weight:600;
+flex:1;line-height:1.35}
 
-/* Bloc d'étape (carte étape complète) */
-.algo-step-block{background:#fff;border:1.5px solid var(--border);
-  border-radius:12px;padding:12px;margin-bottom:14px;transition:all .2s;
-  box-shadow:var(--shadow)}
-.algo-step-block.step-present{border-color:var(--success);
-  background:linear-gradient(135deg,#E8F5E9 0%,#FFF 60%);
-  box-shadow:0 0 0 3px rgba(39,174,96,.15)}
+/* Bloc d’étape (carte étape complète) */
+.algo-step-block{background:#fff;border:1.5px solid var(–border);
+border-radius:12px;padding:12px;margin-bottom:14px;transition:all .2s;
+box-shadow:var(–shadow)}
+.algo-step-block.step-present{border-color:var(–success);
+background:linear-gradient(135deg,#E8F5E9 0%,#FFF 60%);
+box-shadow:0 0 0 3px rgba(39,174,96,.15)}
 .algo-step-block.step-absent{opacity:.6;background:#F8FAFB}
 .algo-step-block.step-explorer{border-color:#FFB74D;
-  background:linear-gradient(135deg,#FFF8E1 0%,#FFF 60%)}
+background:linear-gradient(135deg,#FFF8E1 0%,#FFF 60%)}
 
 .algo-step-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .algo-step-num{width:34px;height:34px;border-radius:50%;
-  background:var(--primary);color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:800;flex-shrink:0;
-  box-shadow:0 2px 6px rgba(74,144,226,.35)}
-.algo-step-block.step-present .algo-step-num{background:var(--success);
-  box-shadow:0 2px 6px rgba(39,174,96,.4)}
+background:var(–primary);color:#fff;
+display:flex;align-items:center;justify-content:center;
+font-size:15px;font-weight:800;flex-shrink:0;
+box-shadow:0 2px 6px rgba(74,144,226,.35)}
+.algo-step-block.step-present .algo-step-num{background:var(–success);
+box-shadow:0 2px 6px rgba(39,174,96,.4)}
 .algo-step-block.step-explorer .algo-step-num{background:#FFB74D;
-  box-shadow:0 2px 6px rgba(255,183,77,.4)}
+box-shadow:0 2px 6px rgba(255,183,77,.4)}
 .algo-step-info{flex:1;min-width:0}
-.algo-step-title{font-size:14.5px;font-weight:800;color:var(--primary-dark);
-  line-height:1.25;margin-bottom:2px}
-.algo-step-sub{font-size:11.5px;color:var(--text-soft);
-  display:flex;flex-wrap:wrap;gap:4px;align-items:center}
-.algo-step-path{color:var(--success);font-weight:700;
-  background:rgba(39,174,96,.12);padding:2px 7px;border-radius:8px;
-  font-size:10.5px;letter-spacing:.3px}
+.algo-step-title{font-size:14.5px;font-weight:800;color:var(–primary-dark);
+line-height:1.25;margin-bottom:2px}
+.algo-step-sub{font-size:11.5px;color:var(–text-soft);
+display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.algo-step-path{color:var(–success);font-weight:700;
+background:rgba(39,174,96,.12);padding:2px 7px;border-radius:8px;
+font-size:10.5px;letter-spacing:.3px}
 .algo-step-path-no{color:#90A4AE;background:rgba(144,164,174,.12)}
 
 /* Mini-Canva intégré au bloc */
 .algo-step-canva{width:100%;aspect-ratio:16/9;border-radius:8px;
-  overflow:hidden;background:#000;margin-bottom:10px;border:1px solid var(--border)}
+overflow:hidden;background:#000;margin-bottom:10px;border:1px solid var(–border)}
 .algo-step-canva iframe{width:100%;height:100%;border:none;display:block}
 
-.algo-step-desc{font-size:12px;color:var(--text);line-height:1.5;
-  background:#F8FAFB;padding:9px 11px;border-radius:8px;margin-bottom:10px}
+.algo-step-desc{font-size:12px;color:var(–text);line-height:1.5;
+background:#F8FAFB;padding:9px 11px;border-radius:8px;margin-bottom:10px}
 
 /* Choix présent/absent/explorer */
 .algo-step-choices{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-.algo-choice{padding:10px 6px;border:1.5px solid var(--border);
-  background:#fff;border-radius:8px;font-size:12px;font-weight:700;
-  cursor:pointer;font-family:inherit;transition:all .15s;
-  color:var(--text-soft);text-align:center;line-height:1.2}
+.algo-choice{padding:10px 6px;border:1.5px solid var(–border);
+background:#fff;border-radius:8px;font-size:12px;font-weight:700;
+cursor:pointer;font-family:inherit;transition:all .15s;
+color:var(–text-soft);text-align:center;line-height:1.2}
 .algo-choice:active{transform:scale(.96)}
-.algo-choice-present.active{background:var(--success);color:#fff;
-  border-color:var(--success);box-shadow:0 2px 6px rgba(39,174,96,.35)}
+.algo-choice-present.active{background:var(–success);color:#fff;
+border-color:var(–success);box-shadow:0 2px 6px rgba(39,174,96,.35)}
 .algo-choice-absent.active{background:#90A4AE;color:#fff;
-  border-color:#90A4AE;box-shadow:0 2px 6px rgba(144,164,174,.35)}
+border-color:#90A4AE;box-shadow:0 2px 6px rgba(144,164,174,.35)}
 .algo-choice-explorer.active{background:#FFB74D;color:#fff;
-  border-color:#FFB74D;box-shadow:0 2px 6px rgba(255,183,77,.35)}
+border-color:#FFB74D;box-shadow:0 2px 6px rgba(255,183,77,.35)}
 
 /* HUB 3 BOUTONS */
 .hub-header{padding:8px 4px 16px;text-align:center}
-.hub-header h2{font-size:20px;font-weight:800;color:var(--primary-dark);margin-bottom:6px}
-.hub-subtitle{font-size:13px;color:var(--text-soft)}
+.hub-header h2{font-size:20px;font-weight:800;color:var(–primary-dark);margin-bottom:6px}
+.hub-subtitle{font-size:13px;color:var(–text-soft)}
 
 .hub-buttons{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
 .hub-btn{display:flex;align-items:center;gap:14px;padding:18px 16px;
-  background:#fff;border:2px solid var(--border);border-radius:var(--radius);
-  cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;
-  width:100%;box-shadow:var(--shadow)}
+background:#fff;border:2px solid var(–border);border-radius:var(–radius);
+cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;
+width:100%;box-shadow:var(–shadow)}
 .hub-btn:active{transform:scale(.98)}
-.hub-btn:hover{border-color:var(--primary);box-shadow:var(--shadow-md)}
-.hub-btn-1{border-left:5px solid var(--success)}
-.hub-btn-2{border-left:5px solid var(--primary)}
-.hub-btn-3{border-left:5px solid var(--ai-accent)}
+.hub-btn:hover{border-color:var(–primary);box-shadow:var(–shadow-md)}
+.hub-btn-1{border-left:5px solid var(–success)}
+.hub-btn-2{border-left:5px solid var(–primary)}
+.hub-btn-3{border-left:5px solid var(–ai-accent)}
 .hub-btn-icon{font-size:28px;flex-shrink:0;width:46px;height:46px;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--accent) 0%,#fff 100%);
-  border-radius:12px}
+display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,var(–accent) 0%,#fff 100%);
+border-radius:12px}
 .hub-btn-content{flex:1;min-width:0}
-.hub-btn-title{font-size:15px;font-weight:700;color:var(--primary-dark);
-  margin-bottom:4px;line-height:1.3}
-.hub-btn-desc{font-size:12px;color:var(--text-soft);line-height:1.4}
-.hub-btn-arrow{font-size:20px;color:var(--primary-light);flex-shrink:0;font-weight:700}
+.hub-btn-title{font-size:15px;font-weight:700;color:var(–primary-dark);
+margin-bottom:4px;line-height:1.3}
+.hub-btn-desc{font-size:12px;color:var(–text-soft);line-height:1.4}
+.hub-btn-arrow{font-size:20px;color:var(–primary-light);flex-shrink:0;font-weight:700}
 
 /* DECISION CARD (écran diag positif) */
-.decision-card{background:linear-gradient(135deg,#FFF 0%,var(--accent) 100%);
-  border:2px solid var(--primary-light)}
+.decision-card{background:linear-gradient(135deg,#FFF 0%,var(–accent) 100%);
+border:2px solid var(–primary-light)}
 .btn-block{width:100%}
-.btn-warning{background:var(--warning);color:#fff}
+.btn-warning{background:var(–warning);color:#fff}
 .btn-warning:active{background:#C0660D}
-.btn-success{background:var(--success);color:#fff}
+.btn-success{background:var(–success);color:#fff}
 .btn-success:active{background:#1E8449}
 
 /* CHATBOT */
-.chatbot-info{background:linear-gradient(135deg,var(--ai-bg) 0%,#FFF 100%);
-  border:2px solid var(--ai-border)}
+.chatbot-info{background:linear-gradient(135deg,var(–ai-bg) 0%,#FFF 100%);
+border:2px solid var(–ai-border)}
 
-.api-key-card{border:1.5px solid var(--warning);background:#FFF8F0}
+.api-key-card{border:1.5px solid var(–warning);background:#FFF8F0}
 .api-key-card.hidden{display:none}
 
 .chat-container{display:flex;flex-direction:column;background:#fff;
-  border-radius:var(--radius);box-shadow:var(--shadow);
-  overflow:hidden;margin-bottom:14px;height:60vh;min-height:400px}
+border-radius:var(–radius);box-shadow:var(–shadow);
+overflow:hidden;margin-bottom:14px;height:60vh;min-height:400px}
 
 .chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;
-  flex-direction:column;gap:10px;background:#FAFBFC}
+flex-direction:column;gap:10px;background:#FAFBFC}
 
 .chat-msg{max-width:85%;padding:10px 14px;border-radius:14px;
-  font-size:14px;line-height:1.45;word-wrap:break-word}
-.chat-msg-user{align-self:flex-end;background:var(--primary);color:#fff;
-  border-bottom-right-radius:4px}
+font-size:14px;line-height:1.45;word-wrap:break-word}
+.chat-msg-user{align-self:flex-end;background:var(–primary);color:#fff;
+border-bottom-right-radius:4px}
 .chat-msg-assistant{align-self:flex-start;background:#F0F4F7;
-  color:var(--text);border-bottom-left-radius:4px}
-.chat-msg-system{align-self:center;background:transparent;color:var(--text-soft);
-  font-size:12px;font-style:italic;text-align:center;max-width:100%}
-.chat-msg strong{color:var(--ai-accent)}
-.chat-msg-assistant strong{color:var(--ai-accent)}
+color:var(–text);border-bottom-left-radius:4px}
+.chat-msg-system{align-self:center;background:transparent;color:var(–text-soft);
+font-size:12px;font-style:italic;text-align:center;max-width:100%}
+.chat-msg strong{color:var(–ai-accent)}
+.chat-msg-assistant strong{color:var(–ai-accent)}
 .chat-msg-user strong{color:#fff;text-decoration:underline}
 
 .chat-typing{align-self:flex-start;background:#F0F4F7;padding:12px 16px;
-  border-radius:14px;border-bottom-left-radius:4px}
+border-radius:14px;border-bottom-left-radius:4px}
 .chat-typing-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
-  background:var(--ai-accent);margin:0 1px;animation:typingBounce 1.4s infinite}
+background:var(–ai-accent);margin:0 1px;animation:typingBounce 1.4s infinite}
 .chat-typing-dot:nth-child(2){animation-delay:.2s}
 .chat-typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.5}
-  30%{transform:translateY(-6px);opacity:1}}
+30%{transform:translateY(-6px);opacity:1}}
 
-.chat-input-wrap{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);
-  background:#fff;align-items:flex-end}
-.chat-input-wrap textarea{flex:1;padding:10px 12px;border:1.5px solid var(--border);
-  border-radius:18px;font-size:14px;font-family:inherit;resize:none;
-  background:#fff;color:var(--text);max-height:80px}
-.chat-input-wrap textarea:focus{outline:none;border-color:var(--primary)}
+.chat-input-wrap{display:flex;gap:8px;padding:10px;border-top:1px solid var(–border);
+background:#fff;align-items:flex-end}
+.chat-input-wrap textarea{flex:1;padding:10px 12px;border:1.5px solid var(–border);
+border-radius:18px;font-size:14px;font-family:inherit;resize:none;
+background:#fff;color:var(–text);max-height:80px}
+.chat-input-wrap textarea:focus{outline:none;border-color:var(–primary)}
 .btn-chat-send{width:42px;height:42px;border-radius:50%;border:none;
-  background:var(--primary);color:#fff;font-size:18px;cursor:pointer;
-  flex-shrink:0;font-weight:700;display:flex;align-items:center;justify-content:center}
+background:var(–primary);color:#fff;font-size:18px;cursor:pointer;
+flex-shrink:0;font-weight:700;display:flex;align-items:center;justify-content:center}
 .btn-chat-send:active{transform:scale(.92)}
 .btn-chat-send:disabled{background:#B0BEC5;cursor:not-allowed}
 
 .chat-suggestions{display:flex;gap:6px;padding:0 10px 10px;flex-wrap:wrap;background:#fff}
-.chat-suggestion{padding:6px 12px;background:#F0F4F7;border:1px solid var(--border);
-  border-radius:14px;font-size:12px;color:var(--primary-dark);cursor:pointer;
-  font-weight:500;transition:all .15s}
-.chat-suggestion:active{background:var(--accent);transform:scale(.95)}
+.chat-suggestion{padding:6px 12px;background:#F0F4F7;border:1px solid var(–border);
+border-radius:14px;font-size:12px;color:var(–primary-dark);cursor:pointer;
+font-weight:500;transition:all .15s}
+.chat-suggestion:active{background:var(–accent);transform:scale(.95)}
 
 @media(max-width:360px){
-  body{font-size:14px}
-  .path-card .code{font-size:16px}
-  .hub-btn-icon{font-size:24px;width:40px;height:40px}
-  .hub-btn-title{font-size:14px}
-  .hub-btn-desc{font-size:11px}
+body{font-size:14px}
+.path-card .code{font-size:16px}
+.hub-btn-icon{font-size:24px;width:40px;height:40px}
+.hub-btn-title{font-size:14px}
+.hub-btn-desc{font-size:11px}
 }
 </style>
+
 </head>
 <body>
 
-<!-- ============ ÉCRAN 0 : WELCOME (Sélecteur langue) ============ -->
+<!-- ============ ÉCRAN 0 : WELCOME (Démarrage direct FR) ============ -->
+
 <section class="screen active" id="screen-0">
   <div class="welcome-logo">🫀</div>
   <h1 class="welcome-title">CardioEcho</h1>
   <p class="welcome-subtitle">Module 2B · Diagnostic Nourrisson 1–6 mois<br>Aide au diagnostic échocardiographique</p>
   <div class="welcome-author">Dr Touati Mohamed · CMCI Algérie</div>
-  <div class="lang-selector-title">Choisissez votre langue · Select your language</div>
-  <div class="lang-cards">
+  <div class="lang-cards" style="grid-template-columns:1fr;max-width:280px;">
     <div class="lang-card" onclick="selectLanguage('fr')">
-      <span class="lang-card-flag">🇫🇷</span>
-      <div class="lang-card-name">Français</div>
-      <div class="lang-card-native">FR</div>
-    </div>
-    <div class="lang-card" onclick="selectLanguage('en')">
-      <span class="lang-card-flag">🇬🇧</span>
-      <div class="lang-card-name">English</div>
-      <div class="lang-card-native">EN</div>
+      <span class="lang-card-flag">🚀</span>
+      <div class="lang-card-name">Démarrer</div>
+      <div class="lang-card-native">Commencer le diagnostic</div>
     </div>
   </div>
   <div class="welcome-footer">
@@ -531,22 +528,21 @@ input.qfield{max-width:120px}
   </div>
 </section>
 
-<!-- Header app avec switch FR/EN (apparaît dès écran 1) -->
+<!-- Header app (sélecteur de langue retiré) -->
+
 <header class="app-header" id="appHeader" style="display:none">
   <div class="app-header-brand">
     <span class="app-header-brand-name">CardioEcho</span>
     <span class="app-header-brand-tag" data-i18n="moduleTag">Module 2B</span>
   </div>
-  <div class="lang-switch">
-    <button class="lang-btn active" id="langBtnFR" onclick="changeLanguage('fr')">FR</button>
-    <button class="lang-btn" id="langBtnEN" onclick="changeLanguage('en')">EN</button>
-  </div>
 </header>
 
 <!-- Patient bar visible dès écran 2 -->
+
 <div class="patient-bar" id="patientBar" style="display:none"></div>
 
 <!-- ============ ÉCRAN 1 : PROFIL PATIENT ============ -->
+
 <section class="screen" id="screen-1">
   <h1 class="screen-title" data-i18n="patientProfile">Profil patient</h1>
   <p class="screen-subtitle" data-i18n="patientProfileSubtitle">Identification du nourrisson 1–6 mois</p>
@@ -560,6 +556,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- Médecin signataire -->
+
   <div class="card card-doctor">
     <div class="card-title card-title-doctor" data-i18n="signatoryDoctor">✍️ Médecin signataire</div>
     <div class="field-row">
@@ -575,6 +572,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- Identité patient -->
+
   <div class="card">
     <div class="card-title" data-i18n="patientIdentity">Identité du patient</div>
     <div class="field">
@@ -583,7 +581,7 @@ input.qfield{max-width:120px}
     </div>
     <div class="field">
       <label class="field-label" data-i18n="firstName">Prénom</label>
-      <input type="text" class="field-input" id="patientFirstName" placeholder="Rayan" autocomplete="off" value="Rayan">
+      <input type="text" class="field-input" id="patientFirstName" placeholder="Rayane" autocomplete="off" value="Rayane">
     </div>
     <div class="field">
       <label class="field-label" data-i18n="sex">Sexe</label>
@@ -595,6 +593,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- Anthropométrie -->
+
   <div class="card">
     <div class="card-title" data-i18n="anthropometry">Anthropométrie</div>
     <div class="field">
@@ -641,6 +640,7 @@ input.qfield{max-width:120px}
 </section>
 
 <!-- ============ ÉCRAN 2 : HUB 3 BOUTONS (juste après profil) ============ -->
+
 <section class="screen" id="screen-2">
   <div class="hub-header">
     <h2 id="hubTitle" data-i18n="hubTitle">🩺 Que voulez-vous faire ?</h2>
@@ -658,25 +658,28 @@ input.qfield{max-width:120px}
       <div class="hub-btn-arrow">▸</div>
     </button>
 
-    <!-- Bouton 2 : Aide diagnostic positif → Algorithme 17 étapes -->
-    <button class="hub-btn hub-btn-2" onclick="goToScreen(4)">
-      <div class="hub-btn-icon">🔍</div>
-      <div class="hub-btn-content">
-        <div class="hub-btn-title" data-i18n="hubBtn2Title">2. Aide au diagnostic positif</div>
-        <div class="hub-btn-desc" data-i18n="hubBtn2Desc">Je cherche à <strong>identifier</strong> la pathologie. Algorithme systématique 17 étapes avec vidéos écho.</div>
-      </div>
-      <div class="hub-btn-arrow">▸</div>
-    </button>
+```
+<!-- Bouton 2 : Aide diagnostic positif → Algorithme 17 étapes -->
+<button class="hub-btn hub-btn-2" onclick="goToScreen(4)">
+  <div class="hub-btn-icon">🔍</div>
+  <div class="hub-btn-content">
+    <div class="hub-btn-title" data-i18n="hubBtn2Title">2. Aide au diagnostic positif</div>
+    <div class="hub-btn-desc" data-i18n="hubBtn2Desc">Je cherche à <strong>identifier</strong> la pathologie. Algorithme systématique 17 étapes avec vidéos écho.</div>
+  </div>
+  <div class="hub-btn-arrow">▸</div>
+</button>
 
-    <!-- Bouton 3 : ChatBot Claude -->
-    <button class="hub-btn hub-btn-3" onclick="goToScreen(6)">
-      <div class="hub-btn-icon">🤖</div>
-      <div class="hub-btn-content">
-        <div class="hub-btn-title" data-i18n="hubBtn3Title">3. Je ne suis pas sûr</div>
-        <div class="hub-btn-desc" data-i18n="hubBtn3Desc"><strong>ChatBot AI</strong> avec Claude pour m'aider à différencier et m'orienter avec les éléments cliniques observés.</div>
-      </div>
-      <div class="hub-btn-arrow">▸</div>
-    </button>
+<!-- Bouton 3 : ChatBot Claude -->
+<button class="hub-btn hub-btn-3" onclick="goToScreen(6)">
+  <div class="hub-btn-icon">🤖</div>
+  <div class="hub-btn-content">
+    <div class="hub-btn-title" data-i18n="hubBtn3Title">3. Je ne suis pas sûr</div>
+    <div class="hub-btn-desc" data-i18n="hubBtn3Desc"><strong>ChatBot AI</strong> avec Claude pour m'aider à différencier et m'orienter avec les éléments cliniques observés.</div>
+  </div>
+  <div class="hub-btn-arrow">▸</div>
+</button>
+```
+
   </div>
 
   <div class="bottom-nav">
@@ -685,6 +688,7 @@ input.qfield{max-width:120px}
 </section>
 
 <!-- ============ ÉCRAN 3 : SÉLECTION PATHOLOGIE (après bouton "J'ai un diag") ============ -->
+
 <section class="screen" id="screen-3">
   <div class="card">
     <div class="card-title"><span class="icon">🎯</span><span data-i18n="pathologyTitle">Quelle pathologie évaluer ?</span></div>
@@ -699,20 +703,24 @@ input.qfield{max-width:120px}
 </section>
 
 <!-- ============ ÉCRAN 4 : DIAGNOSTIC POSITIF (Cat A) ============ -->
+
 <section class="screen" id="screen-4">
   <h1 class="screen-title" data-i18n="algoTitle">🔍 Aide au diagnostic positif</h1>
   <p class="screen-subtitle" data-i18n="algoSubtitle">17 étapes d'évaluation systématique. Pour chaque étape, regardez la vidéo et cochez votre observation.</p>
 
   <!-- Compteur de pathologies marquées présent -->
+
   <div class="algo-summary" id="algoSummary">
     <span class="algo-summary-icon">📊</span>
     <span class="algo-summary-text" id="algoSummaryText" data-i18n="algoSummaryEmpty">Aucune anomalie marquée pour le moment</span>
   </div>
 
   <!-- Liste des 17 étapes empilées -->
+
   <div id="algoStepsContainer"></div>
 
   <!-- Bouton Lancer évaluation (apparait si ≥1 présent) -->
+
   <div class="card decision-card" id="algoLaunchCard" style="display:none">
     <div class="card-title"><span class="icon">🎯</span><span data-i18n="algoLaunchTitle">Pathologies à évaluer</span></div>
     <p class="card-subtitle" id="algoLaunchSubtitle"></p>
@@ -727,11 +735,13 @@ input.qfield{max-width:120px}
 </section>
 
 <!-- ============ ÉCRAN 5 : ÉVALUATION (Q1 + Q2) ============ -->
+
 <section class="screen" id="screen-5">
   <!-- Bloc Canva (boucles écho) -->
   <div id="canvaBlock"></div>
 
   <!-- Section : Diagnostic positif (questionnaire Q1) -->
+
   <div class="section-h diag" data-i18n="evalAnatomic">✅ Évaluation anatomique</div>
   <div class="card">
     <p class="card-subtitle" id="diagPositifSubtitle" data-i18n="evalAnatomicSubtitle">Type, mesures anatomiques</p>
@@ -739,6 +749,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- Section : Évaluation (questionnaire Q2) -->
+
   <div class="section-h eval" data-i18n="evalHemo">🔍 Évaluation hémodynamique</div>
   <div class="card">
     <p class="card-subtitle" data-i18n="evalHemoSubtitle">Flux, restriction, pression VD, surcharge VG, obstacles</p>
@@ -746,6 +757,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- Section : Box AI -->
+
   <div class="section-h ai" data-i18n="evalAI">🤖 Box AI — Synthèse intelligente</div>
   <div id="aiBoxContent"></div>
 
@@ -756,6 +768,7 @@ input.qfield{max-width:120px}
 </section>
 
 <!-- ============ ÉCRAN 6 : CHATBOT CLAUDE ============ -->
+
 <section class="screen" id="screen-6">
   <div class="card chatbot-info">
     <div class="card-title"><span class="icon">🤖</span><span data-i18n="chatTitle">Box AI — Aide diagnostique Claude</span></div>
@@ -763,6 +776,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- API Key (saisie une fois, stockée localStorage) -->
+
   <div class="card api-key-card" id="apiKeyCard">
     <div class="card-title"><span class="icon">🔐</span><span data-i18n="apiKeyTitle">Clé API Anthropic</span></div>
     <p class="card-subtitle" data-i18n="apiKeySubtitle">Saisissez votre clé API Claude. Elle est stockée localement dans votre navigateur uniquement.</p>
@@ -774,6 +788,7 @@ input.qfield{max-width:120px}
   </div>
 
   <!-- Chat -->
+
   <div class="chat-container" id="chatContainer">
     <div class="chat-messages" id="chatMessages"></div>
     <div class="chat-input-wrap">
@@ -790,6 +805,7 @@ input.qfield{max-width:120px}
 </section>
 
 <!-- ============ ÉCRAN 7 : COMPTE RENDU ============ -->
+
 <section class="screen" id="screen-7">
   <div class="card">
     <div class="card-title"><span class="icon">📄</span><span data-i18n="reportTitle">Compte rendu échocardiographique</span></div>
@@ -804,21 +820,21 @@ input.qfield{max-width:120px}
 <script>
 // ============ MAPPING URLS CANVA ============
 const CANVA_URLS = {
-  CIV:    "https://www.canva.com/design/DAHIXS_vD80/view?embed",
-  CIA:    "https://www.canva.com/design/DAHIXYX413w/view?embed",
-  PCA:    "https://www.canva.com/design/DAHIXbMWLO4/view?embed",
-  CAV:    "https://www.canva.com/design/DAHIXRvTRWg/view?embed",
-  T4F:    "https://www.canva.com/design/DAHIXSWBVMc/view?embed",
-  SP:     "https://www.canva.com/design/DAHIXcDWqLc/view?embed",
-  CoAo:   "https://www.canva.com/design/DAHIXTj3Teo/view?embed",
-  VU:     "https://www.canva.com/design/DAHIXYGhs5g/view?embed",
-  TGV_CIV:"https://www.canva.com/design/DAHIXb7400c/view?embed",
-  VDDI:   "https://www.canva.com/design/DAHIXU5wVQI/view?embed",
-  TAC:    "https://www.canva.com/design/DAHIXYe1whw/view?embed",
-  RAO:    "https://www.canva.com/design/DAHIXRHki6M/view?embed",
-  ALCAPA: "https://www.canva.com/design/DAHIXVcUbos/view?embed",
-  FIST:   "https://www.canva.com/design/DAHIXaj6qe8/view?embed",
-  ALGO:   "https://www.canva.com/design/DAHIaf-qo_s/view?embed"
+  CIV:    "https://www.canva.com/design/DAHIXS_vD80/0luISc6HiW6V4DN/view?embed",
+  CIA:    "https://www.canva.com/design/DAHIXYX413w/sJmsasrORgZHA_5/view?embed",
+  PCA:    "https://www.canva.com/design/DAHIXbMWLO4/6XZGLWMk2gIGzEO/view?embed",
+  CAV:    "https://www.canva.com/design/DAHIXRvTRWg/IpVVcMAsyZrlqME/view?embed",
+  T4F:    "https://www.canva.com/design/DAHIXSWBVMc/oCqkOJofcYHcTSD/view?embed",
+  SP:     "https://www.canva.com/design/DAHIXcDWqLc/vFwmy8mbbFej7op/view?embed",
+  CoAo:   "https://www.canva.com/design/DAHIXTj3Teo/QloZEVUmCkNjlIM/view?embed",
+  VU:     "https://www.canva.com/design/DAHIXYGhs5g/fy86Gfe5VHhYep5/view?embed",
+  TGV_CIV:"https://www.canva.com/design/DAHIXb7400c/U7Ra1nGktekuk1r/view?embed",
+  VDDI:   "https://www.canva.com/design/DAHIXU5wVQI/AMk-KhjegVWf3TU/view?embed",
+  TAC:    "https://www.canva.com/design/DAHIXYe1whw/5YdO3fNa5ykE3FK/view?embed",
+  RAO:    "https://www.canva.com/design/DAHIXRHki6M/Dqp29dQk7BHTYEX/view?embed",
+  ALCAPA: "https://www.canva.com/design/DAHIXVcUbos/ZxQHOhVRb1KtAoE/view?embed",
+  FIST:   "https://www.canva.com/design/DAHIXaj6qe8/eQBpmK_8baK2mC1/view?embed",
+  ALGO:   "https://www.canva.com/design/DAHIaf-qo_s/lqM8lRgVtBjY2wQ/view?embed"
 };
 
 // ============ ALGORITHME AIDE DIAGNOSTIC POSITIF — 17 ÉTAPES ============
@@ -1315,7 +1331,7 @@ PATHOLOGIES.CIV.data = {
 const STATE = {
   lang: "fr",  // Langue active : "fr" ou "en"
   doctor: {firstName:"Mohamed", lastName:"Touati"},
-  patient: {firstName:"Rayan", lastName:"Sami", name:"Rayan Sami",
+  patient: {firstName:"Rayane", lastName:"Sami", name:"Rayane Sami",
             sex:"M", ageMonths:3, weight:null, height:null, bsa:null},
   selectedPath: null,
   checks: {} // {diagPositif:{0:true,1:false}, eval:{0:true...}}
@@ -1414,98 +1430,6 @@ const i18n = {
     presentS: "présent", presents: "présents",
     toExplore: "à explorer",
     countLabel: "cochés"
-  },
-  en: {
-    // Welcome
-    welcomeFooter: "Diagnostic aid — does not replace clinical judgment",
-    moduleTag: "Module 2B · Infant 1–6 months",
-    // Screen 1 — Profile
-    patientProfile: "Patient profile",
-    patientProfileSubtitle: "Infant identification 1–6 months",
-    ageBannerTitle: "Age range: 1–6 months",
-    ageBannerSubtitle: "Infant — 11 conditions of module 2B",
-    signatoryDoctor: "✍️ Signatory physician",
-    firstName: "First name",
-    lastName: "Last name",
-    patientIdentity: "Patient identity",
-    sex: "Sex",
-    male: "Male",
-    female: "Female",
-    anthropometry: "Anthropometry",
-    ageMonths: "Age (months)",
-    weight: "Weight",
-    height: "Height",
-    heightHelp: "Optional. If unavailable, BSA is calculated from weight alone.",
-    bsa: "Body surface area",
-    bsaMosteller: "Mosteller (weight + height)",
-    bsaWeightOnly: "Weight-only formula",
-    continueToHub: "Continue to diagnostic hub ▸",
-    // Screen 2 — Hub
-    hubTitle: "🩺 What would you like to do?",
-    hubSubtitleDefault: "Choose your diagnostic approach",
-    hubBtn1Title: "1. I have a diagnosis",
-    hubBtn1Desc: "Diagnosis <strong>already identified</strong>. Select the pathology then proceed directly to evaluation (anatomical + hemodynamic).",
-    hubBtn2Title: "2. Help with positive diagnosis",
-    hubBtn2Desc: "I'm looking to <strong>identify</strong> the pathology. Systematic 17-step algorithm with echo videos.",
-    hubBtn3Title: "3. I'm not sure",
-    hubBtn3Desc: "<strong>AI ChatBot</strong> with Claude to help me differentiate and orient with the observed clinical elements.",
-    backProfile: "◂ Profile",
-    // Screen 3 — Pathologies
-    pathologyTitle: "Which pathology to evaluate?",
-    pathologySubtitle: "11 pathologies of the Diagnostic module. The % indicate prevalence in the CMCI infant 1-6 months cohort.",
-    backHub: "◂ Hub",
-    selectPathology: "Select ▸",
-    // Screen 4 — Algorithm
-    algoTitle: "🔍 Positive diagnosis aid",
-    algoSubtitle: "17 steps of systematic evaluation. For each step, watch the video and check your observation.",
-    algoSummaryEmpty: "No abnormality marked yet",
-    algoChoicePresent: "✓ Present",
-    algoChoiceAbsent: "○ Absent",
-    algoChoiceExplorer: "? To explore",
-    algoLaunchTitle: "Pathologies to evaluate",
-    algoEvaluate: "🩺 Evaluate",
-    algoReset: "♻️ Reset",
-    algoCR: "📄 Report",
-    algoResetConfirm: "Reset all algorithm answers?",
-    // Screen 5 — Evaluation
-    evalAnatomic: "✅ Anatomical evaluation",
-    evalAnatomicSubtitle: "Type, anatomical measurements",
-    evalHemo: "🔍 Hemodynamic evaluation",
-    evalHemoSubtitle: "Flow, restriction, RV pressure, LV overload, obstacles",
-    evalAI: "🤖 AI Box — Smart synthesis",
-    evalReport: "Report ▸",
-    // Screen 6 — ChatBot
-    chatTitle: "AI Box — Claude diagnostic aid",
-    chatSubtitle: "Describe the observed echographic elements. Claude helps you identify the most likely pathology and direct the examination.",
-    apiKeyTitle: "🔐 Anthropic API key",
-    apiKeySubtitle: "Enter your Claude API key. It is stored locally in your browser only.",
-    apiKeySave: "💾 Save key",
-    apiKeyHint: "🔒 Your key stays on your device. No data is sent to a third-party server.",
-    chatPlaceholder: "Describe what you observe on the echo...",
-    chatChoosePath: "Choose pathology ▸",
-    // Screen 7 — Report
-    reportTitle: "📄 Report",
-    reportDate: "Date",
-    reportPatient: "Patient",
-    reportPathology: "Pathology evaluated",
-    reportAlgo: "🔍 Diagnostic aid algorithm",
-    reportAI: "🤖 AI synthesis",
-    reportPresent: "Identified pathologies (present)",
-    reportExplorer: "To explore",
-    reportStepsParsed: "steps reviewed",
-    reportExport: "📤 Export",
-    reportNoneRenseigne: "Not specified",
-    reportStep: "Step",
-    months: "months",
-    // Z-scores
-    zNormal: "NORMAL",
-    zHypo: "HYPOPLASIA",
-    zHyper: "DILATATION",
-    zEmpty: "—",
-    // Algo summary parts
-    presentS: "present", presents: "present",
-    toExplore: "to explore",
-    countLabel: "checked"
   }
 };
 
@@ -1574,7 +1498,7 @@ function applyTranslations(){
   if(STATE.lang === "fr"){
     if($("docFirstName")) $("docFirstName").placeholder = "Mohamed";
     if($("docLastName"))  $("docLastName").placeholder  = "Touati";
-    if($("patientFirstName")) $("patientFirstName").placeholder = "Rayan";
+    if($("patientFirstName")) $("patientFirstName").placeholder = "Rayane";
     if($("patientLastName"))  $("patientLastName").placeholder  = "Sami";
   } else {
     if($("docFirstName")) $("docFirstName").placeholder = "John";
@@ -1650,7 +1574,7 @@ function validateProfileAndGo(){
     lastName:  ($("docLastName").value  || "Touati").trim()
   };
   // Patient
-  STATE.patient.firstName = ($("patientFirstName").value || "Rayan").trim();
+  STATE.patient.firstName = ($("patientFirstName").value || "Rayane").trim();
   STATE.patient.lastName  = ($("patientLastName").value  || "Sami").trim();
   STATE.patient.name      = STATE.patient.firstName + " " + STATE.patient.lastName;
   // Sexe géré par setSex() — on garde la valeur de STATE.patient.sex (default "M")
@@ -1658,11 +1582,7 @@ function validateProfileAndGo(){
   STATE.patient.height    = parseFloat($("patientHeight").value) || null;
   STATE.patient.ageMonths = parseInt($("ageSlider").value);
 
-  if(!STATE.patient.weight){
-    alert("Le poids est obligatoire pour calculer la surface corporelle.");
-    $("patientWeight").focus();
-    return;
-  }
+  // Poids et taille sont OPTIONNELS — pas de blocage
   computeBSA();
   updatePatientBar();
   goToScreen(2);
@@ -2470,5 +2390,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
   if($("patientWeight") && $("patientWeight").value){ computeBSA(); }
 });
 </script>
+
 </body>
 </html>
