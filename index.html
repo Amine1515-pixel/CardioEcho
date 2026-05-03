@@ -2,534 +2,411 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0e4a6e">
-<title>CardioEcho — Aide au diagnostic échocardiographique pédiatrique</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>CardioEcho — Aide au diagnostic échocardiographique</title>
+<meta name="description" content="Application d'aide au diagnostic échocardiographique des cardiopathies congénitales. Conçue par Dr Touati Mohamed, cardiologue pédiatre.">
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --primary: #1e6091;
-  --primary-dark: #0e4a6e;
-  --primary-light: #e8f1f8;
-  --accent: #f0f7fc;
-  --success: #27ae60;
-  --warning: #f39c12;
-  --danger: #c0392b;
-  --text: #2c3e50;
-  --text-soft: #5d6d7e;
-  --text-muted: #95a5a6;
-  --bg: #f8fafb;
-  --card-bg: #ffffff;
-  --border: #e1e8ed;
-  --radius: 14px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 8px rgba(14, 74, 110, 0.06);
-  --shadow-hover: 0 8px 24px rgba(14, 74, 110, 0.12);
+  --bg-deep: #0A1428; --bg-card: #122340; --bg-elevated: #1A2D4D;
+  --border: rgba(255,255,255,0.10); --border-soft: rgba(255,255,255,0.05);
+  --text-primary: #F1F5FF; --text-secondary: #A8B5D4; --text-muted: #6B7B9C;
+  --accent: #4A90E2; --accent-2: #7C3AED; --accent-3: #14B8A6;
+  --success: #10B981; --warning: #F59E0B; --danger: #EF4444;
+  --gradient-neonate: linear-gradient(135deg, #EC4899 0%, #BE185D 100%);
+  --gradient-1: linear-gradient(135deg, #4A90E2 0%, #7C3AED 100%);
+  --gradient-2: linear-gradient(135deg, #14B8A6 0%, #4A90E2 100%);
+  --gradient-3: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
 html, body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #1A2D4D 0%, #0A1428 60%);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  min-height: 100vh; overflow-x: hidden;
 }
+.app { max-width: 480px; margin: 0 auto; min-height: 100vh; padding: 24px 20px 60px; }
 
-body {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(180deg, #f0f7fc 0%, #ffffff 100%);
-}
-
-/* ========== HEADER ========== */
-.app-header {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-  color: #fff;
-  padding: 20px 16px 24px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.app-logo {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 12px;
-  background: rgba(255,255,255,0.15);
-  border: 2px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  backdrop-filter: blur(10px);
-}
-
-.app-title {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.6px;
-  margin-bottom: 4px;
-}
-
-.app-tagline {
-  font-size: 12px;
-  font-weight: 500;
-  opacity: 0.85;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-
-/* ========== LANG SWITCHER ========== */
-.lang-switch {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  display: flex;
-  gap: 4px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 8px;
-  padding: 3px;
-}
-
-.lang-btn {
-  background: transparent;
-  border: none;
-  color: rgba(255,255,255,0.7);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-}
-
-.lang-btn:hover { color: #fff; }
-
-.lang-btn.active {
-  background: #fff;
-  color: var(--primary-dark);
-}
-
-/* ========== MAIN ========== */
-.main {
-  flex: 1;
-  padding: 24px 16px 16px;
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.intro {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.intro-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 6px;
-  letter-spacing: -0.3px;
-}
-
-.intro-subtitle {
-  font-size: 13px;
-  color: var(--text-soft);
-  line-height: 1.5;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-.section-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin: 8px 4px 12px;
-}
-
-/* ========== MODULE CARDS ========== */
-.modules-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.module-card {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.25s ease;
-  box-shadow: var(--shadow);
+.brand-header { text-align: center; margin: 16px 0 28px; }
+.brand-logo {
+  width: 88px; height: 88px; margin: 0 auto 14px;
+  background: var(--gradient-1); border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 46px;
+  box-shadow: 0 12px 36px rgba(74,144,226,0.50);
   position: relative;
-  overflow: hidden;
+}
+.brand-logo::after {
+  content: ''; position: absolute; inset: -3px;
+  background: var(--gradient-1); border-radius: 26px;
+  z-index: -1; filter: blur(16px); opacity: 0.55;
+}
+.brand-name {
+  font-size: 30px; font-weight: 800; letter-spacing: -0.7px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.brand-tagline {
+  font-size: 12.5px; color: var(--text-secondary);
+  letter-spacing: 0.3px; margin-top: 5px; font-weight: 500;
 }
 
-.module-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: var(--card-color, var(--primary));
+.login-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 18px; padding: 22px; margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.login-title {
+  font-size: 16px; font-weight: 700; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.input-group { margin-bottom: 12px; }
+.input-label {
+  font-size: 11px; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  font-weight: 700; margin-bottom: 6px; display: block;
+}
+.input-field {
+  width: 100%; padding: 12px 14px; background: var(--bg-elevated);
+  border: 1.5px solid var(--border); color: var(--text-primary);
+  border-radius: 11px; font-size: 15px; font-family: inherit;
+  -webkit-appearance: none; transition: border 0.18s;
+}
+.input-field:focus { outline: none; border-color: var(--accent); }
+.btn {
+  width: 100%; padding: 13px; background: var(--gradient-1);
+  color: white; border: none; border-radius: 11px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: all 0.18s;
+  box-shadow: 0 6px 16px rgba(74,144,226,0.35);
+}
+.btn:active { transform: scale(0.98); box-shadow: 0 4px 10px rgba(74,144,226,0.25); }
+
+.error-msg {
+  background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);
+  color: #FCA5A5; padding: 10px 13px; border-radius: 9px;
+  font-size: 12.5px; margin-bottom: 12px; display: none;
+  animation: shake 0.4s;
+}
+.error-msg.visible { display: block; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
-.module-card:hover:not(.disabled) {
-  transform: translateY(-2px);
-  border-color: var(--card-color, var(--primary));
-  box-shadow: var(--shadow-hover);
+.login-hint {
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px dashed var(--border); text-align: center;
+  font-size: 11.5px; color: var(--text-muted); line-height: 1.6;
 }
 
-.module-card:active:not(.disabled) {
-  transform: translateY(0);
+.description-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(74,144,226,0.05));
+  border: 1px solid rgba(124,58,237,0.25); border-radius: 14px;
+  padding: 16px; margin-bottom: 22px; font-size: 12.5px; line-height: 1.65;
+  color: var(--text-secondary);
 }
-
-.module-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--card-bg-color, var(--primary-light));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  flex-shrink: 0;
-}
-
-.module-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.module-age {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--card-color, var(--primary));
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  margin-bottom: 3px;
-}
-
-.module-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 4px;
-  letter-spacing: -0.2px;
-}
-
-.module-desc {
-  font-size: 12.5px;
-  color: var(--text-soft);
-  line-height: 1.45;
-}
-
-.module-arrow {
-  color: var(--card-color, var(--primary));
-  font-size: 22px;
-  flex-shrink: 0;
-  margin-left: 4px;
-}
-
-/* État désactivé */
-.module-card.disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  background: #fafbfc;
-}
-
-.module-card.disabled .module-arrow { display: none; }
-
-.coming-soon-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: var(--warning);
-  color: #fff;
-  font-size: 9.5px;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Couleurs par tranche d'âge */
-.card-neonate {
-  --card-color: #d35400;
-  --card-bg-color: #fef5ec;
-}
-.card-infant {
-  --card-color: #1e6091;
-  --card-bg-color: #e8f1f8;
-}
-.card-child {
-  --card-color: #27ae60;
-  --card-bg-color: #e8f8ee;
-}
-.card-teen {
-  --card-color: #8e44ad;
-  --card-bg-color: #f3eaf7;
-}
-
-/* ========== INFO BOX ========== */
-.info-box {
-  background: var(--accent);
-  border-left: 3px solid var(--primary);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  margin-top: 20px;
-  font-size: 12px;
-  color: var(--text-soft);
-  line-height: 1.5;
-}
-
-.info-box strong {
-  color: var(--primary-dark);
-  font-weight: 700;
-}
-
-/* ========== FOOTER ========== */
-.app-footer {
-  background: var(--primary-dark);
-  color: rgba(255,255,255,0.85);
-  padding: 20px 16px;
-  text-align: center;
+.description-card strong { color: var(--text-primary); }
+.description-card .feat-list {
+  list-style: none; padding: 0; margin: 10px 0 4px;
   font-size: 11.5px;
-  line-height: 1.6;
-  letter-spacing: 0.2px;
+}
+.description-card .feat-list li { padding: 3px 0; }
+.description-author {
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid rgba(124,58,237,0.20);
+  font-size: 11.5px; color: var(--text-muted); text-align: center;
+}
+.description-author strong {
+  color: var(--accent); font-weight: 800;
 }
 
-.footer-author {
-  font-weight: 700;
-  color: #fff;
-  font-size: 12.5px;
-  margin-bottom: 4px;
-  letter-spacing: 0.3px;
+.module-section { display: none; }
+.module-section.active { display: block; }
+
+.welcome-banner {
+  background: linear-gradient(135deg, rgba(16,185,129,0.10), transparent);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 12px; padding: 12px 14px; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px; font-size: 13px;
+}
+.welcome-banner-icon { font-size: 22px; }
+.welcome-banner-text { flex: 1; color: var(--success); font-weight: 700; }
+.welcome-banner-logout {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 11.5px; padding: 6px 11px;
+  border-radius: 7px; cursor: pointer; font-family: inherit;
 }
 
-.footer-meta {
-  opacity: 0.7;
-  font-size: 10.5px;
-  margin-top: 6px;
-  letter-spacing: 0.4px;
+.section-title {
+  font-size: 18px; font-weight: 800; margin-bottom: 6px;
+  letter-spacing: -0.4px;
 }
-
-/* ========== RESPONSIVE ========== */
-@media (min-width: 600px) {
-  .modules-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .info-box { grid-column: 1 / -1; }
-}
-
-@media (max-width: 380px) {
-  .app-title { font-size: 24px; }
-  .module-title { font-size: 15px; }
-  .module-desc { font-size: 11.5px; }
-  .module-icon { width: 48px; height: 48px; font-size: 26px; }
-}
-
-/* ========== ANIMATIONS ========== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.section-subtitle {
+  font-size: 12.5px; color: var(--text-secondary);
+  margin-bottom: 18px; line-height: 1.5;
 }
 
 .module-card {
-  animation: fadeInUp 0.4s ease backwards;
+  display: block; text-decoration: none; color: inherit;
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 16px 14px; margin-bottom: 11px;
+  position: relative; overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.module-card:active { transform: scale(0.98); }
+.module-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 5px; background: var(--gradient-1);
+}
+.module-card.module-neonate::before { background: var(--gradient-neonate); }
+.module-card.module-2::before { background: var(--gradient-2); }
+.module-card.module-3::before { background: var(--gradient-3); }
+.module-card-content { display: flex; align-items: center; gap: 13px; }
+.module-card-icon {
+  width: 54px; height: 54px; border-radius: 13px;
+  background: var(--bg-elevated);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; flex-shrink: 0;
+}
+.module-card-info { flex: 1; min-width: 0; }
+.module-card-title { font-size: 14.5px; font-weight: 800; margin-bottom: 3px; }
+.module-card-age {
+  font-size: 10.5px; color: var(--accent); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px;
+}
+.module-neonate .module-card-age { color: #F472B6; }
+.module-2 .module-card-age { color: var(--accent-3); }
+.module-3 .module-card-age { color: var(--warning); }
+.module-card-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+.module-card-arrow {
+  font-size: 18px; color: var(--text-muted); flex-shrink: 0;
+}
+.module-card.disabled { opacity: 0.55; cursor: not-allowed; }
+.module-card-badge {
+  display: inline-block; font-size: 9.5px; padding: 2px 7px;
+  background: rgba(245,158,11,0.18); color: var(--warning);
+  border-radius: 4px; font-weight: 700; margin-left: 6px;
+  text-transform: uppercase; letter-spacing: 0.5px;
 }
 
-.module-card:nth-child(1) { animation-delay: 0.05s; }
-.module-card:nth-child(2) { animation-delay: 0.10s; }
-.module-card:nth-child(3) { animation-delay: 0.15s; }
-.module-card:nth-child(4) { animation-delay: 0.20s; }
+.app-footer {
+  margin-top: 28px; padding-top: 20px;
+  border-top: 1px solid var(--border-soft);
+  text-align: center; font-size: 10.5px; color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  background: var(--success); color: white; padding: 10px 18px;
+  border-radius: 9px; font-size: 13px; font-weight: 700;
+  z-index: 99999; box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  animation: toastIn 0.3s ease-out;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .input-field { font-size: 16px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
-<header class="app-header">
-  <div class="lang-switch">
-    <button class="lang-btn active" id="langBtnFR" onclick="setLang('fr')">FR</button>
-    <button class="lang-btn" id="langBtnEN" onclick="setLang('en')">EN</button>
-  </div>
-  <div class="app-logo">🩺</div>
-  <h1 class="app-title">CardioEcho</h1>
-  <div class="app-tagline" data-i18n="tagline">Aide au diagnostic échocardiographique</div>
-</header>
+<div class="app">
 
-<!-- ============ MAIN ============ -->
-<main class="main">
-
-  <div class="intro">
-    <h2 class="intro-title" data-i18n="introTitle">Choisissez la tranche d'âge</h2>
-    <p class="intro-subtitle" data-i18n="introSubtitle">Sélectionnez le module adapté à l'âge du patient pour accéder à l'algorithme diagnostique correspondant.</p>
+  <div class="brand-header">
+    <div class="brand-logo">🫀</div>
+    <div class="brand-name">CardioEcho</div>
+    <div class="brand-tagline">Aide au diagnostic échocardiographique</div>
   </div>
 
-  <div class="section-label" data-i18n="modulesLabel">Modules disponibles</div>
-
-  <div class="modules-grid">
-
-    <!-- Module 1 : Néonatal (actif) -->
-    <a href="./modules/01_neonatal.html" class="module-card card-neonate">
-      <div class="module-icon">👶</div>
-      <div class="module-content">
-        <div class="module-age" data-i18n="m1Age">0 — 1 mois</div>
-        <div class="module-title" data-i18n="m1Title">Nouveau-né</div>
-        <div class="module-desc" data-i18n="m1Desc">Cardiopathies néonatales · Cyanose · SpO₂ pré/post-ductale · Test d'hyperoxie</div>
+  <!-- ━━━ ÉCRAN LOGIN ━━━ -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <div class="login-title">🔐 Accès protégé</div>
+      <div class="error-msg" id="loginError"></div>
+      <div class="input-group">
+        <label class="input-label">Mot de passe</label>
+        <input type="password" class="input-field" id="loginPassword" autocomplete="current-password" placeholder="••••••••">
       </div>
-      <div class="module-arrow">›</div>
-    </a>
-
-    <!-- Module 2 : Nourrisson (actif) -->
-    <a href="./modules/02_infant.html" class="module-card card-infant">
-      <div class="module-icon">🍼</div>
-      <div class="module-content">
-        <div class="module-age" data-i18n="m2Age">1 — 6 mois</div>
-        <div class="module-title" data-i18n="m2Title">Nourrisson</div>
-        <div class="module-desc" data-i18n="m2Desc">Algorithme 17 étapes · CIV, CIA, CAV, T4F · Z-scores Lopez 2010 · ChatBot IA</div>
-      </div>
-      <div class="module-arrow">›</div>
-    </a>
-
-    <!-- Module 3 : Enfant (à venir) -->
-    <div class="module-card card-child disabled">
-      <div class="coming-soon-badge" data-i18n="comingSoon">Bientôt</div>
-      <div class="module-icon">🧒</div>
-      <div class="module-content">
-        <div class="module-age" data-i18n="m3Age">6 mois — 12 ans</div>
-        <div class="module-title" data-i18n="m3Title">Enfant</div>
-        <div class="module-desc" data-i18n="m3Desc">Cardiopathies de l'enfant · Cardiomyopathies · Suivi post-opératoire</div>
+      <button class="btn" onclick="doLogin()">Accéder à l'application</button>
+      <div class="login-hint">
+        Application réservée à l'usage clinique professionnel.<br>
+        Pour obtenir le mot de passe, contactez le Dr Touati Mohamed.
       </div>
     </div>
 
-    <!-- Module 4 : Adolescent / Adulte (à venir) -->
-    <div class="module-card card-teen disabled">
-      <div class="coming-soon-badge" data-i18n="comingSoon">Bientôt</div>
-      <div class="module-icon">🧑</div>
-      <div class="module-content">
-        <div class="module-age" data-i18n="m4Age">12 ans et +</div>
-        <div class="module-title" data-i18n="m4Title">Adolescent / Adulte</div>
-        <div class="module-desc" data-i18n="m4Desc">Cardiopathies congénitales adultes · GUCH · Cardiopathies acquises</div>
+    <div class="description-card">
+      <strong>🩺 CardioEcho</strong> est une application d'aide au diagnostic échocardiographique
+      des cardiopathies congénitales pédiatriques. Elle propose un parcours interactif organisé par
+      tranche d'âge, avec :
+      <ul class="feat-list">
+        <li>🔍 Algorithme diagnostique à 17 étapes</li>
+        <li>⚖️ Évaluation de gravité (Cat.B) — 14 pathologies</li>
+        <li>💊 Recommandations de prise en charge adaptées</li>
+        <li>📋 Compte rendu unifié + export PDF</li>
+        <li>💬 Assistant IA conversationnel</li>
+      </ul>
+      <div class="description-author">
+        Conçue et développée par <strong>Dr Touati Mohamed</strong><br>
+        Cardiologue pédiatre · CMCI Algérie
       </div>
     </div>
-
   </div>
 
-  <div class="info-box">
-    <strong data-i18n="infoTitle">À propos :</strong>
-    <span data-i18n="infoText">CardioEcho est un outil d'aide au diagnostic destiné aux cardiologues pédiatres. Les recommandations doivent toujours être validées par un médecin spécialiste.</span>
+  <!-- ━━━ ÉCRAN MODULES (après login) ━━━ -->
+  <div class="module-section" id="moduleScreen">
+    <div class="welcome-banner">
+      <div class="welcome-banner-icon">✅</div>
+      <div class="welcome-banner-text">Accès autorisé</div>
+      <button class="welcome-banner-logout" onclick="doLogout()">Verrouiller</button>
+    </div>
+
+    <div class="section-title">Choisir une tranche d'âge</div>
+    <div class="section-subtitle">Sélectionnez le module adapté à l'âge du patient pour accéder à l'algorithme diagnostique correspondant.</div>
+
+    <a class="module-card module-neonate disabled" href="#" id="card-neonate">
+      <div class="module-card-content">
+        <div class="module-card-icon">👶</div>
+        <div class="module-card-info">
+          <div class="module-card-age">0 — 1 mois <span class="module-card-badge">Bientôt</span></div>
+          <div class="module-card-title">Nouveau-né</div>
+          <div class="module-card-desc">Période néonatale · urgences ductodépendantes · prostines · transferts tertiaires</div>
+        </div>
+        <div class="module-card-arrow">→</div>
+      </div>
+    </a>
+
+    <a class="module-card module-1" href="modules/nourrisson.html">
+      <div class="module-card-content">
+        <div class="module-card-icon">🍼</div>
+        <div class="module-card-info">
+          <div class="module-card-age">1 — 6 mois</div>
+          <div class="module-card-title">Petit nourrisson</div>
+          <div class="module-card-desc">14 cardiopathies · cohorte CMCI 26 273 cas · prise en charge précoce</div>
+        </div>
+        <div class="module-card-arrow">→</div>
+      </div>
+    </a>
+
+    <a class="module-card module-2" href="modules/enfant.html">
+      <div class="module-card-content">
+        <div class="module-card-icon">🧒</div>
+        <div class="module-card-info">
+          <div class="module-card-age">6 mois — 5 ans</div>
+          <div class="module-card-title">Enfant</div>
+          <div class="module-card-desc">14 cardiopathies adaptées · cohorte 55 272 cas · stages chir Glenn/Fontan · malaises hypoxémiques</div>
+        </div>
+        <div class="module-card-arrow">→</div>
+      </div>
+    </a>
+
+    <a class="module-card module-3 disabled" href="#" id="card-grand">
+      <div class="module-card-content">
+        <div class="module-card-icon">🧑</div>
+        <div class="module-card-info">
+          <div class="module-card-age">> 5 ans <span class="module-card-badge">À venir</span></div>
+          <div class="module-card-title">Grand enfant et adulte</div>
+          <div class="module-card-desc">Adolescent et adulte avec CHC · suivi post-chirurgical au long cours</div>
+        </div>
+        <div class="module-card-arrow">→</div>
+      </div>
+    </a>
   </div>
 
-</main>
+  <div class="app-footer">
+    CardioEcho v1.0 · Module pédiatrique<br>
+    © 2026 Dr Touati Mohamed · CMCI Algérie<br>
+    Aide au diagnostic — ne remplace pas le jugement clinique
+  </div>
 
-<!-- ============ FOOTER ============ -->
-<footer class="app-footer">
-  <div class="footer-author">Dr Touati Mohamed</div>
-  <div data-i18n="footerOrg">Cardiologue pédiatre · CMCI Algérie</div>
-  <div class="footer-meta">CardioEcho v1.0 · 2026</div>
-</footer>
+</div>
 
 <script>
-/* ════════════════════════════════════════════════
-   GESTION BILINGUE FR / EN
-═════════════════════════════════════════════════ */
-const i18n = {
-  fr: {
-    tagline: "Aide au diagnostic échocardiographique",
-    introTitle: "Choisissez la tranche d'âge",
-    introSubtitle: "Sélectionnez le module adapté à l'âge du patient pour accéder à l'algorithme diagnostique correspondant.",
-    modulesLabel: "Modules disponibles",
-    m1Age: "0 — 1 mois",
-    m1Title: "Nouveau-né",
-    m1Desc: "Cardiopathies néonatales · Cyanose · SpO₂ pré/post-ductale · Test d'hyperoxie",
-    m2Age: "1 — 6 mois",
-    m2Title: "Nourrisson",
-    m2Desc: "Algorithme 17 étapes · CIV, CIA, CAV, T4F · Z-scores Lopez 2010 · ChatBot IA",
-    m3Age: "6 mois — 12 ans",
-    m3Title: "Enfant",
-    m3Desc: "Cardiopathies de l'enfant · Cardiomyopathies · Suivi post-opératoire",
-    m4Age: "12 ans et +",
-    m4Title: "Adolescent / Adulte",
-    m4Desc: "Cardiopathies congénitales adultes · GUCH · Cardiopathies acquises",
-    comingSoon: "Bientôt",
-    infoTitle: "À propos :",
-    infoText: "CardioEcho est un outil d'aide au diagnostic destiné aux cardiologues pédiatres. Les recommandations doivent toujours être validées par un médecin spécialiste.",
-    footerOrg: "Cardiologue pédiatre · CMCI Algérie"
-  },
-  en: {
-    tagline: "Echocardiographic diagnostic assistance",
-    introTitle: "Select the age group",
-    introSubtitle: "Choose the module matching the patient's age to access the corresponding diagnostic algorithm.",
-    modulesLabel: "Available modules",
-    m1Age: "0 — 1 month",
-    m1Title: "Newborn",
-    m1Desc: "Neonatal heart diseases · Cyanosis · Pre/post-ductal SpO₂ · Hyperoxia test",
-    m2Age: "1 — 6 months",
-    m2Title: "Infant",
-    m2Desc: "17-step algorithm · VSD, ASD, AVSD, TOF · Lopez 2010 Z-scores · AI ChatBot",
-    m3Age: "6 months — 12 years",
-    m3Title: "Child",
-    m3Desc: "Pediatric heart diseases · Cardiomyopathies · Post-op follow-up",
-    m4Age: "12+ years",
-    m4Title: "Teen / Adult",
-    m4Desc: "Adult congenital heart disease · GUCH · Acquired cardiopathies",
-    comingSoon: "Soon",
-    infoTitle: "About:",
-    infoText: "CardioEcho is a diagnostic decision-support tool intended for pediatric cardiologists. Recommendations must always be validated by a specialist physician.",
-    footerOrg: "Pediatric cardiologist · CMCI Algeria"
+/* ═══════════════════════════════════════════════════════════
+   CARDIOECHO INDEX — Authentification simple par mot de passe
+   4 modules : Nouveau-né | Nourrisson | Enfant | Grand enfant/Adulte
+   ⚠️ Sécurité limitée : mot de passe en JS (visible dans le code).
+═══════════════════════════════════════════════════════════ */
+
+const APP_PASSWORD = 'cardioecho2026';
+const SESSION_KEY = 'cardioecho_unlocked';
+
+function doLogin() {
+  const pwd = document.getElementById('loginPassword').value;
+  const err = document.getElementById('loginError');
+  if (!pwd) {
+    err.textContent = 'Veuillez saisir le mot de passe';
+    err.classList.add('visible');
+    return;
   }
-};
-
-let currentLang = localStorage.getItem('cardioecho_lang') || 'fr';
-
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('cardioecho_lang', lang);
-  document.documentElement.lang = lang;
-  const dict = i18n[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (dict[key]) el.textContent = dict[key];
-  });
-  // Maj boutons langue
-  document.getElementById('langBtnFR').classList.toggle('active', lang === 'fr');
-  document.getElementById('langBtnEN').classList.toggle('active', lang === 'en');
-  // Titre HTML
-  document.title = lang === 'fr'
-    ? "CardioEcho — Aide au diagnostic échocardiographique pédiatrique"
-    : "CardioEcho — Pediatric echocardiographic decision support";
+  if (pwd !== APP_PASSWORD) {
+    err.textContent = '❌ Mot de passe incorrect';
+    err.classList.add('visible');
+    document.getElementById('loginPassword').value = '';
+    return;
+  }
+  err.classList.remove('visible');
+  sessionStorage.setItem(SESSION_KEY, '1');
+  showModuleScreen();
+  showToast('✅ Accès autorisé');
 }
 
-// Init au chargement
-document.addEventListener('DOMContentLoaded', () => {
-  setLang(currentLang);
+function doLogout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById('loginScreen').style.display = 'block';
+  document.getElementById('moduleScreen').classList.remove('active');
+  document.getElementById('loginPassword').value = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast('🔒 Application verrouillée');
+}
+
+function showModuleScreen() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('moduleScreen').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function checkSession() {
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    showModuleScreen();
+  }
+}
+
+function showToast(msg) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => {
+    t.style.opacity = '0';
+    setTimeout(() => t.remove(), 300);
+  }, 1800);
+}
+
+document.getElementById('card-neonate').addEventListener('click', function(e) {
+  e.preventDefault();
+  showToast('Module "Nouveau-né" en cours de développement');
+});
+document.getElementById('card-grand').addEventListener('click', function(e) {
+  e.preventDefault();
+  showToast('Module "Grand enfant et adulte" en cours de développement');
 });
 
-// Ne rien faire si on clique sur un module désactivé
-document.querySelectorAll('.module-card.disabled').forEach(card => {
-  card.addEventListener('click', e => {
-    e.preventDefault();
-    const msg = currentLang === 'fr'
-      ? "Ce module sera bientôt disponible."
-      : "This module will be available soon.";
-    alert(msg);
-  });
+document.getElementById('loginPassword').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
 });
+
+checkSession();
 </script>
 
 </body>
