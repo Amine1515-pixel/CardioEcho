@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>CardioEcho — 50 Cas Cliniques d'Entraînement</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-deep: #06101E; --bg-card: #0B1928; --bg-elevated: #122537;
+  --border: rgba(255,255,255,0.08); --border-soft: rgba(255,255,255,0.04);
+  --text-primary: #EEF5FF; --text-secondary: #94A3B8; --text-muted: #64748B;
+  --accent: #4A90E2; --accent-2: #7C3AED; --accent-3: #14B8A6;
+  --success: #10B981; --warning: #F59E0B; --danger: #EF4444;
+  --gradient-1: linear-gradient(135deg, #4A90E2 0%, #7C3AED 100%);
+  --gradient-2: linear-gradient(135deg, #14B8A6 0%, #4A90E2 100%);
+}
+html, body {
+  background: radial-gradient(ellipse at top, #1A2D4D 0%, #06101E 60%);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  min-height: 100vh; overflow-x: hidden;
+}
+.app { max-width: 480px; margin: 0 auto; min-height: 100vh; padding: 16px 16px 60px; }
+
+/* HEADER */
+.header {
+  display: flex; align-items: center; gap: 10px; padding: 8px 0 14px;
+  border-bottom: 1px solid var(--border-soft); margin-bottom: 14px;
+}
+.btn-back {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  color: var(--text-primary); padding: 7px 11px; border-radius: 8px;
+  font-size: 12px; font-family: inherit; cursor: pointer; font-weight: 700;
+}
+.brand-mid { flex: 1; text-align: center; }
+.brand-name {
+  font-size: 17px; font-weight: 800; letter-spacing: -0.4px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.brand-tag { font-size: 10px; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+/* SCREENS */
+.screen { display: none; animation: screenIn 0.25s ease-out; }
+.screen.active { display: block; }
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.screen-title {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.screen-subtitle {
+  font-size: 12.5px; color: var(--text-secondary);
+  margin-bottom: 18px; line-height: 1.5;
+}
+
+/* STATS BANNER (écran liste) */
+.stats-banner {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 11px; padding: 10px 8px; text-align: center;
+}
+.stat-value {
+  font-size: 18px; font-weight: 800;
+  background: var(--gradient-1);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-label {
+  font-size: 10px; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px; font-weight: 600;
+}
+
+/* SEARCH BAR */
+.search-bar {
+  position: relative; margin-bottom: 12px;
+}
+.search-input {
+  width: 100%; padding: 11px 12px 11px 36px;
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  color: var(--text-primary); border-radius: 11px;
+  font-size: 14px; font-family: inherit; -webkit-appearance: none;
+}
+.search-input:focus { outline: none; border-color: var(--accent); }
+.search-icon {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); pointer-events: none;
+}
+
+/* FILTER CHIPS */
+.filter-section { margin-bottom: 14px; }
+.filter-label {
+  font-size: 10px; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  font-weight: 700; margin-bottom: 6px;
+}
+.filter-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.chip {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  color: var(--text-secondary); padding: 5px 11px; border-radius: 14px;
+  font-size: 11.5px; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: all 0.18s;
+}
+.chip:active { transform: scale(0.95); }
+.chip.active {
+  background: var(--accent); color: white; border-color: var(--accent);
+}
+.chip.diff-easy.active { background: var(--success); border-color: var(--success); }
+.chip.diff-medium.active { background: var(--warning); border-color: var(--warning); color: #1F2937; }
+.chip.diff-hard.active { background: var(--danger); border-color: var(--danger); }
+
+/* CASE LIST */
+.case-list-empty {
+  text-align: center; padding: 30px 16px;
+  color: var(--text-muted); font-size: 13px;
+}
+.case-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 13px; margin-bottom: 9px;
+  display: flex; align-items: center; gap: 11px; cursor: pointer;
+  transition: all 0.18s;
+  position: relative; overflow: hidden;
+}
+.case-card:active { transform: scale(0.98); }
+.case-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; background: var(--accent);
+}
+.case-card.diff-easy::before { background: var(--success); }
+.case-card.diff-medium::before { background: var(--warning); }
+.case-card.diff-hard::before { background: var(--danger); }
+.case-card-num {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--bg-elevated); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: var(--accent);
+  flex-shrink: 0;
+}
+.case-card.completed .case-card-num { background: var(--success); color: white; }
+.case-card-info { flex: 1; min-width: 0; }
+.case-card-title {
+  font-size: 13px; font-weight: 700; margin-bottom: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.case-card-meta {
+  font-size: 10.5px; color: var(--text-muted); display: flex;
+  gap: 8px; align-items: center; flex-wrap: wrap;
+}
+.case-card-meta .badge {
+  font-size: 9.5px; padding: 1px 6px; border-radius: 4px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.badge.age-neonate { background: rgba(236,72,153,0.15); color: #F472B6; }
+.badge.age-nourrisson { background: rgba(124,58,237,0.15); color: var(--accent-2); }
+.badge.age-enfant { background: rgba(20,184,166,0.15); color: var(--accent-3); }
+.badge.age-grand { background: rgba(245,158,11,0.15); color: var(--warning); }
+.badge.diff-easy { background: rgba(16,185,129,0.15); color: var(--success); }
+.badge.diff-medium { background: rgba(245,158,11,0.15); color: var(--warning); }
+.badge.diff-hard { background: rgba(239,68,68,0.15); color: var(--danger); }
+.case-card-arrow {
+  font-size: 16px; color: var(--text-muted); flex-shrink: 0;
+}
+
+/* CASE DETAIL */
+.case-header {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 14px; margin-bottom: 12px;
+}
+.case-header-top {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.case-header-num {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: var(--gradient-1); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800;
+}
+.case-header-title {
+  flex: 1; font-size: 14px; font-weight: 800;
+}
+.case-header-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* MODE SELECTOR */
+.mode-selector {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
+  margin-bottom: 14px;
+}
+.mode-btn {
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  color: var(--text-secondary); padding: 9px 6px; border-radius: 10px;
+  font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit;
+  text-align: center; transition: all 0.18s;
+}
+.mode-btn:active { transform: scale(0.96); }
+.mode-btn.active {
+  background: var(--accent); color: white; border-color: var(--accent);
+}
+.mode-btn .mode-icon { display: block; font-size: 16px; margin-bottom: 2px; }
+
+/* CARD GENERIQUE */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 13px; margin-bottom: 11px;
+}
+.card-title {
+  font-size: 11px; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.card-content { font-size: 13px; line-height: 1.6; color: var(--text-primary); }
+.card-content p { margin-bottom: 6px; }
+.card-content strong { color: var(--accent); font-weight: 700; }
+
+/* CANVA URL INPUT */
+.canva-url-row {
+  display: flex; gap: 6px; margin-bottom: 8px;
+}
+.canva-url-input {
+  flex: 1; min-width: 0; background: var(--bg-elevated);
+  border: 1.5px solid var(--border); color: var(--text-primary);
+  padding: 9px 11px; border-radius: 9px; font-size: 11.5px;
+  font-family: 'SF Mono', Menlo, monospace; -webkit-appearance: none;
+}
+.canva-url-input:focus { outline: none; border-color: var(--accent); }
+.canva-btn {
+  background: var(--accent); color: white; border: none;
+  padding: 9px 12px; border-radius: 9px; font-size: 12px;
+  font-weight: 700; cursor: pointer; font-family: inherit; flex-shrink: 0;
+}
+.canva-btn.secondary {
+  background: var(--bg-elevated); color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.canva-help {
+  font-size: 10.5px; color: var(--text-muted); line-height: 1.5;
+  background: rgba(74,144,226,0.06); border-left: 2px solid var(--accent);
+  padding: 7px 10px; border-radius: 0 7px 7px 0; margin-bottom: 8px;
+}
+.canva-iframe-wrap {
+  position: relative; width: 100%; padding-bottom: 75%;
+  background: var(--bg-elevated); border-radius: 10px;
+  border: 1px solid var(--border); overflow: hidden;
+}
+.canva-iframe-wrap iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0;
+}
+.canva-empty-placeholder {
+  background: var(--bg-elevated); border: 2px dashed var(--border);
+  border-radius: 10px; padding: 28px 16px; text-align: center;
+  color: var(--text-muted);
+}
+.canva-empty-placeholder .icon { font-size: 28px; margin-bottom: 8px; }
+
+/* QCM */
+.qcm-options { display: flex; flex-direction: column; gap: 8px; }
+.qcm-option {
+  background: var(--bg-elevated); border: 1.5px solid var(--border);
+  color: var(--text-primary); padding: 11px 13px; border-radius: 10px;
+  font-size: 13px; font-family: inherit; text-align: left;
+  cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 9px;
+}
+.qcm-option:active { transform: scale(0.98); }
+.qcm-option:hover { border-color: var(--accent); }
+.qcm-option-letter {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 12px; flex-shrink: 0;
+}
+.qcm-option.selected { border-color: var(--accent); background: rgba(74,144,226,0.10); }
+.qcm-option.selected .qcm-option-letter { background: var(--accent); color: white; border-color: var(--accent); }
+.qcm-option.correct { border-color: var(--success); background: rgba(16,185,129,0.10); }
+.qcm-option.correct .qcm-option-letter { background: var(--success); color: white; border-color: var(--success); }
+.qcm-option.wrong { border-color: var(--danger); background: rgba(239,68,68,0.10); }
+.qcm-option.wrong .qcm-option-letter { background: var(--danger); color: white; border-color: var(--danger); }
+.qcm-option:disabled { cursor: default; }
+
+/* FREE TEXT */
+.free-input {
+  width: 100%; min-height: 80px; padding: 11px 13px;
+  background: var(--bg-elevated); border: 1.5px solid var(--border);
+  color: var(--text-primary); border-radius: 10px;
+  font-size: 14px; font-family: inherit; resize: vertical;
+  -webkit-appearance: none;
+}
+.free-input:focus { outline: none; border-color: var(--accent); }
+
+/* WORKFLOW STEPS */
+.workflow-step-indicator {
+  display: flex; gap: 4px; margin-bottom: 12px;
+}
+.workflow-step-dot {
+  flex: 1; height: 4px; background: var(--border); border-radius: 2px;
+  transition: background 0.2s;
+}
+.workflow-step-dot.active { background: var(--accent); }
+.workflow-step-dot.done { background: var(--success); }
+
+/* ANSWER REVEAL */
+.reveal-card {
+  background: linear-gradient(135deg, rgba(16,185,129,0.10), transparent);
+  border: 1.5px solid var(--success); border-radius: 12px;
+  padding: 13px; margin-bottom: 12px;
+  animation: revealIn 0.4s ease-out;
+}
+@keyframes revealIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.reveal-card.wrong-card {
+  background: linear-gradient(135deg, rgba(239,68,68,0.10), transparent);
+  border-color: var(--danger);
+}
+.reveal-title {
+  font-size: 12px; font-weight: 800; color: var(--success);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+}
+.reveal-card.wrong-card .reveal-title { color: var(--danger); }
+.reveal-content { font-size: 13px; line-height: 1.6; }
+.reveal-content strong { color: var(--accent); }
+
+/* BUTTONS */
+.btn {
+  width: 100%; padding: 12px; background: var(--gradient-1);
+  color: white; border: none; border-radius: 11px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: all 0.18s;
+  box-shadow: 0 6px 16px rgba(74,144,226,0.30);
+}
+.btn:active { transform: scale(0.98); }
+.btn-secondary {
+  background: var(--bg-elevated); color: var(--text-primary);
+  border: 1px solid var(--border); box-shadow: none;
+}
+.btn-success { background: linear-gradient(135deg, #10B981, #059669); box-shadow: 0 6px 16px rgba(16,185,129,0.30); }
+.btn-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;
+}
+
+/* TOAST */
+.toast {
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+  background: var(--success); color: white; padding: 10px 18px;
+  border-radius: 9px; font-size: 13px; font-weight: 700;
+  z-index: 99999; box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  animation: toastIn 0.3s ease-out;
+}
+.toast.error { background: var(--danger); }
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .canva-url-input, .free-input, .search-input { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <button class="btn-back" id="btnBack" onclick="onBack()">← Retour</button>
+    <div class="brand-mid">
+      <div class="brand-name">📚 Cas Cliniques</div>
+      <div class="brand-tag" id="headerTag">50 cas d'entraînement</div>
+    </div>
+    <div style="width:60px;"></div>
+  </div>
+
+  <!-- ━━━ ÉCRAN LISTE ━━━ -->
+  <section class="screen active" id="screen-list">
+    <h1 class="screen-title">Bibliothèque de cas</h1>
+    <p class="screen-subtitle">50 cas pédagogiques basés sur la cohorte CMCI. Filtrez par pathologie, âge ou difficulté.</p>
+
+    <div class="stats-banner">
+      <div class="stat-card">
+        <div class="stat-value" id="statTotal">50</div>
+        <div class="stat-label">Cas totaux</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statDone">0</div>
+        <div class="stat-label">Complétés</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statSuccess">—</div>
+        <div class="stat-label">Réussite</div>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Rechercher (CIV, T4F, cyanose...)">
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Pathologie</div>
+      <div class="filter-chips" id="filterPatho">
+        <button class="chip active" data-filter-patho="all">Toutes</button>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Tranche d'âge</div>
+      <div class="filter-chips" id="filterAge">
+        <button class="chip active" data-filter-age="all">Tous</button>
+        <button class="chip" data-filter-age="neonate">👶 0-1m</button>
+        <button class="chip" data-filter-age="nourrisson">🍼 1-6m</button>
+        <button class="chip" data-filter-age="enfant">🧒 6m-5a</button>
+        <button class="chip" data-filter-age="grand">🧑 >5a</button>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Difficulté</div>
+      <div class="filter-chips" id="filterDiff">
+        <button class="chip active" data-filter-diff="all">Toutes</button>
+        <button class="chip diff-easy" data-filter-diff="easy">Facile</button>
+        <button class="chip diff-medium" data-filter-diff="medium">Moyen</button>
+        <button class="chip diff-hard" data-filter-diff="hard">Difficile</button>
+      </div>
+    </div>
+
+    <div id="caseList"></div>
+  </section>
+
+  <!-- ━━━ ÉCRAN CAS DÉTAIL ━━━ -->
+  <section class="screen" id="screen-case">
+    <div id="caseDetail"></div>
+  </section>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CARDIOECHO — 50 CAS CLINIQUES
+   Données + logique seront injectées après
+═══════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════
+   50 CAS CLINIQUES — Bibliothèque pédagogique CardioEcho
+═══════════════════════════════════════════════════════════ */
+const CASES_DATA = [
+
+  /* ━━━━━━━━━━ CIV (10 cas) ━━━━━━━━━━ */
+  {
+    id: 1, patho: 'CIV', age: 'enfant', diff: 'easy',
+    title: 'CIV musculaire de découverte fortuite',
+    age_label: '18 mois', sex: 'F',
+    presentation: 'Enfant de 18 mois, asymptomatique. Souffle systolique grade 2/6 entendu à la visite des 18 mois. Croissance staturopondérale normale. Pas d\'antécédents.',
+    examens: 'TA normale, FC 110/min, sat 99% en air. Auscultation : souffle holosystolique 2/6 mésocardiaque, B2 normal.',
+    echo_focus: 'Recherchez la CIV en parasternale petit axe + Doppler couleur',
+    qcm_question: 'Quel est votre diagnostic le plus probable ?',
+    qcm_options: [
+      { text: 'CIV musculaire restrictive', correct: true },
+      { text: 'CIA ostium secundum', correct: false },
+      { text: 'PCA petit', correct: false },
+      { text: 'Sténose pulmonaire légère', correct: false }
+    ],
+    qcm_explanation: 'Souffle systolique mésocardiaque + asymptomatique + croissance normale → CIV restrictive (le plus souvent musculaire à cet âge). La fermeture spontanée est encore possible.',
+    correct_dx: 'CIV musculaire restrictive',
+    pec: 'Surveillance échographique annuelle. Pas d\'indication chirurgicale (Qp/Qs < 1.5). Prophylaxie endocardite si valve dystrophique. Information parents : fermeture spontanée possible jusqu\'à 5 ans.',
+    pearls: '💡 80% des CIV musculaires se ferment spontanément avant 5 ans.'
+  },
+  {
+    id: 2, patho: 'CIV', age: 'nourrisson', diff: 'medium',
+    title: 'CIV large périmembraneuse avec IC',
+    age_label: '3 mois', sex: 'M',
+    presentation: 'Nourrisson de 3 mois, sueurs aux tétées, prises alimentaires fragmentées. Stagnation pondérale (+200g en 1 mois). Tachypnée au repos.',
+    examens: 'FR 60/min, FC 160/min, sat 96%. Souffle holosystolique 4/6 mésocardiaque. Hépatomégalie 3 cm. Pâleur.',
+    echo_focus: 'PSAX + apicale 4C : taille CIV, retentissement OG/VG, IT pour PAPs',
+    qcm_question: 'Quelle est votre conduite immédiate ?',
+    qcm_options: [
+      { text: 'Surveillance simple, fermeture spontanée probable', correct: false },
+      { text: 'Traitement IC (diurétiques + IEC) + avis chirurgical urgent', correct: true },
+      { text: 'Cathétérisme cardiaque uniquement', correct: false },
+      { text: 'Prostines IV en attente du transfert', correct: false }
+    ],
+    qcm_explanation: 'CIV large + IC + cassure pondérale = indication chirurgicale précoce (avant 6 mois) pour éviter HTAP fixée. Traitement IC en attendant.',
+    correct_dx: 'CIV périmembraneuse large avec insuffisance cardiaque',
+    pec: 'Hospitalisation. Furosémide 1-2 mg/kg/j + spironolactone + captopril 0.1-0.3 mg/kg/dose ×3. Avis chirurgical urgent. Cathétérisme droit pour évaluer RVP avant chir. Nutrition hypercalorique (SNG si besoin).',
+    pearls: '🚨 Cassure de la courbe pondérale = signe d\'alerte majeur dans la CIV large.'
+  },
+  {
+    id: 3, patho: 'CIV', age: 'enfant', diff: 'hard',
+    title: 'CIV opérée avec shunt résiduel',
+    age_label: '4 ans', sex: 'M',
+    presentation: 'Enfant de 4 ans, opéré d\'une CIV à 8 mois (fermeture chirurgicale). Suivi régulier. Souffle persistant à la consultation de contrôle annuelle.',
+    examens: 'Asymptomatique, croissance normale. Souffle systolique 2/6 mésocardiaque résiduel. Pas d\'IC.',
+    echo_focus: 'Recherche shunt résiduel (Doppler couleur ++), fonction VG, BAV',
+    qcm_question: 'Quelle est votre attitude ?',
+    qcm_options: [
+      { text: 'Reprise chirurgicale immédiate', correct: false },
+      { text: 'Surveillance, prophylaxie endocardite, écho annuelle', correct: true },
+      { text: 'Fermeture percutanée du shunt résiduel', correct: false },
+      { text: 'Cathétérisme diagnostique en urgence', correct: false }
+    ],
+    qcm_explanation: 'Shunt résiduel post-chirurgical < 2 mm sans retentissement = surveillance. Reprise chir uniquement si Qp/Qs > 1.5 ou retentissement.',
+    correct_dx: 'CIV opérée avec shunt résiduel non significatif',
+    pec: 'Surveillance écho annuelle. Prophylaxie endocardite recommandée 6 mois post-chir (puis selon risque). Évaluer BAV (peut survenir tardivement). ECG annuel.',
+    pearls: '💡 Un shunt résiduel < 2mm est très fréquent (jusqu\'à 20% des cas) et n\'a pas de signification clinique.'
+  },
+  {
+    id: 4, patho: 'CIV', age: 'enfant', diff: 'hard',
+    title: 'CIV + Eisenmenger constitué',
+    age_label: '4 ans', sex: 'F',
+    presentation: 'Enfant de 4 ans, jamais opérée (perdue de vue). Cyanose progressive. Hippocratisme digital. Dyspnée d\'effort.',
+    examens: 'Sat 84% en air. B2 unique claqué. Plus de souffle holosystolique (disparu). Hb 19 g/dL.',
+    echo_focus: 'CIV large, sens du shunt au Doppler, IT Vmax pour PAPs, fonction VD',
+    qcm_question: 'Quelle est l\'option thérapeutique principale ?',
+    qcm_options: [
+      { text: 'Fermeture chirurgicale en urgence', correct: false },
+      { text: 'Sildénafil + bosentan + transplantation cœur-poumons à terme', correct: true },
+      { text: 'Cathétérisme avec Amplatzer percutané', correct: false },
+      { text: 'Banding artère pulmonaire', correct: false }
+    ],
+    qcm_explanation: 'Eisenmenger constitué (shunt D-G, cyanose, Hb élevée, B2 claqué) = contre-indication formelle à la fermeture. PEC médicale + transplantation.',
+    correct_dx: 'Syndrome d\'Eisenmenger sur CIV non opérée',
+    pec: 'Cathétérisme droit + test à l\'O2/NO pour confirmer irréversibilité. Sildénafil 1-2 mg/kg ×3/j ± bosentan. Oxygénothérapie au long cours. Évaluation transplantation cœur-poumons. Anticoagulation à discuter. Saignée si Hb > 22 g/dL et symptômes.',
+    pearls: '⚠️ La disparition du souffle holosystolique dans une CIV connue est un SIGNE D\'ALARME (équilibration des pressions = HTAP).'
+  },
+  {
+    id: 5, patho: 'CIV', age: 'nourrisson', diff: 'easy',
+    title: 'CIV petite restrictive du nourrisson',
+    age_label: '4 mois', sex: 'M',
+    presentation: 'Nourrisson de 4 mois, asymptomatique. Souffle découvert à 1 mois. Croissance normale. Pas de gêne aux tétées.',
+    examens: 'FR 35/min, FC 120/min, sat 99%. Souffle holosystolique 3/6 mésocardiaque. Pas d\'hépatomégalie.',
+    echo_focus: 'PSAX : taille CIV (< 3 mm), gradient au Doppler continu',
+    qcm_question: 'Que recommandez-vous ?',
+    qcm_options: [
+      { text: 'Chirurgie programmée avant 6 mois', correct: false },
+      { text: 'Surveillance échographique semestrielle', correct: true },
+      { text: 'Fermeture percutanée immédiate', correct: false },
+      { text: 'Traitement IC préventif', correct: false }
+    ],
+    qcm_explanation: 'CIV petite restrictive sans retentissement = surveillance. Fermeture spontanée possible dans 50-70% des cas.',
+    correct_dx: 'CIV petite restrictive',
+    pec: 'Surveillance écho semestrielle. Prophylaxie endocardite. Pas de restriction d\'activité. Information parents : fermeture spontanée fréquente.',
+    pearls: '💡 Un souffle "fort" (3-4/6) ne signifie pas une CIV "grave" — souvent l\'inverse (CIV restrictive = gradient élevé = souffle intense).'
+  },
+  {
+    id: 6, patho: 'CIV', age: 'enfant', diff: 'medium',
+    title: 'CIV supracristale avec prolapsus aortique',
+    age_label: '3 ans', sex: 'M',
+    presentation: 'Enfant de 3 ans connu pour CIV. Apparition d\'un souffle diastolique à la consultation de suivi.',
+    examens: 'Souffle holosystolique 3/6 + souffle diastolique aortique 2/6. Pas d\'IC.',
+    echo_focus: 'PLAX : valve aortique, prolapsus de la cuspide droite, IAo',
+    qcm_question: 'Quelle est l\'attitude prioritaire ?',
+    qcm_options: [
+      { text: 'Surveillance simple', correct: false },
+      { text: 'Indication chirurgicale (fermeture CIV ± plastie aortique)', correct: true },
+      { text: 'Augmenter la prophylaxie endocardite', correct: false },
+      { text: 'Vasodilatateur uniquement', correct: false }
+    ],
+    qcm_explanation: 'CIV supracristale (type 1) + prolapsus de la valve aortique avec IAo = indication chirurgicale URGENTE pour éviter aggravation IAo.',
+    correct_dx: 'CIV supracristale (type 1) avec prolapsus aortique et IAo',
+    pec: 'Avis chirurgical rapide. Fermeture CIV par voie chirurgicale (pas Amplatzer car proximité valve aortique) + plastie aortique si IAo significative. Surveillance étroite en attendant.',
+    pearls: '⚠️ La CIV supracristale a un risque évolutif d\'IAo (prolapsus du sinus de Valsalva droit) — indication chirurgicale même si CIV petite.'
+  },
+  {
+    id: 7, patho: 'CIV', age: 'nourrisson', diff: 'medium',
+    title: 'CIV "Swiss-cheese" multiple',
+    age_label: '5 mois', sex: 'F',
+    presentation: 'Nourrisson de 5 mois, IC sévère malgré traitement médical maximal. Multiples souffles à l\'auscultation.',
+    examens: 'FR 70/min, hépatomégalie 4 cm, sueurs profuses. Souffles multiples à l\'auscultation.',
+    echo_focus: 'PSAX + Doppler couleur multi-orientations : compter le nombre de défauts',
+    qcm_question: 'Quelle est la stratégie chirurgicale ?',
+    qcm_options: [
+      { text: 'Fermeture chirurgicale conventionnelle des défauts', correct: false },
+      { text: 'Cerclage de l\'artère pulmonaire (banding) en attendant', correct: true },
+      { text: 'Transplantation cardiaque', correct: false },
+      { text: 'Amplatzer multiples', correct: false }
+    ],
+    qcm_explanation: 'CIV Swiss-cheese (multiples) chez nourrisson = trop complexe pour fermeture chirurgicale. Banding AP en palliative + fermeture en 2ème temps.',
+    correct_dx: 'CIV multiples (Swiss-cheese)',
+    pec: 'Banding artère pulmonaire en urgence (palliatif). Traitement IC maximal en attendant. Fermeture chirurgicale différée vers 2-3 ans (certains se ferment spontanément). Avis centre tertiaire.',
+    pearls: '🚨 Swiss-cheese = forme la plus difficile chirurgicalement. Le banding "achète du temps".'
+  },
+  {
+    id: 8, patho: 'CIV', age: 'nourrisson', diff: 'medium',
+    title: 'CIV inlet (T21)',
+    age_label: '4 mois', sex: 'F',
+    presentation: 'Nourrisson trisomique 21 (T21) de 4 mois. Bilan cardiaque systématique. Souffle holosystolique audible.',
+    examens: 'Faciès T21. Hypotonie. Souffle holosystolique 3/6 + souffle systolique apical (cleft mitral ?). Hépatomégalie modérée.',
+    echo_focus: 'Apicale 4C : croix du cœur, CIV inlet, fente mitrale (CAV partiel ?)',
+    qcm_question: 'Que rechercher en priorité ?',
+    qcm_options: [
+      { text: 'CIV isolée', correct: false },
+      { text: 'CAV (canal atrio-ventriculaire) à éliminer absolument', correct: true },
+      { text: 'PCA simple', correct: false },
+      { text: 'CMD primitive', correct: false }
+    ],
+    qcm_explanation: 'Tout T21 avec souffle = recherche CAV systématique (60-70% des CAV ont T21). CIV inlet souvent associée à un défaut endocardique.',
+    correct_dx: 'CIV inlet — possible CAV partiel à éliminer',
+    pec: 'Échographie complète (croix du cœur, valves AV, septum primum). Si CAV : chirurgie obligatoire entre 3-6 mois. Si CIV inlet isolée : chirurgie selon retentissement. Bilan T21 (caryotype, ophtalmo, ORL, thyroïde, hématologie).',
+    pearls: '💡 Tout T21 doit avoir une écho cardiaque dans les premiers mois (50% ont une cardiopathie).'
+  },
+  {
+    id: 9, patho: 'CIV', age: 'enfant', diff: 'medium',
+    title: 'CIV avec HTAP modérée',
+    age_label: '2 ans', sex: 'M',
+    presentation: 'Enfant de 2 ans, CIV diagnostiquée à 6 mois, parents ont refusé la chirurgie. Aujourd\'hui : dyspnée d\'effort, retard staturopondéral (-2 DS).',
+    examens: 'FR 40/min, sat 92%. Souffle 3/6 + B2 claqué. Hépatomégalie modérée.',
+    echo_focus: 'CIV taille, sens shunt (G→D, bidirectionnel ?), IT Vmax pour PAPs',
+    qcm_question: 'Quelle est la prochaine étape diagnostique cruciale ?',
+    qcm_options: [
+      { text: 'Cathétérisme droit pour évaluer RVP', correct: true },
+      { text: 'IRM cardiaque', correct: false },
+      { text: 'Scintigraphie pulmonaire', correct: false },
+      { text: 'Test de marche 6 minutes', correct: false }
+    ],
+    qcm_explanation: 'CIV non opérée avec HTAP suspectée = cathétérisme droit OBLIGATOIRE pour mesurer RVP et tester réversibilité (NO/O2). Détermine l\'opérabilité.',
+    correct_dx: 'CIV large avec HTAP — opérabilité à évaluer',
+    pec: 'Hospitalisation. Cathétérisme droit avec test à l\'O2/NO. Si RVPI < 6 UW.m² et/ou réversible : chirurgie possible. Si RVPI > 8 UW.m² fixée : INOPÉRABLE. Sildénafil en attendant si HTAP confirmée.',
+    pearls: '🚨 Au-delà de 1 an, toute CIV large non opérée nécessite un cathétérisme avant décision chirurgicale.'
+  },
+  {
+    id: 10, patho: 'CIV', age: 'nourrisson', diff: 'easy',
+    title: 'CIV périmembraneuse modérée',
+    age_label: '5 mois', sex: 'M',
+    presentation: 'Nourrisson de 5 mois. Souffle découvert à la naissance. Croissance limite (-1 DS). Tétées de plus de 30 minutes.',
+    examens: 'FR 40/min, sat 98%. Souffle holosystolique 3-4/6 mésocardiaque. Pas d\'IC franche.',
+    echo_focus: 'PSAX : type, taille CIV. Apicale 4C : retentissement OG/VG',
+    qcm_question: 'Conduite la plus appropriée ?',
+    qcm_options: [
+      { text: 'Surveillance simple (CIV restrictive)', correct: false },
+      { text: 'Traitement IC + avis cardiopédiatrique pour fermeture programmée', correct: true },
+      { text: 'Chirurgie urgente (< 1 mois)', correct: false },
+      { text: 'Cathétérisme diagnostique', correct: false }
+    ],
+    qcm_explanation: 'CIV modérée + retentissement clinique léger (cassure pondérale, tétées prolongées) = traitement médical + fermeture programmée (idéal vers 6-12 mois).',
+    correct_dx: 'CIV périmembraneuse modérée avec retentissement débutant',
+    pec: 'Diurétique léger (furosémide 1 mg/kg/j) + IEC. Nutrition hypercalorique. Avis cardiopédiatrique. Fermeture chirurgicale à programmer entre 6-12 mois.',
+    pearls: '💡 Une cassure pondérale modérée + tétées prolongées sont déjà des signes de retentissement nécessitant une PEC.'
+  },
+
+  /* ━━━━━━━━━━ CIA (6 cas) ━━━━━━━━━━ */
+  {
+    id: 11, patho: 'CIA', age: 'enfant', diff: 'easy',
+    title: 'CIA secundum de découverte fortuite',
+    age_label: '3 ans', sex: 'F',
+    presentation: 'Enfant de 3 ans. Souffle découvert à la visite des 3 ans. Asymptomatique. Croissance normale.',
+    examens: 'FR 25/min, sat 99%. Souffle systolique éjectionnel 2/6 au foyer pulmonaire. Dédoublement fixe de B2.',
+    echo_focus: 'Sous-costale 4C (référence pour CIA), Doppler couleur sur SIA',
+    qcm_question: 'Quel est votre diagnostic ?',
+    qcm_options: [
+      { text: 'CIA secundum', correct: true },
+      { text: 'Sténose pulmonaire valvulaire', correct: false },
+      { text: 'CIV', correct: false },
+      { text: 'Bicuspidie aortique', correct: false }
+    ],
+    qcm_explanation: 'Souffle éjectionnel pulmonaire + dédoublement FIXE de B2 = signe pathognomonique de CIA. Le souffle vient du débit pulmonaire augmenté, pas du shunt lui-même.',
+    correct_dx: 'CIA ostium secundum',
+    pec: 'Échographie complète (taille, bordures, retentissement OD/VD, RVPA). Surveillance écho annuelle. Fermeture percutanée Amplatzer à programmer entre 3-5 ans si CIA significative + bordures suffisantes. Pas de restriction d\'activité.',
+    pearls: '💡 Le dédoublement FIXE de B2 (qui ne varie pas avec la respiration) est quasi-pathognomonique de CIA significative.'
+  },
+  {
+    id: 12, patho: 'CIA', age: 'enfant', diff: 'medium',
+    title: 'CIA secundum large avec retentissement',
+    age_label: '5 ans', sex: 'M',
+    presentation: 'Enfant de 5 ans. Bronchiolites répétées (5 dans l\'année). Fatigabilité à l\'effort signalée par parents.',
+    examens: 'Sat 98%. Souffle pulmonaire 2/6 + dédoublement fixe B2. Pas d\'IC.',
+    echo_focus: 'Sous-costale : CIA, bordures pour Amplatzer. Apicale : OD/VD dilatés, mvt paradoxal SIV',
+    qcm_question: 'Indication thérapeutique ?',
+    qcm_options: [
+      { text: 'Surveillance, fermeture spontanée encore possible', correct: false },
+      { text: 'Fermeture percutanée Amplatzer si bordures suffisantes', correct: true },
+      { text: 'Chirurgie d\'emblée', correct: false },
+      { text: 'Diurétiques au long cours', correct: false }
+    ],
+    qcm_explanation: 'CIA + retentissement (OD/VD dilatés, infections respiratoires répétées) à 5 ans = indication formelle de fermeture. Percutanée Amplatzer en 1ère intention si secundum + bordures OK.',
+    correct_dx: 'CIA secundum large avec retentissement',
+    pec: 'ETO pré-procédurale pour analyse précise des bordures + Qp/Qs. Fermeture Amplatzer (taille adaptée + 2-4 mm). Aspirine 6 mois post-procédure. Prophylaxie endocardite 6 mois.',
+    pearls: '⚠️ Bordure aortique souvent déficiente — peut être acceptable pour fermeture si bordures postérieures et inférieures > 5 mm.'
+  },
+  {
+    id: 13, patho: 'CIA', age: 'enfant', diff: 'hard',
+    title: 'CIA ostium primum (CAV partiel)',
+    age_label: '4 ans', sex: 'M',
+    presentation: 'Enfant de 4 ans avec T21. Souffle 3/6. Dyspnée d\'effort. Suivi cardiopédiatrique régulier mais perdu de vue 2 ans.',
+    examens: 'Sat 96%. Souffle systolique 3/6 + souffle apical d\'IM. Hépatomégalie 2 cm.',
+    echo_focus: 'Apicale 4C : CIA basse au niveau de la croix du cœur, fente mitrale, IM',
+    qcm_question: 'Quelle est l\'option thérapeutique ?',
+    qcm_options: [
+      { text: 'Fermeture percutanée Amplatzer', correct: false },
+      { text: 'Chirurgie obligatoire (fermeture CIA + plastie cleft mitral)', correct: true },
+      { text: 'Surveillance simple', correct: false },
+      { text: 'Diurétiques uniquement', correct: false }
+    ],
+    qcm_explanation: 'CIA primum = CAV partiel = chirurgie OBLIGATOIRE (pas de fermeture percutanée possible — proximité valves AV). Plastie de la fente mitrale au même temps.',
+    correct_dx: 'CIA ostium primum (CAV partiel)',
+    pec: 'Avis chirurgical rapide. Chirurgie correctrice (fermeture CIA primum + plastie cleft mitral). Bilan T21 complet. Suivi écho post-op à long terme (risque IM tardive).',
+    pearls: '🚨 Toute CIA chez un T21 doit faire suspecter un CAV (partiel ou complet). Sous-costale + apicale 4C indispensables.'
+  },
+  {
+    id: 14, patho: 'CIA', age: 'enfant', diff: 'hard',
+    title: 'CIA sinus venosus avec RVPAP',
+    age_label: '4 ans', sex: 'F',
+    presentation: 'Enfant de 4 ans, asymptomatique. Souffle découvert lors d\'un bilan pré-anesthésique.',
+    examens: 'Souffle pulmonaire 2/6, dédoublement fixe B2. Pas d\'IC.',
+    echo_focus: 'Sous-costale parasagittale haute : CIA haute près VCS, retours veineux pulmonaires droits',
+    qcm_question: 'Anomalie associée à rechercher ?',
+    qcm_options: [
+      { text: 'Bicuspidie aortique', correct: false },
+      { text: 'Retour veineux pulmonaire anormal partiel (RVPAP)', correct: true },
+      { text: 'CoAo', correct: false },
+      { text: 'Anomalie d\'Ebstein', correct: false }
+    ],
+    qcm_explanation: 'CIA sinus venosus haute = RVPAP quasi-constant (veines pulmonaires droites supérieures se drainent dans VCS). Important pour planification chirurgicale.',
+    correct_dx: 'CIA sinus venosus + RVPAP',
+    pec: 'IRM cardiaque ou ETO pour confirmer RVPAP. Chirurgie OBLIGATOIRE (pas d\'Amplatzer possible). Technique de Warden : redirection des veines pulmonaires + fermeture CIA. Avis centre spécialisé.',
+    pearls: '💡 CIA sinus venosus + RVPAP = "package deal" : ne se ferment JAMAIS percutanément.'
+  },
+  {
+    id: 15, patho: 'CIA', age: 'enfant', diff: 'easy',
+    title: 'CIA petite asymptomatique',
+    age_label: '2 ans', sex: 'M',
+    presentation: 'Enfant de 2 ans, CIA diagnostiquée à la naissance (4 mm). Asymptomatique, croissance normale.',
+    examens: 'Sat 99%. Souffle 1/6. Pas de retentissement clinique.',
+    echo_focus: 'Sous-costale : taille actuelle CIA, OD/VD',
+    qcm_question: 'Conduite à tenir ?',
+    qcm_options: [
+      { text: 'Surveillance, fermeture spontanée encore possible', correct: true },
+      { text: 'Fermeture percutanée immédiate', correct: false },
+      { text: 'Chirurgie d\'emblée', correct: false },
+      { text: 'Restriction d\'activité', correct: false }
+    ],
+    qcm_explanation: 'CIA petite (< 5 mm) à 2 ans = surveillance. Fermeture spontanée encore possible jusqu\'à 4-5 ans. Pas d\'indication d\'intervention si pas de retentissement.',
+    correct_dx: 'CIA secundum petite',
+    pec: 'Surveillance écho annuelle. Si stable et asymptomatique à 5 ans : abstention possible. Si Qp/Qs > 1.5 ou OD/VD dilatés : fermeture indiquée. Pas de restriction d\'activité.',
+    pearls: '💡 Beaucoup de "petites CIA" du nourrisson sont en fait des FOP qui se fermeront spontanément.'
+  },
+  {
+    id: 16, patho: 'CIA', age: 'nourrisson', diff: 'medium',
+    title: 'CIA secundum modérée chez nourrisson',
+    age_label: '5 mois', sex: 'F',
+    presentation: 'Nourrisson de 5 mois. Souffle découvert à 2 mois. Asymptomatique. Croissance normale.',
+    examens: 'Souffle 2/6 pulmonaire. Pas d\'IC. Dédoublement B2 modéré.',
+    echo_focus: 'Sous-costale : taille CIA, bordures, retentissement OD/VD',
+    qcm_question: 'Attitude actuelle ?',
+    qcm_options: [
+      { text: 'Fermeture percutanée immédiate', correct: false },
+      { text: 'Surveillance, réévaluation vers 3-5 ans pour fermeture', correct: true },
+      { text: 'Chirurgie d\'emblée', correct: false },
+      { text: 'Cathétérisme diagnostique', correct: false }
+    ],
+    qcm_explanation: 'CIA modérée chez nourrisson = surveillance. Fermeture percutanée idéale entre 3-5 ans (taille gaines, croissance des bordures, possibilité de fermeture spontanée).',
+    correct_dx: 'CIA secundum modérée',
+    pec: 'Surveillance écho annuelle. Évaluation pour fermeture vers 3-5 ans. Pas de traitement médical si asymptomatique.',
+    pearls: '💡 Pas d\'urgence à fermer une CIA chez le nourrisson — la fermeture est idéale plus tard.'
+  },
+
+  /* ━━━━━━━━━━ PCA (4 cas) ━━━━━━━━━━ */
+  {
+    id: 17, patho: 'PCA', age: 'nourrisson', diff: 'easy',
+    title: 'PCA persistant petit',
+    age_label: '4 mois', sex: 'F',
+    presentation: 'Nourrisson de 4 mois (à terme). Souffle continu sous-claviculaire G découvert à 2 mois.',
+    examens: 'FR 35/min, sat 99%. Souffle continu sous-claviculaire G "machinerie", maximal en systole tardive.',
+    echo_focus: 'Vue ductale parasternale haute G + Doppler couleur',
+    qcm_question: 'Quel diagnostic ?',
+    qcm_options: [
+      { text: 'PCA (canal artériel persistant)', correct: true },
+      { text: 'CIV', correct: false },
+      { text: 'Fistule coronaire', correct: false },
+      { text: 'Souffle anorganique', correct: false }
+    ],
+    qcm_explanation: 'Souffle CONTINU "machinerie" sous-claviculaire G = signature classique du PCA. Doppler couleur en parasternal haut G confirme.',
+    correct_dx: 'Persistance du canal artériel (petit)',
+    pec: 'Surveillance écho semestrielle. Fermeture percutanée à programmer si persiste après 1 an (Amplatzer ductal ou coil). Prophylaxie endocardite tant que PCA audible.',
+    pearls: '💡 Le souffle continu "de machinerie" est très évocateur — ne pas confondre avec souffle anorganique systolique.'
+  },
+  {
+    id: 18, patho: 'PCA', age: 'nourrisson', diff: 'medium',
+    title: 'PCA large avec IC',
+    age_label: '3 mois', sex: 'F',
+    presentation: 'Nourrisson de 3 mois (ex-prématurée 32 SA). Tachypnée, sueurs aux tétées, mauvaise croissance.',
+    examens: 'FR 65/min, FC 170/min. Souffle continu 4/6 sous-claviculaire G. Hépatomégalie 3 cm. Pulsations capillaires bondissantes.',
+    echo_focus: 'PCA diamètre, OG/VG dilatation, Doppler aorte abdominale (vol diastolique)',
+    qcm_question: 'Conduite immédiate ?',
+    qcm_options: [
+      { text: 'Surveillance simple', correct: false },
+      { text: 'Diurétiques + fermeture percutanée rapide', correct: true },
+      { text: 'AINS (ibuprofène)', correct: false },
+      { text: 'Cathétérisme diagnostique', correct: false }
+    ],
+    qcm_explanation: 'PCA large + IC à 3 mois = fermeture rapide. AINS uniquement chez prématuré < 3 semaines de vie. Amplatzer ductal en 1ère intention.',
+    correct_dx: 'PCA large avec insuffisance cardiaque',
+    pec: 'Hospitalisation. Diurétiques (furosémide) + restriction hydrique. Avis cardiopédiatrique urgent. Fermeture percutanée par Amplatzer ductal (idéale > 5 kg). Si trop petit ou impossible : chirurgie (ligature thoracique gauche).',
+    pearls: '🚨 Pulsations capillaires bondissantes + différentiel TA élevé = signe de PCA hémodynamiquement significatif.'
+  },
+  {
+    id: 19, patho: 'PCA', age: 'enfant', diff: 'medium',
+    title: 'PCA modéré chez enfant',
+    age_label: '2 ans', sex: 'M',
+    presentation: 'Enfant de 2 ans. PCA connu depuis la naissance, parents ont attendu fermeture spontanée.',
+    examens: 'Souffle continu 2/6. Croissance normale. Pas d\'IC.',
+    echo_focus: 'PCA forme (Krichenko A, B, C, D, E ?), diamètre, retentissement',
+    qcm_question: 'Recommandation actuelle ?',
+    qcm_options: [
+      { text: 'Continuer la surveillance, fermeture spontanée encore possible', correct: false },
+      { text: 'Fermeture percutanée à programmer', correct: true },
+      { text: 'AINS chez l\'enfant', correct: false },
+      { text: 'Chirurgie d\'emblée', correct: false }
+    ],
+    qcm_explanation: 'PCA persistant après 1 an = fermeture indiquée (faible chance de fermeture spontanée). Amplatzer ou coil selon morphologie Krichenko.',
+    correct_dx: 'PCA modéré persistant',
+    pec: 'Échographie complète + classification Krichenko. Fermeture percutanée (Amplatzer ductal si A/B/D, coil si E ou résiduel). Aspirine 6 mois post-procédure. Prophylaxie endocardite jusqu\'à fermeture documentée.',
+    pearls: '💡 Krichenko A (conique) = + facile à fermer. Krichenko C (tubulaire) = plus difficile.'
+  },
+  {
+    id: 20, patho: 'PCA', age: 'enfant', diff: 'easy',
+    title: 'PCA silencieux découverte fortuite',
+    age_label: '3 ans', sex: 'F',
+    presentation: 'Enfant de 3 ans, échographie de dépistage avant intervention ORL. Découverte fortuite d\'un PCA silencieux.',
+    examens: 'Examen clinique normal. Pas de souffle audible.',
+    echo_focus: 'PCA silencieux : visible uniquement au Doppler couleur',
+    qcm_question: 'Que recommander ?',
+    qcm_options: [
+      { text: 'Fermeture percutanée immédiate', correct: false },
+      { text: 'Surveillance, pas d\'indication formelle de fermeture', correct: true },
+      { text: 'Chirurgie programmée', correct: false },
+      { text: 'AINS', correct: false }
+    ],
+    qcm_explanation: 'PCA silencieux (< 1 mm, sans souffle) = pas d\'indication formelle de fermeture. Risque endocardite quasi nul. Surveillance simple.',
+    correct_dx: 'PCA silencieux (microPCA)',
+    pec: 'Pas d\'intervention. Pas de prophylaxie endocardite (recommandations actuelles AHA). Surveillance écho à 5 ans pour vérifier fermeture spontanée.',
+    pearls: '💡 La position actuelle est de NE PAS fermer les PCA silencieux (risque procédure > bénéfice).'
+  },
+
+  /* ━━━━━━━━━━ CAV (3 cas) ━━━━━━━━━━ */
+  {
+    id: 21, patho: 'CAV', age: 'nourrisson', diff: 'hard',
+    title: 'CAV complet T21',
+    age_label: '3 mois', sex: 'M',
+    presentation: 'Nourrisson T21 de 3 mois. IC sévère (sueurs, mauvaise croissance, FR > 60). Souffle holosystolique.',
+    examens: 'FR 70/min, sat 92%. Souffle 4/6 + B2 claqué. Hépatomégalie 4 cm.',
+    echo_focus: 'Apicale 4C : disparition de la croix du cœur, valve AV unique, CIA primum + CIV inlet',
+    qcm_question: 'Conduite ?',
+    qcm_options: [
+      { text: 'Surveillance, chirurgie après 1 an', correct: false },
+      { text: 'Traitement IC + chirurgie urgente entre 3-6 mois', correct: true },
+      { text: 'Banding AP en attendant', correct: false },
+      { text: 'Transplantation cardiaque', correct: false }
+    ],
+    qcm_explanation: 'CAV complet = chirurgie idéale entre 3 et 6 mois (avant HTAP fixée). Le risque d\'HTAP irréversible est précoce dans la T21 (++).',
+    correct_dx: 'CAV complet (Rastelli A) sur T21',
+    pec: 'Hospitalisation. Diurétiques + IEC. Bilan T21 (caryotype confirmé, ophtalmo, ORL, thyroïde). Avis chirurgical urgent. Cathétérisme préop. Réparation chirurgicale (fermeture CIA primum + CIV inlet + plastie valves AV).',
+    pearls: '🚨 La T21 favorise une HTAP irréversible précoce — ne JAMAIS attendre pour opérer un CAV complet T21.'
+  },
+  {
+    id: 22, patho: 'CAV', age: 'enfant', diff: 'hard',
+    title: 'CAV partiel découvert tardivement',
+    age_label: '5 ans', sex: 'F',
+    presentation: 'Enfant T21 de 5 ans. Bronchiolites répétées dans la petite enfance. Suivi cardiologique abandonné. Aujourd\'hui : dyspnée d\'effort.',
+    examens: 'Souffle systolique 3/6 + souffle apical d\'IM. Pas d\'IC franche.',
+    echo_focus: 'Apicale 4C : CIA primum, fente mitrale avec IM, balance ventriculaire',
+    qcm_question: 'Quelle est la stratégie ?',
+    qcm_options: [
+      { text: 'Surveillance simple', correct: false },
+      { text: 'Chirurgie correctrice (fermeture CIA + plastie mitrale)', correct: true },
+      { text: 'Fermeture percutanée Amplatzer', correct: false },
+      { text: 'Diurétiques uniquement', correct: false }
+    ],
+    qcm_explanation: 'CAV partiel = chirurgie obligatoire (CIA primum non fermable percutanément + nécessité plastie cleft mitral).',
+    correct_dx: 'CAV partiel (CIA primum + cleft mitral)',
+    pec: 'Bilan préop complet. Cathétérisme pour évaluer pressions. Chirurgie correctrice (fermeture CIA primum + plastie cleft mitral). Suivi écho long terme (risque IM tardive).',
+    pearls: '💡 La fente mitrale (cleft) du CAV partiel évolue souvent vers une IM significative à l\'âge adulte si non corrigée.'
+  },
+  {
+    id: 23, patho: 'CAV', age: 'nourrisson', diff: 'hard',
+    title: 'CAV complet déséquilibré (VD dominant)',
+    age_label: '4 mois', sex: 'M',
+    presentation: 'Nourrisson de 4 mois, T21. CAV complet diagnostiqué en anténatal. Bilan préopératoire.',
+    examens: 'IC modérée. Souffle multiple. Cyanose discrète (sat 90%).',
+    echo_focus: 'Balance ventriculaire (VG hypoplasique ?), index AVV/V, taille VG',
+    qcm_question: 'Si déséquilibre majeur (VG hypoplasique) ?',
+    qcm_options: [
+      { text: 'Réparation biventriculaire conventionnelle', correct: false },
+      { text: 'Voie univentriculaire (Norwood → Glenn → Fontan)', correct: true },
+      { text: 'Transplantation immédiate', correct: false },
+      { text: 'Surveillance simple', correct: false }
+    ],
+    qcm_explanation: 'CAV déséquilibré avec VG hypoplasique = impossibilité de réparation biventriculaire = voie univentriculaire (palliation Norwood-like → Glenn → Fontan).',
+    correct_dx: 'CAV complet déséquilibré (VD dominant) sur T21',
+    pec: 'Avis centre tertiaire ultra-spécialisé. Cathétérisme. Stratégie univentriculaire : Norwood-like ou banding AP en 1er temps → Glenn vers 6 mois → Fontan vers 3-4 ans. Pronostic plus réservé que biventriculaire.',
+    pearls: '🚨 La balance ventriculaire est CRITIQUE dans le CAV — détermine la faisabilité bi vs univentriculaire.'
+  },
+
+  /* ━━━━━━━━━━ T4F (4 cas) ━━━━━━━━━━ */
+  {
+    id: 24, patho: 'T4F', age: 'nourrisson', diff: 'medium',
+    title: 'T4F classique',
+    age_label: '4 mois', sex: 'M',
+    presentation: 'Nourrisson de 4 mois, cyanose progressive depuis 1 mois. Saturation 85% en air. Souffle systolique éjectionnel pulmonaire.',
+    examens: 'Cyanose des extrémités. Sat 85%. Souffle 3/6 éjectionnel pulmonaire. B2 unique.',
+    echo_focus: 'PLAX : aorte à cheval. PSAX : SP infundibulaire + valvulaire. Apicale : CIV + HVD',
+    qcm_question: 'Diagnostic ?',
+    qcm_options: [
+      { text: 'CIV + HTAP', correct: false },
+      { text: 'Tétralogie de Fallot', correct: true },
+      { text: 'TGV', correct: false },
+      { text: 'Sténose pulmonaire isolée', correct: false }
+    ],
+    qcm_explanation: 'Cyanose + CIV + aorte à cheval + sténose pulmonaire + HVD = tétralogie de Fallot (4 éléments classiques).',
+    correct_dx: 'Tétralogie de Fallot classique',
+    pec: 'Évaluation de la cyanose au repos et à l\'effort. NFS (polyglobulie). Cure chirurgicale complète à programmer entre 3-6 mois. Bilan : taille branches AP (Nakata), MAPCAs ?, anomalies coronaires. β-bloquant si malaises.',
+    pearls: '💡 La sévérité de la T4F dépend du DEGRÉ d\'obstruction pulmonaire : "T4F rose" si peu obstructive, "T4F sévère" si très obstructive.'
+  },
+  {
+    id: 25, patho: 'T4F', age: 'enfant', diff: 'hard',
+    title: 'T4F avec malaises hypoxémiques',
+    age_label: '18 mois', sex: 'M',
+    presentation: 'Enfant de 18 mois, T4F connue, jamais opérée (consultation perdue de vue). Apparition de malaises avec cyanose intense lors des pleurs ou efforts.',
+    examens: 'Cyanose au repos (sat 78%). Position d\'accroupissement (squatting) observée. Hb 18 g/dL.',
+    echo_focus: 'Voie pulmonaire : SP serrée (Vmax > 4 m/s), branches AP, anatomie coronaires',
+    qcm_question: 'Conduite immédiate face à un malaise ?',
+    qcm_options: [
+      { text: 'Hospitalisation simple', correct: false },
+      { text: 'O2 + position genou-poitrine + sédation morphine + β-bloquant IV', correct: true },
+      { text: 'Diurétiques IV', correct: false },
+      { text: 'Aspirine', correct: false }
+    ],
+    qcm_explanation: 'Malaise hypoxémique = URGENCE. Position genou-poitrine (augmente RVS) + O2 + morphine (sédation) + propranolol IV (lève spasme infundibulaire). Programmer chirurgie URGENTE.',
+    correct_dx: 'T4F sévère avec malaises hypoxémiques',
+    pec: 'Hospitalisation. β-bloquant au long cours (propranolol 1-2 mg/kg/j) prophylactique. Cure chirurgicale URGENTE. Si attente prolongée : Blalock palliatif (shunt sous-clavière → AP) en attendant cure complète.',
+    pearls: '🚨 Le squatting (position d\'accroupissement) est un signe de Fallot évolué — à reconnaître absolument.'
+  },
+  {
+    id: 26, patho: 'T4F', age: 'nourrisson', diff: 'hard',
+    title: 'APSO (atrésie pulmonaire + CIV)',
+    age_label: '2 mois', sex: 'M',
+    presentation: 'Nourrisson de 2 mois. Cyanose néonatale, sortie de maternité sous prostines. Adressé pour bilan complémentaire.',
+    examens: 'Sat 75% sous PgE1. B2 unique. Souffle continu (collatérales AP ?).',
+    echo_focus: 'Voie pulmonaire : ATRÉSIE pulmonaire. CIV. Branches AP : taille, présence, MAPCAs',
+    qcm_question: 'Stratégie chirurgicale principale ?',
+    qcm_options: [
+      { text: 'Cure complète immédiate type T4F', correct: false },
+      { text: 'Évaluation anatomie AP/MAPCAs + chirurgie multi-temps', correct: true },
+      { text: 'Voie univentriculaire (Fontan)', correct: false },
+      { text: 'Transplantation', correct: false }
+    ],
+    qcm_explanation: 'APSO = situation complexe. Stratégie dépend de l\'anatomie : si branches AP présentes → cure type T4F + conduit VD-AP. Si MAPCAs : unifocalisation + cure en plusieurs temps.',
+    correct_dx: 'Atrésie pulmonaire + CIV (APSO)',
+    pec: 'Maintien des prostines (PgE1) en perfusion continue. Transfert centre cardiaque pédiatrique. Cathétérisme + angiographie pour cartographie AP/MAPCAs. IRM cardiaque. Stratégie chirurgicale en plusieurs temps. Avis multidisciplinaire.',
+    pearls: '🚨 APSO ductodépendant = JAMAIS arrêter les prostines avant chirurgie palliative ou complète.'
+  },
+  {
+    id: 27, patho: 'T4F', age: 'enfant', diff: 'medium',
+    title: 'T4F opérée (suivi à long terme)',
+    age_label: '4 ans', sex: 'F',
+    presentation: 'Enfant de 4 ans, T4F opérée à 8 mois (cure complète). Suivi annuel. Pas de symptômes. Souffle diastolique au foyer pulmonaire.',
+    examens: 'Sat 99%. Souffle diastolique 2/6 pulmonaire (IPul ?). Pas d\'IC.',
+    echo_focus: 'Fuite pulmonaire (Doppler couleur, durée, vena contracta), VD (taille, fonction), IPul Vmax',
+    qcm_question: 'Que rechercher en priorité ?',
+    qcm_options: [
+      { text: 'Récidive de la sténose pulmonaire', correct: false },
+      { text: 'Insuffisance pulmonaire + dilatation VD', correct: true },
+      { text: 'CIV résiduelle', correct: false },
+      { text: 'Endocardite', correct: false }
+    ],
+    qcm_explanation: 'IPul est la séquelle la plus fréquente après cure T4F (élargissement infundibulaire). Surveillance volumes VD (IRM ++). Indication remplacement valve pulm si VEDV VD > 150 ml/m².',
+    correct_dx: 'T4F opérée avec insuffisance pulmonaire',
+    pec: 'IRM cardiaque tous les 2-3 ans (volumes VD, FE, fraction régurgitation). ECG annuel (BAV, troubles rythme). Si VEDV VD > 150 ml/m² ou VTSV > 80 ml/m² : indication remplacement valve pulm (chirurgical ou Melody/Sapien percutané).',
+    pearls: '💡 La fuite pulmonaire post-T4F est très bien tolérée pendant 10-20 ans, puis évolue vers dilatation et dysfonction VD.'
+  },
+
+  /* ━━━━━━━━━━ SP (3 cas) ━━━━━━━━━━ */
+  {
+    id: 28, patho: 'SP', age: 'enfant', diff: 'easy',
+    title: 'SP valvulaire modérée',
+    age_label: '2 ans', sex: 'M',
+    presentation: 'Enfant de 2 ans. Souffle systolique éjectionnel découvert à 6 mois. Asymptomatique.',
+    examens: 'FR 25/min, sat 99%. Souffle éjectionnel 3/6 au foyer pulmonaire + click éjectionnel.',
+    echo_focus: 'PSAX gros vaisseaux : valve pulmonaire (dôme), Vmax au Doppler continu',
+    qcm_question: 'Conduite si gradient = 45 mmHg ?',
+    qcm_options: [
+      { text: 'Valvuloplastie immédiate', correct: false },
+      { text: 'Surveillance écho semestrielle', correct: true },
+      { text: 'Chirurgie de remplacement', correct: false },
+      { text: 'Restriction d\'activité totale', correct: false }
+    ],
+    qcm_explanation: 'SP modérée (gradient 36-50 mmHg) = surveillance. Indication valvuloplastie si gradient > 50 mmHg ou symptômes ou évolution.',
+    correct_dx: 'Sténose pulmonaire valvulaire modérée',
+    pec: 'Surveillance écho semestrielle. Valvuloplastie si gradient évolutif > 50 mmHg ou symptômes. Activité physique sans restriction (modérée). Prophylaxie endocardite si valve dystrophique.',
+    pearls: '💡 Le click éjectionnel est caractéristique de la SP valvulaire — disparait en SP infundibulaire.'
+  },
+  {
+    id: 29, patho: 'SP', age: 'nourrisson', diff: 'medium',
+    title: 'SP sévère du nourrisson',
+    age_label: '3 mois', sex: 'F',
+    presentation: 'Nourrisson de 3 mois. Cyanose discrète depuis la naissance. Souffle 4/6 éjectionnel pulmonaire.',
+    examens: 'Sat 92% en air. Souffle 4/6 + B2 diminué. HVD à l\'ECG.',
+    echo_focus: 'Vmax pulm > 4 m/s. Anneau pulmonaire (Z-score). HVD. CIA/FOP avec shunt D-G ?',
+    qcm_question: 'Conduite ?',
+    qcm_options: [
+      { text: 'Surveillance', correct: false },
+      { text: 'Valvuloplastie percutanée par cathétérisme', correct: true },
+      { text: 'Chirurgie de Ross', correct: false },
+      { text: 'Banding AP', correct: false }
+    ],
+    qcm_explanation: 'SP sévère (gradient > 64 mmHg) ou symptomatique = valvuloplastie percutanée (excellents résultats). Cyanose = shunt D-G via FOP, indication formelle de procédure.',
+    correct_dx: 'Sténose pulmonaire valvulaire sévère',
+    pec: 'Valvuloplastie percutanée (ballon 1.2-1.4× anneau). Bilan pré : ECG, écho complète. Surveillance post : resténose (15-20% à long terme), IPul iatrogène.',
+    pearls: '🚨 Cyanose dans la SP = shunt D-G via FOP = indication formelle de valvuloplastie.'
+  },
+  {
+    id: 30, patho: 'SP', age: 'enfant', diff: 'hard',
+    title: 'SP dysplasique (Noonan)',
+    age_label: '3 ans', sex: 'M',
+    presentation: 'Enfant de 3 ans, faciès évocateur (hypertélorisme, pli épicanthique), petite taille. SP modérée connue.',
+    examens: 'Souffle 3/6 pulmonaire. Pas de click éjectionnel (valve dysplasique). Faciès Noonan.',
+    echo_focus: 'Valve pulmonaire dysplasique (épaissie, peu mobile). Anneau parfois petit',
+    qcm_question: 'Diagnostic syndromique à évoquer ?',
+    qcm_options: [
+      { text: 'Trisomie 21', correct: false },
+      { text: 'Syndrome de Noonan (mutation PTPN11)', correct: true },
+      { text: 'Syndrome de Williams', correct: false },
+      { text: 'Syndrome de DiGeorge', correct: false }
+    ],
+    qcm_explanation: 'Faciès évocateur + petite taille + SP dysplasique = syndrome de Noonan (mutation PTPN11 dans 50% des cas). Bilan génétique.',
+    correct_dx: 'SP dysplasique sur syndrome de Noonan',
+    pec: 'Bilan génétique (panel RASopathies : PTPN11, SOS1, RAF1...). Valvuloplastie moins efficace sur valve dysplasique → souvent chirurgie de résection de valve. Suivi multidisciplinaire (cardio, génétique, croissance, hématologie pour CMH éventuelle).',
+    pearls: '💡 La SP dysplasique du Noonan répond mal à la valvuloplastie — la chirurgie est souvent nécessaire.'
+  },
+
+  /* ━━━━━━━━━━ CoAo (3 cas) ━━━━━━━━━━ */
+  {
+    id: 31, patho: 'CoAo', age: 'nourrisson', diff: 'hard',
+    title: 'CoAo sévère néonatale',
+    age_label: '15 jours', sex: 'M',
+    presentation: 'Nouveau-né à terme, J15. Difficultés alimentaires, marbrures, oligurie. Pouls fémoraux faiblement perçus.',
+    examens: 'TA bras D 100/60, jambes 50/30. Pouls fémoraux abolis. Acidose métabolique.',
+    echo_focus: 'Sus-sternale long axe : isthme aortique (gradient, shelf), arche, branches',
+    qcm_question: 'Conduite immédiate ?',
+    qcm_options: [
+      { text: 'Surveillance simple', correct: false },
+      { text: 'Prostines IV + transfert centre tertiaire URGENT', correct: true },
+      { text: 'Diurétiques uniquement', correct: false },
+      { text: 'IEC en urgence', correct: false }
+    ],
+    qcm_explanation: 'CoAo sévère néonatale = URGENCE vitale. Réouverture du canal artériel par prostines (PgE1) = sauvetage de vie. Transfert immédiat pour chirurgie.',
+    correct_dx: 'Coarctation aortique sévère néonatale',
+    pec: 'PgE1 (Alprostadil) IV continu. Support hémodynamique. Transfert centre cardiaque pédiatrique. Chirurgie de cure (anastomose termino-terminale élargie ou plastie d\'élargissement) dans les jours suivants.',
+    pearls: '🚨 Disparition des pouls fémoraux + acidose néonatale = penser CoAo sévère ductodépendante. Prostines = sauvetage.'
+  },
+  {
+    id: 32, patho: 'CoAo', age: 'enfant', diff: 'medium',
+    title: 'CoAo modérée chez enfant',
+    age_label: '4 ans', sex: 'F',
+    presentation: 'Enfant de 4 ans. HTA des membres supérieurs découverte au bilan ophtalmo (hypertensive ?). Pouls fémoraux diminués.',
+    examens: 'TA bras D 130/80, jambes 105/65. Souffle systolique dorsal. Pouls fémoraux diminués.',
+    echo_focus: 'Sus-sternale : isthme, gradient. Doppler abdominal : flux amorti, perte diastolique',
+    qcm_question: 'Option thérapeutique privilégiée ?',
+    qcm_options: [
+      { text: 'IEC seuls', correct: false },
+      { text: 'Angioplastie ± stent au cathétérisme', correct: true },
+      { text: 'Chirurgie d\'emblée', correct: false },
+      { text: 'Surveillance', correct: false }
+    ],
+    qcm_explanation: 'CoAo focale chez enfant > 10 kg = angioplastie percutanée privilégiée (1ère intention). Chirurgie réservée aux cas complexes (hypoplasie tubulaire).',
+    correct_dx: 'Coarctation aortique focale modérée',
+    pec: 'Cathétérisme + angioplastie (ballon ± stent selon âge). Surveillance TA aux 4 membres. Bicuspidie aortique associée à rechercher (50% des cas) — surveillance valve aortique au long cours.',
+    pearls: '💡 Toute HTA chez l\'enfant doit faire palper les pouls fémoraux et mesurer la TA aux 4 membres.'
+  },
+  {
+    id: 33, patho: 'CoAo', age: 'enfant', diff: 'hard',
+    title: 'Re-coarctation post-chirurgicale',
+    age_label: '5 ans', sex: 'M',
+    presentation: 'Enfant de 5 ans, opéré d\'une CoAo en période néonatale. Suivi régulier. Souffle dorsal réapparu.',
+    examens: 'TA bras D 125/75, jambes 100/60. Gradient 25 mmHg. Asymptomatique.',
+    echo_focus: 'Sus-sternale : zone opérée, gradient résiduel. Vmax au Doppler continu',
+    qcm_question: 'Attitude ?',
+    qcm_options: [
+      { text: 'Reprise chirurgicale', correct: false },
+      { text: 'Angioplastie percutanée ± stent', correct: true },
+      { text: 'Surveillance avec IEC', correct: false },
+      { text: 'IRM annuelle uniquement', correct: false }
+    ],
+    qcm_explanation: 'Re-coarctation post-chir = angioplastie percutanée (1ère intention, excellents résultats). Reprise chir uniquement si échec.',
+    correct_dx: 'Re-coarctation post-chirurgicale',
+    pec: 'Cathétérisme + angioplastie ± stent. Si stent : surveiller anévrisme à long terme (IRM/CT tous les 2-3 ans). Surveillance TA + écho semestrielle.',
+    pearls: '⚠️ La re-coarctation est fréquente (10-20%) — doit être recherchée systématiquement à chaque consultation.'
+  },
+
+  /* ━━━━━━━━━━ VU (3 cas) ━━━━━━━━━━ */
+  {
+    id: 34, patho: 'VU', age: 'nourrisson', diff: 'hard',
+    title: 'Atrésie tricuspide',
+    age_label: '3 mois', sex: 'M',
+    presentation: 'Nourrisson de 3 mois. Cyanose précoce néonatale, sortie sous prostines. Aujourd\'hui : pré-Glenn.',
+    examens: 'Sat 80%. Souffle 2/6. Pas d\'IC.',
+    echo_focus: 'Apicale 4C : valve tricuspide ATRÉSIQUE, VG dominant + VD hypoplasique, CIA, CIV',
+    qcm_question: 'Quelle est la prochaine étape ?',
+    qcm_options: [
+      { text: 'Cure biventriculaire', correct: false },
+      { text: 'Glenn bidirectionnel (vers 6 mois)', correct: true },
+      { text: 'Transplantation', correct: false },
+      { text: 'Surveillance', correct: false }
+    ],
+    qcm_explanation: 'Atrésie tricuspide = voie univentriculaire. Étape Glenn (anastomose VCS-AP) à 4-6 mois, puis Fontan vers 2-4 ans.',
+    correct_dx: 'Atrésie tricuspide (voie univentriculaire)',
+    pec: 'Cathétérisme pré-Glenn (pressions, anatomie AP). Glenn bidirectionnel à 4-6 mois. Saturation cible post-Glenn 80-85%. Surveillance étroite (perméabilité Glenn, AVMs pulmonaires). Cathétérisme pré-Fontan vers 18-24 mois.',
+    pearls: '💡 Glenn = "stade 2" de la voie univentriculaire. Saturation acceptée 80-85% (cyanose modérée).'
+  },
+  {
+    id: 35, patho: 'VU', age: 'enfant', diff: 'hard',
+    title: 'Fontan en place (post-Fontan)',
+    age_label: '4 ans', sex: 'F',
+    presentation: 'Enfant de 4 ans, atrésie tricuspide. Norwood-like → Glenn → Fontan extra-cardiaque (TCPC) à 3 ans. Suivi.',
+    examens: 'Sat 95%. Cicatrice médiane. Pas d\'œdème, pas d\'ascite.',
+    echo_focus: 'Anastomose Fontan (perméabilité), fonction VG, fuite mitrale',
+    qcm_question: 'Que surveiller spécifiquement à long terme ?',
+    qcm_options: [
+      { text: 'HTAP', correct: false },
+      { text: 'Entéropathie exsudative + Fontan-associated liver disease + arythmies', correct: true },
+      { text: 'Sténose pulmonaire', correct: false },
+      { text: 'CIV résiduelle', correct: false }
+    ],
+    qcm_explanation: 'Complications spécifiques du Fontan : entéropathie exsudative (perte protéines), bronchite plastique, FALD (cirrhose hépatique), arythmies, dysfonction du V dominant.',
+    correct_dx: 'Post-Fontan (suivi)',
+    pec: 'Suivi multidisciplinaire (cardio, gastro-hépato, pneumo). Aspirine ± AVK selon centre. Bilan annuel : écho, ECG-Holter, NT-proBNP, écho hépatique (FALD), albuminémie (entéropathie).',
+    pearls: '⚠️ Le Fontan est une "palliation à long terme" — surveillance multi-organes obligatoire (Fontan-associated complications).'
+  },
+  {
+    id: 36, patho: 'VU', age: 'enfant', diff: 'hard',
+    title: 'Fontan failing',
+    age_label: '5 ans', sex: 'M',
+    presentation: 'Enfant de 5 ans, post-Fontan à 3 ans. Apparition d\'œdèmes des MI, ascite, diarrhée chronique. Asthénie.',
+    examens: 'Œdèmes MI ++, abdomen distendu. Hypoalbuminémie (22 g/L). Sat 92%.',
+    echo_focus: 'Fonction V, valves AV, anastomose Fontan, IRM pour pressions',
+    qcm_question: 'Diagnostic à évoquer ?',
+    qcm_options: [
+      { text: 'IC sur cardiopathie ischémique', correct: false },
+      { text: 'Fontan failing avec entéropathie exsudative', correct: true },
+      { text: 'Insuffisance rénale chronique', correct: false },
+      { text: 'Cirrhose virale', correct: false }
+    ],
+    qcm_explanation: 'Œdèmes + diarrhée + hypoalbuminémie post-Fontan = entéropathie exsudative = signe de Fontan failing. URGENCE thérapeutique.',
+    correct_dx: 'Fontan failing avec entéropathie exsudative',
+    pec: 'URGENCE. Bilan complet : cathétérisme (pressions Fontan), écho, IRM, bio (alb, NT-proBNP, fonction hépatique). Optimisation : sildénafil (baisse RVP), IEC, héparine (entéropathie). Discussion : Fontan revision vs transplantation.',
+    pearls: '🚨 L\'entéropathie post-Fontan = signe d\'alarme majeur — pronostic réservé sans intervention.'
+  },
+
+  /* ━━━━━━━━━━ TGV (2 cas) ━━━━━━━━━━ */
+  {
+    id: 37, patho: 'TGV', age: 'neonate', diff: 'hard',
+    title: 'TGV simple néonatale',
+    age_label: '2 jours', sex: 'M',
+    presentation: 'Nouveau-né à terme, J2. Cyanose intense (sat 70%) sans signes de détresse respiratoire. Souffle absent.',
+    examens: 'Sat 70% en air, peu améliorée sous O2 (test à l\'hyperoxie négatif). Pas de souffle. Hépatomégalie absente.',
+    echo_focus: 'PLAX : vaisseaux parallèles. PSAX : 2 cercles non croisés. Mélange interatrial (FOP)',
+    qcm_question: 'Conduite immédiate ?',
+    qcm_options: [
+      { text: 'O2 nasal', correct: false },
+      { text: 'Prostines + Rashkind si mélange restrictif + transfert URGENT', correct: true },
+      { text: 'Diurétiques', correct: false },
+      { text: 'Surveillance simple', correct: false }
+    ],
+    qcm_explanation: 'TGV simple = URGENCE vitale néonatale. Prostines pour maintenir PCA + Rashkind (atrioseptostomie) si FOP restrictif. Switch artériel idéal entre J7 et J21.',
+    correct_dx: 'Transposition des gros vaisseaux (D-TGA) simple',
+    pec: 'PgE1 IV continu URGENT. Échographie évaluation FOP. Si FOP restrictif : Rashkind (atrioseptostomie de Rashkind par cathétérisme) en urgence. Transfert centre tertiaire pour switch artériel (idéal J7-J21). Bilan préop : anatomie coronaires (Yacoub).',
+    pearls: '🚨 Test à l\'hyperoxie négatif (PaO2 < 100 mmHg sous FiO2 100%) = cardiopathie cyanogène. Penser TGV en l\'absence de souffle.'
+  },
+  {
+    id: 38, patho: 'TGV', age: 'enfant', diff: 'hard',
+    title: 'TGV opérée (switch artériel)',
+    age_label: '3 ans', sex: 'M',
+    presentation: 'Enfant de 3 ans, TGV simple opérée par switch artériel à J14. Suivi régulier. Asymptomatique.',
+    examens: 'Sat 99%. Souffle systolique 2/6 (sténose néo-pulm résiduelle ?). Pas d\'IC.',
+    echo_focus: 'Néo-aorte (insuffisance, dilatation), néo-pulm (sténose), coronaires (sténose ostiale)',
+    qcm_question: 'Que surveiller ?',
+    qcm_options: [
+      { text: 'CIV résiduelle', correct: false },
+      { text: 'Insuff néo-aortique + dilatation néo-Ao + sténose coronaires', correct: true },
+      { text: 'HTAP', correct: false },
+      { text: 'Récidive de la transposition', correct: false }
+    ],
+    qcm_explanation: 'Complications post-switch : insuff néo-aortique (10-20%), dilatation néo-Ao, sténoses sus-pulmonaires, sténoses coronaires ostiales (test d\'effort + scintigraphie ou IRM).',
+    correct_dx: 'TGV post-switch artériel (suivi)',
+    pec: 'Écho annuelle (néo-Ao, néo-pulm, coronaires). Test d\'effort + scintigraphie ou IRM coronaires si suspicion. ECG annuel. Activité physique adaptée.',
+    pearls: '💡 Le switch artériel a transformé le pronostic de la TGV — survie > 95% à 20 ans, avec une qualité de vie quasi normale.'
+  },
+
+  /* ━━━━━━━━━━ VDDI (2 cas) ━━━━━━━━━━ */
+  {
+    id: 39, patho: 'VDDI', age: 'nourrisson', diff: 'hard',
+    title: 'DORV Fallot-like',
+    age_label: '4 mois', sex: 'M',
+    presentation: 'Nourrisson de 4 mois. Cyanose modérée (sat 88%). Souffle systolique 3/6 + B2 unique.',
+    examens: 'Sat 88%. Souffle éjectionnel pulmonaire. Pas d\'IC.',
+    echo_focus: 'PLAX : 2 vaisseaux du VD. Position CIV (sous-aortique). Sténose pulmonaire ?',
+    qcm_question: 'Diagnostic ?',
+    qcm_options: [
+      { text: 'T4F classique', correct: false },
+      { text: 'DORV (VDDI) avec CIV sous-aortique et SP', correct: true },
+      { text: 'TGV + CIV', correct: false },
+      { text: 'Truncus', correct: false }
+    ],
+    qcm_explanation: 'Les 2 gros vaisseaux naissent du VD (vs 1 dans T4F où Ao "à cheval" mais > 50% du VG). DORV avec CIV sous-aortique se présente "comme un Fallot".',
+    correct_dx: 'DORV (VDDI) avec CIV sous-aortique et SP (Fallot-like)',
+    pec: 'Bilan : écho détaillée + IRM cardiaque + cathétérisme. Réparation chirurgicale type T4F (tunneling CIV-Ao) entre 6-12 mois. Avis centre spécialisé.',
+    pearls: '💡 DORV = 2 vaisseaux > 50% du VD (alors que dans T4F : Ao "à cheval" mais < 50% du VD).'
+  },
+  {
+    id: 40, patho: 'VDDI', age: 'nourrisson', diff: 'hard',
+    title: 'Taussig-Bing (CIV sous-pulmonaire)',
+    age_label: '2 mois', sex: 'F',
+    presentation: 'Nourrisson de 2 mois. Cyanose marquée + IC. Souffle systolique multiple.',
+    examens: 'Sat 80%. IC : tachypnée, hépatomégalie. Souffles complexes.',
+    echo_focus: 'PLAX/PSAX : DORV + CIV sous-pulmonaire (Aorte naît du VD, AP "à cheval" CIV)',
+    qcm_question: 'Stratégie chirurgicale ?',
+    qcm_options: [
+      { text: 'Tunneling CIV-Ao (type T4F)', correct: false },
+      { text: 'Switch artériel + tunneling CIV-AP (LV switch)', correct: true },
+      { text: 'Voie univentriculaire', correct: false },
+      { text: 'Banding AP isolé', correct: false }
+    ],
+    qcm_explanation: 'Taussig-Bing (CIV sous-pulmonaire) = traitement comme une TGV. Switch artériel + LV switch (tunneling CIV vers néo-pulm).',
+    correct_dx: 'Taussig-Bing (DORV avec CIV sous-pulmonaire)',
+    pec: 'PEC URGENTE. Si IC sévère : prostines en attente. Switch artériel + LV switch précoce (idéalement < 3 mois). Centre tertiaire spécialisé. Pronostic réservé si HTAP fixée.',
+    pearls: '🚨 Taussig-Bing se comporte hémodynamiquement comme une TGV — d\'où l\'indication de switch artériel.'
+  },
+
+  /* ━━━━━━━━━━ RAO (2 cas) ━━━━━━━━━━ */
+  {
+    id: 41, patho: 'RAO', age: 'enfant', diff: 'medium',
+    title: 'Bicuspidie aortique avec RAO modéré',
+    age_label: '5 ans', sex: 'M',
+    presentation: 'Enfant de 5 ans, bicuspidie aortique connue. Souffle systolique éjectionnel aortique 3/6 + click.',
+    examens: 'TA normale. Souffle 3/6 + click éjectionnel. Pas d\'IC.',
+    echo_focus: 'PLAX/PSAX 5C : valve bicuspide, gradient au Doppler continu, dilatation Ao asc',
+    qcm_question: 'Conduite si gradient = 35 mmHg ?',
+    qcm_options: [
+      { text: 'Valvuloplastie immédiate', correct: false },
+      { text: 'Surveillance écho annuelle + restriction sport intense', correct: true },
+      { text: 'Chirurgie de Ross', correct: false },
+      { text: 'Remplacement valvulaire mécanique', correct: false }
+    ],
+    qcm_explanation: 'RAO modéré (gradient 30-50 mmHg) = surveillance + restriction sport intense. Indication intervention si gradient > 50 mmHg ou symptômes.',
+    correct_dx: 'Bicuspidie aortique avec RAO modéré',
+    pec: 'Surveillance écho annuelle (gradient + Vmax + dilatation Ao asc). Restriction sport en compétition. Si gradient > 50 mmHg : valvuloplastie percutanée. Suivi à vie de la dilatation aortique.',
+    pearls: '💡 La bicuspidie aortique est l\'anomalie cardiaque congénitale la plus fréquente (1-2% de la population). Surveillance valve + Ao asc à vie.'
+  },
+  {
+    id: 42, patho: 'RAO', age: 'enfant', diff: 'hard',
+    title: 'Sténose sus-aortique (Williams)',
+    age_label: '3 ans', sex: 'F',
+    presentation: 'Enfant de 3 ans. Faciès "elfe" (front bombé, lèvres épaisses, hypoplasie médio-faciale). Hypercalcémie. Retard mental modéré.',
+    examens: 'Souffle 3/6 sus-sternal D. Souffle bilatéral sur les branches AP.',
+    echo_focus: 'Sus-aortique (juste au-dessus des sigmoïdes). Branches AP (sténoses ?)',
+    qcm_question: 'Diagnostic syndromique ?',
+    qcm_options: [
+      { text: 'Trisomie 21', correct: false },
+      { text: 'Syndrome de Williams (microdélétion 7q11.23)', correct: true },
+      { text: 'Syndrome de Noonan', correct: false },
+      { text: 'Syndrome de DiGeorge', correct: false }
+    ],
+    qcm_explanation: 'Faciès évocateur + hypercalcémie + retard + RAO sus-valvulaire = syndrome de Williams (microdélétion 7q11.23 incluant le gène ELN de l\'élastine).',
+    correct_dx: 'Sténose sus-aortique sur syndrome de Williams',
+    pec: 'Bilan génétique (FISH 7q11.23). Bilan multidisciplinaire (cardio, génétique, néphro pour hypercalcémie, ORL, psychomotricité). Chirurgie de cure si gradient > 50 mmHg. Surveillance des sténoses pulmonaires associées.',
+    pearls: '💡 Williams = "Aortite + élastine" : RAO sus-valvulaire + sténoses des branches AP + sténose des artères rénales.'
+  },
+
+  /* ━━━━━━━━━━ Cas spéciaux (1 cas chaque) ━━━━━━━━━━ */
+  {
+    id: 43, patho: 'TAC', age: 'nourrisson', diff: 'hard',
+    title: 'Truncus arteriosus',
+    age_label: '2 mois', sex: 'M',
+    presentation: 'Nourrisson de 2 mois. Cyanose + IC. B2 unique. Souffle multiple.',
+    examens: 'Sat 88% (mélange systémo-pulmonaire). IC : tachypnée, hépatomégalie. Souffle continu (vol pulmonaire).',
+    echo_focus: 'PSAX : 1 SEUL gros vaisseau (truncus) avec valve unique. CIV sous-truncale',
+    qcm_question: 'Diagnostic ?',
+    qcm_options: [
+      { text: 'TGV', correct: false },
+      { text: 'Truncus arteriosus (TAC)', correct: true },
+      { text: 'T4F', correct: false },
+      { text: 'CAV complet', correct: false }
+    ],
+    qcm_explanation: 'Un seul gros vaisseau d\'où naissent à la fois Ao + AP + coronaires = truncus arteriosus. CIV sous-truncale constante.',
+    correct_dx: 'Truncus arteriosus (Van Praagh A2)',
+    pec: 'PEC URGENTE. Traitement IC. Bilan : type Van Praagh, valve truncale (sténose/IAo), bilan DiGeorge (calcémie, FISH 22q11). Chirurgie correctrice (Rastelli) URGENTE avant 3 mois. Conduit VD-AP à changer vers 5-7 ans (croissance).',
+    pearls: '🚨 TAC = HTAP fixée précoce — chirurgie obligatoire avant 3 mois.'
+  },
+  {
+    id: 44, patho: 'ALCAPA', age: 'nourrisson', diff: 'hard',
+    title: 'ALCAPA chez nourrisson',
+    age_label: '4 mois', sex: 'F',
+    presentation: 'Nourrisson de 4 mois. Pleurs lors des tétées (douleurs ?). Mauvaise prise alimentaire. Sueurs.',
+    examens: 'IC : tachypnée, hépatomégalie. ECG : Q profondes en latéral, ST sus-décalé.',
+    echo_focus: 'PSAX étage des sigmoïdes : origine LCA depuis tronc AP + flux rétrograde dans AP',
+    qcm_question: 'Diagnostic ?',
+    qcm_options: [
+      { text: 'CMD primitive', correct: false },
+      { text: 'ALCAPA (anomalie origine LCA depuis AP)', correct: true },
+      { text: 'Myocardite virale', correct: false },
+      { text: 'Maladie de Kawasaki', correct: false }
+    ],
+    qcm_explanation: 'CMD du nourrisson + douleurs aux tétées + signes d\'ischémie ECG = ALCAPA jusqu\'à preuve du contraire. Recherche LCA depuis AP en écho.',
+    correct_dx: 'ALCAPA (anomalie origine coronaire G depuis AP)',
+    pec: 'URGENCE chirurgicale. Bilan : IRM cardiaque + coronaro-CT (anatomie + viabilité myocarde). Chirurgie : réimplantation LCA dans Ao. Récupération FE post-op généralement bonne (6-12 mois). Anti-IC et inotropes en attente.',
+    pearls: '🚨 Toute CMD du nourrisson < 1 an doit éliminer une ALCAPA (cardiopathie ischémique).'
+  },
+  {
+    id: 45, patho: 'Fistule', age: 'enfant', diff: 'medium',
+    title: 'Fistule coronaire vers VD',
+    age_label: '2 ans', sex: 'M',
+    presentation: 'Enfant de 2 ans, asymptomatique. Souffle continu découvert à la consultation systématique.',
+    examens: 'Souffle continu mésocardiaque. Pas de différentiel. Pas d\'IC.',
+    echo_focus: 'PSAX étage coronaires : fistule LCA → VD au Doppler couleur',
+    qcm_question: 'Conduite si fistule modérée asymptomatique ?',
+    qcm_options: [
+      { text: 'Fermeture chirurgicale immédiate', correct: false },
+      { text: 'Surveillance écho annuelle', correct: true },
+      { text: 'Aspirine au long cours', correct: false },
+      { text: 'Coronarographie en urgence', correct: false }
+    ],
+    qcm_explanation: 'Fistule coronaire petite/modérée asymptomatique = surveillance. Fermeture (coil ou Amplatzer Vascular Plug) si large, dilatation coronaire évolutive, ou symptômes.',
+    correct_dx: 'Fistule coronaire (LCA vers VD)',
+    pec: 'Coronaro-CT ou angiographie pour cartographie précise. Surveillance écho annuelle. Fermeture percutanée si évolution. Aspirine 6 mois post-fermeture.',
+    pearls: '💡 Souffle CONTINU sans signes de PCA = penser fistule coronaire ou rupture sinus de Valsalva.'
+  },
+  {
+    id: 46, patho: 'RVPA', age: 'nourrisson', diff: 'hard',
+    title: 'RVPAT supra-cardiaque',
+    age_label: '1 mois', sex: 'M',
+    presentation: 'Nourrisson de 1 mois. Cyanose modérée + détresse respiratoire. Sat 85%.',
+    examens: 'Sat 85%. IC : tachypnée, hépatomégalie. Souffle 2/6.',
+    echo_focus: 'Sous-costale : retours veineux pulmonaires anormaux (collecteur, drainage VCS)',
+    qcm_question: 'Si RVPAT obstructif (collecteur sténosé) ?',
+    qcm_options: [
+      { text: 'Surveillance', correct: false },
+      { text: 'Chirurgie URGENTE (J0-J7)', correct: true },
+      { text: 'Diurétiques uniquement', correct: false },
+      { text: 'Cathétérisme avec stent', correct: false }
+    ],
+    qcm_explanation: 'RVPAT obstructif = URGENCE chirurgicale (mortalité élevée sans chir). Réimplantation des veines pulmonaires dans l\'OG.',
+    correct_dx: 'Retour veineux pulmonaire anormal total (RVPAT) supracardiaque',
+    pec: 'URGENCE absolue. Stabilisation (intubation, support hémodynamique). Chirurgie immédiate (réimplantation veines pulm dans OG + ligature collecteur). Pronostic dépend de la précocité de la chirurgie et de l\'absence d\'HTAP fixée.',
+    pearls: '🚨 RVPAT obstructif = "œdème pulmonaire bleu" du nouveau-né, mortalité 100% sans chirurgie.'
+  },
+  {
+    id: 47, patho: 'IAA', age: 'neonate', diff: 'hard',
+    title: 'Interruption de l\'arche aortique',
+    age_label: '5 jours', sex: 'M',
+    presentation: 'Nouveau-né à terme, J5. Choc cardiogénique après fermeture du canal artériel. Acidose sévère.',
+    examens: 'Pouls fémoraux abolis. TA différentielle massive. Marbrures. pH 7.10.',
+    echo_focus: 'Sus-sternale : interruption complète arche, type A/B/C selon localisation',
+    qcm_question: 'Conduite immédiate ?',
+    qcm_options: [
+      { text: 'Surveillance', correct: false },
+      { text: 'Prostines IV + intubation + transfert URGENT', correct: true },
+      { text: 'Diurétiques', correct: false },
+      { text: 'Aspirine', correct: false }
+    ],
+    qcm_explanation: 'IAA = URGENCE vitale ductodépendante. Prostines pour réouvrir canal artériel = sauvetage de vie. Chirurgie multi-niveaux dans les jours suivants.',
+    correct_dx: 'Interruption de l\'arche aortique (IAA)',
+    pec: 'PgE1 IV continu URGENT. Intubation, support hémodynamique. Transfert centre cardiaque pédiatrique. Bilan : type IAA (A, B, C), CIV associée (constante), DiGeorge (FISH 22q11). Chirurgie correctrice complexe (anastomose arche + fermeture CIV).',
+    pearls: '🚨 IAA type B (entre carotide G et sous-clavière G) est associée à DiGeorge dans 50% des cas.'
+  },
+  {
+    id: 48, patho: 'HLHS', age: 'neonate', diff: 'hard',
+    title: 'HLHS (hypoplasie cœur gauche)',
+    age_label: '3 jours', sex: 'F',
+    presentation: 'Nouveau-né à terme, J3. Choc cardiogénique progressif. Sat 75%. Pouls fémoraux faibles.',
+    examens: 'Marbrures, oligurie, acidose. Souffle diastolique d\'IT (HTAP).',
+    echo_focus: 'Apicale 4C : VG hypoplasique, atrésie/hypoplasie mitrale + aortique. Aorte ascendante fine',
+    qcm_question: 'Options thérapeutiques ?',
+    qcm_options: [
+      { text: 'Surveillance compassionnelle', correct: false },
+      { text: 'Norwood I + Glenn + Fontan (voie univentriculaire) ou transplantation', correct: true },
+      { text: 'Cure biventriculaire', correct: false },
+      { text: 'Banding AP isolé', correct: false }
+    ],
+    qcm_explanation: 'HLHS = voie univentriculaire (VG inutilisable). Norwood I dans la première semaine de vie + Glenn vers 6 mois + Fontan vers 3 ans. Alternative : transplantation cardiaque néonatale.',
+    correct_dx: 'Syndrome d\'hypoplasie du cœur gauche (HLHS)',
+    pec: 'PgE1 IV + intubation + transfert centre tertiaire ULTRA-spécialisé. Discussion familiale franche (pronostic réservé). Norwood I (J3-J7). Mortalité interstage Norwood-Glenn = 10-15%. Glenn (4-6 mois). Fontan (2-4 ans). Suivi multidisciplinaire à vie.',
+    pearls: '🚨 HLHS = pronostic le plus réservé des cardiopathies congénitales — discussion éthique avec parents.'
+  },
+
+  /* ━━━━━━━━━━ Examens normaux (2 cas pédagogiques) ━━━━━━━━━━ */
+  {
+    id: 49, patho: 'Normal', age: 'enfant', diff: 'easy',
+    title: 'Souffle anorganique chez enfant fébrile',
+    age_label: '3 ans', sex: 'F',
+    presentation: 'Enfant de 3 ans, consultation pour fièvre virale. Découverte d\'un souffle systolique pendant la consultation.',
+    examens: 'Fièvre 38.5°C, FC 140/min. Souffle systolique 2/6 mésocardiaque, doux, musical, court (proto-mésosystolique). Pas d\'autre anomalie.',
+    echo_focus: 'Vérification absence de cardiopathie : structure normale 4 cavités, septums intacts',
+    qcm_question: 'Diagnostic ?',
+    qcm_options: [
+      { text: 'CIV minime', correct: false },
+      { text: 'Souffle anorganique (innocent) — examen normal', correct: true },
+      { text: 'Sténose pulmonaire légère', correct: false },
+      { text: 'CIA petite', correct: false }
+    ],
+    qcm_explanation: 'Souffle "musical", court, proto-mésosystolique, doux, sans irradiation, qui varie avec la position et la fièvre = souffle anorganique de Still (le + fréquent chez l\'enfant).',
+    correct_dx: 'Souffle anorganique (innocent) — examen normal',
+    pec: 'Rassurer les parents +++. Pas de bilan complémentaire si caractéristiques typiques. Si doute : échographie cardiaque (normale). Pas de prophylaxie. Activité physique normale.',
+    pearls: '💡 Le souffle anorganique est présent chez 50% des enfants entre 2 et 10 ans. Caractéristiques : doux, musical, court, sans irradiation, varie avec la position/fièvre.'
+  },
+  {
+    id: 50, patho: 'Normal', age: 'nourrisson', diff: 'easy',
+    title: 'Foramen ovale perméable du nourrisson',
+    age_label: '2 mois', sex: 'M',
+    presentation: 'Nourrisson de 2 mois, asymptomatique, croissance normale. Bilan systématique. Pas de souffle.',
+    examens: 'Examen clinique parfaitement normal. Sat 99%.',
+    echo_focus: 'Sous-costale : petit shunt G→D au niveau du septum interatrial, < 5 mm, bordures épaisses',
+    qcm_question: 'Conduite ?',
+    qcm_options: [
+      { text: 'Fermeture percutanée', correct: false },
+      { text: 'Surveillance — examen quasi normal (FOP physiologique)', correct: true },
+      { text: 'Chirurgie programmée', correct: false },
+      { text: 'IRM cardiaque', correct: false }
+    ],
+    qcm_explanation: 'FOP < 5 mm chez nourrisson asymptomatique = quasi-physiologique. Persiste chez 25% des adultes. Pas d\'indication d\'intervention chez l\'enfant.',
+    correct_dx: 'Foramen ovale perméable (FOP) — examen normal',
+    pec: 'Pas de traitement. Pas de surveillance spécifique. Information parents : "ouverture physiologique" qui peut persister, sans conséquence clinique chez l\'enfant.',
+    pearls: '💡 Différence FOP vs CIA : FOP = passage entre 2 lames septales (membrane septale primaire/secondaire), CIA = vrai défaut tissulaire. Le FOP est physiologique chez le fœtus.'
+  }
+
+];
+
+/* Liste des pathologies pour les filtres */
+const PATHO_LIST = [
+  { id: 'CIV', label: 'CIV', color: '#EF4444' },
+  { id: 'CIA', label: 'CIA', color: '#3B82F6' },
+  { id: 'PCA', label: 'PCA', color: '#EC4899' },
+  { id: 'CAV', label: 'CAV', color: '#A855F7' },
+  { id: 'T4F', label: 'T4F', color: '#8B5CF6' },
+  { id: 'SP', label: 'SP', color: '#10B981' },
+  { id: 'CoAo', label: 'CoAo', color: '#F59E0B' },
+  { id: 'VU', label: 'VU', color: '#6B7280' },
+  { id: 'TGV', label: 'TGV', color: '#92400E' },
+  { id: 'VDDI', label: 'VDDI', color: '#78350F' },
+  { id: 'RAO', label: 'RAO', color: '#EAB308' },
+  { id: 'TAC', label: 'TAC', color: '#0EA5E9' },
+  { id: 'ALCAPA', label: 'ALCAPA', color: '#1F2937' },
+  { id: 'Fistule', label: 'Fistule', color: '#9CA3AF' },
+  { id: 'RVPA', label: 'RVPA', color: '#06B6D4' },
+  { id: 'IAA', label: 'IAA', color: '#DC2626' },
+  { id: 'HLHS', label: 'HLHS', color: '#7C2D12' },
+  { id: 'Normal', label: 'Normal', color: '#10B981' }
+];
+
+
+/* ═══════════════════════════════════════════════════════════
+   LOGIQUE D'AFFICHAGE — Filtres, liste, détail
+═══════════════════════════════════════════════════════════ */
+
+let filters = {
+  search: '',
+  patho: 'all',
+  age: 'all',
+  diff: 'all'
+};
+
+/* Initialisation des filtres patho */
+function initPathoFilter() {
+  const container = document.getElementById('filterPatho');
+  PATHO_LIST.forEach(p => {
+    const count = CASES_DATA.filter(c => c.patho === p.id).length;
+    if (count === 0) return;
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.dataset.filterPatho = p.id;
+    btn.innerHTML = p.label + ' <span style="opacity:0.6;font-size:10px;">(' + count + ')</span>';
+    btn.onclick = () => setFilter('patho', p.id);
+    container.appendChild(btn);
+  });
+}
+
+/* Activation d'un filtre */
+function setFilter(type, value) {
+  filters[type] = value;
+  // Mettre à jour visuel
+  document.querySelectorAll('[data-filter-' + type + ']').forEach(b => {
+    b.classList.toggle('active', b.dataset['filter' + type.charAt(0).toUpperCase() + type.slice(1)] === value);
+  });
+  renderCaseList();
+}
+
+/* Initialisation des écouteurs */
+function initFilters() {
+  // Filtres âge et diff (déjà dans HTML)
+  document.querySelectorAll('[data-filter-age]').forEach(b => {
+    b.onclick = () => setFilter('age', b.dataset.filterAge);
+  });
+  document.querySelectorAll('[data-filter-diff]').forEach(b => {
+    b.onclick = () => setFilter('diff', b.dataset.filterDiff);
+  });
+  // Filtre patho "all"
+  document.querySelector('[data-filter-patho="all"]').onclick = () => setFilter('patho', 'all');
+  // Recherche
+  document.getElementById('searchInput').addEventListener('input', e => {
+    filters.search = e.target.value.toLowerCase().trim();
+    renderCaseList();
+  });
+}
+
+/* Rendu de la liste filtrée */
+function renderCaseList() {
+  const filtered = CASES_DATA.filter(c => {
+    if (filters.patho !== 'all' && c.patho !== filters.patho) return false;
+    if (filters.age !== 'all' && c.age !== filters.age) return false;
+    if (filters.diff !== 'all' && c.diff !== filters.diff) return false;
+    if (filters.search) {
+      const blob = (c.title + ' ' + c.patho + ' ' + c.presentation + ' ' + c.correct_dx).toLowerCase();
+      if (!blob.includes(filters.search)) return false;
+    }
+    return true;
+  });
+
+  // Stats
+  const progress = getProgress();
+  const completedCount = Object.keys(progress).filter(id => progress[id].completed).length;
+  const successCount = Object.keys(progress).filter(id => progress[id].success).length;
+  document.getElementById('statTotal').textContent = CASES_DATA.length;
+  document.getElementById('statDone').textContent = completedCount;
+  document.getElementById('statSuccess').textContent = completedCount > 0 ? Math.round(successCount / completedCount * 100) + '%' : '—';
+
+  const list = document.getElementById('caseList');
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="case-list-empty">🔍 Aucun cas ne correspond aux filtres.<br><small>Essayez d\'élargir vos critères.</small></div>';
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(c => {
+    const isCompleted = progress[c.id] && progress[c.id].completed;
+    const ageLabel = { neonate: '0-1m', nourrisson: '1-6m', enfant: '6m-5a', grand: '>5a' }[c.age];
+    const diffLabel = { easy: 'Facile', medium: 'Moyen', hard: 'Difficile' }[c.diff];
+    html += '<div class="case-card diff-' + c.diff + (isCompleted ? ' completed' : '') + '" onclick="openCase(' + c.id + ')">';
+    html += '<div class="case-card-num">' + (isCompleted ? '✓' : c.id) + '</div>';
+    html += '<div class="case-card-info">';
+    html += '<div class="case-card-title">' + escapeHtml(c.title) + '</div>';
+    html += '<div class="case-card-meta">';
+    html += '<span class="badge age-' + c.age + '">' + ageLabel + '</span>';
+    html += '<span class="badge diff-' + c.diff + '">' + diffLabel + '</span>';
+    html += '<span>' + c.patho + ' · ' + c.age_label + '</span>';
+    html += '</div></div>';
+    html += '<div class="case-card-arrow">›</div>';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+/* ━━━ OUVERTURE D'UN CAS ━━━ */
+function openCase(id) {
+  currentCaseId = id;
+  currentMode = 'workflow';
+  workflowStep = 0;
+  goTo('case');
+  renderCaseDetail();
+}
+
+/* ━━━ AFFICHAGE D'UN CAS ━━━ */
+function renderCaseDetail() {
+  const c = CASES_DATA.find(x => x.id === currentCaseId);
+  if (!c) { goTo('list'); return; }
+  const container = document.getElementById('caseDetail');
+
+  const ageLabel = { neonate: '0-1m', nourrisson: '1-6m', enfant: '6m-5a', grand: '>5a' }[c.age];
+  const diffLabel = { easy: 'Facile', medium: 'Moyen', hard: 'Difficile' }[c.diff];
+
+  let html = '';
+
+  // Header
+  html += '<div class="case-header">';
+  html += '<div class="case-header-top">';
+  html += '<div class="case-header-num">#' + c.id + '</div>';
+  html += '<div class="case-header-title">' + escapeHtml(c.title) + '</div>';
+  html += '</div>';
+  html += '<div class="case-header-badges">';
+  html += '<span class="badge age-' + c.age + '">' + ageLabel + ' · ' + c.age_label + '</span>';
+  html += '<span class="badge diff-' + c.diff + '">' + diffLabel + '</span>';
+  html += '<span class="badge" style="background:rgba(255,255,255,0.08);color:var(--text-secondary);">Sexe : ' + (c.sex === 'M' ? 'M' : 'F') + '</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Sélecteur de mode
+  html += '<div class="mode-selector">';
+  html += '<button class="mode-btn ' + (currentMode === 'workflow' ? 'active' : '') + '" onclick="switchMode(\'workflow\')"><span class="mode-icon">🎯</span>Workflow</button>';
+  html += '<button class="mode-btn ' + (currentMode === 'qcm' ? 'active' : '') + '" onclick="switchMode(\'qcm\')"><span class="mode-icon">🧠</span>QCM</button>';
+  html += '<button class="mode-btn ' + (currentMode === 'libre' ? 'active' : '') + '" onclick="switchMode(\'libre\')"><span class="mode-icon">📝</span>Libre</button>';
+  html += '</div>';
+
+  // Présentation clinique (toujours visible)
+  html += '<div class="card">';
+  html += '<div class="card-title">📋 Présentation clinique</div>';
+  html += '<div class="card-content"><p>' + escapeHtml(c.presentation) + '</p></div>';
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += '<div class="card-title">🩺 Examen clinique</div>';
+  html += '<div class="card-content"><p>' + escapeHtml(c.examens) + '</p></div>';
+  html += '</div>';
+
+  // Section Canva (toujours visible)
+  html += renderCanvaSection(c);
+
+  // Mode spécifique
+  if (currentMode === 'workflow') {
+    html += renderWorkflowMode(c);
+  } else if (currentMode === 'qcm') {
+    html += renderQcmMode(c);
+  } else if (currentMode === 'libre') {
+    html += renderLibreMode(c);
+  }
+
+  container.innerHTML = html;
+  attachCanvaListeners(c);
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  workflowStep = 0;
+  renderCaseDetail();
+}
+
+/* ━━━ SECTION CANVA ━━━ */
+function renderCanvaSection(c) {
+  const urls = getCanvaUrls();
+  const url = urls[c.id] || '';
+  let html = '<div class="card">';
+  html += '<div class="card-title">🎬 Iconographie échographique</div>';
+  if (c.echo_focus) {
+    html += '<div class="canva-help">📍 <strong>Focus :</strong> ' + escapeHtml(c.echo_focus) + '</div>';
+  }
+  html += '<div class="canva-url-row">';
+  html += '<input type="url" class="canva-url-input" id="canvaInput-' + c.id + '" placeholder="Collez votre lien Canva ici (https://www.canva.com/design/.../view?embed)" value="' + escapeHtml(url) + '">';
+  html += '<button class="canva-btn" onclick="saveCanvaUrl(' + c.id + ')">💾</button>';
+  if (url) html += '<button class="canva-btn secondary" onclick="clearCanvaUrl(' + c.id + ')">✕</button>';
+  html += '</div>';
+  if (url) {
+    html += '<div class="canva-iframe-wrap">';
+    html += '<iframe src="' + escapeHtml(url) + '" allowfullscreen allow="fullscreen" loading="lazy" title="Echographie cas ' + c.id + '"></iframe>';
+    html += '</div>';
+  } else {
+    html += '<div class="canva-empty-placeholder">';
+    html += '<div class="icon">🎬</div>';
+    html += '<div>Aucune iconographie liée à ce cas.<br><small>Collez l\'URL de votre Canva ci-dessus puis cliquez 💾</small></div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function attachCanvaListeners(c) {
+  const inp = document.getElementById('canvaInput-' + c.id);
+  if (inp) {
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') saveCanvaUrl(c.id); });
+  }
+}
+
+function saveCanvaUrl(id) {
+  const inp = document.getElementById('canvaInput-' + id);
+  let url = inp.value.trim();
+  // Auto-correction format Canva
+  if (url && !url.includes('embed') && url.includes('canva.com/design/')) {
+    if (url.includes('/view')) url = url.replace('/view', '/view?embed');
+    else url += '/view?embed';
+  }
+  setCanvaUrl(id, url);
+  showToast('💾 Lien Canva sauvegardé');
+  renderCaseDetail();
+}
+
+function clearCanvaUrl(id) {
+  if (!confirm('Supprimer le lien Canva ?')) return;
+  setCanvaUrl(id, '');
+  showToast('Lien supprimé');
+  renderCaseDetail();
+}
+
+/* ━━━ MODE QCM ━━━ */
+let qcmAnswered = false;
+let qcmSelected = null;
+
+function renderQcmMode(c) {
+  qcmAnswered = false; qcmSelected = null;
+  let html = '<div class="card">';
+  html += '<div class="card-title">🧠 Question à choix multiple</div>';
+  html += '<div class="card-content" style="margin-bottom:12px;"><p><strong>' + escapeHtml(c.qcm_question) + '</strong></p></div>';
+  html += '<div class="qcm-options" id="qcmOptions">';
+  c.qcm_options.forEach((opt, idx) => {
+    const letter = String.fromCharCode(65 + idx);
+    html += '<button class="qcm-option" data-qcm-idx="' + idx + '" onclick="selectQcm(' + idx + ')">';
+    html += '<div class="qcm-option-letter">' + letter + '</div>';
+    html += '<span>' + escapeHtml(opt.text) + '</span>';
+    html += '</button>';
+  });
+  html += '</div>';
+  html += '<button class="btn" id="qcmValidate" onclick="validateQcm()" style="margin-top:14px;" disabled>Valider la réponse</button>';
+  html += '</div>';
+  html += '<div id="qcmReveal"></div>';
+  return html;
+}
+
+function selectQcm(idx) {
+  if (qcmAnswered) return;
+  qcmSelected = idx;
+  document.querySelectorAll('[data-qcm-idx]').forEach(b => {
+    b.classList.toggle('selected', parseInt(b.dataset.qcmIdx) === idx);
+  });
+  document.getElementById('qcmValidate').disabled = false;
+}
+
+function validateQcm() {
+  if (qcmSelected === null) return;
+  qcmAnswered = true;
+  const c = CASES_DATA.find(x => x.id === currentCaseId);
+  const correctIdx = c.qcm_options.findIndex(o => o.correct);
+  const isCorrect = qcmSelected === correctIdx;
+
+  // Marquer les options
+  document.querySelectorAll('[data-qcm-idx]').forEach(b => {
+    const idx = parseInt(b.dataset.qcmIdx);
+    b.classList.remove('selected');
+    if (idx === correctIdx) b.classList.add('correct');
+    else if (idx === qcmSelected) b.classList.add('wrong');
+    b.disabled = true;
+  });
+
+  document.getElementById('qcmValidate').style.display = 'none';
+
+  // Révélation
+  let reveal = '<div class="reveal-card' + (isCorrect ? '' : ' wrong-card') + '">';
+  reveal += '<div class="reveal-title">' + (isCorrect ? '✅ Bonne réponse' : '❌ Réponse incorrecte') + '</div>';
+  reveal += '<div class="reveal-content">';
+  reveal += '<p><strong>Diagnostic correct :</strong> ' + escapeHtml(c.correct_dx) + '</p>';
+  reveal += '<p style="margin-top:8px;">' + escapeHtml(c.qcm_explanation) + '</p>';
+  reveal += '</div></div>';
+
+  reveal += '<div class="card">';
+  reveal += '<div class="card-title">💊 Prise en charge</div>';
+  reveal += '<div class="card-content"><p>' + escapeHtml(c.pec) + '</p></div>';
+  reveal += '</div>';
+
+  if (c.pearls) {
+    reveal += '<div class="card" style="background:linear-gradient(135deg, rgba(245,158,11,0.10), transparent);border-color:rgba(245,158,11,0.30);">';
+    reveal += '<div class="card-title" style="color:var(--warning);">💎 Perle clinique</div>';
+    reveal += '<div class="card-content"><p>' + escapeHtml(c.pearls) + '</p></div>';
+    reveal += '</div>';
+  }
+
+  reveal += '<div class="btn-row">';
+  reveal += '<button class="btn btn-secondary" onclick="goTo(\'list\'); renderCaseList();">← Retour</button>';
+  reveal += '<button class="btn" onclick="nextCase()">Suivant →</button>';
+  reveal += '</div>';
+
+  document.getElementById('qcmReveal').innerHTML = reveal;
+  setProgress(currentCaseId, isCorrect);
+}
+
+/* ━━━ MODE LIBRE ━━━ */
+function renderLibreMode(c) {
+  let html = '<div class="card">';
+  html += '<div class="card-title">📝 Saisie libre</div>';
+  html += '<div class="card-content"><p><strong>Quel est votre diagnostic et votre PEC ?</strong></p></div>';
+  html += '<textarea class="free-input" id="libreInput" placeholder="Tapez votre diagnostic et votre prise en charge ici..."></textarea>';
+  html += '<button class="btn" onclick="revealLibre()" style="margin-top:10px;">🔓 Révéler la réponse</button>';
+  html += '</div>';
+  html += '<div id="libreReveal"></div>';
+  return html;
+}
+
+function revealLibre() {
+  const c = CASES_DATA.find(x => x.id === currentCaseId);
+  let reveal = '<div class="reveal-card">';
+  reveal += '<div class="reveal-title">📌 Diagnostic et PEC</div>';
+  reveal += '<div class="reveal-content">';
+  reveal += '<p><strong>Diagnostic :</strong> ' + escapeHtml(c.correct_dx) + '</p>';
+  reveal += '<p style="margin-top:8px;"><strong>Explication :</strong> ' + escapeHtml(c.qcm_explanation) + '</p>';
+  reveal += '</div></div>';
+  reveal += '<div class="card">';
+  reveal += '<div class="card-title">💊 Prise en charge</div>';
+  reveal += '<div class="card-content"><p>' + escapeHtml(c.pec) + '</p></div>';
+  reveal += '</div>';
+  if (c.pearls) {
+    reveal += '<div class="card" style="background:linear-gradient(135deg, rgba(245,158,11,0.10), transparent);border-color:rgba(245,158,11,0.30);">';
+    reveal += '<div class="card-title" style="color:var(--warning);">💎 Perle clinique</div>';
+    reveal += '<div class="card-content"><p>' + escapeHtml(c.pearls) + '</p></div>';
+    reveal += '</div>';
+  }
+  reveal += '<div class="btn-row">';
+  reveal += '<button class="btn btn-secondary" onclick="goTo(\'list\'); renderCaseList();">← Retour</button>';
+  reveal += '<button class="btn" onclick="nextCase()">Suivant →</button>';
+  reveal += '</div>';
+  document.getElementById('libreReveal').innerHTML = reveal;
+  setProgress(currentCaseId, true);
+}
+
+/* ━━━ MODE WORKFLOW (étape par étape) ━━━ */
+const WORKFLOW_STEPS = [
+  { title: '1. Anamnèse + examen', key: 'anamnese' },
+  { title: '2. Iconographie écho', key: 'echo' },
+  { title: '3. Diagnostic (QCM)', key: 'dx' },
+  { title: '4. Prise en charge', key: 'pec' },
+  { title: '5. Synthèse + perle', key: 'synthese' }
+];
+
+function renderWorkflowMode(c) {
+  let html = '<div class="workflow-step-indicator">';
+  WORKFLOW_STEPS.forEach((s, i) => {
+    let cls = '';
+    if (i < workflowStep) cls = 'done';
+    else if (i === workflowStep) cls = 'active';
+    html += '<div class="workflow-step-dot ' + cls + '"></div>';
+  });
+  html += '</div>';
+
+  const step = WORKFLOW_STEPS[workflowStep];
+
+  if (step.key === 'anamnese') {
+    html += '<div class="card">';
+    html += '<div class="card-title">📋 Étape 1 — Anamnèse + examen</div>';
+    html += '<div class="card-content"><p>Lisez attentivement la présentation et l\'examen clinique ci-dessus. Que vous évoquent-ils ?</p></div>';
+    html += '<button class="btn" onclick="workflowNext()" style="margin-top:10px;">Étape suivante →</button>';
+    html += '</div>';
+  } else if (step.key === 'echo') {
+    html += '<div class="card">';
+    html += '<div class="card-title">🎬 Étape 2 — Analyse de l\'écho</div>';
+    html += '<div class="card-content"><p>Examinez l\'iconographie ci-dessus. Quels signes échographiques retenez-vous ?</p></div>';
+    html += '<button class="btn" onclick="workflowNext()" style="margin-top:10px;">Étape suivante →</button>';
+    html += '</div>';
+  } else if (step.key === 'dx') {
+    qcmAnswered = false; qcmSelected = null;
+    html += '<div class="card">';
+    html += '<div class="card-title">🧠 Étape 3 — Quel est votre diagnostic ?</div>';
+    html += '<div class="card-content" style="margin-bottom:12px;"><p><strong>' + escapeHtml(c.qcm_question) + '</strong></p></div>';
+    html += '<div class="qcm-options">';
+    c.qcm_options.forEach((opt, idx) => {
+      const letter = String.fromCharCode(65 + idx);
+      html += '<button class="qcm-option" data-qcm-idx="' + idx + '" onclick="selectQcmWorkflow(' + idx + ')">';
+      html += '<div class="qcm-option-letter">' + letter + '</div>';
+      html += '<span>' + escapeHtml(opt.text) + '</span>';
+      html += '</button>';
+    });
+    html += '</div>';
+    html += '<button class="btn" id="qcmValidate" onclick="validateQcmWorkflow()" style="margin-top:14px;" disabled>Valider</button>';
+    html += '</div>';
+    html += '<div id="qcmReveal"></div>';
+  } else if (step.key === 'pec') {
+    html += '<div class="card">';
+    html += '<div class="card-title">💊 Étape 4 — Prise en charge</div>';
+    html += '<div class="card-content"><p>' + escapeHtml(c.pec) + '</p></div>';
+    html += '<button class="btn" onclick="workflowNext()" style="margin-top:10px;">Voir la synthèse →</button>';
+    html += '</div>';
+  } else if (step.key === 'synthese') {
+    html += '<div class="reveal-card">';
+    html += '<div class="reveal-title">📌 Synthèse du cas</div>';
+    html += '<div class="reveal-content">';
+    html += '<p><strong>Diagnostic :</strong> ' + escapeHtml(c.correct_dx) + '</p>';
+    html += '<p style="margin-top:8px;"><strong>PEC :</strong> ' + escapeHtml(c.pec) + '</p>';
+    html += '</div></div>';
+    if (c.pearls) {
+      html += '<div class="card" style="background:linear-gradient(135deg, rgba(245,158,11,0.10), transparent);border-color:rgba(245,158,11,0.30);">';
+      html += '<div class="card-title" style="color:var(--warning);">💎 Perle clinique</div>';
+      html += '<div class="card-content"><p>' + escapeHtml(c.pearls) + '</p></div>';
+      html += '</div>';
+    }
+    html += '<div class="btn-row">';
+    html += '<button class="btn btn-secondary" onclick="goTo(\'list\'); renderCaseList();">← Retour</button>';
+    html += '<button class="btn" onclick="nextCase()">Cas suivant →</button>';
+    html += '</div>';
+  }
+  return html;
+}
+
+function selectQcmWorkflow(idx) {
+  if (qcmAnswered) return;
+  qcmSelected = idx;
+  document.querySelectorAll('[data-qcm-idx]').forEach(b => {
+    b.classList.toggle('selected', parseInt(b.dataset.qcmIdx) === idx);
+  });
+  document.getElementById('qcmValidate').disabled = false;
+}
+
+function validateQcmWorkflow() {
+  if (qcmSelected === null) return;
+  qcmAnswered = true;
+  const c = CASES_DATA.find(x => x.id === currentCaseId);
+  const correctIdx = c.qcm_options.findIndex(o => o.correct);
+  const isCorrect = qcmSelected === correctIdx;
+  document.querySelectorAll('[data-qcm-idx]').forEach(b => {
+    const idx = parseInt(b.dataset.qcmIdx);
+    b.classList.remove('selected');
+    if (idx === correctIdx) b.classList.add('correct');
+    else if (idx === qcmSelected) b.classList.add('wrong');
+    b.disabled = true;
+  });
+  document.getElementById('qcmValidate').style.display = 'none';
+
+  let reveal = '<div class="reveal-card' + (isCorrect ? '' : ' wrong-card') + '">';
+  reveal += '<div class="reveal-title">' + (isCorrect ? '✅ Bonne réponse' : '❌ Réponse incorrecte') + '</div>';
+  reveal += '<div class="reveal-content"><p>' + escapeHtml(c.qcm_explanation) + '</p></div>';
+  reveal += '</div>';
+  reveal += '<button class="btn" onclick="workflowNext()" style="margin-top:10px;">Voir la PEC →</button>';
+  document.getElementById('qcmReveal').innerHTML = reveal;
+  setProgress(currentCaseId, isCorrect);
+}
+
+function workflowNext() {
+  workflowStep++;
+  if (workflowStep >= WORKFLOW_STEPS.length) {
+    workflowStep = WORKFLOW_STEPS.length - 1;
+  }
+  renderCaseDetail();
+}
+
+function nextCase() {
+  const idx = CASES_DATA.findIndex(c => c.id === currentCaseId);
+  const nextIdx = (idx + 1) % CASES_DATA.length;
+  currentCaseId = CASES_DATA[nextIdx].id;
+  workflowStep = 0;
+  renderCaseDetail();
+}
+
+/* ━━━ INITIALISATION ━━━ */
+function init() {
+  initPathoFilter();
+  initFilters();
+  renderCaseList();
+}
+/* init() sera appelé à la fin du fichier après que toutes les fonctions soient définies */
+
+
+/* Storage URL Canva par cas */
+const CANVA_URLS_KEY = 'cardioecho_cases_canva';
+const PROGRESS_KEY = 'cardioecho_cases_progress';
+
+function getCanvaUrls() { return JSON.parse(localStorage.getItem(CANVA_URLS_KEY) || '{}'); }
+function setCanvaUrl(id, url) {
+  const u = getCanvaUrls();
+  if (url) u[id] = url; else delete u[id];
+  localStorage.setItem(CANVA_URLS_KEY, JSON.stringify(u));
+}
+function getProgress() { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); }
+function setProgress(id, success) {
+  const p = getProgress();
+  p[id] = { completed: true, success: !!success, date: new Date().toISOString() };
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(p));
+}
+
+function showToast(msg, isError) {
+  const e = document.querySelector('.toast');
+  if (e) e.remove();
+  const t = document.createElement('div');
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 1800);
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+/* Navigation */
+let currentScreen = 'list';
+let currentCaseId = null;
+let currentMode = 'workflow'; // workflow | qcm | libre
+let workflowStep = 0;
+
+function goTo(scr) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + scr).classList.add('active');
+  currentScreen = scr;
+  window.scrollTo(0, 0);
+}
+
+function onBack() {
+  if (currentScreen === 'case') {
+    goTo('list');
+    renderCaseList();
+  } else {
+    // Retour à l'index principal si présent (page parente)
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = '../index.html';
+  }
+}
+
+/* ━━━ DÉMARRAGE FINAL — toutes les fonctions sont maintenant définies ━━━ */
+init();
+</script>
+
+</body>
+</html>
